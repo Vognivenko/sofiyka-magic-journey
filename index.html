@@ -3,45 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Подорож Софійки</title>
 
 <style>
+
 body{
 margin:0;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:flex-end;
+
 background-image:url("file_00000000f1f0720a96c83b0635f64e3b.png");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
+
 font-family:Arial,sans-serif;
+overflow:hidden;
 }
 
 .box{
 text-align:center;
-margin-bottom:45px;
+margin-bottom:180px;
+padding:20px;
+}
+
+h1{
+color:white;
+font-size:42px;
+margin-bottom:10px;
+text-shadow:0 0 20px rgba(255,255,255,0.9);
+}
+
+p{
+color:white;
+font-size:22px;
+margin-bottom:25px;
+text-shadow:0 0 10px rgba(0,0,0,0.7);
 }
 
 button{
-padding:18px 30px;
+padding:20px 35px;
 border:none;
-border-radius:35px;
-background:#ff5db4;
+border-radius:40px;
+background:#f95fb8;
 color:white;
 font-size:28px;
+font-weight:bold;
 box-shadow:0 0 25px rgba(255,105,180,0.9);
+animation:pulse 2s infinite;
+cursor:pointer;
 }
+
+@keyframes pulse{
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.05);
+}
+
+100%{
+transform:scale(1);
+}
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="box">
-<button>
+
+<h1>Подорож Софійки</h1>
+
+<p>Ласкаво просимо до чарівної пригоди</p>
+
+<button onclick="location.href='map.html'">
 ✨ Розпочати подорож ✨
 </button>
+
 </div>
 
 </body>

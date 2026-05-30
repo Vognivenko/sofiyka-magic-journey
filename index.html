@@ -1,296 +1,492 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Подорож Софійки</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подорож Софійки</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@500;600;700&display=swap');
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Cormorant Garamond', serif;
-      background: #f8eaf5;
-    }
+html,
+body{
+  width:100%;
+  height:100%;
+}
 
-    body {
-      position: relative;
-    }
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  overflow:hidden;
+  background:url("file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
+  font-family:'Cormorant Garamond',serif;
+}
 
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      background:
-        linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
-        url('sofiika-bg.jpg') center center / cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      overflow: hidden;
-    }
+.screen{
+  position:relative;
+  width:100%;
+  height:100vh;
+  height:100dvh;
+  overflow:hidden;
+}
 
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(40, 10, 70, 0.10), rgba(40, 10, 70, 0.08)),
-        radial-gradient(circle at center, rgba(255,255,255,0.03), rgba(255,255,255,0));
-      pointer-events: none;
-    }
+/* легке затемнення тільки знизу під кнопку */
+.screen::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:28%;
+  background:linear-gradient(
+    to bottom,
+    rgba(40,10,55,0) 0%,
+    rgba(40,10,55,0.16) 55%,
+    rgba(40,10,55,0.36) 100%
+  );
+  z-index:1;
+  pointer-events:none;
+}
 
-    /* Блок для анімованого тексту */
-    .text-stage {
-      position: absolute;
-      top: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 78%;
-      max-width: 520px;
-      min-height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 10px 12px;
-      z-index: 5;
-    }
+/* зона казкового тексту зверху */
+.message-area{
+  position:absolute;
+  top:74px;
+  left:50%;
+  transform:translateX(-50%);
+  width:86%;
+  max-width:430px;
+  min-height:82px;
+  z-index:5;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
 
-    .line {
-      position: absolute;
-      width: 100%;
-      opacity: 0;
-      transform: translateY(12px) scale(0.98);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      color: #fff6fb;
-      text-shadow:
-        0 2px 8px rgba(92, 26, 92, 0.45),
-        0 0 18px rgba(255, 220, 242, 0.35);
-      letter-spacing: 0.5px;
-      line-height: 1.2;
-    }
+/* казкова стрічка */
+.ribbon{
+  position:relative;
+  width:100%;
+  min-height:74px;
+  padding:14px 26px;
+  border-radius:26px;
 
-    .line.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+  background:linear-gradient(
+    180deg,
+    rgba(255,244,226,0.92) 0%,
+    rgba(255,219,185,0.88) 48%,
+    rgba(247,188,141,0.88) 100%
+  );
 
-    .line.big {
-      font-family: 'Marck Script', cursive;
-      font-size: clamp(42px, 7vw, 68px);
-      color: #ffe6f4;
-      text-shadow:
-        0 2px 10px rgba(124, 29, 92, 0.55),
-        0 0 20px rgba(255, 214, 236, 0.45);
-    }
+  border:2px solid rgba(255,219,105,0.95);
 
-    .line.medium {
-      font-size: clamp(34px, 5.8vw, 48px);
-      font-weight: 600;
-      color: #fff3fb;
-    }
+  box-shadow:
+    0 0 14px rgba(255,220,110,0.95),
+    0 0 30px rgba(255,180,90,0.45),
+    inset 0 0 14px rgba(255,255,255,0.65);
 
-    .line.small {
-      font-size: clamp(30px, 5vw, 42px);
-      font-weight: 600;
-      color: #fff3fb;
-    }
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    /* Кнопка */
-    .button-wrap {
-      position: absolute;
-      left: 50%;
-      bottom: 8%;
-      transform: translateX(-50%) translateY(30px);
-      width: 86%;
-      max-width: 620px;
-      opacity: 0;
-      transition: opacity 1s ease, transform 1s ease;
-      z-index: 8;
-    }
+/* хвостики стрічки */
+.ribbon::before,
+.ribbon::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:42px;
+  height:46px;
+  background:linear-gradient(
+    180deg,
+    rgba(255,237,210,0.9),
+    rgba(240,178,135,0.88)
+  );
+  border:2px solid rgba(255,219,105,0.9);
+  z-index:-1;
+}
 
-    .button-wrap.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+.ribbon::before{
+  left:-22px;
+  clip-path:polygon(0 0,100% 12%,100% 88%,0 100%,28% 50%);
+}
 
-    .magic-btn {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      min-height: 88px;
-      padding: 22px 26px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(24px, 5vw, 38px);
-      font-weight: 700;
-      color: #ffe8a8;
-      background:
-        linear-gradient(to bottom, #ffd6ef 0%, #ff8fd1 22%, #f64fb4 58%, #c7258f 100%);
-      border: 4px solid #f7d85c;
-      box-shadow:
-        0 0 0 3px rgba(255, 245, 180, 0.25) inset,
-        0 0 14px rgba(255, 223, 100, 0.8),
-        0 0 32px rgba(255, 205, 96, 0.45),
-        0 12px 22px rgba(130, 20, 92, 0.28);
-      text-shadow:
-        0 1px 0 rgba(120, 60, 0, 0.4),
-        0 2px 6px rgba(120, 60, 0, 0.35);
-      overflow: hidden;
-    }
+.ribbon::after{
+  right:-22px;
+  clip-path:polygon(100% 0,0 12%,0 88%,100% 100%,72% 50%);
+}
 
-    .magic-btn::before {
-      content: "";
-      position: absolute;
-      top: 8px;
-      left: 10%;
-      width: 80%;
-      height: 18px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.45);
-      filter: blur(1px);
-    }
+/* маленька корона над стрічкою */
+.crown{
+  position:absolute;
+  top:-28px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:28px;
+  text-shadow:
+    0 0 10px rgba(255,220,90,1),
+    0 2px 4px rgba(120,70,0,0.5);
+}
 
-    .magic-btn::after {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      border-radius: 999px;
-      box-shadow:
-        0 0 12px rgba(255, 244, 157, 0.75),
-        0 0 24px rgba(255, 213, 79, 0.55);
-      pointer-events: none;
-    }
+/* текст, який змінюється */
+.animated-text{
+  position:absolute;
+  width:88%;
+  text-align:center;
+  opacity:0;
+  transform:translateY(10px) scale(0.98);
+  transition:
+    opacity .75s ease,
+    transform .75s ease,
+    filter .75s ease;
+  filter:blur(3px);
+  color:#7a3d62;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.85),
+    0 0 8px rgba(255,255,255,0.65);
+}
 
-    .magic-btn span {
-      position: relative;
-      z-index: 2;
-    }
+.animated-text.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
 
-    .magic-btn:hover,
-    .magic-btn:active {
-      transform: scale(1.02);
-    }
+.animated-text.script{
+  font-family:'Marck Script',cursive;
+  font-size:40px;
+  line-height:1;
+  color:#d84d98;
+}
 
-    .sparkle {
-      color: #ffe26d;
-      margin: 0 12px;
-      font-size: 1em;
-      filter: drop-shadow(0 0 8px rgba(255, 240, 170, 0.8));
-      animation: twinkle 1.8s ease-in-out infinite;
-    }
+.animated-text.normal{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;
+  line-height:1.06;
+  font-weight:700;
+}
 
-    .sparkle.right {
-      animation-delay: 0.5s;
-    }
+.animated-text.small{
+  font-family:'Cormorant Garamond',serif;
+  font-size:25px;
+  line-height:1.08;
+  font-weight:700;
+}
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.75; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.12); }
-    }
+/* кнопка */
+.button-wrap{
+  position:absolute;
+  left:50%;
+  bottom:56px;
+  transform:translateX(-50%) translateY(22px);
+  width:88%;
+  max-width:430px;
+  z-index:6;
+  opacity:0;
+  pointer-events:none;
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
 
-    /* Адаптація */
-    @media (max-width: 480px) {
-      .text-stage {
-        top: 8%;
-        width: 84%;
-        min-height: 110px;
-      }
+.button-wrap.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateX(-50%) translateY(0);
+}
 
-      .button-wrap {
-        width: 90%;
-        bottom: 7%;
-      }
+.magic-btn{
+  position:relative;
+  width:100%;
+  border:none;
+  border-radius:46px;
+  padding:16px 16px;
 
-      .magic-btn {
-        min-height: 82px;
-        padding: 18px 18px;
-      }
-    }
-  </style>
+  background:linear-gradient(
+    180deg,
+    #ffb9e7 0%,
+    #ff7dcb 38%,
+    #ea4ba9 70%,
+    #c83486 100%
+  );
+
+  color:#fff2a8;
+  font-family:'Cormorant Garamond',serif;
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:.4px;
+
+  text-shadow:
+    0 2px 4px rgba(110,35,80,0.95),
+    0 0 8px rgba(255,235,140,0.9);
+
+  box-shadow:
+    0 0 12px rgba(255,226,120,0.95),
+    0 0 30px rgba(255,172,83,0.65),
+    0 0 46px rgba(255,105,185,0.58),
+    inset 0 5px 10px rgba(255,255,255,0.65),
+    inset 0 -9px 15px rgba(110,25,80,0.34);
+
+  cursor:pointer;
+  animation:pulse 2.2s infinite;
+}
+
+.magic-btn::before{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  border-radius:50px;
+  border:3px solid #ffd76f;
+  box-shadow:
+    inset 0 0 8px rgba(255,255,255,0.8),
+    0 0 16px rgba(255,220,110,0.95);
+  pointer-events:none;
+}
+
+.magic-btn::after{
+  content:"";
+  position:absolute;
+  top:8px;
+  left:10%;
+  right:10%;
+  height:27%;
+  border-radius:40px;
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.75),
+    rgba(255,255,255,0.05)
+  );
+  pointer-events:none;
+}
+
+.spark-left,
+.spark-right{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:22px;
+  color:#fff0a8;
+  text-shadow:0 0 12px rgba(255,230,120,1);
+  z-index:2;
+  animation:twinkle 1.8s infinite;
+}
+
+.spark-left{
+  left:18px;
+}
+
+.spark-right{
+  right:18px;
+  animation-delay:.5s;
+}
+
+/* легке мерехтіння зірочок */
+.float-star{
+  position:absolute;
+  color:#fff0a8;
+  font-size:18px;
+  text-shadow:0 0 12px rgba(255,230,120,1);
+  z-index:4;
+  opacity:.8;
+  animation:floatStar 3s ease-in-out infinite;
+}
+
+.star1{
+  top:150px;
+  left:18%;
+}
+
+.star2{
+  top:126px;
+  right:15%;
+  animation-delay:.9s;
+}
+
+.star3{
+  top:210px;
+  right:26%;
+  animation-delay:1.5s;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.025);}
+  100%{transform:scale(1);}
+}
+
+@keyframes twinkle{
+  0%{opacity:.55; transform:translateY(-50%) scale(.9);}
+  50%{opacity:1; transform:translateY(-50%) scale(1.18);}
+  100%{opacity:.55; transform:translateY(-50%) scale(.9);}
+}
+
+@keyframes floatStar{
+  0%{opacity:.45; transform:translateY(0) scale(.9);}
+  50%{opacity:1; transform:translateY(-8px) scale(1.12);}
+  100%{opacity:.45; transform:translateY(0) scale(.9);}
+}
+
+@media(max-height:720px){
+  .message-area{
+    top:58px;
+    width:84%;
+  }
+
+  .ribbon{
+    min-height:66px;
+    padding:12px 22px;
+  }
+
+  .animated-text.script{
+    font-size:34px;
+  }
+
+  .animated-text.normal{
+    font-size:24px;
+  }
+
+  .animated-text.small{
+    font-size:22px;
+  }
+
+  .button-wrap{
+    bottom:42px;
+    width:86%;
+  }
+
+  .magic-btn{
+    font-size:24px;
+    padding:14px 14px;
+  }
+}
+
+@media(max-height:650px){
+  .message-area{
+    top:46px;
+  }
+
+  .ribbon{
+    min-height:60px;
+  }
+
+  .animated-text.script{
+    font-size:30px;
+  }
+
+  .animated-text.normal{
+    font-size:21px;
+  }
+
+  .animated-text.small{
+    font-size:20px;
+  }
+
+  .button-wrap{
+    bottom:28px;
+    width:84%;
+  }
+
+  .magic-btn{
+    font-size:22px;
+    padding:13px 12px;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <section class="hero">
-    <div class="overlay"></div>
+<div class="screen">
 
-    <!-- Текст, який буде змінюватися -->
-    <div class="text-stage">
-      <div class="line big show" id="animatedText">Привіт!</div>
+  <div class="float-star star1">✨</div>
+  <div class="float-star star2">✨</div>
+  <div class="float-star star3">✦</div>
+
+  <div class="message-area">
+    <div class="ribbon">
+      <div class="crown">👑</div>
+      <div id="animatedText" class="animated-text script show">
+        Привіт!
+      </div>
     </div>
+  </div>
 
-    <!-- Кнопка з'явиться після всього тексту -->
-    <div class="button-wrap" id="buttonWrap">
-      <a href="journey.html" class="magic-btn">
-        <span class="sparkle">✨</span>
-        <span>Почати подорож</span>
-        <span class="sparkle right">✨</span>
-      </a>
-    </div>
-  </section>
+  <div id="buttonWrap" class="button-wrap">
+    <button class="magic-btn" onclick="location.href='map.html'">
+      <span class="spark-left">✨</span>
+      Почати подорож
+      <span class="spark-right">✨</span>
+    </button>
+  </div>
 
-  <script>
-    const textEl = document.getElementById('animatedText');
-    const buttonWrap = document.getElementById('buttonWrap');
+</div>
 
-    const phrases = [
-      { text: "Привіт!", className: "big" },
-      { text: "Мене звати Софійка.", className: "medium" },
-      { text: "Скоро у мене особливий день.", className: "small" },
-      { text: "Допоможеш знайти чарівне запрошення?", className: "small" }
-    ];
+<script>
+const animatedText = document.getElementById("animatedText");
+const buttonWrap = document.getElementById("buttonWrap");
 
-    let current = 0;
+const phrases = [
+  {
+    text: "Привіт!",
+    className: "script"
+  },
+  {
+    text: "Мене звати<br>Софійка.",
+    className: "normal"
+  },
+  {
+    text: "Скоро у мене<br>особливий день.",
+    className: "small"
+  },
+  {
+    text: "Допоможеш знайти<br>чарівне запрошення?",
+    className: "small"
+  }
+];
 
-    function showPhrase(index) {
-      textEl.classList.remove('show');
+let index = 0;
+
+function setPhrase(i){
+  animatedText.classList.remove("show");
+
+  setTimeout(() => {
+    animatedText.innerHTML = phrases[i].text;
+    animatedText.className = "animated-text " + phrases[i].className;
+
+    requestAnimationFrame(() => {
+      animatedText.classList.add("show");
+    });
+  }, 550);
+}
+
+function startTextAnimation(){
+  setPhrase(0);
+
+  const timer = setInterval(() => {
+    index++;
+
+    if(index < phrases.length){
+      setPhrase(index);
+    }else{
+      clearInterval(timer);
 
       setTimeout(() => {
-        textEl.textContent = phrases[index].text;
-        textEl.className = 'line ' + phrases[index].className;
-        requestAnimationFrame(() => {
-          textEl.classList.add('show');
-        });
-      }, 500);
+        buttonWrap.classList.add("show");
+      }, 900);
     }
+  }, 2500);
+}
 
-    function runSequence() {
-      showPhrase(current);
-
-      const interval = setInterval(() => {
-        current++;
-
-        if (current < phrases.length) {
-          showPhrase(current);
-        } else {
-          clearInterval(interval);
-
-          // залишаємо останню фразу і після цього показуємо кнопку
-          setTimeout(() => {
-            buttonWrap.classList.add('show');
-          }, 1200);
-        }
-      }, 2600);
-    }
-
-    // запуск
-    window.addEventListener('load', () => {
-      runSequence();
-    });
-  </script>
+window.addEventListener("load", startTextAnimation);
+</script>
 
 </body>
 </html>

@@ -53,26 +53,23 @@ body{
   pointer-events:none;
 }
 
-/* PNG стрічка з короною */
+/* PNG-стрічка з короною */
 .message-area{
   position:absolute;
-  top:70px;
+  top:68px;
   left:50%;
   transform:translateX(-50%);
-  width:96%;
-  max-width:500px;
+  width:106%;
+  max-width:620px;
   z-index:5;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
 
-.ribbon-image-wrap{
+.banner-wrap{
   position:relative;
   width:100%;
 }
 
-.ribbon-png{
+.banner-png{
   display:block;
   width:100%;
   height:auto;
@@ -80,13 +77,13 @@ body{
   pointer-events:none;
 }
 
-/* Анімований текст поверх стрічки */
+/* Текст поверх PNG-стрічки */
 .animated-text{
   position:absolute;
   left:50%;
   top:58%;
   transform:translate(-50%, -50%) scale(0.98);
-  width:74%;
+  width:68%;
   text-align:center;
   opacity:0;
   transition:
@@ -108,7 +105,7 @@ body{
 
 .animated-text.script{
   font-family:'Great Vibes',cursive;
-  font-size:58px;
+  font-size:56px;
   line-height:1;
   font-weight:400;
   color:#f06ab2;
@@ -121,18 +118,18 @@ body{
 }
 
 .animated-text.normal{
-  font-size:30px;
+  font-size:29px;
   line-height:1.02;
   font-weight:700;
 }
 
 .animated-text.small{
-  font-size:27px;
+  font-size:26px;
   line-height:1.05;
   font-weight:700;
 }
 
-/* PNG кнопка */
+/* PNG-кнопка */
 .button-wrap{
   position:absolute;
   left:50%;
@@ -201,7 +198,7 @@ body{
   animation-delay:.5s;
 }
 
-/* Зірочки */
+/* Декор-зірочки */
 .float-star{
   position:absolute;
   color:#fff0a8;
@@ -249,20 +246,20 @@ body{
 
 @media(max-height:720px){
   .message-area{
-    top:52px;
-    width:98%;
+    top:54px;
+    width:108%;
   }
 
   .animated-text.script{
-    font-size:50px;
+    font-size:48px;
   }
 
   .animated-text.normal{
-    font-size:26px;
+    font-size:25px;
   }
 
   .animated-text.small{
-    font-size:23px;
+    font-size:22px;
   }
 
   .button-wrap{
@@ -278,11 +275,11 @@ body{
 @media(max-height:650px){
   .message-area{
     top:42px;
-    width:98%;
+    width:108%;
   }
 
   .animated-text.script{
-    font-size:44px;
+    font-size:42px;
   }
 
   .animated-text.normal{
@@ -290,7 +287,7 @@ body{
   }
 
   .animated-text.small{
-    font-size:20px;
+    font-size:19px;
   }
 
   .button-wrap{
@@ -314,8 +311,8 @@ body{
   <div class="float-star star3">✦</div>
 
   <div class="message-area">
-    <div class="ribbon-image-wrap">
-      <img src="/sofiyka-magic-journey/crown.png" alt="Казкова стрічка" class="ribbon-png">
+    <div class="banner-wrap">
+      <img src="/sofiyka-magic-journey/crown.png?v=2" alt="Казкова стрічка" class="banner-png">
 
       <div id="animatedText" class="animated-text script show">
         Привіт!
@@ -325,7 +322,8 @@ body{
 
   <div id="buttonWrap" class="button-wrap">
     <button class="image-btn" onclick="location.href='map.html'">
-      <img src="/sofiyka-magic-journey/button.png" alt="Почати подорож" class="btn-png">
+      <img src="/sofiyka-magic-journey/button.png?v=2" alt="Почати подорож" class="btn-png">
+
       <span class="btn-text">
         <span class="spark-left">✨</span>
         Почати подорож

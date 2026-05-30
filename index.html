@@ -6,7 +6,7 @@
 <title>Подорож Софійки</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Alice&family=Cormorant+Garamond:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@500;600;700&display=swap');
 
 *{
   margin:0;
@@ -53,23 +53,26 @@ body{
   pointer-events:none;
 }
 
-/* PNG-стрічка з короною */
+/* PNG стрічка з короною */
 .message-area{
   position:absolute;
-  top:68px;
+  top:70px;
   left:50%;
   transform:translateX(-50%);
-  width:106%;
-  max-width:620px;
+  width:96%;
+  max-width:500px;
   z-index:5;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
-.banner-wrap{
+.ribbon-image-wrap{
   position:relative;
   width:100%;
 }
 
-.banner-png{
+.ribbon-png{
   display:block;
   width:100%;
   height:auto;
@@ -77,33 +80,35 @@ body{
   pointer-events:none;
 }
 
-/* Текст поверх PNG-стрічки */
+/* Анімований текст поверх стрічки */
 .animated-text{
   position:absolute;
   left:50%;
-  top:69%;
+  top:58%;
   transform:translate(-50%, -50%) scale(0.98);
-  width:60%;
+  width:74%;
   text-align:center;
   opacity:0;
   transition:
     opacity .75s ease,
-    transform .75s ease;
-  color:#5d356d;
+    transform .75s ease,
+    filter .75s ease;
+  filter:blur(3px);
+  color:#6b3a68;
   text-shadow:
-    0 1px 0 rgba(255,255,255,0.95),
-    0 0 8px rgba(255,255,255,0.75),
-    0 2px 5px rgba(90,35,90,0.18);
+    0 1px 0 rgba(255,255,255,0.9),
+    0 0 8px rgba(255,255,255,0.7);
 }
 
 .animated-text.show{
   opacity:1;
   transform:translate(-50%, -50%) scale(1);
+  filter:blur(0);
 }
 
 .animated-text.script{
   font-family:'Great Vibes',cursive;
-  font-size:50px;
+  font-size:58px;
   line-height:1;
   font-weight:400;
   color:#f06ab2;
@@ -116,20 +121,18 @@ body{
 }
 
 .animated-text.normal{
-  font-family:'Alice',serif;
-  font-size:26px;
-  line-height:1.03;
-  font-weight:400;
+  font-size:30px;
+  line-height:1.02;
+  font-weight:700;
 }
 
 .animated-text.small{
-  font-family:'Alice',serif;
-  font-size:23px;
-  line-height:1.07;
-  font-weight:400;
+  font-size:27px;
+  line-height:1.05;
+  font-weight:700;
 }
 
-/* PNG-кнопка */
+/* PNG кнопка */
 .button-wrap{
   position:absolute;
   left:50%;
@@ -198,7 +201,7 @@ body{
   animation-delay:.5s;
 }
 
-/* Декор-зірочки */
+/* Зірочки */
 .float-star{
   position:absolute;
   color:#fff0a8;
@@ -244,28 +247,22 @@ body{
   100%{opacity:.45; transform:translateY(0) scale(.9);}
 }
 
-/* Адаптація під нижчі екрани */
 @media(max-height:720px){
   .message-area{
-    top:54px;
-    width:108%;
-  }
-
-  .animated-text{
-    top:68%;
-    width:60%;
+    top:52px;
+    width:98%;
   }
 
   .animated-text.script{
-    font-size:44px;
+    font-size:50px;
   }
 
   .animated-text.normal{
-    font-size:23px;
+    font-size:26px;
   }
 
   .animated-text.small{
-    font-size:20px;
+    font-size:23px;
   }
 
   .button-wrap{
@@ -281,24 +278,19 @@ body{
 @media(max-height:650px){
   .message-area{
     top:42px;
-    width:108%;
-  }
-
-  .animated-text{
-    top:68%;
-    width:60%;
+    width:98%;
   }
 
   .animated-text.script{
-    font-size:38px;
+    font-size:44px;
   }
 
   .animated-text.normal{
-    font-size:20px;
+    font-size:22px;
   }
 
   .animated-text.small{
-    font-size:18px;
+    font-size:20px;
   }
 
   .button-wrap{
@@ -322,8 +314,8 @@ body{
   <div class="float-star star3">✦</div>
 
   <div class="message-area">
-    <div class="banner-wrap">
-      <img src="/sofiyka-magic-journey/crown.png?v=4" alt="Казкова стрічка" class="banner-png">
+    <div class="ribbon-image-wrap">
+      <img src="/sofiyka-magic-journey/crown.png" alt="Казкова стрічка" class="ribbon-png">
 
       <div id="animatedText" class="animated-text script show">
         Привіт!
@@ -333,8 +325,7 @@ body{
 
   <div id="buttonWrap" class="button-wrap">
     <button class="image-btn" onclick="location.href='map.html'">
-      <img src="/sofiyka-magic-journey/button.png?v=4" alt="Почати подорож" class="btn-png">
-
+      <img src="/sofiyka-magic-journey/button.png" alt="Почати подорож" class="btn-png">
       <span class="btn-text">
         <span class="spark-left">✨</span>
         Почати подорож

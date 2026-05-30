@@ -81,31 +81,29 @@ body{
 .animated-text{
   position:absolute;
   left:50%;
-  top:58%;
+  top:64%;
   transform:translate(-50%, -50%) scale(0.98);
-  width:68%;
+  width:58%;
   text-align:center;
   opacity:0;
   transition:
     opacity .75s ease,
-    transform .75s ease,
-    filter .75s ease;
-  filter:blur(3px);
-  color:#6b3a68;
+    transform .75s ease;
+  color:#5f3470;
   text-shadow:
-    0 1px 0 rgba(255,255,255,0.9),
-    0 0 8px rgba(255,255,255,0.7);
+    0 1px 0 rgba(255,255,255,0.95),
+    0 0 8px rgba(255,255,255,0.75),
+    0 2px 5px rgba(90,35,90,0.22);
 }
 
 .animated-text.show{
   opacity:1;
   transform:translate(-50%, -50%) scale(1);
-  filter:blur(0);
 }
 
 .animated-text.script{
   font-family:'Great Vibes',cursive;
-  font-size:56px;
+  font-size:50px;
   line-height:1;
   font-weight:400;
   color:#f06ab2;
@@ -118,13 +116,13 @@ body{
 }
 
 .animated-text.normal{
-  font-size:29px;
+  font-size:25px;
   line-height:1.02;
   font-weight:700;
 }
 
 .animated-text.small{
-  font-size:26px;
+  font-size:22px;
   line-height:1.05;
   font-weight:700;
 }
@@ -244,22 +242,28 @@ body{
   100%{opacity:.45; transform:translateY(0) scale(.9);}
 }
 
+/* Адаптація під нижчі екрани */
 @media(max-height:720px){
   .message-area{
     top:54px;
     width:108%;
   }
 
+  .animated-text{
+    top:64%;
+    width:58%;
+  }
+
   .animated-text.script{
-    font-size:48px;
+    font-size:44px;
   }
 
   .animated-text.normal{
-    font-size:25px;
+    font-size:22px;
   }
 
   .animated-text.small{
-    font-size:22px;
+    font-size:19px;
   }
 
   .button-wrap{
@@ -278,16 +282,21 @@ body{
     width:108%;
   }
 
+  .animated-text{
+    top:64%;
+    width:58%;
+  }
+
   .animated-text.script{
-    font-size:42px;
+    font-size:38px;
   }
 
   .animated-text.normal{
-    font-size:22px;
+    font-size:20px;
   }
 
   .animated-text.small{
-    font-size:19px;
+    font-size:17px;
   }
 
   .button-wrap{
@@ -312,7 +321,7 @@ body{
 
   <div class="message-area">
     <div class="banner-wrap">
-      <img src="/sofiyka-magic-journey/crown.png?v=2" alt="Казкова стрічка" class="banner-png">
+      <img src="/sofiyka-magic-journey/crown.png?v=3" alt="Казкова стрічка" class="banner-png">
 
       <div id="animatedText" class="animated-text script show">
         Привіт!
@@ -322,7 +331,7 @@ body{
 
   <div id="buttonWrap" class="button-wrap">
     <button class="image-btn" onclick="location.href='map.html'">
-      <img src="/sofiyka-magic-journey/button.png?v=2" alt="Почати подорож" class="btn-png">
+      <img src="/sofiyka-magic-journey/button.png?v=3" alt="Почати подорож" class="btn-png">
 
       <span class="btn-text">
         <span class="spark-left">✨</span>

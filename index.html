@@ -17,82 +17,199 @@ box-sizing:border-box;
 body{
 height:100vh;
 overflow:hidden;
-background:url("file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
 font-family:'Playfair Display',serif;
+background:url("file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
 }
 
-.overlay{
+.screen{
+position:relative;
+width:100%;
 height:100vh;
-display:flex;
-align-items:flex-end;
-justify-content:center;
-padding:0 24px 48px;
+overflow:hidden;
+}
+
+.screen::after{
+content:"";
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+height:48%;
 background:linear-gradient(
 to bottom,
-rgba(0,0,0,0) 45%,
-rgba(65,25,80,0.25) 72%,
-rgba(65,25,80,0.55) 100%
+rgba(255,220,245,0) 0%,
+rgba(255,226,245,0.45) 38%,
+rgba(120,45,120,0.38) 100%
 );
+z-index:1;
+pointer-events:none;
 }
 
-.panel{
-width:100%;
+.content{
+position:absolute;
+left:50%;
+bottom:24px;
+transform:translateX(-50%);
+width:92%;
 max-width:430px;
 text-align:center;
-padding:22px 16px 0;
+z-index:3;
+animation:showUp 1.2s ease;
 }
 
 .hello{
 font-family:'Marck Script',cursive;
 font-size:58px;
-line-height:1;
+line-height:0.95;
 color:#f26aaa;
 text-shadow:
-0 2px 0 #fff0f8,
-0 0 12px rgba(255,255,255,.8);
-margin-bottom:8px;
+0 2px 0 #fff3fb,
+0 0 14px rgba(255,255,255,0.95),
+0 0 20px rgba(255,120,190,0.55);
+margin-bottom:4px;
 }
 
 .name{
-font-size:27px;
-color:#5b316f;
+font-size:26px;
 font-weight:700;
-text-shadow:0 0 10px rgba(255,255,255,.9);
-margin-bottom:12px;
+color:#5b316f;
+text-shadow:0 0 12px rgba(255,255,255,0.95);
+margin-bottom:8px;
 }
 
-.line{
-color:#d9a33c;
-font-size:18px;
-margin-bottom:12px;
+.divider{
+font-size:20px;
+color:#d8a13c;
+text-shadow:0 0 10px rgba(255,230,150,0.8);
+margin-bottom:8px;
 }
 
 .text{
-font-size:23px;
-line-height:1.25;
-color:#5b316f;
+font-size:22px;
+line-height:1.22;
 font-weight:700;
-text-shadow:0 0 12px rgba(255,255,255,.95);
-margin-bottom:14px;
+color:#5b316f;
+text-shadow:
+0 0 10px rgba(255,255,255,0.95),
+0 2px 6px rgba(255,230,245,0.8);
+margin-bottom:10px;
 }
 
-button{
+.magic-btn{
+position:relative;
 width:100%;
-border:3px solid #ffd66f;
-border-radius:34px;
-padding:15px 18px;
-background:linear-gradient(180deg,#ff95d0 0%,#ee5bad 55%,#c93a8d 100%);
-color:#ffe98d;
+border:none;
+border-radius:42px;
+padding:17px 18px;
+margin-top:6px;
+background:linear-gradient(
+180deg,
+#ffb5e4 0%,
+#ff78c7 42%,
+#e849a4 72%,
+#c83586 100%
+);
+color:#fff1a8;
 font-family:'Playfair Display',serif;
 font-size:25px;
 font-weight:700;
-text-shadow:0 2px 5px rgba(100,30,70,.85);
+letter-spacing:.2px;
+text-shadow:
+0 2px 4px rgba(100,30,70,0.9),
+0 0 8px rgba(255,230,150,0.8);
 box-shadow:
-0 0 14px rgba(255,220,120,.95),
-0 0 34px rgba(255,100,185,.85),
-inset 0 0 12px rgba(255,255,255,.55),
-inset 0 -7px 14px rgba(110,20,75,.3);
-animation:pulse 2s infinite;
+0 0 10px rgba(255,230,120,0.95),
+0 0 28px rgba(255,190,85,0.75),
+0 0 45px rgba(255,105,185,0.65),
+inset 0 4px 9px rgba(255,255,255,0.65),
+inset 0 -8px 14px rgba(105,20,75,0.35);
+cursor:pointer;
+animation:pulse 2.2s infinite;
+}
+
+.magic-btn::before{
+content:"";
+position:absolute;
+inset:-4px;
+border-radius:46px;
+border:3px solid #ffd76f;
+box-shadow:
+inset 0 0 8px rgba(255,255,255,0.8),
+0 0 14px rgba(255,220,110,0.9);
+pointer-events:none;
+}
+
+.magic-btn::after{
+content:"";
+position:absolute;
+top:7px;
+left:12%;
+right:12%;
+height:32%;
+border-radius:40px;
+background:linear-gradient(
+to bottom,
+rgba(255,255,255,0.75),
+rgba(255,255,255,0.05)
+);
+pointer-events:none;
+}
+
+.ornament{
+position:relative;
+width:86%;
+height:20px;
+margin:0 auto -2px;
+z-index:4;
+}
+
+.ornament::before{
+content:"";
+position:absolute;
+left:0;
+right:0;
+top:9px;
+height:2px;
+background:linear-gradient(
+to right,
+transparent,
+#ffd76f,
+#fff0a6,
+#ffd76f,
+transparent
+);
+box-shadow:0 0 10px rgba(255,220,120,0.9);
+}
+
+.ornament::after{
+content:"♡";
+position:absolute;
+left:50%;
+top:-6px;
+transform:translateX(-50%);
+color:#ffd76f;
+font-size:24px;
+text-shadow:0 0 10px rgba(255,220,120,1);
+}
+
+.spark{
+position:absolute;
+color:#fff1a8;
+font-size:20px;
+text-shadow:0 0 12px rgba(255,230,120,1);
+animation:twinkle 1.8s infinite;
+z-index:4;
+}
+
+.spark.one{
+left:10px;
+top:50%;
+}
+
+.spark.two{
+right:10px;
+top:50%;
+animation-delay:.5s;
 }
 
 @keyframes pulse{
@@ -100,16 +217,57 @@ animation:pulse 2s infinite;
 50%{transform:scale(1.035);}
 100%{transform:scale(1);}
 }
+
+@keyframes twinkle{
+0%{opacity:.5;transform:scale(.9);}
+50%{opacity:1;transform:scale(1.18);}
+100%{opacity:.5;transform:scale(.9);}
+}
+
+@keyframes showUp{
+from{
+opacity:0;
+transform:translateX(-50%) translateY(24px);
+}
+to{
+opacity:1;
+transform:translateX(-50%) translateY(0);
+}
+}
+
+@media(max-height:700px){
+.hello{
+font-size:46px;
+}
+.name{
+font-size:22px;
+}
+.text{
+font-size:19px;
+}
+.magic-btn{
+font-size:22px;
+padding:15px 14px;
+}
+.content{
+bottom:16px;
+}
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="overlay">
-  <div class="panel">
+<div class="screen">
+
+  <div class="content">
+
     <div class="hello">Привіт!</div>
+
     <div class="name">Я Софійка.</div>
-    <div class="line">──── 💛 ────</div>
+
+    <div class="divider">──── 💛 ────</div>
 
     <div class="text">
       Скоро у мене<br>
@@ -121,10 +279,16 @@ animation:pulse 2s infinite;
       чарівне запрошення?
     </div>
 
-    <button onclick="location.href='map.html'">
-      ✨ Розпочати подорож ✨
+    <div class="ornament"></div>
+
+    <button class="magic-btn" onclick="location.href='map.html'">
+      <span class="spark one">✨</span>
+      Розпочати подорож
+      <span class="spark two">✨</span>
     </button>
+
   </div>
+
 </div>
 
 </body>

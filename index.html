@@ -78,10 +78,10 @@
     .curved-text-svg{
       position:absolute;
       left:50%;
-      top:69%;
+      top:63%;
       transform:translate(-50%, -50%) scale(0.98);
-      width:96%;
-      height:64%;
+      width:98%;
+      height:66%;
       overflow:visible;
       opacity:0;
       transition:
@@ -99,42 +99,42 @@
       text-anchor:middle;
       dominant-baseline:middle;
       paint-order:stroke;
-      stroke:rgba(255,255,255,0.92);
-      stroke-width:2px;
+      stroke:rgba(255,255,255,0.94);
+      stroke-width:2.2px;
       stroke-linejoin:round;
       fill:#573064;
       letter-spacing:0.2px;
-      filter:drop-shadow(0 2px 3px rgba(70,25,85,0.18));
+      filter:drop-shadow(0 2px 3px rgba(70,25,85,0.2));
     }
 
-    .curved-text-svg.script text{
+    .curved-text-svg.hello text{
       font-family:'Marck Script', cursive;
-      font-size:86px;
+      font-size:90px;
       font-weight:400;
       fill:#ef64ad;
-      stroke-width:1.5px;
+      stroke-width:1.6px;
       filter:
-        drop-shadow(0 0 7px rgba(255,255,255,0.85))
+        drop-shadow(0 0 7px rgba(255,255,255,0.9))
         drop-shadow(0 3px 5px rgba(123,58,98,0.24));
     }
 
     .curved-text-svg.normal text{
       font-family:'Marck Script', cursive;
-      font-size:64px;
+      font-size:68px;
       font-weight:400;
       fill:#573064;
     }
 
     .curved-text-svg.small text{
       font-family:'Marck Script', cursive;
-      font-size:56px;
+      font-size:60px;
       font-weight:400;
       fill:#573064;
     }
 
     .curved-text-svg.question text{
       font-family:'Marck Script', cursive;
-      font-size:52px;
+      font-size:64px;
       font-weight:400;
       fill:#573064;
       letter-spacing:0px;
@@ -185,7 +185,7 @@
       transform:translate(-50%, -50%);
       width:82%;
       text-align:center;
-      font-family:'Lviv Towers', serif;
+      font-family:'Cormorant Garamond', serif;
       font-size:30px;
       font-weight:700;
       letter-spacing:.4px;
@@ -260,25 +260,25 @@
       }
 
       .curved-text-svg{
-        top:69%;
-        width:98%;
-        height:66%;
+        top:63%;
+        width:100%;
+        height:68%;
       }
 
-      .curved-text-svg.script text{
-        font-size:74px;
+      .curved-text-svg.hello text{
+        font-size:78px;
       }
 
       .curved-text-svg.normal text{
-        font-size:56px;
+        font-size:58px;
       }
 
       .curved-text-svg.small text{
-        font-size:49px;
+        font-size:51px;
       }
 
       .curved-text-svg.question text{
-        font-size:46px;
+        font-size:54px;
       }
 
       .button-wrap{
@@ -298,13 +298,13 @@
       }
 
       .curved-text-svg{
-        top:70%;
-        width:100%;
-        height:68%;
+        top:64%;
+        width:102%;
+        height:70%;
       }
 
-      .curved-text-svg.script text{
-        font-size:66px;
+      .curved-text-svg.hello text{
+        font-size:68px;
       }
 
       .curved-text-svg.normal text{
@@ -312,11 +312,11 @@
       }
 
       .curved-text-svg.small text{
-        font-size:43px;
+        font-size:44px;
       }
 
       .curved-text-svg.question text{
-        font-size:40px;
+        font-size:46px;
       }
 
       .button-wrap{
@@ -340,12 +340,12 @@
 
     <div class="message-area">
       <div class="banner-wrap">
-        <img src="/sofiyka-magic-journey/crown.png?v=10" alt="Казкова стрічка" class="banner-png">
+        <img src="/sofiyka-magic-journey/crown.png?v=11" alt="Казкова стрічка" class="banner-png">
 
-        <svg id="animatedText" class="curved-text-svg script show" viewBox="0 0 700 170" preserveAspectRatio="xMidYMid meet">
+        <svg id="animatedText" class="curved-text-svg hello show" viewBox="0 0 800 210" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <path id="curveLineOne" d="M 20 78 Q 350 112 680 78"></path>
-            <path id="curveLineTwo" d="M 30 124 Q 350 154 670 124"></path>
+            <path id="curveLineOne" d="M 80 82 C 250 128, 550 128, 720 82"></path>
+            <path id="curveLineTwo" d="M 95 145 C 260 188, 540 188, 705 145"></path>
           </defs>
 
           <text>
@@ -363,7 +363,7 @@
 
     <div id="buttonWrap" class="button-wrap">
       <button class="image-btn" onclick="location.href='map.html'">
-        <img src="/sofiyka-magic-journey/button.png?v=10" alt="Почати подорож" class="btn-png">
+        <img src="/sofiyka-magic-journey/button.png?v=11" alt="Почати подорож" class="btn-png">
 
         <span class="btn-text">
           <span class="spark-left">✨</span>
@@ -385,26 +385,44 @@
       {
         line1: "Привіт!",
         line2: "",
-        className: "script"
+        className: "hello",
+        len1: 300,
+        len2: 0
       },
       {
         line1: "Мене звати",
         line2: "Софійка.",
-        className: "normal"
+        className: "normal",
+        len1: 500,
+        len2: 360
       },
       {
         line1: "Скоро у мене",
         line2: "особливий день.",
-        className: "small"
+        className: "small",
+        len1: 500,
+        len2: 560
       },
       {
         line1: "Допоможеш знайти",
         line2: "чарівне запрошення?",
-        className: "question"
+        className: "question",
+        len1: 640,
+        len2: 650
       }
     ];
 
     let index = 0;
+
+    function applyTextLength(element, value){
+      if(value && value > 0){
+        element.setAttribute("textLength", value);
+        element.setAttribute("lengthAdjust", "spacingAndGlyphs");
+      }else{
+        element.removeAttribute("textLength");
+        element.removeAttribute("lengthAdjust");
+      }
+    }
 
     function setPhrase(i){
       animatedText.classList.remove("show");
@@ -412,6 +430,9 @@
       setTimeout(() => {
         lineOne.textContent = phrases[i].line1;
         lineTwo.textContent = phrases[i].line2;
+
+        applyTextLength(lineOne, phrases[i].len1);
+        applyTextLength(lineTwo, phrases[i].len2);
 
         animatedText.setAttribute("class", "curved-text-svg " + phrases[i].className);
 

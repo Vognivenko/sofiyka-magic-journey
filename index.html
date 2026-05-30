@@ -6,7 +6,7 @@
   <title>Подорож Софійки</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pattaya&family=Cormorant+Garamond:wght@500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@500;600;700&display=swap');
 
     *{
       margin:0;
@@ -78,9 +78,9 @@
     .curved-text-svg{
       position:absolute;
       left:50%;
-      top:70%;
+      top:69%;
       transform:translate(-50%, -50%) scale(0.98);
-      width:80%;
+      width:82%;
       height:58%;
       overflow:visible;
       opacity:0;
@@ -102,34 +102,42 @@
       stroke:rgba(255,255,255,0.92);
       stroke-width:2px;
       stroke-linejoin:round;
-      fill:#4d245f;
-      letter-spacing:0.4px;
-      filter:drop-shadow(0 2px 3px rgba(60,20,75,0.18));
+      fill:#573064;
+      letter-spacing:0.2px;
+      filter:drop-shadow(0 2px 3px rgba(70,25,85,0.18));
     }
 
     .curved-text-svg.script text{
-      font-family:'Pattaya', serif;
-      font-size:84px;
+      font-family:'Marck Script', cursive;
+      font-size:86px;
       font-weight:400;
-      fill:#d84d98;
-      stroke-width:1.7px;
+      fill:#ef64ad;
+      stroke-width:1.5px;
       filter:
         drop-shadow(0 0 7px rgba(255,255,255,0.85))
         drop-shadow(0 3px 5px rgba(123,58,98,0.24));
     }
 
     .curved-text-svg.normal text{
-      font-family:'Pattaya', serif;
+      font-family:'Marck Script', cursive;
       font-size:62px;
       font-weight:400;
-      fill:#4d245f;
+      fill:#573064;
     }
 
     .curved-text-svg.small text{
-      font-family:'Pattaya', serif;
+      font-family:'Marck Script', cursive;
       font-size:54px;
       font-weight:400;
-      fill:#4d245f;
+      fill:#573064;
+    }
+
+    .curved-text-svg.question text{
+      font-family:'Marck Script', cursive;
+      font-size:46px;
+      font-weight:400;
+      fill:#573064;
+      letter-spacing:0px;
     }
 
     .button-wrap{
@@ -252,13 +260,13 @@
       }
 
       .curved-text-svg{
-        top:70%;
-        width:82%;
+        top:69%;
+        width:84%;
         height:60%;
       }
 
       .curved-text-svg.script text{
-        font-size:72px;
+        font-size:74px;
       }
 
       .curved-text-svg.normal text{
@@ -267,6 +275,10 @@
 
       .curved-text-svg.small text{
         font-size:47px;
+      }
+
+      .curved-text-svg.question text{
+        font-size:40px;
       }
 
       .button-wrap{
@@ -287,12 +299,12 @@
 
       .curved-text-svg{
         top:70%;
-        width:84%;
+        width:86%;
         height:62%;
       }
 
       .curved-text-svg.script text{
-        font-size:64px;
+        font-size:66px;
       }
 
       .curved-text-svg.normal text{
@@ -301,6 +313,10 @@
 
       .curved-text-svg.small text{
         font-size:41px;
+      }
+
+      .curved-text-svg.question text{
+        font-size:35px;
       }
 
       .button-wrap{
@@ -324,12 +340,12 @@
 
     <div class="message-area">
       <div class="banner-wrap">
-        <img src="/sofiyka-magic-journey/crown.png?v=8" alt="Казкова стрічка" class="banner-png">
+        <img src="/sofiyka-magic-journey/crown.png?v=9" alt="Казкова стрічка" class="banner-png">
 
         <svg id="animatedText" class="curved-text-svg script show" viewBox="0 0 600 160" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <path id="curveLineOne" d="M 80 76 Q 300 106 520 76"></path>
-            <path id="curveLineTwo" d="M 95 120 Q 300 146 505 120"></path>
+            <path id="curveLineOne" d="M 65 76 Q 300 104 535 76"></path>
+            <path id="curveLineTwo" d="M 75 120 Q 300 144 525 120"></path>
           </defs>
 
           <text>
@@ -347,7 +363,7 @@
 
     <div id="buttonWrap" class="button-wrap">
       <button class="image-btn" onclick="location.href='map.html'">
-        <img src="/sofiyka-magic-journey/button.png?v=8" alt="Почати подорож" class="btn-png">
+        <img src="/sofiyka-magic-journey/button.png?v=9" alt="Почати подорож" class="btn-png">
 
         <span class="btn-text">
           <span class="spark-left">✨</span>
@@ -384,7 +400,7 @@
       {
         line1: "Допоможеш знайти",
         line2: "чарівне запрошення?",
-        className: "small"
+        className: "question"
       }
     ];
 

@@ -53,94 +53,42 @@ body{
   pointer-events:none;
 }
 
-/* Верхня стрічка */
+/* PNG стрічка з короною */
 .message-area{
   position:absolute;
-  top:72px;
+  top:70px;
   left:50%;
   transform:translateX(-50%);
-  width:86%;
-  max-width:430px;
-  min-height:82px;
+  width:96%;
+  max-width:500px;
   z-index:5;
   display:flex;
   justify-content:center;
   align-items:center;
 }
 
-.ribbon{
+.ribbon-image-wrap{
   position:relative;
   width:100%;
-  min-height:74px;
-  padding:14px 26px;
-  border-radius:26px;
-
-  background:linear-gradient(
-    180deg,
-    rgba(255,244,226,0.94) 0%,
-    rgba(255,219,185,0.90) 48%,
-    rgba(247,188,141,0.90) 100%
-  );
-
-  border:2px solid rgba(255,219,105,0.95);
-
-  box-shadow:
-    0 0 14px rgba(255,220,110,0.95),
-    0 0 30px rgba(255,180,90,0.45),
-    inset 0 0 14px rgba(255,255,255,0.65);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
-.ribbon::before,
-.ribbon::after{
-  content:"";
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:42px;
-  height:46px;
-  background:linear-gradient(
-    180deg,
-    rgba(255,237,210,0.92),
-    rgba(240,178,135,0.90)
-  );
-  border:2px solid rgba(255,219,105,0.9);
-  z-index:-1;
-}
-
-.ribbon::before{
-  left:-22px;
-  clip-path:polygon(0 0,100% 12%,100% 88%,0 100%,28% 50%);
-}
-
-.ribbon::after{
-  right:-22px;
-  clip-path:polygon(100% 0,0 12%,0 88%,100% 100%,72% 50%);
-}
-
-/* PNG корона */
-.crown-png{
-  position:absolute;
-  top:-42px;
-  left:50%;
-  transform:translateX(-50%);
-  width:78px;
+.ribbon-png{
+  display:block;
+  width:100%;
   height:auto;
-  z-index:10;
-  filter:drop-shadow(0 0 10px rgba(255,220,90,0.95));
+  filter:drop-shadow(0 0 14px rgba(255,220,100,0.75));
   pointer-events:none;
 }
 
-/* Анімований текст */
+/* Анімований текст поверх стрічки */
 .animated-text{
   position:absolute;
-  width:88%;
+  left:50%;
+  top:58%;
+  transform:translate(-50%, -50%) scale(0.98);
+  width:74%;
   text-align:center;
   opacity:0;
-  transform:translateY(10px) scale(0.98);
   transition:
     opacity .75s ease,
     transform .75s ease,
@@ -148,13 +96,13 @@ body{
   filter:blur(3px);
   color:#6b3a68;
   text-shadow:
-    0 1px 0 rgba(255,255,255,0.85),
-    0 0 8px rgba(255,255,255,0.65);
+    0 1px 0 rgba(255,255,255,0.9),
+    0 0 8px rgba(255,255,255,0.7);
 }
 
 .animated-text.show{
   opacity:1;
-  transform:translateY(0) scale(1);
+  transform:translate(-50%, -50%) scale(1);
   filter:blur(0);
 }
 
@@ -173,14 +121,14 @@ body{
 }
 
 .animated-text.normal{
-  font-size:28px;
-  line-height:1.06;
+  font-size:30px;
+  line-height:1.02;
   font-weight:700;
 }
 
 .animated-text.small{
-  font-size:25px;
-  line-height:1.08;
+  font-size:27px;
+  line-height:1.05;
   font-weight:700;
 }
 
@@ -301,18 +249,8 @@ body{
 
 @media(max-height:720px){
   .message-area{
-    top:58px;
-    width:84%;
-  }
-
-  .ribbon{
-    min-height:66px;
-    padding:12px 22px;
-  }
-
-  .crown-png{
-    width:66px;
-    top:-36px;
+    top:52px;
+    width:98%;
   }
 
   .animated-text.script{
@@ -320,11 +258,11 @@ body{
   }
 
   .animated-text.normal{
-    font-size:24px;
+    font-size:26px;
   }
 
   .animated-text.small{
-    font-size:22px;
+    font-size:23px;
   }
 
   .button-wrap{
@@ -339,16 +277,8 @@ body{
 
 @media(max-height:650px){
   .message-area{
-    top:46px;
-  }
-
-  .ribbon{
-    min-height:60px;
-  }
-
-  .crown-png{
-    width:56px;
-    top:-30px;
+    top:42px;
+    width:98%;
   }
 
   .animated-text.script{
@@ -356,7 +286,7 @@ body{
   }
 
   .animated-text.normal{
-    font-size:21px;
+    font-size:22px;
   }
 
   .animated-text.small{
@@ -384,8 +314,8 @@ body{
   <div class="float-star star3">✦</div>
 
   <div class="message-area">
-    <div class="ribbon">
-      <img src="/sofiyka-magic-journey/crown.png" alt="Корона" class="crown-png">
+    <div class="ribbon-image-wrap">
+      <img src="/sofiyka-magic-journey/crown.png" alt="Казкова стрічка" class="ribbon-png">
 
       <div id="animatedText" class="animated-text script show">
         Привіт!

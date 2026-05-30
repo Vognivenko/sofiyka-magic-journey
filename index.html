@@ -1,305 +1,341 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Подорож Софійки</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подорож Софійки</title>
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@500;600;700;800&display=swap');
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@500;600;700&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    html, body {
-      width: 100%;
-      height: 100%;
-    }
+html,
+body{
+  width:100%;
+  height:100%;
+}
 
-    body {
-      min-height: 100vh;
-      min-height: 100dvh;
-      overflow: hidden;
-      font-family: 'Montserrat', sans-serif;
-      background: url("file_00000000f1f0720a96c83b0635f64e3b.png") center center / cover no-repeat;
-    }
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  overflow:hidden;
+  background:url("file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
+  font-family:'Cormorant Garamond',serif;
+}
 
-    .screen {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      height: 100dvh;
-      overflow: hidden;
-    }
+.screen{
+  position:relative;
+  width:100%;
+  height:100vh;
+  height:100dvh;
+  overflow:hidden;
+}
 
-    .screen::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 50%;
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 220, 245, 0) 0%,
-        rgba(255, 225, 245, 0.12) 30%,
-        rgba(70, 25, 80, 0.28) 100%
-      );
-      z-index: 1;
-      pointer-events: none;
-    }
+.screen::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:38%;
+  background:linear-gradient(
+    to bottom,
+    rgba(255,220,245,0) 0%,
+    rgba(255,225,245,0.12) 35%,
+    rgba(70,25,80,0.26) 100%
+  );
+  z-index:1;
+  pointer-events:none;
+}
 
-    .content {
-      position: absolute;
-      left: 50%;
-      bottom: 26px;
-      transform: translateX(-50%);
-      width: 92%;
-      max-width: 430px;
-      z-index: 3;
-      text-align: center;
-    }
+.content{
+  position:absolute;
+  left:50%;
+  bottom:32px;
+  transform:translateX(-50%);
+  width:92%;
+  max-width:430px;
+  z-index:3;
+  text-align:center;
+  animation:fadeUp 1s ease;
+}
 
-    .titles-card {
-      width: 100%;
-      padding: 22px 20px 24px;
-      border-radius: 30px;
-      background: linear-gradient(
-        180deg,
-        rgba(255, 248, 255, 0.72) 0%,
-        rgba(255, 231, 246, 0.55) 100%
-      );
-      box-shadow:
-        0 0 22px rgba(255, 210, 245, 0.34),
-        inset 0 0 16px rgba(255, 255, 255, 0.42);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      margin-bottom: 14px;
-    }
+.titles-card{
+  width:86%;
+  max-width:360px;
+  margin:0 auto 14px;
+  padding:16px 18px 18px;
+  border-radius:28px;
 
-    .hello {
-      font-family: 'Marck Script', cursive;
-      font-size: 42px;
-      line-height: 1;
-      color: #ea67ac;
-      text-shadow:
-        0 2px 0 rgba(255,255,255,0.75),
-        0 0 12px rgba(255,255,255,0.95);
-      margin-bottom: 10px;
-    }
+  background:linear-gradient(
+    180deg,
+    rgba(255,250,255,0.62) 0%,
+    rgba(255,228,246,0.42) 100%
+  );
 
-    .name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 30px;
-      font-weight: 700;
-      color: #5b3275;
-      line-height: 1.05;
-      text-shadow: 0 0 10px rgba(255,255,255,0.9);
-      margin-bottom: 12px;
-    }
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
 
-    .ornament {
-      width: 76%;
-      height: 18px;
-      margin: 0 auto 14px;
-      position: relative;
-    }
+  box-shadow:
+    0 8px 28px rgba(180,120,160,0.22),
+    0 0 18px rgba(255,220,245,0.34),
+    inset 0 0 18px rgba(255,255,255,0.36);
+}
 
-    .ornament::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 8px;
-      height: 2px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        #d9a43d,
-        #ffeaa0,
-        #d9a43d,
-        transparent
-      );
-      box-shadow: 0 0 8px rgba(255,224,120,0.95);
-    }
+.hello{
+  font-family:'Marck Script',cursive;
+  font-size:36px;
+  line-height:1;
+  color:#ea67ac;
+  font-weight:400;
+  margin-bottom:6px;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,0.75),
+    0 0 10px rgba(255,255,255,0.95);
+}
 
-    .ornament::after {
-      content: "💛";
-      position: absolute;
-      left: 50%;
-      top: -3px;
-      transform: translateX(-50%);
-      font-size: 18px;
-    }
+.name{
+  font-size:25px;
+  font-weight:700;
+  color:#5f347b;
+  line-height:1.05;
+  margin-bottom:8px;
+  text-shadow:0 0 9px rgba(255,255,255,0.95);
+}
 
-    .text,
-    .small-text {
-      font-family: 'Cormorant Garamond', serif;
-      color: #5b3275;
-      text-shadow: 0 0 10px rgba(255,255,255,0.95);
-      font-weight: 600;
-      line-height: 1.08;
-    }
+.ornament{
+  position:relative;
+  width:78%;
+  height:18px;
+  margin:0 auto 10px;
+}
 
-    .text {
-      font-size: 26px;
-      margin-bottom: 12px;
-    }
+.ornament::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:8px;
+  height:2px;
+  background:linear-gradient(
+    to right,
+    transparent,
+    #d9a43d,
+    #ffeaa0,
+    #d9a43d,
+    transparent
+  );
+  box-shadow:0 0 8px rgba(255,224,120,0.95);
+}
 
-    .small-text {
-      font-size: 24px;
-    }
+.ornament::after{
+  content:"💛";
+  position:absolute;
+  left:50%;
+  top:-3px;
+  transform:translateX(-50%);
+  font-size:18px;
+}
 
-    /* Ефект титрів */
-    .title-anim {
-      opacity: 0;
-      transform: translateY(18px) scale(0.98);
-      animation: titleFade 0.9s ease forwards;
-    }
+.text-main,
+.text-sub{
+  color:#5f347b;
+  font-weight:600;
+  line-height:1.12;
+  text-shadow:0 0 8px rgba(255,255,255,0.8);
+}
 
-    .a1 { animation-delay: 0.15s; }
-    .a2 { animation-delay: 0.55s; }
-    .a3 { animation-delay: 0.95s; }
-    .a4 { animation-delay: 1.35s; }
-    .a5 { animation-delay: 1.8s; }
+.text-main{
+  font-size:21px;
+  margin-bottom:9px;
+}
 
-    @keyframes titleFade {
-      0% {
-        opacity: 0;
-        transform: translateY(18px) scale(0.98);
-        filter: blur(4px);
-      }
-      60% {
-        opacity: 1;
-        transform: translateY(-2px) scale(1.01);
-        filter: blur(0);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-      }
-    }
+.text-sub{
+  font-size:20px;
+}
 
-    .magic-btn {
-      position: relative;
-      width: 100%;
-      border: none;
-      border-radius: 42px;
-      padding: 16px 14px;
-      background: linear-gradient(
-        180deg,
-        #ffb9e7 0%,
-        #ff82cf 36%,
-        #eb4baa 68%,
-        #cb3588 100%
-      );
-      color: #fff1a8;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 29px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      text-shadow:
-        0 2px 4px rgba(110, 35, 80, 0.95),
-        0 0 8px rgba(255, 235, 150, 0.85);
-      box-shadow:
-        0 0 12px rgba(255, 230, 120, 0.95),
-        0 0 30px rgba(255, 185, 90, 0.75),
-        0 0 42px rgba(255, 105, 185, 0.65),
-        inset 0 4px 10px rgba(255,255,255,0.65),
-        inset 0 -8px 14px rgba(105,20,75,0.35);
-      cursor: pointer;
-      animation: pulse 2.2s infinite;
-    }
+.magic-btn{
+  position:relative;
+  width:100%;
+  border:none;
+  border-radius:42px;
+  padding:15px 14px;
 
-    .magic-btn::before {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      border-radius: 46px;
-      border: 3px solid #ffd76f;
-      box-shadow:
-        inset 0 0 8px rgba(255,255,255,0.8),
-        0 0 16px rgba(255,220,110,0.95);
-      pointer-events: none;
-    }
+  background:linear-gradient(
+    180deg,
+    #ffb9e7 0%,
+    #ff7dcb 40%,
+    #ea4ba9 70%,
+    #c83486 100%
+  );
 
-    .magic-btn::after {
-      content: "";
-      position: absolute;
-      top: 8px;
-      left: 10%;
-      right: 10%;
-      height: 28%;
-      border-radius: 40px;
-      background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.72),
-        rgba(255,255,255,0.05)
-      );
-      pointer-events: none;
-    }
+  color:#fff2a8;
+  font-family:'Cormorant Garamond',serif;
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:.3px;
 
-    @keyframes pulse {
-      0%   { transform: scale(1); }
-      50%  { transform: scale(1.03); }
-      100% { transform: scale(1); }
-    }
+  text-shadow:
+    0 2px 4px rgba(110,35,80,0.9),
+    0 0 6px rgba(255,235,140,0.8);
 
-    @media (max-width: 430px) {
-      .hello {
-        font-size: 39px;
-      }
+  box-shadow:
+    0 0 12px rgba(255,226,120,0.95),
+    0 0 30px rgba(255,172,83,0.65),
+    0 0 42px rgba(255,105,185,0.56),
+    inset 0 4px 10px rgba(255,255,255,0.62),
+    inset 0 -8px 14px rgba(110,25,80,0.32);
 
-      .name {
-        font-size: 28px;
-      }
+  cursor:pointer;
+  animation:pulse 2.2s infinite;
+}
 
-      .text {
-        font-size: 24px;
-      }
+.magic-btn::before{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  border-radius:46px;
+  border:3px solid #ffd76f;
+  box-shadow:
+    inset 0 0 8px rgba(255,255,255,0.8),
+    0 0 14px rgba(255,220,110,0.95);
+  pointer-events:none;
+}
 
-      .small-text {
-        font-size: 22px;
-      }
+.magic-btn::after{
+  content:"";
+  position:absolute;
+  top:8px;
+  left:10%;
+  right:10%;
+  height:26%;
+  border-radius:40px;
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.72),
+    rgba(255,255,255,0.05)
+  );
+  pointer-events:none;
+}
 
-      .magic-btn {
-        font-size: 26px;
-        padding: 15px 12px;
-      }
-    }
-  </style>
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.025);}
+  100%{transform:scale(1);}
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateX(-50%) translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+}
+
+@media(max-height:720px){
+  .content{
+    bottom:26px;
+  }
+
+  .titles-card{
+    padding:14px 16px 15px;
+    margin-bottom:12px;
+  }
+
+  .hello{
+    font-size:32px;
+  }
+
+  .name{
+    font-size:22px;
+  }
+
+  .text-main{
+    font-size:18px;
+  }
+
+  .text-sub{
+    font-size:17px;
+  }
+
+  .magic-btn{
+    font-size:23px;
+    padding:13px 12px;
+  }
+}
+
+@media(max-height:650px){
+  .content{
+    bottom:18px;
+  }
+
+  .titles-card{
+    padding:12px 14px 13px;
+  }
+
+  .hello{
+    font-size:29px;
+  }
+
+  .name{
+    font-size:20px;
+  }
+
+  .text-main{
+    font-size:16px;
+  }
+
+  .text-sub{
+    font-size:15px;
+  }
+
+  .magic-btn{
+    font-size:21px;
+    padding:12px 10px;
+  }
+}
+</style>
 </head>
+
 <body>
-  <div class="screen">
-    <div class="content">
 
-      <div class="titles-card">
-        <div class="hello title-anim a1">Привіт!</div>
+<div class="screen">
 
-        <div class="name title-anim a2">Я Софійка.</div>
+  <div class="content">
 
-        <div class="ornament title-anim a3"></div>
+    <div class="titles-card">
+      <div class="hello">Привіт!</div>
 
-        <div class="text title-anim a4">
-          Скоро у мене<br>
-          особливий день.
-        </div>
+      <div class="name">Я Софійка.</div>
 
-        <div class="small-text title-anim a5">
-          Допоможеш знайти<br>
-          чарівне запрошення?
-        </div>
+      <div class="ornament"></div>
+
+      <div class="text-main">
+        Скоро у мене<br>
+        особливий день.
       </div>
 
-      <button class="magic-btn" onclick="location.href='map.html'">
-        ✨ Почати подорож ✨
-      </button>
-
+      <div class="text-sub">
+        Допоможеш знайти<br>
+        чарівне запрошення?
+      </div>
     </div>
+
+    <button class="magic-btn" onclick="location.href='map.html'">
+      ✨ Почати подорож ✨
+    </button>
+
   </div>
+
+</div>
+
 </body>
 </html>

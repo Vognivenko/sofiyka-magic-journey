@@ -14,8 +14,7 @@
   box-sizing:border-box;
 }
 
-html,
-body{
+html, body{
   width:100%;
   height:100%;
 }
@@ -42,12 +41,12 @@ body{
   left:0;
   right:0;
   bottom:0;
-  height:38%;
+  height:36%;
   background:linear-gradient(
     to bottom,
     rgba(255,220,245,0) 0%,
     rgba(255,225,245,0.12) 35%,
-    rgba(70,25,80,0.26) 100%
+    rgba(70,25,80,0.28) 100%
   );
   z-index:1;
   pointer-events:none;
@@ -56,63 +55,58 @@ body{
 .content{
   position:absolute;
   left:50%;
-  bottom:32px;
+  bottom:34px;
   transform:translateX(-50%);
   width:92%;
   max-width:430px;
   z-index:3;
   text-align:center;
-  animation:fadeUp 1s ease;
 }
 
 .titles-card{
-  width:86%;
-  max-width:360px;
+  width:84%;
+  max-width:350px;
   margin:0 auto 14px;
-  padding:16px 18px 18px;
-  border-radius:28px;
-
+  padding:14px 16px 16px;
+  border-radius:26px;
   background:linear-gradient(
     180deg,
-    rgba(255,250,255,0.62) 0%,
-    rgba(255,228,246,0.42) 100%
+    rgba(255,250,255,0.58) 0%,
+    rgba(255,228,246,0.36) 100%
   );
-
-  backdrop-filter:blur(4px);
-  -webkit-backdrop-filter:blur(4px);
-
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
   box-shadow:
-    0 8px 28px rgba(180,120,160,0.22),
-    0 0 18px rgba(255,220,245,0.34),
-    inset 0 0 18px rgba(255,255,255,0.36);
+    0 8px 26px rgba(180,120,160,0.20),
+    0 0 16px rgba(255,220,245,0.30),
+    inset 0 0 16px rgba(255,255,255,0.32);
 }
 
 .hello{
   font-family:'Marck Script',cursive;
-  font-size:36px;
+  font-size:34px;
   line-height:1;
   color:#ea67ac;
-  font-weight:400;
-  margin-bottom:6px;
+  margin-bottom:5px;
   text-shadow:
     0 2px 0 rgba(255,255,255,0.75),
     0 0 10px rgba(255,255,255,0.95);
 }
 
 .name{
-  font-size:25px;
+  font-size:24px;
   font-weight:700;
   color:#5f347b;
   line-height:1.05;
-  margin-bottom:8px;
+  margin-bottom:7px;
   text-shadow:0 0 9px rgba(255,255,255,0.95);
 }
 
 .ornament{
   position:relative;
-  width:78%;
-  height:18px;
-  margin:0 auto 10px;
+  width:76%;
+  height:16px;
+  margin:0 auto 9px;
 }
 
 .ornament::before{
@@ -137,9 +131,9 @@ body{
   content:"💛";
   position:absolute;
   left:50%;
-  top:-3px;
+  top:-4px;
   transform:translateX(-50%);
-  font-size:18px;
+  font-size:17px;
 }
 
 .text-main,
@@ -151,12 +145,12 @@ body{
 }
 
 .text-main{
-  font-size:21px;
-  margin-bottom:9px;
+  font-size:20px;
+  margin-bottom:8px;
 }
 
 .text-sub{
-  font-size:20px;
+  font-size:19px;
 }
 
 .magic-btn{
@@ -165,7 +159,6 @@ body{
   border:none;
   border-radius:42px;
   padding:15px 14px;
-
   background:linear-gradient(
     180deg,
     #ffb9e7 0%,
@@ -173,24 +166,20 @@ body{
     #ea4ba9 70%,
     #c83486 100%
   );
-
   color:#fff2a8;
   font-family:'Cormorant Garamond',serif;
-  font-size:27px;
+  font-size:26px;
   font-weight:700;
   letter-spacing:.3px;
-
   text-shadow:
     0 2px 4px rgba(110,35,80,0.9),
     0 0 6px rgba(255,235,140,0.8);
-
   box-shadow:
     0 0 12px rgba(255,226,120,0.95),
     0 0 30px rgba(255,172,83,0.65),
     0 0 42px rgba(255,105,185,0.56),
     inset 0 4px 10px rgba(255,255,255,0.62),
     inset 0 -8px 14px rgba(110,25,80,0.32);
-
   cursor:pointer;
   animation:pulse 2.2s infinite;
 }
@@ -229,77 +218,35 @@ body{
   100%{transform:scale(1);}
 }
 
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateX(-50%) translateY(20px);
-  }
-  to{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-  }
-}
-
 @media(max-height:720px){
   .content{
     bottom:26px;
   }
 
   .titles-card{
-    padding:14px 16px 15px;
+    padding:12px 14px 14px;
     margin-bottom:12px;
   }
 
   .hello{
-    font-size:32px;
+    font-size:31px;
   }
 
   .name{
-    font-size:22px;
+    font-size:21px;
   }
 
   .text-main{
-    font-size:18px;
+    font-size:17px;
   }
 
   .text-sub{
-    font-size:17px;
+    font-size:16px;
   }
 
   .magic-btn{
     font-size:23px;
     padding:13px 12px;
-  }
-}
-
-@media(max-height:650px){
-  .content{
-    bottom:18px;
-  }
-
-  .titles-card{
-    padding:12px 14px 13px;
-  }
-
-  .hello{
-    font-size:29px;
-  }
-
-  .name{
-    font-size:20px;
-  }
-
-  .text-main{
-    font-size:16px;
-  }
-
-  .text-sub{
-    font-size:15px;
-  }
-
-  .magic-btn{
-    font-size:21px;
-    padding:12px 10px;
   }
 }
 </style>

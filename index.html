@@ -6,7 +6,7 @@
 <title>Подорож Софійки</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Montserrat:wght@500;600;700;800&display=swap');
 
 *{
   margin:0;
@@ -25,7 +25,7 @@ body{
   min-height:100dvh;
   overflow:hidden;
   background:url("file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
-  font-family:'Cormorant Garamond',serif;
+  font-family:'Montserrat',sans-serif;
 }
 
 .screen{
@@ -87,18 +87,22 @@ body{
   font-size:38px;
   line-height:1;
   color:#e95aa5;
+  font-weight:400;
+  letter-spacing:.5px;
   text-shadow:
     0 2px 0 #fff2fb,
     0 0 10px rgba(255,255,255,0.95);
-  margin-bottom:0;
+  margin-bottom:4px;
 }
 
 .name{
-  font-size:22px;
+  font-family:'Montserrat',sans-serif;
+  font-size:20px;
   font-weight:700;
-  color:#57306d;
+  color:#56306c;
+  letter-spacing:.3px;
   text-shadow:0 0 9px rgba(255,255,255,0.95);
-  margin-bottom:3px;
+  margin-bottom:5px;
 }
 
 .ornament{
@@ -136,19 +140,21 @@ body{
 }
 
 .text{
-  font-size:18px;
-  line-height:1.1;
-  font-weight:700;
-  color:#55306a;
+  font-family:'Montserrat',sans-serif;
+  font-size:16px;
+  line-height:1.22;
+  font-weight:600;
+  color:#56306c;
   text-shadow:0 0 8px rgba(255,255,255,0.95);
-  margin-bottom:5px;
+  margin-bottom:6px;
 }
 
 .small-text{
-  font-size:17px;
-  line-height:1.1;
-  font-weight:700;
-  color:#55306a;
+  font-family:'Montserrat',sans-serif;
+  font-size:15px;
+  line-height:1.22;
+  font-weight:600;
+  color:#56306c;
   text-shadow:0 0 8px rgba(255,255,255,0.95);
 }
 
@@ -166,10 +172,10 @@ body{
     #c83586 100%
   );
   color:#fff0a8;
-  font-family:'Cormorant Garamond',serif;
-  font-size:22px;
-  font-weight:700;
-  letter-spacing:.3px;
+  font-family:'Montserrat',sans-serif;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.4px;
   text-shadow:
     0 2px 4px rgba(100,30,70,0.9),
     0 0 8px rgba(255,230,150,0.8);
@@ -243,19 +249,19 @@ body{
   }
 
   .name{
-    font-size:20px;
+    font-size:19px;
   }
 
   .text{
-    font-size:17px;
+    font-size:15px;
   }
 
   .small-text{
-    font-size:16px;
+    font-size:14px;
   }
 
   .magic-btn{
-    font-size:20px;
+    font-size:17px;
     padding:12px 12px;
   }
 }
@@ -270,19 +276,19 @@ body{
   }
 
   .name{
-    font-size:19px;
+    font-size:18px;
   }
 
   .text{
-    font-size:16px;
+    font-size:14px;
   }
 
   .small-text{
-    font-size:15px;
+    font-size:13px;
   }
 
   .magic-btn{
-    font-size:19px;
+    font-size:16px;
     padding:11px 10px;
   }
 }
@@ -315,7 +321,7 @@ body{
     </div>
 
     <button class="magic-btn" onclick="location.href='map.html'">
-      ✨ Розпочати подорож ✨
+      ✨ Почати подорож ✨
     </button>
 
   </div>

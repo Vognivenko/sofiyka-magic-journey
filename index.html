@@ -1,436 +1,432 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Подорож Софійки</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Подорож Софійки</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@500;600;700&display=swap');
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@500;600;700&display=swap');
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-html,
-body{
-  width:100%;
-  height:100%;
-}
+    html, body{
+      width:100%;
+      height:100%;
+    }
 
-body{
-  min-height:100vh;
-  min-height:100dvh;
-  overflow:hidden;
-  background:#f4ddea url("/sofiyka-magic-journey/file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
-  font-family:'Cormorant Garamond',serif;
-}
+    body{
+      min-height:100vh;
+      min-height:100dvh;
+      overflow:hidden;
+      background:#f4ddea url("/sofiyka-magic-journey/file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
+      font-family:'Cormorant Garamond', serif;
+    }
 
-.screen{
-  position:relative;
-  width:100%;
-  height:100vh;
-  height:100dvh;
-  overflow:hidden;
-}
+    .screen{
+      position:relative;
+      width:100%;
+      height:100vh;
+      height:100dvh;
+      overflow:hidden;
+    }
 
-.screen::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:30%;
-  background:linear-gradient(
-    to bottom,
-    rgba(40,10,55,0) 0%,
-    rgba(40,10,55,0.18) 55%,
-    rgba(40,10,55,0.38) 100%
-  );
-  z-index:1;
-  pointer-events:none;
-}
+    .screen::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:30%;
+      background:linear-gradient(
+        to bottom,
+        rgba(40,10,55,0) 0%,
+        rgba(40,10,55,0.18) 55%,
+        rgba(40,10,55,0.38) 100%
+      );
+      z-index:1;
+      pointer-events:none;
+    }
 
-/* PNG-стрічка з короною */
-.message-area{
-  position:absolute;
-  top:68px;
-  left:50%;
-  transform:translateX(-50%);
-  width:106%;
-  max-width:620px;
-  z-index:5;
-}
+    /* Стрічка */
+    .message-area{
+      position:absolute;
+      top:68px;
+      left:50%;
+      transform:translateX(-50%);
+      width:106%;
+      max-width:640px;
+      z-index:5;
+    }
 
-.banner-wrap{
-  position:relative;
-  width:100%;
-}
+    .banner-wrap{
+      position:relative;
+      width:100%;
+    }
 
-.banner-png{
-  display:block;
-  width:100%;
-  height:auto;
-  filter:drop-shadow(0 0 14px rgba(255,220,100,0.75));
-  pointer-events:none;
-}
+    .banner-png{
+      display:block;
+      width:100%;
+      height:auto;
+      filter:drop-shadow(0 0 14px rgba(255,220,100,0.75));
+      pointer-events:none;
+    }
 
-/* Вигнутий текст поверх стрічки */
-.curved-text-svg{
-  position:absolute;
-  left:50%;
-  top:67%;
-  transform:translate(-50%, -50%) scale(0.98);
-  width:72%;
-  height:50%;
-  overflow:visible;
-  opacity:0;
-  transition:
-    opacity .75s ease,
-    transform .75s ease;
-  pointer-events:none;
-}
+    /* Текст поверх стрічки */
+    .curved-text-svg{
+      position:absolute;
+      left:50%;
+      top:69%;
+      transform:translate(-50%, -50%) scale(0.98);
+      width:78%;
+      height:56%;
+      overflow:visible;
+      opacity:0;
+      transition:
+        opacity .75s ease,
+        transform .75s ease;
+      pointer-events:none;
+    }
 
-.curved-text-svg.show{
-  opacity:1;
-  transform:translate(-50%, -50%) scale(1);
-}
+    .curved-text-svg.show{
+      opacity:1;
+      transform:translate(-50%, -50%) scale(1);
+    }
 
-.curved-text-svg text{
-  text-anchor:middle;
-  dominant-baseline:middle;
-  paint-order:stroke;
-  stroke:rgba(255,255,255,0.9);
-  stroke-width:2px;
-  stroke-linejoin:round;
-  fill:#5d356d;
-  filter:drop-shadow(0 2px 3px rgba(90,35,90,0.22));
-}
+    .curved-text-svg text{
+      text-anchor:middle;
+      dominant-baseline:middle;
+      paint-order:stroke;
+      stroke:rgba(255,255,255,0.92);
+      stroke-width:2px;
+      stroke-linejoin:round;
+      fill:#5d356d;
+      letter-spacing:0.5px;
+      filter:drop-shadow(0 2px 3px rgba(90,35,90,0.18));
+    }
 
-.curved-text-svg.script text{
-  font-family:'Marck Script',cursive;
-  font-size:76px;
-  font-weight:400;
-  fill:#f06ab2;
-  stroke-width:1.5px;
-  filter:
-    drop-shadow(0 0 7px rgba(255,255,255,0.85))
-    drop-shadow(0 3px 5px rgba(123,58,98,0.24));
-}
+    .curved-text-svg.script text{
+      font-family:'Marck Script', cursive;
+      font-size:88px;
+      font-weight:400;
+      fill:#f06ab2;
+      stroke-width:1.5px;
+      filter:
+        drop-shadow(0 0 7px rgba(255,255,255,0.85))
+        drop-shadow(0 3px 5px rgba(123,58,98,0.24));
+    }
 
-.curved-text-svg.normal text{
-  font-family:'Marck Script',cursive;
-  font-size:52px;
-  font-weight:400;
-  fill:#5d356d;
-}
+    .curved-text-svg.normal text{
+      font-family:'Marck Script', cursive;
+      font-size:66px;
+      font-weight:400;
+      fill:#5d356d;
+    }
 
-.curved-text-svg.small text{
-  font-family:'Marck Script',cursive;
-  font-size:45px;
-  font-weight:400;
-  fill:#5d356d;
-}
+    .curved-text-svg.small text{
+      font-family:'Marck Script', cursive;
+      font-size:58px;
+      font-weight:400;
+      fill:#5d356d;
+    }
 
-/* PNG-кнопка */
-.button-wrap{
-  position:absolute;
-  left:50%;
-  bottom:50px;
-  transform:translateX(-50%) translateY(22px);
-  width:92%;
-  max-width:470px;
-  z-index:6;
-  opacity:0;
-  pointer-events:none;
-  transition:
-    opacity 1s ease,
-    transform 1s ease;
-}
+    /* Кнопка */
+    .button-wrap{
+      position:absolute;
+      left:50%;
+      bottom:50px;
+      transform:translateX(-50%) translateY(22px);
+      width:92%;
+      max-width:470px;
+      z-index:6;
+      opacity:0;
+      pointer-events:none;
+      transition:
+        opacity 1s ease,
+        transform 1s ease;
+    }
 
-.button-wrap.show{
-  opacity:1;
-  pointer-events:auto;
-  transform:translateX(-50%) translateY(0);
-}
+    .button-wrap.show{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateX(-50%) translateY(0);
+    }
 
-.image-btn{
-  position:relative;
-  width:100%;
-  border:none;
-  background:none;
-  padding:0;
-  cursor:pointer;
-  animation:pulse 2.2s infinite;
-}
+    .image-btn{
+      position:relative;
+      width:100%;
+      border:none;
+      background:none;
+      padding:0;
+      cursor:pointer;
+      animation:pulse 2.2s infinite;
+    }
 
-.btn-png{
-  display:block;
-  width:100%;
-  height:auto;
-  filter:drop-shadow(0 0 18px rgba(255,220,95,0.75));
-}
+    .btn-png{
+      display:block;
+      width:100%;
+      height:auto;
+      filter:drop-shadow(0 0 18px rgba(255,220,95,0.75));
+    }
 
-.btn-text{
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%, -50%);
-  width:82%;
-  text-align:center;
-  font-family:'Cormorant Garamond',serif;
-  font-size:30px;
-  font-weight:700;
-  letter-spacing:.4px;
-  color:#fff2a8;
-  text-shadow:
-    0 2px 4px rgba(110,35,80,0.95),
-    0 0 8px rgba(255,235,140,0.9);
-  pointer-events:none;
-  white-space:nowrap;
-}
+    .btn-text{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%, -50%);
+      width:82%;
+      text-align:center;
+      font-family:'Cormorant Garamond', serif;
+      font-size:30px;
+      font-weight:700;
+      letter-spacing:.4px;
+      color:#fff2a8;
+      text-shadow:
+        0 2px 4px rgba(110,35,80,0.95),
+        0 0 8px rgba(255,235,140,0.9);
+      pointer-events:none;
+      white-space:nowrap;
+    }
 
-.spark-left,
-.spark-right{
-  color:#fff0a8;
-  text-shadow:0 0 12px rgba(255,230,120,1);
-  animation:twinkleText 1.8s infinite;
-}
+    .spark-left,
+    .spark-right{
+      color:#fff0a8;
+      text-shadow:0 0 12px rgba(255,230,120,1);
+      animation:twinkleText 1.8s infinite;
+    }
 
-.spark-right{
-  animation-delay:.5s;
-}
+    .spark-right{
+      animation-delay:.5s;
+    }
 
-/* Декор-зірочки */
-.float-star{
-  position:absolute;
-  color:#fff0a8;
-  font-size:18px;
-  text-shadow:0 0 12px rgba(255,230,120,1);
-  z-index:4;
-  opacity:.8;
-  animation:floatStar 3s ease-in-out infinite;
-}
+    /* Декор */
+    .float-star{
+      position:absolute;
+      color:#fff0a8;
+      font-size:18px;
+      text-shadow:0 0 12px rgba(255,230,120,1);
+      z-index:4;
+      opacity:.8;
+      animation:floatStar 3s ease-in-out infinite;
+    }
 
-.star1{
-  top:150px;
-  left:18%;
-}
+    .star1{
+      top:150px;
+      left:18%;
+    }
 
-.star2{
-  top:126px;
-  right:15%;
-  animation-delay:.9s;
-}
+    .star2{
+      top:126px;
+      right:15%;
+      animation-delay:.9s;
+    }
 
-.star3{
-  top:210px;
-  right:26%;
-  animation-delay:1.5s;
-}
+    .star3{
+      top:210px;
+      right:26%;
+      animation-delay:1.5s;
+    }
 
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.025);}
-  100%{transform:scale(1);}
-}
+    @keyframes pulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.025);}
+      100%{transform:scale(1);}
+    }
 
-@keyframes twinkleText{
-  0%{opacity:.65;}
-  50%{opacity:1;}
-  100%{opacity:.65;}
-}
+    @keyframes twinkleText{
+      0%{opacity:.65;}
+      50%{opacity:1;}
+      100%{opacity:.65;}
+    }
 
-@keyframes floatStar{
-  0%{opacity:.45; transform:translateY(0) scale(.9);}
-  50%{opacity:1; transform:translateY(-8px) scale(1.12);}
-  100%{opacity:.45; transform:translateY(0) scale(.9);}
-}
+    @keyframes floatStar{
+      0%{opacity:.45; transform:translateY(0) scale(.9);}
+      50%{opacity:1; transform:translateY(-8px) scale(1.12);}
+      100%{opacity:.45; transform:translateY(0) scale(.9);}
+    }
 
-/* Адаптація під нижчі екрани */
-@media(max-height:720px){
-  .message-area{
-    top:54px;
-    width:108%;
-  }
+    @media(max-height:720px){
+      .message-area{
+        top:56px;
+        width:108%;
+      }
 
-  .curved-text-svg{
-    top:67%;
-    width:72%;
-    height:50%;
-  }
+      .curved-text-svg{
+        top:69%;
+        width:80%;
+        height:58%;
+      }
 
-  .curved-text-svg.script text{
-    font-size:66px;
-  }
+      .curved-text-svg.script text{
+        font-size:74px;
+      }
 
-  .curved-text-svg.normal text{
-    font-size:46px;
-  }
+      .curved-text-svg.normal text{
+        font-size:56px;
+      }
 
-  .curved-text-svg.small text{
-    font-size:40px;
-  }
+      .curved-text-svg.small text{
+        font-size:49px;
+      }
 
-  .button-wrap{
-    bottom:38px;
-    width:90%;
-  }
+      .button-wrap{
+        bottom:38px;
+        width:90%;
+      }
 
-  .btn-text{
-    font-size:27px;
-  }
-}
+      .btn-text{
+        font-size:27px;
+      }
+    }
 
-@media(max-height:650px){
-  .message-area{
-    top:42px;
-    width:108%;
-  }
+    @media(max-height:650px){
+      .message-area{
+        top:44px;
+        width:108%;
+      }
 
-  .curved-text-svg{
-    top:67%;
-    width:72%;
-    height:50%;
-  }
+      .curved-text-svg{
+        top:70%;
+        width:82%;
+        height:60%;
+      }
 
-  .curved-text-svg.script text{
-    font-size:58px;
-  }
+      .curved-text-svg.script text{
+        font-size:66px;
+      }
 
-  .curved-text-svg.normal text{
-    font-size:40px;
-  }
+      .curved-text-svg.normal text{
+        font-size:48px;
+      }
 
-  .curved-text-svg.small text{
-    font-size:35px;
-  }
+      .curved-text-svg.small text{
+        font-size:42px;
+      }
 
-  .button-wrap{
-    bottom:24px;
-    width:88%;
-  }
+      .button-wrap{
+        bottom:24px;
+        width:88%;
+      }
 
-  .btn-text{
-    font-size:24px;
-  }
-}
-</style>
+      .btn-text{
+        font-size:24px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="screen">
 
-<div class="screen">
+    <div class="float-star star1">✨</div>
+    <div class="float-star star2">✨</div>
+    <div class="float-star star3">✦</div>
 
-  <div class="float-star star1">✨</div>
-  <div class="float-star star2">✨</div>
-  <div class="float-star star3">✦</div>
+    <div class="message-area">
+      <div class="banner-wrap">
+        <img src="/sofiyka-magic-journey/crown.png?v=7" alt="Казкова стрічка" class="banner-png">
 
-  <div class="message-area">
-    <div class="banner-wrap">
-      <img src="/sofiyka-magic-journey/crown.png?v=6" alt="Казкова стрічка" class="banner-png">
+        <svg id="animatedText" class="curved-text-svg script show" viewBox="0 0 600 160" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <path id="curveLineOne" d="M 90 76 Q 300 104 510 76"></path>
+            <path id="curveLineTwo" d="M 105 118 Q 300 142 495 118"></path>
+          </defs>
 
-      <svg id="animatedText" class="curved-text-svg script show" viewBox="0 0 600 160" preserveAspectRatio="xMidYMid meet">
-        <defs>
-          <path id="curveLineOne" d="M 90 78 Q 300 106 510 78"></path>
-          <path id="curveLineTwo" d="M 105 118 Q 300 142 495 118"></path>
-        </defs>
+          <text>
+            <textPath id="lineOne" href="#curveLineOne" startOffset="50%">
+              Привіт!
+            </textPath>
+          </text>
 
-        <text>
-          <textPath id="lineOne" href="#curveLineOne" startOffset="50%">
-            Привіт!
-          </textPath>
-        </text>
-
-        <text>
-          <textPath id="lineTwo" href="#curveLineTwo" startOffset="50%"></textPath>
-        </text>
-      </svg>
+          <text>
+            <textPath id="lineTwo" href="#curveLineTwo" startOffset="50%"></textPath>
+          </text>
+        </svg>
+      </div>
     </div>
+
+    <div id="buttonWrap" class="button-wrap">
+      <button class="image-btn" onclick="location.href='map.html'">
+        <img src="/sofiyka-magic-journey/button.png?v=7" alt="Почати подорож" class="btn-png">
+        <span class="btn-text">
+          <span class="spark-left">✨</span>
+          Почати подорож
+          <span class="spark-right">✨</span>
+        </span>
+      </button>
+    </div>
+
   </div>
 
-  <div id="buttonWrap" class="button-wrap">
-    <button class="image-btn" onclick="location.href='map.html'">
-      <img src="/sofiyka-magic-journey/button.png?v=6" alt="Почати подорож" class="btn-png">
+  <script>
+    const animatedText = document.getElementById("animatedText");
+    const buttonWrap = document.getElementById("buttonWrap");
+    const lineOne = document.getElementById("lineOne");
+    const lineTwo = document.getElementById("lineTwo");
 
-      <span class="btn-text">
-        <span class="spark-left">✨</span>
-        Почати подорож
-        <span class="spark-right">✨</span>
-      </span>
-    </button>
-  </div>
+    const phrases = [
+      {
+        line1: "Привіт!",
+        line2: "",
+        className: "script"
+      },
+      {
+        line1: "Мене звати",
+        line2: "Софійка.",
+        className: "normal"
+      },
+      {
+        line1: "Скоро у мене",
+        line2: "особливий день.",
+        className: "small"
+      },
+      {
+        line1: "Допоможеш знайти",
+        line2: "чарівне запрошення?",
+        className: "small"
+      }
+    ];
 
-</div>
+    let index = 0;
 
-<script>
-const animatedText = document.getElementById("animatedText");
-const buttonWrap = document.getElementById("buttonWrap");
-const lineOne = document.getElementById("lineOne");
-const lineTwo = document.getElementById("lineTwo");
-
-const phrases = [
-  {
-    line1: "Привіт!",
-    line2: "",
-    className: "script"
-  },
-  {
-    line1: "Мене звати",
-    line2: "Софійка.",
-    className: "normal"
-  },
-  {
-    line1: "Скоро у мене",
-    line2: "особливий день.",
-    className: "small"
-  },
-  {
-    line1: "Допоможеш знайти",
-    line2: "чарівне запрошення?",
-    className: "small"
-  }
-];
-
-let index = 0;
-
-function setPhrase(i){
-  animatedText.classList.remove("show");
-
-  setTimeout(() => {
-    lineOne.textContent = phrases[i].line1;
-    lineTwo.textContent = phrases[i].line2;
-
-    animatedText.setAttribute("class", "curved-text-svg " + phrases[i].className);
-
-    requestAnimationFrame(() => {
-      animatedText.classList.add("show");
-    });
-  }, 550);
-}
-
-function startTextAnimation(){
-  setPhrase(0);
-
-  const timer = setInterval(() => {
-    index++;
-
-    if(index < phrases.length){
-      setPhrase(index);
-    }else{
-      clearInterval(timer);
+    function setPhrase(i){
+      animatedText.classList.remove("show");
 
       setTimeout(() => {
-        buttonWrap.classList.add("show");
-      }, 900);
+        lineOne.textContent = phrases[i].line1;
+        lineTwo.textContent = phrases[i].line2;
+
+        animatedText.setAttribute("class", "curved-text-svg " + phrases[i].className);
+
+        requestAnimationFrame(() => {
+          animatedText.classList.add("show");
+        });
+      }, 550);
     }
-  }, 2500);
-}
 
-window.addEventListener("load", startTextAnimation);
-</script>
+    function startTextAnimation(){
+      setPhrase(0);
 
+      const timer = setInterval(() => {
+        index++;
+
+        if(index < phrases.length){
+          setPhrase(index);
+        }else{
+          clearInterval(timer);
+
+          setTimeout(() => {
+            buttonWrap.classList.add("show");
+          }, 900);
+        }
+      }, 2500);
+    }
+
+    window.addEventListener("load", startTextAnimation);
+  </script>
 </body>
 </html>

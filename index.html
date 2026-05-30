@@ -1,204 +1,296 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Подорож Софійки</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Подорож Софійки</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
+  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-html,
-body{
-  width:100%;
-  height:100%;
-}
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Cormorant Garamond', serif;
+      background: #f8eaf5;
+    }
 
-body{
-  min-height:100vh;
-  min-height:100dvh;
-  overflow:hidden;
-  background:url("file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
-  font-family:'Cormorant Garamond',serif;
-}
+    body {
+      position: relative;
+    }
 
-.screen{
-  position:relative;
-  width:100%;
-  height:100vh;
-  height:100dvh;
-  overflow:hidden;
-}
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+        url('sofiika-bg.jpg') center center / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      overflow: hidden;
+    }
 
-.screen::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  height:28%;
-  background:linear-gradient(
-    to bottom,
-    rgba(40,10,55,0) 0%,
-    rgba(40,10,55,0.18) 50%,
-    rgba(40,10,55,0.38) 100%
-  );
-  z-index:1;
-  pointer-events:none;
-}
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(40, 10, 70, 0.10), rgba(40, 10, 70, 0.08)),
+        radial-gradient(circle at center, rgba(255,255,255,0.03), rgba(255,255,255,0));
+      pointer-events: none;
+    }
 
-.button-wrap{
-  position:absolute;
-  left:50%;
-  bottom:54px;
-  transform:translateX(-50%);
-  width:88%;
-  max-width:430px;
-  z-index:3;
-}
+    /* Блок для анімованого тексту */
+    .text-stage {
+      position: absolute;
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 78%;
+      max-width: 520px;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px 12px;
+      z-index: 5;
+    }
 
-.magic-btn{
-  position:relative;
-  width:100%;
-  border:none;
-  border-radius:46px;
-  padding:16px 16px;
+    .line {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      color: #fff6fb;
+      text-shadow:
+        0 2px 8px rgba(92, 26, 92, 0.45),
+        0 0 18px rgba(255, 220, 242, 0.35);
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
 
-  background:linear-gradient(
-    180deg,
-    #ffb9e7 0%,
-    #ff7dcb 38%,
-    #ea4ba9 70%,
-    #c83486 100%
-  );
+    .line.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
 
-  color:#fff2a8;
-  font-family:'Cormorant Garamond',serif;
-  font-size:27px;
-  font-weight:700;
-  letter-spacing:.4px;
+    .line.big {
+      font-family: 'Marck Script', cursive;
+      font-size: clamp(42px, 7vw, 68px);
+      color: #ffe6f4;
+      text-shadow:
+        0 2px 10px rgba(124, 29, 92, 0.55),
+        0 0 20px rgba(255, 214, 236, 0.45);
+    }
 
-  text-shadow:
-    0 2px 4px rgba(110,35,80,0.95),
-    0 0 8px rgba(255,235,140,0.9);
+    .line.medium {
+      font-size: clamp(34px, 5.8vw, 48px);
+      font-weight: 600;
+      color: #fff3fb;
+    }
 
-  box-shadow:
-    0 0 12px rgba(255,226,120,0.95),
-    0 0 30px rgba(255,172,83,0.65),
-    0 0 46px rgba(255,105,185,0.58),
-    inset 0 5px 10px rgba(255,255,255,0.65),
-    inset 0 -9px 15px rgba(110,25,80,0.34);
+    .line.small {
+      font-size: clamp(30px, 5vw, 42px);
+      font-weight: 600;
+      color: #fff3fb;
+    }
 
-  cursor:pointer;
-  animation:pulse 2.2s infinite;
-}
+    /* Кнопка */
+    .button-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: 8%;
+      transform: translateX(-50%) translateY(30px);
+      width: 86%;
+      max-width: 620px;
+      opacity: 0;
+      transition: opacity 1s ease, transform 1s ease;
+      z-index: 8;
+    }
 
-.magic-btn::before{
-  content:"";
-  position:absolute;
-  inset:-4px;
-  border-radius:50px;
-  border:3px solid #ffd76f;
-  box-shadow:
-    inset 0 0 8px rgba(255,255,255,0.8),
-    0 0 16px rgba(255,220,110,0.95);
-  pointer-events:none;
-}
+    .button-wrap.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
 
-.magic-btn::after{
-  content:"";
-  position:absolute;
-  top:8px;
-  left:10%;
-  right:10%;
-  height:27%;
-  border-radius:40px;
-  background:linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.75),
-    rgba(255,255,255,0.05)
-  );
-  pointer-events:none;
-}
+    .magic-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 88px;
+      padding: 22px 26px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 5vw, 38px);
+      font-weight: 700;
+      color: #ffe8a8;
+      background:
+        linear-gradient(to bottom, #ffd6ef 0%, #ff8fd1 22%, #f64fb4 58%, #c7258f 100%);
+      border: 4px solid #f7d85c;
+      box-shadow:
+        0 0 0 3px rgba(255, 245, 180, 0.25) inset,
+        0 0 14px rgba(255, 223, 100, 0.8),
+        0 0 32px rgba(255, 205, 96, 0.45),
+        0 12px 22px rgba(130, 20, 92, 0.28);
+      text-shadow:
+        0 1px 0 rgba(120, 60, 0, 0.4),
+        0 2px 6px rgba(120, 60, 0, 0.35);
+      overflow: hidden;
+    }
 
-.spark-left,
-.spark-right{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:22px;
-  color:#fff0a8;
-  text-shadow:0 0 12px rgba(255,230,120,1);
-  z-index:2;
-  animation:twinkle 1.8s infinite;
-}
+    .magic-btn::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 10%;
+      width: 80%;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.45);
+      filter: blur(1px);
+    }
 
-.spark-left{
-  left:18px;
-}
+    .magic-btn::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 999px;
+      box-shadow:
+        0 0 12px rgba(255, 244, 157, 0.75),
+        0 0 24px rgba(255, 213, 79, 0.55);
+      pointer-events: none;
+    }
 
-.spark-right{
-  right:18px;
-  animation-delay:.5s;
-}
+    .magic-btn span {
+      position: relative;
+      z-index: 2;
+    }
 
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.025);}
-  100%{transform:scale(1);}
-}
+    .magic-btn:hover,
+    .magic-btn:active {
+      transform: scale(1.02);
+    }
 
-@keyframes twinkle{
-  0%{opacity:.55; transform:translateY(-50%) scale(.9);}
-  50%{opacity:1; transform:translateY(-50%) scale(1.18);}
-  100%{opacity:.55; transform:translateY(-50%) scale(.9);}
-}
+    .sparkle {
+      color: #ffe26d;
+      margin: 0 12px;
+      font-size: 1em;
+      filter: drop-shadow(0 0 8px rgba(255, 240, 170, 0.8));
+      animation: twinkle 1.8s ease-in-out infinite;
+    }
 
-@media(max-height:720px){
-  .button-wrap{
-    bottom:42px;
-    width:86%;
-  }
+    .sparkle.right {
+      animation-delay: 0.5s;
+    }
 
-  .magic-btn{
-    font-size:24px;
-    padding:14px 14px;
-  }
-}
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.75; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.12); }
+    }
 
-@media(max-height:650px){
-  .button-wrap{
-    bottom:28px;
-    width:84%;
-  }
+    /* Адаптація */
+    @media (max-width: 480px) {
+      .text-stage {
+        top: 8%;
+        width: 84%;
+        min-height: 110px;
+      }
 
-  .magic-btn{
-    font-size:22px;
-    padding:13px 12px;
-  }
-}
-</style>
+      .button-wrap {
+        width: 90%;
+        bottom: 7%;
+      }
+
+      .magic-btn {
+        min-height: 82px;
+        padding: 18px 18px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="screen">
+  <section class="hero">
+    <div class="overlay"></div>
 
-  <div class="button-wrap">
-    <button class="magic-btn" onclick="location.href='map.html'">
-      <span class="spark-left">✨</span>
-      Почати подорож
-      <span class="spark-right">✨</span>
-    </button>
-  </div>
+    <!-- Текст, який буде змінюватися -->
+    <div class="text-stage">
+      <div class="line big show" id="animatedText">Привіт!</div>
+    </div>
 
-</div>
+    <!-- Кнопка з'явиться після всього тексту -->
+    <div class="button-wrap" id="buttonWrap">
+      <a href="journey.html" class="magic-btn">
+        <span class="sparkle">✨</span>
+        <span>Почати подорож</span>
+        <span class="sparkle right">✨</span>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    const textEl = document.getElementById('animatedText');
+    const buttonWrap = document.getElementById('buttonWrap');
+
+    const phrases = [
+      { text: "Привіт!", className: "big" },
+      { text: "Мене звати Софійка.", className: "medium" },
+      { text: "Скоро у мене особливий день.", className: "small" },
+      { text: "Допоможеш знайти чарівне запрошення?", className: "small" }
+    ];
+
+    let current = 0;
+
+    function showPhrase(index) {
+      textEl.classList.remove('show');
+
+      setTimeout(() => {
+        textEl.textContent = phrases[index].text;
+        textEl.className = 'line ' + phrases[index].className;
+        requestAnimationFrame(() => {
+          textEl.classList.add('show');
+        });
+      }, 500);
+    }
+
+    function runSequence() {
+      showPhrase(current);
+
+      const interval = setInterval(() => {
+        current++;
+
+        if (current < phrases.length) {
+          showPhrase(current);
+        } else {
+          clearInterval(interval);
+
+          // залишаємо останню фразу і після цього показуємо кнопку
+          setTimeout(() => {
+            buttonWrap.classList.add('show');
+          }, 1200);
+        }
+      }, 2600);
+    }
+
+    // запуск
+    window.addEventListener('load', () => {
+      runSequence();
+    });
+  </script>
 
 </body>
 </html>

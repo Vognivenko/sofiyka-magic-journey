@@ -8,80 +8,120 @@
 
 <style>
 
-body{
+*{
 margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:flex-end;
-
-background-image:url("file_00000000f1f0720a96c83b0635f64e3b.png");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-
-font-family:Arial,sans-serif;
-overflow:hidden;
+padding:0;
+box-sizing:border-box;
 }
 
-.box{
+body{
+height:100vh;
+overflow:hidden;
+font-family:'Arial',sans-serif;
+background:url('sofiyka.jpg') center center/cover no-repeat;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.25);
+backdrop-filter:blur(2px);
+}
+
+.content{
+position:relative;
+z-index:2;
+width:90%;
+max-width:500px;
 text-align:center;
-margin-bottom:180px;
-padding:20px;
+color:white;
+animation:fadeIn 1.5s ease;
 }
 
 h1{
-color:white;
-font-size:42px;
-margin-bottom:10px;
-text-shadow:0 0 20px rgba(255,255,255,0.9);
+font-size:58px;
+font-weight:900;
+line-height:1;
+margin-bottom:20px;
+text-shadow:0 0 20px rgba(255,255,255,0.8);
 }
 
 p{
-color:white;
-font-size:22px;
-margin-bottom:25px;
-text-shadow:0 0 10px rgba(0,0,0,0.7);
+font-size:24px;
+line-height:1.4;
+margin-bottom:45px;
+text-shadow:0 0 15px rgba(0,0,0,0.7);
 }
 
 button{
-padding:20px 35px;
-border:none;
-border-radius:40px;
-background:#f95fb8;
-color:white;
+border:3px solid #ffd36a;
+border-radius:50px;
+padding:18px 40px;
+background:linear-gradient(
+180deg,
+#ff9ed6 0%,
+#f067b8 50%,
+#d63f93 100%
+);
+color:#fff7c9;
 font-size:28px;
-font-weight:bold;
-box-shadow:0 0 25px rgba(255,105,180,0.9);
-animation:pulse 2s infinite;
+font-weight:800;
 cursor:pointer;
+text-shadow:0 2px 5px rgba(0,0,0,0.35);
+box-shadow:
+0 0 15px rgba(255,220,120,.9),
+0 0 35px rgba(255,120,200,.8),
+inset 0 0 10px rgba(255,255,255,.6);
+animation:pulse 2s infinite;
+}
+
+button:hover{
+transform:scale(1.05);
 }
 
 @keyframes pulse{
 0%{
 transform:scale(1);
 }
-
 50%{
 transform:scale(1.05);
 }
-
 100%{
 transform:scale(1);
 }
 }
 
-</style>
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
 
+</style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="overlay"></div>
 
-<h1>Подорож Софійки</h1>
+<div class="content">
 
-<p>Ласкаво просимо до чарівної пригоди</p>
+<h1>Подорож<br>Софійки</h1>
+
+<p>
+Ласкаво просимо до чарівної пригоди
+</p>
 
 <button onclick="location.href='map.html'">
 ✨ Розпочати подорож ✨

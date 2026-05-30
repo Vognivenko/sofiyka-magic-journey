@@ -6,7 +6,7 @@
 <title>Подорож Софійки</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&family=Cormorant+Garamond:wght@500;600;700&display=swap');
 
 *{
   margin:0;
@@ -53,26 +53,23 @@ body{
   pointer-events:none;
 }
 
-/* PNG стрічка з короною */
+/* PNG-стрічка з короною */
 .message-area{
   position:absolute;
-  top:70px;
+  top:68px;
   left:50%;
   transform:translateX(-50%);
-  width:96%;
-  max-width:500px;
+  width:106%;
+  max-width:620px;
   z-index:5;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
 
-.ribbon-image-wrap{
+.banner-wrap{
   position:relative;
   width:100%;
 }
 
-.ribbon-png{
+.banner-png{
   display:block;
   width:100%;
   height:auto;
@@ -80,59 +77,64 @@ body{
   pointer-events:none;
 }
 
-/* Анімований текст поверх стрічки */
-.animated-text{
+/* Вигнутий текст поверх стрічки */
+.curved-text-svg{
   position:absolute;
   left:50%;
-  top:58%;
+  top:67%;
   transform:translate(-50%, -50%) scale(0.98);
-  width:74%;
-  text-align:center;
+  width:62%;
+  height:45%;
+  overflow:visible;
   opacity:0;
   transition:
     opacity .75s ease,
-    transform .75s ease,
-    filter .75s ease;
-  filter:blur(3px);
-  color:#6b3a68;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,0.9),
-    0 0 8px rgba(255,255,255,0.7);
+    transform .75s ease;
+  pointer-events:none;
 }
 
-.animated-text.show{
+.curved-text-svg.show{
   opacity:1;
   transform:translate(-50%, -50%) scale(1);
-  filter:blur(0);
 }
 
-.animated-text.script{
-  font-family:'Great Vibes',cursive;
+.curved-text-svg text{
+  text-anchor:middle;
+  dominant-baseline:middle;
+  paint-order:stroke;
+  stroke:rgba(255,255,255,0.9);
+  stroke-width:2px;
+  stroke-linejoin:round;
+  fill:#5d356d;
+  filter:drop-shadow(0 2px 3px rgba(90,35,90,0.22));
+}
+
+.curved-text-svg.script text{
+  font-family:'Marck Script',cursive;
   font-size:58px;
-  line-height:1;
   font-weight:400;
-  color:#f06ab2;
-  letter-spacing:0.5px;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,0.95),
-    0 0 8px rgba(255,255,255,0.75),
-    0 0 18px rgba(255,180,220,0.55),
-    2px 3px 8px rgba(123,58,98,0.28);
+  fill:#f06ab2;
+  stroke-width:1.5px;
+  filter:
+    drop-shadow(0 0 7px rgba(255,255,255,0.85))
+    drop-shadow(0 3px 5px rgba(123,58,98,0.24));
 }
 
-.animated-text.normal{
-  font-size:30px;
-  line-height:1.02;
-  font-weight:700;
+.curved-text-svg.normal text{
+  font-family:'Marck Script',cursive;
+  font-size:35px;
+  font-weight:400;
+  fill:#5d356d;
 }
 
-.animated-text.small{
-  font-size:27px;
-  line-height:1.05;
-  font-weight:700;
+.curved-text-svg.small text{
+  font-family:'Marck Script',cursive;
+  font-size:31px;
+  font-weight:400;
+  fill:#5d356d;
 }
 
-/* PNG кнопка */
+/* PNG-кнопка */
 .button-wrap{
   position:absolute;
   left:50%;
@@ -201,7 +203,7 @@ body{
   animation-delay:.5s;
 }
 
-/* Зірочки */
+/* Декор-зірочки */
 .float-star{
   position:absolute;
   color:#fff0a8;
@@ -247,22 +249,29 @@ body{
   100%{opacity:.45; transform:translateY(0) scale(.9);}
 }
 
+/* Адаптація під нижчі екрани */
 @media(max-height:720px){
   .message-area{
-    top:52px;
-    width:98%;
+    top:54px;
+    width:108%;
   }
 
-  .animated-text.script{
+  .curved-text-svg{
+    top:67%;
+    width:62%;
+    height:45%;
+  }
+
+  .curved-text-svg.script text{
     font-size:50px;
   }
 
-  .animated-text.normal{
-    font-size:26px;
+  .curved-text-svg.normal text{
+    font-size:31px;
   }
 
-  .animated-text.small{
-    font-size:23px;
+  .curved-text-svg.small text{
+    font-size:27px;
   }
 
   .button-wrap{
@@ -278,19 +287,25 @@ body{
 @media(max-height:650px){
   .message-area{
     top:42px;
-    width:98%;
+    width:108%;
   }
 
-  .animated-text.script{
+  .curved-text-svg{
+    top:67%;
+    width:62%;
+    height:45%;
+  }
+
+  .curved-text-svg.script text{
     font-size:44px;
   }
 
-  .animated-text.normal{
-    font-size:22px;
+  .curved-text-svg.normal text{
+    font-size:27px;
   }
 
-  .animated-text.small{
-    font-size:20px;
+  .curved-text-svg.small text{
+    font-size:23px;
   }
 
   .button-wrap{
@@ -314,18 +329,32 @@ body{
   <div class="float-star star3">✦</div>
 
   <div class="message-area">
-    <div class="ribbon-image-wrap">
-      <img src="/sofiyka-magic-journey/crown.png" alt="Казкова стрічка" class="ribbon-png">
+    <div class="banner-wrap">
+      <img src="/sofiyka-magic-journey/crown.png?v=5" alt="Казкова стрічка" class="banner-png">
 
-      <div id="animatedText" class="animated-text script show">
-        Привіт!
-      </div>
+      <svg id="animatedText" class="curved-text-svg script show" viewBox="0 0 600 160" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <path id="curveLineOne" d="M 90 78 Q 300 106 510 78"></path>
+          <path id="curveLineTwo" d="M 105 118 Q 300 142 495 118"></path>
+        </defs>
+
+        <text>
+          <textPath id="lineOne" href="#curveLineOne" startOffset="50%">
+            Привіт!
+          </textPath>
+        </text>
+
+        <text>
+          <textPath id="lineTwo" href="#curveLineTwo" startOffset="50%"></textPath>
+        </text>
+      </svg>
     </div>
   </div>
 
   <div id="buttonWrap" class="button-wrap">
     <button class="image-btn" onclick="location.href='map.html'">
-      <img src="/sofiyka-magic-journey/button.png" alt="Почати подорож" class="btn-png">
+      <img src="/sofiyka-magic-journey/button.png?v=5" alt="Почати подорож" class="btn-png">
+
       <span class="btn-text">
         <span class="spark-left">✨</span>
         Почати подорож
@@ -339,22 +368,28 @@ body{
 <script>
 const animatedText = document.getElementById("animatedText");
 const buttonWrap = document.getElementById("buttonWrap");
+const lineOne = document.getElementById("lineOne");
+const lineTwo = document.getElementById("lineTwo");
 
 const phrases = [
   {
-    text: "Привіт!",
+    line1: "Привіт!",
+    line2: "",
     className: "script"
   },
   {
-    text: "Мене звати<br>Софійка.",
+    line1: "Мене звати",
+    line2: "Софійка.",
     className: "normal"
   },
   {
-    text: "Скоро у мене<br>особливий день.",
+    line1: "Скоро у мене",
+    line2: "особливий день.",
     className: "small"
   },
   {
-    text: "Допоможеш знайти<br>чарівне запрошення?",
+    line1: "Допоможеш знайти",
+    line2: "чарівне запрошення?",
     className: "small"
   }
 ];
@@ -365,8 +400,10 @@ function setPhrase(i){
   animatedText.classList.remove("show");
 
   setTimeout(() => {
-    animatedText.innerHTML = phrases[i].text;
-    animatedText.className = "animated-text " + phrases[i].className;
+    lineOne.textContent = phrases[i].line1;
+    lineTwo.textContent = phrases[i].line2;
+
+    animatedText.setAttribute("class", "curved-text-svg " + phrases[i].className);
 
     requestAnimationFrame(() => {
       animatedText.classList.add("show");

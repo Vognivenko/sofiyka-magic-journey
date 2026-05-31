@@ -62,8 +62,8 @@
       height: 42px;
       border-radius: 50%;
       border: 2px solid rgba(255, 225, 135, 0.95);
-      background: rgba(255, 230, 190, 0.55);
-      color: #6d3578;
+      background: rgba(255, 204, 236, 0.72);
+      color: #9b2c7b;
       font-size: 20px;
       z-index: 20;
       box-shadow:
@@ -72,12 +72,13 @@
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       cursor: pointer;
+      animation: musicPulse 1.8s infinite;
     }
 
-    .music-toggle.playing {
-      background: rgba(255, 204, 236, 0.72);
-      color: #9b2c7b;
-      animation: musicPulse 1.8s infinite;
+    .music-toggle.off {
+      background: rgba(255, 230, 190, 0.55);
+      color: #6d3578;
+      animation: none;
     }
 
     .float-star {
@@ -378,15 +379,16 @@
 
   <audio 
     id="bgMusic" 
-    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3?v=1" 
+    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3?v=2" 
+    autoplay 
     loop 
     preload="auto">
   </audio>
 
   <div class="screen">
 
-    <button id="musicToggle" class="music-toggle" type="button" aria-label="Увімкнути музику">
-      🎵
+    <button id="musicToggle" class="music-toggle" type="button" aria-label="Вимкнути музику">
+      🔊
     </button>
 
     <div class="float-star star1">✨</div>
@@ -477,52 +479,79 @@
       }, 2500);
     }
 
-    async function playMusic() {
+    async function startMusicImmediately() {
       if (musicMutedByUser) return;
 
       try {
         await bgMusic.play();
         musicStarted = true;
-        musicToggle.classList.add("playing");
+        musicToggle.classList.remove("off");
         musicToggle.textContent = "🔊";
         musicToggle.setAttribute("aria-label", "Вимкнути музику");
       } catch (error) {
         musicStarted = false;
-        musicToggle.classList.remove("playing");
+        musicToggle.classList.add("off");
         musicToggle.textContent = "🎵";
+        musicToggle.setAttribute("aria-label", "Увімкнути музику");
+
+        window.addEventListener("click", firstUserInteraction, { once: true });
+        window.addEventListener("touchstart", firstUserInteraction, { once: true });
+      }
+    }
+
+    async function firstUserInteraction() {
+      if (musicMutedByUser) return;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.remove("off");
+        musicToggle.textContent = "🔊";
+        musicToggle.setAttribute("aria-label", "Вимкнути музику");
+      } catch (error) {
+        musicStarted = false;
       }
     }
 
     function pauseMusic() {
       bgMusic.pause();
       musicStarted = false;
-      musicToggle.classList.remove("playing");
+      musicMutedByUser = true;
+      musicToggle.classList.add("off");
       musicToggle.textContent = "🎵";
       musicToggle.setAttribute("aria-label", "Увімкнути музику");
+    }
+
+    async function resumeMusic() {
+      musicMutedByUser = false;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.remove("off");
+        musicToggle.textContent = "🔊";
+        musicToggle.setAttribute("aria-label", "Вимкнути музику");
+      } catch (error) {
+        musicStarted = false;
+        musicToggle.classList.add("off");
+        musicToggle.textContent = "🎵";
+      }
     }
 
     musicToggle.addEventListener("click", (event) => {
       event.stopPropagation();
 
       if (musicStarted && !bgMusic.paused) {
-        musicMutedByUser = true;
         pauseMusic();
       } else {
-        musicMutedByUser = false;
-        playMusic();
+        resumeMusic();
       }
     });
 
-    function firstUserInteraction() {
-      playMusic();
-      window.removeEventListener("click", firstUserInteraction);
-      window.removeEventListener("touchstart", firstUserInteraction);
-    }
-
-    window.addEventListener("click", firstUserInteraction);
-    window.addEventListener("touchstart", firstUserInteraction);
-
-    window.addEventListener("load", startTextAnimation);
+    window.addEventListener("load", () => {
+      startTextAnimation();
+      startMusicImmediately();
+    });
   </script>
 </body>
 </html>

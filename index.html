@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
   <title>Подорож Софійки</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Yeseva+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Playfair+Display:wght@700&display=swap');
 
     *{
       margin:0;
@@ -23,7 +24,7 @@
       min-height:100vh;
       min-height:100dvh;
       overflow:hidden;
-      background:#f4ddea url("/sofiyka-magic-journey/file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
+      background:#f4ddea url("./file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
       font-family:'Cormorant Garamond', serif;
     }
 
@@ -45,21 +46,49 @@
       background:linear-gradient(
         to bottom,
         rgba(40,10,55,0) 0%,
-        rgba(40,10,55,0.18) 55%,
-        rgba(40,10,55,0.38) 100%
+        rgba(40,10,55,0.14) 55%,
+        rgba(40,10,55,0.32) 100%
       );
       z-index:1;
       pointer-events:none;
     }
 
+    .float-star{
+      position:absolute;
+      color:#fff0a8;
+      font-size:18px;
+      text-shadow:0 0 12px rgba(255,230,120,1);
+      z-index:4;
+      opacity:.85;
+      animation:floatStar 3s ease-in-out infinite;
+      pointer-events:none;
+    }
+
+    .star1{
+      top:155px;
+      left:18%;
+    }
+
+    .star2{
+      top:130px;
+      right:15%;
+      animation-delay:.9s;
+    }
+
+    .star3{
+      top:212px;
+      right:26%;
+      animation-delay:1.5s;
+    }
+
     .message-area{
       position:absolute;
-      top:68px;
+      top:58px;
       left:50%;
       transform:translateX(-50%);
-      width:106%;
-      max-width:640px;
+      width:min(108vw, 760px);
       z-index:5;
+      pointer-events:none;
     }
 
     .banner-wrap{
@@ -71,87 +100,88 @@
       display:block;
       width:100%;
       height:auto;
-      filter:drop-shadow(0 0 14px rgba(255,220,100,0.75));
+      filter:drop-shadow(0 0 14px rgba(255,220,100,0.55));
+      user-select:none;
+      -webkit-user-drag:none;
       pointer-events:none;
     }
 
-    /* Прямий 3D-текст поверх стрічки */
-    .magic-text-svg{
+    .animated-text{
       position:absolute;
       left:50%;
-      top:63%;
-      transform:translate(-50%, -50%) scale(0.98);
-      width:88%;
-      height:58%;
-      overflow:visible;
+      top:58%;
+      transform:translate(-50%, -50%) scale(.98);
+      width:78%;
+      text-align:center;
       opacity:0;
       transition:
-        opacity .75s ease,
-        transform .75s ease;
+        opacity .72s ease,
+        transform .72s ease,
+        filter .72s ease;
+      filter:blur(2px);
+      color:#f7ebc2;
+      font-family:'Cormorant Garamond', serif;
+      font-weight:700;
+      letter-spacing:-0.01em;
+      line-height:1.02;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.96),
+        0 2px 0 rgba(235,204,122,0.96),
+        0 3px 0 rgba(196,153,76,0.92),
+        0 4px 8px rgba(98,53,104,0.30),
+        0 0 8px rgba(255,235,170,0.30);
+      -webkit-text-stroke:0.45px rgba(132,91,40,0.55);
       pointer-events:none;
     }
 
-    .magic-text-svg.show{
+    .animated-text.show{
       opacity:1;
       transform:translate(-50%, -50%) scale(1);
+      filter:blur(0);
     }
 
-    .magic-text-svg text{
-      font-family:'Cormorant Garamond', serif;
-      text-anchor:middle;
-      dominant-baseline:middle;
-      paint-order:stroke fill;
-      stroke:#7b3f21;
-      stroke-width:1.7px;
-      stroke-linejoin:round;
-      fill:#fff3c4;
-      letter-spacing:0.3px;
-
-      filter:
-        drop-shadow(0 1px 0 rgba(255,255,255,0.95))
-        drop-shadow(0 2px 0 rgba(219,158,65,0.95))
-        drop-shadow(0 4px 3px rgba(78,30,92,0.55))
-        drop-shadow(0 0 7px rgba(255,236,165,0.75));
+    .animated-text.hello{
+      font-family:'Playfair Display', serif;
+      font-size:clamp(50px, 8.8vw, 72px);
+      width:64%;
+      top:58%;
     }
 
-    .magic-text-svg .line-gold{
-      fill:#fff0b6;
-      stroke:#8a4b25;
+    .animated-text.name{
+      font-size:clamp(38px, 6.7vw, 54px);
+      width:66%;
+      top:58%;
     }
 
-    .magic-text-svg.hello text{
-      font-family:'Yeseva One', serif;
-      font-size:82px;
-      fill:#ffe9a6;
-      stroke:#8a3e2a;
-      stroke-width:1.9px;
-      letter-spacing:0.5px;
+    .animated-text.day{
+      font-size:clamp(34px, 5.8vw, 48px);
+      width:70%;
+      top:58%;
     }
 
-    .magic-text-svg.normal text{
-      font-size:56px;
-      font-weight:700;
+    .animated-text.question{
+      width:84%;
+      top:60%;
+      line-height:0.98;
     }
 
-    .magic-text-svg.small text{
-      font-size:48px;
-      font-weight:700;
+    .animated-text.question .q-top{
+      display:block;
+      font-size:clamp(24px, 4.0vw, 33px);
+      white-space:nowrap;
     }
 
-    .magic-text-svg.question text{
-      font-size:39px;
-      font-weight:700;
-      letter-spacing:0.1px;
-    }
-
-    .magic-text-svg.question #lineTwo{
-      font-size:60px;
+    .animated-text.question .q-bottom{
+      display:block;
+      margin-top:2px;
+      font-size:clamp(42px, 6.2vw, 58px);
+      line-height:.95;
     }
 
     .button-wrap{
       position:absolute;
       left:50%;
-      bottom:50px;
+      bottom:48px;
       transform:translateX(-50%) translateY(22px);
       width:92%;
       max-width:470px;
@@ -172,6 +202,7 @@
     .image-btn{
       position:relative;
       width:100%;
+      display:block;
       border:none;
       background:none;
       padding:0;
@@ -183,7 +214,10 @@
       display:block;
       width:100%;
       height:auto;
-      filter:drop-shadow(0 0 18px rgba(255,220,95,0.75));
+      filter:drop-shadow(0 0 18px rgba(255,220,95,0.72));
+      user-select:none;
+      -webkit-user-drag:none;
+      pointer-events:none;
     }
 
     .btn-text{
@@ -191,50 +225,25 @@
       left:50%;
       top:50%;
       transform:translate(-50%, -50%);
-      width:72%;
+      width:74%;
       text-align:center;
-      font-family:'Cormorant Garamond', serif;
-      font-size:26px;
-      font-weight:700;
-      letter-spacing:.3px;
-      color:#fff2a8;
-      text-shadow:
-        0 2px 4px rgba(110,35,80,0.95),
-        0 0 8px rgba(255,235,140,0.9);
-      pointer-events:none;
       white-space:nowrap;
-    }
-
-    .float-star{
-      position:absolute;
-      color:#fff0a8;
-      font-size:18px;
-      text-shadow:0 0 12px rgba(255,230,120,1);
-      z-index:4;
-      opacity:.8;
-      animation:floatStar 3s ease-in-out infinite;
-    }
-
-    .star1{
-      top:150px;
-      left:18%;
-    }
-
-    .star2{
-      top:126px;
-      right:15%;
-      animation-delay:.9s;
-    }
-
-    .star3{
-      top:210px;
-      right:26%;
-      animation-delay:1.5s;
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(24px, 5vw, 33px);
+      font-weight:700;
+      letter-spacing:.2px;
+      color:#fff2b3;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.55),
+        0 2px 0 rgba(244,207,108,0.55),
+        0 3px 5px rgba(108,36,82,0.90),
+        0 0 8px rgba(255,235,140,0.92);
+      pointer-events:none;
     }
 
     @keyframes pulse{
       0%{transform:scale(1);}
-      50%{transform:scale(1.025);}
+      50%{transform:scale(1.022);}
       100%{transform:scale(1);}
     }
 
@@ -244,95 +253,62 @@
       100%{opacity:.45; transform:translateY(0) scale(.9);}
     }
 
-    @media(max-height:720px){
+    @media (max-height: 760px){
       .message-area{
-        top:56px;
-        width:108%;
+        top:50px;
       }
 
-      .magic-text-svg{
-        top:63%;
-        width:90%;
-        height:60%;
+      .animated-text.hello{
+        font-size:clamp(46px, 8vw, 66px);
       }
 
-      .magic-text-svg.hello text{
-        font-size:70px;
+      .animated-text.name{
+        font-size:clamp(34px, 6.2vw, 48px);
       }
 
-      .magic-text-svg.normal text{
-        font-size:49px;
+      .animated-text.day{
+        font-size:clamp(31px, 5.3vw, 43px);
       }
 
-      .magic-text-svg.small text{
-        font-size:42px;
+      .animated-text.question .q-top{
+        font-size:clamp(21px, 3.8vw, 29px);
       }
 
-      .magic-text-svg.question text{
-        font-size:34px;
-      }
-
-      .magic-text-svg.question #lineTwo{
-        font-size:52px;
+      .animated-text.question .q-bottom{
+        font-size:clamp(36px, 5.6vw, 50px);
       }
 
       .button-wrap{
-        bottom:38px;
-        width:90%;
-      }
-
-      .btn-text{
-        font-size:24px;
-        width:70%;
+        bottom:34px;
       }
     }
 
-    @media(max-height:650px){
+    @media (max-height: 680px){
       .message-area{
-        top:44px;
-        width:108%;
+        top:42px;
       }
 
-      .magic-text-svg{
-        top:64%;
-        width:92%;
-        height:62%;
+      .animated-text{
+        top:59%;
       }
 
-      .magic-text-svg.hello text{
-        font-size:62px;
-      }
-
-      .magic-text-svg.normal text{
-        font-size:43px;
-      }
-
-      .magic-text-svg.small text{
-        font-size:37px;
-      }
-
-      .magic-text-svg.question text{
-        font-size:30px;
-      }
-
-      .magic-text-svg.question #lineTwo{
-        font-size:46px;
+      .animated-text.question{
+        top:60%;
       }
 
       .button-wrap{
         bottom:24px;
-        width:88%;
+        width:90%;
       }
 
       .btn-text{
-        font-size:22px;
-        width:70%;
+        font-size:clamp(22px, 4.8vw, 30px);
       }
     }
   </style>
 </head>
 
-<body>
+<body class="notranslate">
   <div class="screen">
 
     <div class="float-star star1">✨</div>
@@ -341,18 +317,17 @@
 
     <div class="message-area">
       <div class="banner-wrap">
-        <img src="/sofiyka-magic-journey/crown.png?v=16" alt="Казкова стрічка" class="banner-png">
+        <img src="./crown.png?v=30" alt="Казкова стрічка" class="banner-png">
 
-        <svg id="animatedText" class="magic-text-svg hello show" viewBox="0 0 1000 250" preserveAspectRatio="xMidYMid meet">
-          <text id="lineOne" x="500" y="102" class="line-gold">Привіт!</text>
-          <text id="lineTwo" x="500" y="164" class="line-gold"></text>
-        </svg>
+        <div id="animatedText" class="animated-text hello show notranslate">
+          Привіт!
+        </div>
       </div>
     </div>
 
     <div id="buttonWrap" class="button-wrap">
       <button class="image-btn" onclick="location.href='map.html'">
-        <img src="/sofiyka-magic-journey/button.png?v=16" alt="Почати подорож" class="btn-png">
+        <img src="./button.png?v=30" alt="Почати подорож" class="btn-png">
         <span class="btn-text">Почати подорож</span>
       </button>
     </div>
@@ -362,37 +337,23 @@
   <script>
     const animatedText = document.getElementById("animatedText");
     const buttonWrap = document.getElementById("buttonWrap");
-    const lineOne = document.getElementById("lineOne");
-    const lineTwo = document.getElementById("lineTwo");
 
     const phrases = [
       {
-        line1: "Привіт!",
-        line2: "",
-        className: "hello",
-        y1: 126,
-        y2: 170
+        html: "Привіт!",
+        className: "hello"
       },
       {
-        line1: "Мене звати",
-        line2: "Софійка.",
-        className: "normal",
-        y1: 104,
-        y2: 166
+        html: "Мене звати<br>Софійка.",
+        className: "name"
       },
       {
-        line1: "Скоро у мене",
-        line2: "особливий день.",
-        className: "small",
-        y1: 104,
-        y2: 166
+        html: "Скоро у мене<br>особливий день.",
+        className: "day"
       },
       {
-        line1: "Допоможеш мені знайти чарівне",
-        line2: "запрошення?",
-        className: "question",
-        y1: 103,
-        y2: 170
+        html: '<span class="q-top">Допоможеш мені знайти чарівне</span><span class="q-bottom">запрошення?</span>',
+        className: "question"
       }
     ];
 
@@ -402,18 +363,13 @@
       animatedText.classList.remove("show");
 
       setTimeout(() => {
-        lineOne.textContent = phrases[i].line1;
-        lineTwo.textContent = phrases[i].line2;
-
-        lineOne.setAttribute("y", phrases[i].y1);
-        lineTwo.setAttribute("y", phrases[i].y2);
-
-        animatedText.setAttribute("class", "magic-text-svg " + phrases[i].className);
+        animatedText.innerHTML = phrases[i].html;
+        animatedText.className = "animated-text notranslate " + phrases[i].className;
 
         requestAnimationFrame(() => {
           animatedText.classList.add("show");
         });
-      }, 550);
+      }, 520);
     }
 
     function startTextAnimation(){

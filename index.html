@@ -1,557 +1,714 @@
 <!DOCTYPE html>
-<html lang="uk" translate="no">
+<html lang="uk">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google" content="notranslate" />
-  <title>Подорож Софійки</title>
+
+  <title>Казкова мапа Софії</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       min-height: 100vh;
-      min-height: 100dvh;
       overflow: hidden;
-      background: #f4ddea url("./file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
-      font-family: 'Cormorant Garamond', serif;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(255, 242, 200, 0.9), transparent 28%),
+        linear-gradient(180deg, #f8e8c8 0%, #e9c98f 45%, #b8894d 100%);
+      color: #fff;
     }
 
-    .screen {
+    .page {
       position: relative;
-      width: 100%;
+      width: 100vw;
       height: 100vh;
-      height: 100dvh;
       overflow: hidden;
     }
 
-    .screen::after {
-      content: "";
+    .map-wrap {
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 30%;
-      background: linear-gradient(
-        to bottom,
-        rgba(40, 10, 55, 0) 0%,
-        rgba(40, 10, 55, 0.10) 55%,
-        rgba(40, 10, 55, 0.28) 100%
-      );
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .music-toggle {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 225, 135, 0.95);
-      background: rgba(255, 204, 236, 0.72);
-      color: #9b2c7b;
-      font-size: 20px;
-      z-index: 20;
-      box-shadow:
-        0 0 12px rgba(255, 220, 120, 0.75),
-        inset 0 0 10px rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      cursor: pointer;
-      animation: musicPulse 1.8s infinite;
-    }
-
-    .music-toggle.off {
-      background: rgba(255, 230, 190, 0.55);
-      color: #6d3578;
-      animation: none;
-    }
-
-    .float-star {
-      position: absolute;
-      color: #fff0a8;
-      font-size: 18px;
-      text-shadow: 0 0 12px rgba(255, 230, 120, 1);
-      z-index: 4;
-      opacity: .85;
-      animation: floatStar 3s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    .star1 {
-      top: 155px;
-      left: 18%;
-    }
-
-    .star2 {
-      top: 130px;
-      right: 15%;
-      animation-delay: .9s;
-    }
-
-    .star3 {
-      top: 212px;
-      right: 26%;
-      animation-delay: 1.5s;
-    }
-
-    .message-area {
-      position: absolute;
-      top: 58px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(108vw, 760px);
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .banner-wrap {
-      position: relative;
-      width: 100%;
-    }
-
-    .banner-png {
-      display: block;
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 0 14px rgba(255, 220, 100, 0.55));
-      user-select: none;
-      -webkit-user-drag: none;
-      pointer-events: none;
-    }
-
-    .banner-text-zone {
-      position: absolute;
-      left: 13%;
-      right: 13%;
-      top: 47%;
-      height: 34%;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      pointer-events: none;
+      overflow: hidden;
     }
 
-    .animated-text {
+    .map-image {
       width: 100%;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(8px) scale(.98);
-      transition:
-        opacity .62s ease,
-        transform .62s ease,
-        filter .62s ease;
-      filter: blur(2px);
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      color: #5b3471;
-      letter-spacing: .2px;
-      line-height: .92;
-      text-shadow:
-        0 1px 0 rgba(255, 255, 255, .92),
-        0 2px 2px rgba(255, 240, 210, .55),
-        0 3px 5px rgba(80, 30, 90, .22);
-      pointer-events: none;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      filter: saturate(1.08) contrast(1.04) brightness(1.02);
     }
 
-    .animated-text.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
-    }
-
-    .animated-text.hello {
-      font-size: clamp(50px, 8.4vw, 66px);
-      line-height: .9;
-    }
-
-    .animated-text.name {
-      font-size: clamp(36px, 6.2vw, 48px);
-      line-height: .88;
-    }
-
-    .animated-text.day {
-      font-size: clamp(33px, 5.6vw, 44px);
-      line-height: .9;
-    }
-
-    .animated-text.question {
-      line-height: .88;
-    }
-
-    .animated-text.question .q-top {
-      display: block;
-      font-size: clamp(28px, 4.6vw, 36px);
-      white-space: nowrap;
-    }
-
-    .animated-text.question .q-bottom {
-      display: block;
-      margin-top: 2px;
-      font-size: clamp(36px, 5.8vw, 48px);
-      white-space: nowrap;
-    }
-
-    .button-wrap {
+    .vignette {
       position: absolute;
-      left: 50%;
-      bottom: 48px;
-      transform: translateX(-50%) translateY(22px);
-      width: 92%;
-      max-width: 470px;
-      z-index: 6;
-      opacity: 0;
+      inset: 0;
       pointer-events: none;
-      transition:
-        opacity 1s ease,
-        transform 1s ease;
+      background:
+        radial-gradient(circle at center, transparent 42%, rgba(71, 39, 16, 0.35) 100%),
+        linear-gradient(180deg, rgba(255, 243, 205, 0.12), rgba(69, 33, 11, 0.18));
+      z-index: 2;
     }
 
-    .button-wrap.show {
-      opacity: 1;
+    .top-panel {
+      position: fixed;
+      top: 16px;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 14px;
+      pointer-events: none;
+    }
+
+    .magic-btn {
       pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .image-btn {
-      position: relative;
-      width: 100%;
-      display: block;
-      border: none;
-      background: none;
-      padding: 0;
+      width: 56px;
+      height: 56px;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 25%, #fff7c9, #e8b95e 42%, #8b4f1f 100%);
+      color: #fff;
+      font-size: 25px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 14px rgba(255, 238, 160, 0.95),
+        0 0 30px rgba(255, 191, 71, 0.75),
+        inset 0 0 12px rgba(255, 255, 255, 0.35);
       cursor: pointer;
-      animation: pulse 2.2s infinite;
+      animation: strongPulse 1.8s infinite ease-in-out;
+      backdrop-filter: blur(6px);
     }
 
-    .btn-png {
-      display: block;
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 0 18px rgba(255, 220, 95, 0.72));
-      user-select: none;
-      -webkit-user-drag: none;
-      pointer-events: none;
+    .magic-btn:active {
+      transform: scale(0.92);
     }
 
-    .btn-text {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 74%;
-      text-align: center;
-      white-space: nowrap;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(24px, 5vw, 33px);
-      font-weight: 700;
-      letter-spacing: .2px;
-      color: #fff2b3;
-      text-shadow:
-        0 1px 0 rgba(255, 255, 255, .55),
-        0 2px 0 rgba(244, 207, 108, .55),
-        0 3px 5px rgba(108, 36, 82, .90),
-        0 0 8px rgba(255, 235, 140, .92);
-      pointer-events: none;
+    .back-btn {
+      font-size: 30px;
+      padding-bottom: 4px;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.022); }
-      100% { transform: scale(1); }
+    .music-btn.active {
+      background:
+        radial-gradient(circle at 30% 25%, #fff8d5, #ffd25f 42%, #a55a1b 100%);
+      box-shadow:
+        0 0 18px rgba(255, 250, 190, 1),
+        0 0 42px rgba(255, 209, 82, 0.95),
+        0 0 70px rgba(255, 177, 27, 0.65),
+        inset 0 0 14px rgba(255, 255, 255, 0.45);
     }
 
-    @keyframes musicPulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes floatStar {
-      0% {
-        opacity: .45;
-        transform: translateY(0) scale(.9);
+    @keyframes strongPulse {
+      0%, 100% {
+        transform: scale(1);
       }
 
       50% {
-        opacity: 1;
-        transform: translateY(-8px) scale(1.12);
+        transform: scale(1.09);
+      }
+    }
+
+    .title-box {
+      position: fixed;
+      top: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      width: calc(100% - 36px);
+      max-width: 420px;
+      text-align: center;
+      padding: 12px 18px;
+      border-radius: 24px;
+      background: rgba(80, 42, 14, 0.34);
+      border: 1px solid rgba(255, 240, 188, 0.7);
+      box-shadow:
+        0 0 18px rgba(255, 219, 133, 0.65),
+        inset 0 0 18px rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(6px);
+    }
+
+    .title-box h1 {
+      font-size: 22px;
+      line-height: 1.15;
+      color: #fff5cf;
+      text-shadow:
+        0 2px 8px rgba(80, 32, 0, 0.8),
+        0 0 16px rgba(255, 219, 121, 0.85);
+    }
+
+    .title-box p {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #fff9e6;
+      text-shadow: 0 2px 6px rgba(68, 29, 0, 0.7);
+    }
+
+    .location-point {
+      position: absolute;
+      z-index: 12;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: none;
+      background:
+        radial-gradient(circle at 35% 30%, #ffffff 0%, #fff2a8 22%, #ffc84e 50%, #9a541c 100%);
+      box-shadow:
+        0 0 0 7px rgba(255, 226, 121, 0.28),
+        0 0 22px rgba(255, 217, 104, 0.95),
+        0 0 55px rgba(255, 159, 31, 0.75);
+      color: #703a11;
+      font-size: 27px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      animation: markerPulse 1.5s infinite ease-in-out;
+    }
+
+    .location-point::before {
+      content: "";
+      position: absolute;
+      inset: -16px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 236, 151, 0.65);
+      animation: ringWave 1.7s infinite ease-out;
+    }
+
+    .location-point::after {
+      content: "";
+      position: absolute;
+      bottom: -13px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 22px;
+      height: 22px;
+      background: #d78328;
+      border-radius: 0 0 6px 0;
+      box-shadow: 0 0 18px rgba(255, 190, 66, 0.8);
+      z-index: -1;
+    }
+
+    .location-one {
+      left: 55%;
+      top: 46%;
+    }
+
+    .location-two {
+      left: 29%;
+      top: 58%;
+    }
+
+    .location-three {
+      left: 68%;
+      top: 66%;
+    }
+
+    @keyframes markerPulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.13);
+      }
+    }
+
+    @keyframes ringWave {
+      0% {
+        transform: scale(0.7);
+        opacity: 0.9;
       }
 
       100% {
-        opacity: .45;
-        transform: translateY(0) scale(.9);
+        transform: scale(1.35);
+        opacity: 0;
       }
     }
 
-    @media (max-height: 760px) {
-      .message-area {
-        top: 50px;
+    .sparkle-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #fff8c9;
+      border-radius: 50%;
+      box-shadow:
+        0 0 8px #fff8c9,
+        0 0 18px #ffd35c,
+        0 0 34px rgba(255, 173, 40, 0.9);
+      animation: sparkleFloat linear infinite;
+    }
+
+    @keyframes sparkleFloat {
+      0% {
+        transform: translateY(20px) scale(0.4);
+        opacity: 0;
       }
 
-      .banner-text-zone {
-        top: 48%;
-        height: 33%;
+      15% {
+        opacity: 1;
       }
 
-      .animated-text.hello {
-        font-size: clamp(46px, 7.8vw, 60px);
+      55% {
+        opacity: 0.95;
       }
 
-      .animated-text.name {
-        font-size: clamp(33px, 5.8vw, 44px);
-      }
-
-      .animated-text.day {
-        font-size: clamp(30px, 5.2vw, 40px);
-      }
-
-      .animated-text.question .q-top {
-        font-size: clamp(25px, 4.1vw, 32px);
-      }
-
-      .animated-text.question .q-bottom {
-        font-size: clamp(32px, 5.1vw, 42px);
-      }
-
-      .button-wrap {
-        bottom: 34px;
+      100% {
+        transform: translateY(-120px) scale(1.2);
+        opacity: 0;
       }
     }
 
-    @media (max-height: 680px) {
-      .message-area {
-        top: 42px;
+    .flare {
+      position: absolute;
+      z-index: 9;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle, rgba(255, 255, 221, 0.95) 0%, rgba(255, 218, 91, 0.48) 25%, transparent 68%);
+      filter: blur(1px);
+      mix-blend-mode: screen;
+      opacity: 0;
+      animation: flareFlash 4.5s infinite ease-in-out;
+    }
+
+    .flare-one {
+      left: 12%;
+      top: 24%;
+      animation-delay: 0.4s;
+    }
+
+    .flare-two {
+      right: 8%;
+      top: 34%;
+      animation-delay: 1.5s;
+    }
+
+    .flare-three {
+      left: 45%;
+      bottom: 18%;
+      animation-delay: 2.6s;
+    }
+
+    .flare-four {
+      right: 18%;
+      bottom: 28%;
+      animation-delay: 3.4s;
+    }
+
+    @keyframes flareFlash {
+      0%, 78%, 100% {
+        transform: scale(0.5);
+        opacity: 0;
       }
 
-      .banner-text-zone {
-        top: 49%;
-        height: 32%;
+      84% {
+        opacity: 0.95;
+        transform: scale(1.15);
       }
 
-      .animated-text.hello {
-        font-size: clamp(42px, 7.4vw, 54px);
+      90% {
+        opacity: 0.35;
+        transform: scale(1.6);
+      }
+    }
+
+    .bottom-hint {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 25;
+      width: calc(100% - 42px);
+      max-width: 390px;
+      padding: 13px 18px;
+      text-align: center;
+      border-radius: 24px;
+      background: rgba(75, 38, 11, 0.42);
+      border: 1px solid rgba(255, 234, 168, 0.72);
+      backdrop-filter: blur(8px);
+      box-shadow:
+        0 0 20px rgba(255, 215, 120, 0.55),
+        inset 0 0 16px rgba(255, 255, 255, 0.12);
+      color: #fff7dc;
+      font-size: 15px;
+      line-height: 1.25;
+      text-shadow: 0 2px 5px rgba(62, 28, 0, 0.8);
+    }
+
+    .location-card {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background:
+        radial-gradient(circle at center, rgba(255, 236, 174, 0.35), rgba(41, 18, 5, 0.78));
+      backdrop-filter: blur(7px);
+    }
+
+    .location-card.show {
+      display: flex;
+      animation: cardFade 0.35s ease forwards;
+    }
+
+    @keyframes cardFade {
+      from {
+        opacity: 0;
       }
 
-      .animated-text.name {
-        font-size: clamp(30px, 5.3vw, 40px);
+      to {
+        opacity: 1;
+      }
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      max-width: 390px;
+      padding: 26px 22px 24px;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 246, 195, 0.22), transparent 38%),
+        linear-gradient(180deg, rgba(109, 61, 21, 0.96), rgba(62, 31, 10, 0.96));
+      border: 1px solid rgba(255, 233, 165, 0.85);
+      box-shadow:
+        0 0 28px rgba(255, 221, 128, 0.75),
+        0 0 70px rgba(255, 162, 32, 0.38),
+        inset 0 0 22px rgba(255, 255, 255, 0.12);
+      text-align: center;
+      overflow: hidden;
+      animation: cardPop 0.42s ease forwards;
+    }
+
+    @keyframes cardPop {
+      from {
+        transform: scale(0.86) translateY(16px);
       }
 
-      .animated-text.day {
-        font-size: clamp(28px, 4.9vw, 36px);
+      to {
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .card-inner::before {
+      content: "";
+      position: absolute;
+      top: -70px;
+      left: 50%;
+      width: 190px;
+      height: 190px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 241, 173, 0.75), transparent 66%);
+      pointer-events: none;
+    }
+
+    .card-inner h2 {
+      position: relative;
+      font-size: 28px;
+      color: #fff2bd;
+      margin-bottom: 10px;
+      text-shadow:
+        0 2px 8px rgba(54, 22, 0, 0.95),
+        0 0 18px rgba(255, 205, 88, 0.8);
+    }
+
+    .card-inner p {
+      position: relative;
+      font-size: 16px;
+      line-height: 1.45;
+      color: #fff9e9;
+      margin-bottom: 18px;
+      text-shadow: 0 2px 5px rgba(43, 17, 0, 0.75);
+    }
+
+    .card-action {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 247, 210, 0.95);
+      background:
+        linear-gradient(180deg, #fff0a8, #d99030);
+      color: #5d300d;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow:
+        0 0 14px rgba(255, 231, 136, 0.9),
+        0 0 34px rgba(255, 160, 28, 0.52);
+    }
+
+    .close-card {
+      position: absolute;
+      right: 14px;
+      top: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 240, 190, 0.85);
+      background: rgba(255, 230, 160, 0.16);
+      color: #fff6d0;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .screen-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255, 255, 235, 0.95), transparent 65%);
+      opacity: 0;
+    }
+
+    .screen-flash.active {
+      animation: screenFlash 0.72s ease forwards;
+    }
+
+    @keyframes screenFlash {
+      0% {
+        opacity: 0;
       }
 
-      .animated-text.question .q-top {
-        font-size: clamp(22px, 3.8vw, 28px);
+      25% {
+        opacity: 0.95;
       }
 
-      .animated-text.question .q-bottom {
-        font-size: clamp(29px, 4.8vw, 38px);
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .title-box {
+        top: 82px;
       }
 
-      .button-wrap {
-        bottom: 24px;
-        width: 90%;
+      .title-box h1 {
+        font-size: 20px;
       }
 
-      .btn-text {
-        font-size: clamp(22px, 4.8vw, 30px);
+      .magic-btn {
+        width: 54px;
+        height: 54px;
+      }
+
+      .location-point {
+        width: 54px;
+        height: 54px;
+        font-size: 25px;
       }
     }
   </style>
 </head>
 
-<body class="notranslate">
+<body>
+  <div class="page">
 
-  <audio 
-    id="bgMusic" 
-    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3?v=2" 
-    autoplay 
-    loop 
-    preload="auto">
-  </audio>
+    <audio id="bgMusic" src="assets/music.mp3" loop></audio>
 
-  <div class="screen">
+    <div class="map-wrap">
+      <img src="assets/map.png" class="map-image" alt="Казкова мапа Софії">
+    </div>
 
-    <button id="musicToggle" class="music-toggle" type="button" aria-label="Вимкнути музику">
-      🔊
+    <div class="vignette"></div>
+
+    <div class="top-panel">
+      <button class="magic-btn back-btn" id="backBtn" aria-label="Назад">‹</button>
+      <button class="magic-btn music-btn" id="musicBtn" aria-label="Музика">♪</button>
+    </div>
+
+    <div class="title-box">
+      <h1>Казкова мапа Софії</h1>
+      <p>Натисни на сяючу локацію, щоб відкрити підказку</p>
+    </div>
+
+    <button
+      class="location-point location-one"
+      data-title="Перша локація"
+      data-text="Тут починається наша казкова історія. Саме звідси гості дізнаються першу важливу частину запрошення."
+    >
+      ✦
     </button>
 
-    <div class="float-star star1">✨</div>
-    <div class="float-star star2">✨</div>
-    <div class="float-star star3">✦</div>
+    <button
+      class="location-point location-two"
+      data-title="Святкова подія"
+      data-text="Тут можна буде розмістити інформацію про хрещення, час, дату або місце проведення."
+    >
+      ✧
+    </button>
 
-    <div class="message-area">
-      <div class="banner-wrap">
-        <img src="./crown.png?v=34" alt="Казкова стрічка" class="banner-png">
+    <button
+      class="location-point location-three"
+      data-title="Сюрприз для гостей"
+      data-text="Ця локація може вести до завдання, опитування або підтвердження присутності."
+    >
+      ❋
+    </button>
 
-        <div class="banner-text-zone">
-          <div id="animatedText" class="animated-text hello show notranslate">
-            Привіт!
-          </div>
-        </div>
+    <div class="sparkle-layer" id="sparkleLayer"></div>
+
+    <div class="flare flare-one"></div>
+    <div class="flare flare-two"></div>
+    <div class="flare flare-three"></div>
+    <div class="flare flare-four"></div>
+
+    <div class="bottom-hint">
+      Мапа ожила. Обери першу сяючу точку, щоб продовжити подорож.
+    </div>
+
+    <div class="location-card" id="locationCard">
+      <div class="card-inner">
+        <button class="close-card" id="closeCard">×</button>
+        <h2 id="cardTitle">Перша локація</h2>
+        <p id="cardText">Тут буде опис першої локації.</p>
+        <button class="card-action" id="cardAction">Продовжити</button>
       </div>
     </div>
 
-    <div id="buttonWrap" class="button-wrap">
-      <button class="image-btn" onclick="location.href='map.html'">
-        <img src="./button.png?v=34" alt="Почати подорож" class="btn-png">
-        <span class="btn-text">Почати подорож</span>
-      </button>
-    </div>
+    <div class="screen-flash" id="screenFlash"></div>
 
   </div>
 
   <script>
-    const animatedText = document.getElementById("animatedText");
-    const buttonWrap = document.getElementById("buttonWrap");
+    const musicBtn = document.getElementById("musicBtn");
     const bgMusic = document.getElementById("bgMusic");
-    const musicToggle = document.getElementById("musicToggle");
+    const backBtn = document.getElementById("backBtn");
+    const sparkleLayer = document.getElementById("sparkleLayer");
+    const locationCard = document.getElementById("locationCard");
+    const closeCard = document.getElementById("closeCard");
+    const cardTitle = document.getElementById("cardTitle");
+    const cardText = document.getElementById("cardText");
+    const cardAction = document.getElementById("cardAction");
+    const screenFlash = document.getElementById("screenFlash");
 
-    bgMusic.volume = 0.45;
+    let musicPlaying = false;
 
-    let musicStarted = false;
-    let musicMutedByUser = false;
-
-    const phrases = [
-      {
-        html: "Привіт!",
-        className: "hello"
-      },
-      {
-        html: "Мене звати<br>Софійка.",
-        className: "name"
-      },
-      {
-        html: "Скоро у мене<br>особливий день.",
-        className: "day"
-      },
-      {
-        html: '<span class="q-top">Допоможеш знайти</span><span class="q-bottom">чарівне запрошення?</span>',
-        className: "question"
+    musicBtn.addEventListener("click", async () => {
+      try {
+        if (!musicPlaying) {
+          await bgMusic.play();
+          musicPlaying = true;
+          musicBtn.classList.add("active");
+          musicBtn.textContent = "♫";
+          makeFlash();
+        } else {
+          bgMusic.pause();
+          musicPlaying = false;
+          musicBtn.classList.remove("active");
+          musicBtn.textContent = "♪";
+        }
+      } catch (error) {
+        console.log("Музика не запустилась:", error);
       }
-    ];
+    });
 
-    let index = 0;
+    backBtn.addEventListener("click", () => {
+      makeFlash();
 
-    function setPhrase(i) {
-      animatedText.classList.remove("show");
+      if (locationCard.classList.contains("show")) {
+        closeLocationCard();
+        return;
+      }
+
+      if (window.history.length > 1) {
+        setTimeout(() => {
+          window.history.back();
+        }, 250);
+      }
+    });
+
+    document.querySelectorAll(".location-point").forEach((point) => {
+      point.addEventListener("click", () => {
+        const title = point.dataset.title;
+        const text = point.dataset.text;
+
+        cardTitle.textContent = title;
+        cardText.textContent = text;
+
+        makeFlash();
+
+        setTimeout(() => {
+          locationCard.classList.add("show");
+        }, 180);
+      });
+    });
+
+    closeCard.addEventListener("click", closeLocationCard);
+
+    cardAction.addEventListener("click", () => {
+      makeFlash();
 
       setTimeout(() => {
-        animatedText.innerHTML = phrases[i].html;
-        animatedText.className = "animated-text notranslate " + phrases[i].className;
-
-        requestAnimationFrame(() => {
-          animatedText.classList.add("show");
-        });
-      }, 450);
-    }
-
-    function startTextAnimation() {
-      setPhrase(0);
-
-      const timer = setInterval(() => {
-        index++;
-
-        if (index < phrases.length) {
-          setPhrase(index);
-        } else {
-          clearInterval(timer);
-
-          setTimeout(() => {
-            buttonWrap.classList.add("show");
-          }, 900);
-        }
-      }, 2500);
-    }
-
-    async function startMusicImmediately() {
-      if (musicMutedByUser) return;
-
-      try {
-        await bgMusic.play();
-        musicStarted = true;
-        musicToggle.classList.remove("off");
-        musicToggle.textContent = "🔊";
-        musicToggle.setAttribute("aria-label", "Вимкнути музику");
-      } catch (error) {
-        musicStarted = false;
-        musicToggle.classList.add("off");
-        musicToggle.textContent = "🎵";
-        musicToggle.setAttribute("aria-label", "Увімкнути музику");
-
-        window.addEventListener("click", firstUserInteraction, { once: true });
-        window.addEventListener("touchstart", firstUserInteraction, { once: true });
-      }
-    }
-
-    async function firstUserInteraction() {
-      if (musicMutedByUser) return;
-
-      try {
-        await bgMusic.play();
-        musicStarted = true;
-        musicToggle.classList.remove("off");
-        musicToggle.textContent = "🔊";
-        musicToggle.setAttribute("aria-label", "Вимкнути музику");
-      } catch (error) {
-        musicStarted = false;
-      }
-    }
-
-    function pauseMusic() {
-      bgMusic.pause();
-      musicStarted = false;
-      musicMutedByUser = true;
-      musicToggle.classList.add("off");
-      musicToggle.textContent = "🎵";
-      musicToggle.setAttribute("aria-label", "Увімкнути музику");
-    }
-
-    async function resumeMusic() {
-      musicMutedByUser = false;
-
-      try {
-        await bgMusic.play();
-        musicStarted = true;
-        musicToggle.classList.remove("off");
-        musicToggle.textContent = "🔊";
-        musicToggle.setAttribute("aria-label", "Вимкнути музику");
-      } catch (error) {
-        musicStarted = false;
-        musicToggle.classList.add("off");
-        musicToggle.textContent = "🎵";
-      }
-    }
-
-    musicToggle.addEventListener("click", (event) => {
-      event.stopPropagation();
-
-      if (musicStarted && !bgMusic.paused) {
-        pauseMusic();
-      } else {
-        resumeMusic();
-      }
+        closeLocationCard();
+      }, 250);
     });
 
-    window.addEventListener("load", () => {
-      startTextAnimation();
-      startMusicImmediately();
-    });
-  </script>
-</body>
-</html>
+    function closeLocationCard() {
+      locationCard.classList.remove("show");
+    }
+
+    function makeFlash() {
+      screenFlash.classList.remove("active");
+      void screenFlash.offsetWidth;
+      screenFlash.classList.add("active");
+    }
+
+    function createSparkles() {
+      const sparkleCount = 54;
+
+      for (let i = 0; i < sparkleCount; i++) {
+        const sparkle = document.createElement("span");
+        sparkle.className = "sparkle";
+
+        const size = Math.random() * 5 + 3;
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const duration = Math.random() * 3 + 3;
+        const delay = Math.random() * 4;
+
+        sparkle.style.width = `${size}px`;
+        sparkle.style.hei= `${size}px`;
+        sparkle.style.left = `${left}%`;
+        sparkle.style.top = `${top}%`;
+        sparkle.style.animationDuration = `${duration}s`;
+        sparkle.style.animationDelay = `${delay}s`;
+
+        sparkleLayer.appendChild(sparkle);
+      }
+    }
+
+    cr

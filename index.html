@@ -15,7 +15,8 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       width: 100%;
       height: 100%;
     }
@@ -45,9 +46,9 @@
       height: 30%;
       background: linear-gradient(
         to bottom,
-        rgba(40,10,55,0) 0%,
-        rgba(40,10,55,0.10) 55%,
-        rgba(40,10,55,0.26) 100%
+        rgba(40, 10, 55, 0) 0%,
+        rgba(40, 10, 55, 0.10) 55%,
+        rgba(40, 10, 55, 0.28) 100%
       );
       z-index: 1;
       pointer-events: none;
@@ -57,7 +58,7 @@
       position: absolute;
       color: #fff0a8;
       font-size: 18px;
-      text-shadow: 0 0 12px rgba(255,230,120,1);
+      text-shadow: 0 0 12px rgba(255, 230, 120, 1);
       z-index: 4;
       opacity: .85;
       animation: floatStar 3s ease-in-out infinite;
@@ -100,23 +101,22 @@
       display: block;
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 0 14px rgba(255,220,100,0.55));
+      filter: drop-shadow(0 0 14px rgba(255, 220, 100, 0.55));
       user-select: none;
       -webkit-user-drag: none;
       pointer-events: none;
     }
 
-    /* БЕЗПЕЧНА ЗОНА ДЛЯ ТЕКСТУ */
+    /* ТЕКСТОВА ЗОНА НИЖЧЕ КОРОНИ */
     .banner-text-zone {
       position: absolute;
-      left: 11%;
-      right: 11%;
-      top: 31%;
-      height: 43%;
+      left: 13%;
+      right: 13%;
+      top: 47%;
+      height: 34%;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       pointer-events: none;
     }
 
@@ -125,16 +125,20 @@
       text-align: center;
       opacity: 0;
       transform: translateY(8px) scale(.98);
-      transition: opacity .65s ease, transform .65s ease, filter .65s ease;
+      transition:
+        opacity .62s ease,
+        transform .62s ease,
+        filter .62s ease;
       filter: blur(2px);
-      color: #704088;
       font-family: 'Cormorant Garamond', serif;
       font-weight: 700;
-      letter-spacing: 0;
-      line-height: 1.02;
+      color: #5b3471;
+      letter-spacing: .2px;
+      line-height: .92;
       text-shadow:
-        0 1px 0 rgba(255,255,255,0.95),
-        0 2px 4px rgba(255,233,190,0.65);
+        0 1px 0 rgba(255, 255, 255, .92),
+        0 2px 2px rgba(255, 240, 210, .55),
+        0 3px 5px rgba(80, 30, 90, .22);
       pointer-events: none;
     }
 
@@ -145,39 +149,35 @@
     }
 
     .animated-text.hello {
-      font-size: clamp(50px, 9vw, 72px);
-      width: 70%;
-      line-height: .95;
+      font-size: clamp(50px, 8.4vw, 66px);
+      line-height: .9;
     }
 
     .animated-text.name {
-      font-size: clamp(38px, 6.9vw, 54px);
-      width: 74%;
-      line-height: .95;
+      font-size: clamp(36px, 6.2vw, 48px);
+      line-height: .88;
     }
 
     .animated-text.day {
-      font-size: clamp(36px, 6.2vw, 50px);
-      width: 78%;
-      line-height: .98;
+      font-size: clamp(33px, 5.6vw, 44px);
+      line-height: .9;
     }
 
     .animated-text.question {
-      width: 88%;
-      line-height: .95;
+      line-height: .88;
     }
 
     .animated-text.question .q-top {
       display: block;
-      font-size: clamp(28px, 4.6vw, 37px);
+      font-size: clamp(28px, 4.6vw, 36px);
       white-space: nowrap;
     }
 
     .animated-text.question .q-bottom {
       display: block;
       margin-top: 2px;
-      font-size: clamp(40px, 6.5vw, 56px);
-      line-height: .92;
+      font-size: clamp(36px, 5.8vw, 48px);
+      white-space: nowrap;
     }
 
     .button-wrap {
@@ -190,7 +190,9 @@
       z-index: 6;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 1s ease, transform 1s ease;
+      transition:
+        opacity 1s ease,
+        transform 1s ease;
     }
 
     .button-wrap.show {
@@ -214,7 +216,7 @@
       display: block;
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 0 18px rgba(255,220,95,0.72));
+      filter: drop-shadow(0 0 18px rgba(255, 220, 95, 0.72));
       user-select: none;
       -webkit-user-drag: none;
       pointer-events: none;
@@ -234,23 +236,42 @@
       letter-spacing: .2px;
       color: #fff2b3;
       text-shadow:
-        0 1px 0 rgba(255,255,255,0.55),
-        0 2px 0 rgba(244,207,108,0.55),
-        0 3px 5px rgba(108,36,82,0.90),
-        0 0 8px rgba(255,235,140,0.92);
+        0 1px 0 rgba(255, 255, 255, .55),
+        0 2px 0 rgba(244, 207, 108, .55),
+        0 3px 5px rgba(108, 36, 82, .90),
+        0 0 8px rgba(255, 235, 140, .92);
       pointer-events: none;
     }
 
     @keyframes pulse {
-      0%   { transform: scale(1); }
-      50%  { transform: scale(1.022); }
-      100% { transform: scale(1); }
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.022);
+      }
+
+      100% {
+        transform: scale(1);
+      }
     }
 
     @keyframes floatStar {
-      0%   { opacity: .45; transform: translateY(0) scale(.9); }
-      50%  { opacity: 1; transform: translateY(-8px) scale(1.12); }
-      100% { opacity: .45; transform: translateY(0) scale(.9); }
+      0% {
+        opacity: .45;
+        transform: translateY(0) scale(.9);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.12);
+      }
+
+      100% {
+        opacity: .45;
+        transform: translateY(0) scale(.9);
+      }
     }
 
     @media (max-height: 760px) {
@@ -259,28 +280,28 @@
       }
 
       .banner-text-zone {
-        top: 32%;
-        height: 42%;
+        top: 48%;
+        height: 33%;
       }
 
       .animated-text.hello {
-        font-size: clamp(46px, 8.2vw, 66px);
+        font-size: clamp(46px, 7.8vw, 60px);
       }
 
       .animated-text.name {
-        font-size: clamp(34px, 6.2vw, 48px);
+        font-size: clamp(33px, 5.8vw, 44px);
       }
 
       .animated-text.day {
-        font-size: clamp(32px, 5.8vw, 44px);
+        font-size: clamp(30px, 5.2vw, 40px);
       }
 
       .animated-text.question .q-top {
-        font-size: clamp(24px, 4.2vw, 33px);
+        font-size: clamp(25px, 4.1vw, 32px);
       }
 
       .animated-text.question .q-bottom {
-        font-size: clamp(36px, 5.8vw, 50px);
+        font-size: clamp(32px, 5.1vw, 42px);
       }
 
       .button-wrap {
@@ -294,8 +315,28 @@
       }
 
       .banner-text-zone {
-        top: 33%;
-        height: 41%;
+        top: 49%;
+        height: 32%;
+      }
+
+      .animated-text.hello {
+        font-size: clamp(42px, 7.4vw, 54px);
+      }
+
+      .animated-text.name {
+        font-size: clamp(30px, 5.3vw, 40px);
+      }
+
+      .animated-text.day {
+        font-size: clamp(28px, 4.9vw, 36px);
+      }
+
+      .animated-text.question .q-top {
+        font-size: clamp(22px, 3.8vw, 28px);
+      }
+
+      .animated-text.question .q-bottom {
+        font-size: clamp(29px, 4.8vw, 38px);
       }
 
       .button-wrap {
@@ -319,7 +360,7 @@
 
     <div class="message-area">
       <div class="banner-wrap">
-        <img src="./crown.png?v=31" alt="Казкова стрічка" class="banner-png">
+        <img src="./crown.png?v=32" alt="Казкова стрічка" class="banner-png">
 
         <div class="banner-text-zone">
           <div id="animatedText" class="animated-text hello show notranslate">
@@ -331,7 +372,7 @@
 
     <div id="buttonWrap" class="button-wrap">
       <button class="image-btn" onclick="location.href='map.html'">
-        <img src="./button.png?v=31" alt="Почати подорож" class="btn-png">
+        <img src="./button.png?v=32" alt="Почати подорож" class="btn-png">
         <span class="btn-text">Почати подорож</span>
       </button>
     </div>
@@ -356,7 +397,7 @@
         className: "day"
       },
       {
-        html: '<span class="q-top">Допоможеш мені знайти</span><span class="q-bottom">чарівне запрошення?</span>',
+        html: '<span class="q-top">Допоможеш знайти</span><span class="q-bottom">чарівне запрошення?</span>',
         className: "question"
       }
     ];
@@ -397,4 +438,4 @@
     window.addEventListener("load", startTextAnimation);
   </script>
 </body>
-</html>
+  </html>

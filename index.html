@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Казкова мапа Софії</title>
+  <title>Запрошення Софії</title>
 
   <style>
     * {
@@ -15,235 +15,255 @@
     }
 
     body {
+      width: 100%;
       min-height: 100vh;
       overflow: hidden;
       font-family: Georgia, "Times New Roman", serif;
       background:
-        radial-gradient(circle at 50% 15%, rgba(255, 242, 200, 0.9), transparent 28%),
-        linear-gradient(180deg, #f8e8c8 0%, #e9c98f 45%, #b8894d 100%);
+        radial-gradient(circle at 50% 18%, rgba(255, 245, 207, 0.95), transparent 28%),
+        radial-gradient(circle at 20% 75%, rgba(255, 212, 126, 0.45), transparent 32%),
+        linear-gradient(180deg, #f8e7c7 0%, #dfb979 48%, #9b6635 100%);
       color: #fff;
     }
 
-    .page {
+    .start-screen {
       position: relative;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-    }
-
-    .map-wrap {
-      position: absolute;
-      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      padding: 24px;
     }
 
-    .map-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.02);
-      filter: saturate(1.08) contrast(1.04) brightness(1.02);
-    }
-
-    .vignette {
+    .background-glow {
       position: absolute;
       inset: 0;
+      z-index: 1;
       pointer-events: none;
       background:
-        radial-gradient(circle at center, transparent 42%, rgba(71, 39, 16, 0.35) 100%),
-        linear-gradient(180deg, rgba(255, 243, 205, 0.12), rgba(69, 33, 11, 0.18));
-      z-index: 2;
+        radial-gradient(circle at 50% 35%, rgba(255, 248, 214, 0.52), transparent 34%),
+        radial-gradient(circle at 72% 20%, rgba(255, 230, 151, 0.38), transparent 20%),
+        radial-gradient(circle at 20% 28%, rgba(255, 236, 178, 0.32), transparent 24%);
+      animation: glowBreath 6s ease-in-out infinite;
     }
 
-    .top-panel {
+    @keyframes glowBreath {
+      0%, 100% {
+        opacity: 0.65;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+    }
+
+    .top-buttons {
       position: fixed;
-      top: 16px;
-      left: 0;
-      right: 0;
-      z-index: 30;
+      top: 18px;
+      right: 18px;
+      z-index: 20;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 14px;
-      pointer-events: none;
+      gap: 12px;
     }
 
-    .magic-btn {
-      pointer-events: auto;
-      width: 56px;
-      height: 56px;
-      border: 2px solid rgba(255, 255, 255, 0.9);
+    .music-btn {
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.9);
       background:
-        radial-gradient(circle at 30% 25%, #fff7c9, #e8b95e 42%, #8b4f1f 100%);
+        radial-gradient(circle at 30% 25%, #fff7c9, #e8b95e 45%, #8b4f1f 100%);
       color: #fff;
       font-size: 25px;
       font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       box-shadow:
-        0 0 14px rgba(255, 238, 160, 0.95),
-        0 0 30px rgba(255, 191, 71, 0.75),
+        0 0 16px rgba(255, 238, 160, 0.95),
+        0 0 34px rgba(255, 191, 71, 0.75),
         inset 0 0 12px rgba(255, 255, 255, 0.35);
       cursor: pointer;
-      animation: strongPulse 1.8s infinite ease-in-out;
-      backdrop-filter: blur(6px);
-    }
-
-    .magic-btn:active {
-      transform: scale(0.92);
-    }
-
-    .back-btn {
-      font-size: 30px;
-      padding-bottom: 4px;
+      animation: buttonPulse 1.8s infinite ease-in-out;
     }
 
     .music-btn.active {
       background:
         radial-gradient(circle at 30% 25%, #fff8d5, #ffd25f 42%, #a55a1b 100%);
       box-shadow:
-        0 0 18px rgba(255, 250, 190, 1),
-        0 0 42px rgba(255, 209, 82, 0.95),
-        0 0 70px rgba(255, 177, 27, 0.65),
+        0 0 20px rgba(255, 250, 190, 1),
+        0 0 48px rgba(255, 209, 82, 0.95),
+        0 0 75px rgba(255, 177, 27, 0.65),
         inset 0 0 14px rgba(255, 255, 255, 0.45);
     }
 
-    @keyframes strongPulse {
+    @keyframes buttonPulse {
       0%, 100% {
         transform: scale(1);
       }
 
       50% {
-        transform: scale(1.09);
+        transform: scale(1.08);
       }
     }
 
-    .title-box {
-      position: fixed;
-      top: 84px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 20;
-      width: calc(100% - 36px);
-      max-width: 420px;
+    .start-card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 430px;
+      min-height: 520px;
+      padding: 34px 24px 30px;
+      border-radius: 36px;
       text-align: center;
-      padding: 12px 18px;
-      border-radius: 24px;
-      background: rgba(80, 42, 14, 0.34);
-      border: 1px solid rgba(255, 240, 188, 0.7);
-      box-shadow:
-        0 0 18px rgba(255, 219, 133, 0.65),
-        inset 0 0 18px rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(6px);
-    }
-
-    .title-box h1 {
-      font-size: 22px;
-      line-height: 1.15;
-      color: #fff5cf;
-      text-shadow:
-        0 2px 8px rgba(80, 32, 0, 0.8),
-        0 0 16px rgba(255, 219, 121, 0.85);
-    }
-
-    .title-box p {
-      margin-top: 5px;
-      font-size: 14px;
-      color: #fff9e6;
-      text-shadow: 0 2px 6px rgba(68, 29, 0, 0.7);
-    }
-
-    .location-point {
-      position: absolute;
-      z-index: 12;
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      border: none;
       background:
-        radial-gradient(circle at 35% 30%, #ffffff 0%, #fff2a8 22%, #ffc84e 50%, #9a541c 100%);
+        radial-gradient(circle at 50% 0%, rgba(255, 246, 196, 0.26), transparent 35%),
+        linear-gradient(180deg, rgba(124, 72, 29, 0.72), rgba(78, 40, 15, 0.76));
+      border: 1px solid rgba(255, 235, 175, 0.82);
       box-shadow:
-        0 0 0 7px rgba(255, 226, 121, 0.28),
-        0 0 22px rgba(255, 217, 104, 0.95),
-        0 0 55px rgba(255, 159, 31, 0.75);
-      color: #703a11;
-      font-size: 27px;
+        0 0 28px rgba(255, 221, 128, 0.72),
+        0 0 80px rgba(255, 162, 32, 0.36),
+        inset 0 0 24px rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
       display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .start-card::before {
+      content: "";
+      position: absolute;
+      top: -90px;
+      left: 50%;
+      width: 220px;
+      height: 220px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 241, 173, 0.78), transparent 66%);
+      pointer-events: none;
+    }
+
+    .small-title {
+      position: relative;
+      z-index: 2;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff1bd;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 7px rgba(50, 20, 0, 0.8);
+    }
+
+    h1 {
+      position: relative;
+      z-index: 2;
+      font-size: 35px;
+      line-height: 1.1;
+      color: #fff5cf;
+      margin-bottom: 16px;
+      text-shadow:
+        0 3px 10px rgba(55, 23, 0, 0.9),
+        0 0 20px rgba(255, 220, 120, 0.8);
+    }
+
+    .main-text {
+      position: relative;
+      z-index: 2;
+      font-size: 18px;
+      line-height: 1.45;
+      color: #fff9e9;
+      margin-bottom: 26px;
+      text-shadow: 0 2px 6px rgba(47, 19, 0, 0.75);
+    }
+
+    .date-box {
+      position: relative;
+      z-index: 2;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 28px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 25%, #fffbe0 0%, #ffd86d 35%, #d9892f 78%, #7b3f16 100%);
+      border: 2px solid rgba(255, 248, 220, 0.95);
+      box-shadow:
+        0 0 24px rgba(255, 228, 135, 0.9),
+        0 0 60px rgba(255, 172, 41, 0.62),
+        inset 0 0 18px rgba(255, 255, 255, 0.35);
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      animation: markerPulse 1.5s infinite ease-in-out;
+      animation: datePulse 2.4s ease-in-out infinite;
     }
 
-    .location-point::before {
-      content: "";
-      position: absolute;
-      inset: -16px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 236, 151, 0.65);
-      animation: ringWave 1.7s infinite ease-out;
-    }
-
-    .location-point::after {
-      content: "";
-      position: absolute;
-      bottom: -13px;
-      left: 50%;
-      transform: translateX(-50%) rotate(45deg);
-      width: 22px;
-      height: 22px;
-      background: #d78328;
-      border-radius: 0 0 6px 0;
-      box-shadow: 0 0 18px rgba(255, 190, 66, 0.8);
-      z-index: -1;
-    }
-
-    .location-one {
-      left: 55%;
-      top: 46%;
-    }
-
-    .location-two {
-      left: 29%;
-      top: 58%;
-    }
-
-    .location-three {
-      left: 68%;
-      top: 66%;
-    }
-
-    @keyframes markerPulse {
+    @keyframes datePulse {
       0%, 100% {
         transform: scale(1);
       }
 
       50% {
-        transform: scale(1.13);
+        transform: scale(1.06);
       }
     }
 
-    @keyframes ringWave {
-      0% {
-        transform: scale(0.7);
-        opacity: 0.9;
+    .date-number {
+      font-size: 54px;
+      font-weight: bold;
+      line-height: 1;
+      color: #fff8d9;
+      text-shadow:
+        0 3px 8px rgba(79, 35, 0, 0.8),
+        0 0 16px rgba(255, 232, 145, 0.9);
+    }
+
+    .date-month {
+      font-size: 17px;
+      color: #fff8dc;
+      text-shadow: 0 2px 5px rgba(60, 25, 0, 0.8);
+    }
+
+    .start-btn {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      min-height: 58px;
+      border: 1px solid rgba(255, 248, 214, 0.95);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, #fff0a8 0%, #e4a340 52%, #9d561f 100%);
+      color: #5d300d;
+      font-size: 19px;
+      font-weight: bold;
+      font-family: Georgia, "Times New Roman", serif;
+      cursor: pointer;
+      box-shadow:
+        0 0 18px rgba(255, 232, 140, 0.9),
+        0 0 42px rgba(255, 160, 28, 0.52),
+        inset 0 0 12px rgba(255, 255, 255, 0.34);
+      animation: startBtnPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes startBtnPulse {
+      0%, 100% {
+        transform: scale(1);
       }
 
-      100% {
-        transform: scale(1.35);
-        opacity: 0;
+      50% {
+        transform: scale(1.04);
       }
+    }
+
+    .start-btn:active {
+      transform: scale(0.96);
     }
 
     .sparkle-layer {
       position: absolute;
       inset: 0;
-      z-index: 8;
+      z-index: 5;
       pointer-events: none;
       overflow: hidden;
     }
@@ -252,8 +272,8 @@
       position: absolute;
       width: 5px;
       height: 5px;
-      background: #fff8c9;
       border-radius: 50%;
+      background: #fff8c9;
       box-shadow:
         0 0 8px #fff8c9,
         0 0 18px #ffd35c,
@@ -263,7 +283,7 @@
 
     @keyframes sparkleFloat {
       0% {
-        transform: translateY(20px) scale(0.4);
+        transform: translateY(40px) scale(0.4);
         opacity: 0;
       }
 
@@ -271,217 +291,14 @@
         opacity: 1;
       }
 
-      55% {
+      60% {
         opacity: 0.95;
       }
 
       100% {
-        transform: translateY(-120px) scale(1.2);
+        transform: translateY(-140px) scale(1.15);
         opacity: 0;
       }
-    }
-
-    .flare {
-      position: absolute;
-      z-index: 9;
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      pointer-events: none;
-      background:
-        radial-gradient(circle, rgba(255, 255, 221, 0.95) 0%, rgba(255, 218, 91, 0.48) 25%, transparent 68%);
-      filter: blur(1px);
-      mix-blend-mode: screen;
-      opacity: 0;
-      animation: flareFlash 4.5s infinite ease-in-out;
-    }
-
-    .flare-one {
-      left: 12%;
-      top: 24%;
-      animation-delay: 0.4s;
-    }
-
-    .flare-two {
-      right: 8%;
-      top: 34%;
-      animation-delay: 1.5s;
-    }
-
-    .flare-three {
-      left: 45%;
-      bottom: 18%;
-      animation-delay: 2.6s;
-    }
-
-    .flare-four {
-      right: 18%;
-      bottom: 28%;
-      animation-delay: 3.4s;
-    }
-
-    @keyframes flareFlash {
-      0%, 78%, 100% {
-        transform: scale(0.5);
-        opacity: 0;
-      }
-
-      84% {
-        opacity: 0.95;
-        transform: scale(1.15);
-      }
-
-      90% {
-        opacity: 0.35;
-        transform: scale(1.6);
-      }
-    }
-
-    .bottom-hint {
-      position: fixed;
-      left: 50%;
-      bottom: 24px;
-      transform: translateX(-50%);
-      z-index: 25;
-      width: calc(100% - 42px);
-      max-width: 390px;
-      padding: 13px 18px;
-      text-align: center;
-      border-radius: 24px;
-      background: rgba(75, 38, 11, 0.42);
-      border: 1px solid rgba(255, 234, 168, 0.72);
-      backdrop-filter: blur(8px);
-      box-shadow:
-        0 0 20px rgba(255, 215, 120, 0.55),
-        inset 0 0 16px rgba(255, 255, 255, 0.12);
-      color: #fff7dc;
-      font-size: 15px;
-      line-height: 1.25;
-      text-shadow: 0 2px 5px rgba(62, 28, 0, 0.8);
-    }
-
-    .location-card {
-      position: fixed;
-      inset: 0;
-      z-index: 60;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-      background:
-        radial-gradient(circle at center, rgba(255, 236, 174, 0.35), rgba(41, 18, 5, 0.78));
-      backdrop-filter: blur(7px);
-    }
-
-    .location-card.show {
-      display: flex;
-      animation: cardFade 0.35s ease forwards;
-    }
-
-    @keyframes cardFade {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    .card-inner {
-      position: relative;
-      width: 100%;
-      max-width: 390px;
-      padding: 26px 22px 24px;
-      border-radius: 32px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 246, 195, 0.22), transparent 38%),
-        linear-gradient(180deg, rgba(109, 61, 21, 0.96), rgba(62, 31, 10, 0.96));
-      border: 1px solid rgba(255, 233, 165, 0.85);
-      box-shadow:
-        0 0 28px rgba(255, 221, 128, 0.75),
-        0 0 70px rgba(255, 162, 32, 0.38),
-        inset 0 0 22px rgba(255, 255, 255, 0.12);
-      text-align: center;
-      overflow: hidden;
-      animation: cardPop 0.42s ease forwards;
-    }
-
-    @keyframes cardPop {
-      from {
-        transform: scale(0.86) translateY(16px);
-      }
-
-      to {
-        transform: scale(1) translateY(0);
-      }
-    }
-
-    .card-inner::before {
-      content: "";
-      position: absolute;
-      top: -70px;
-      left: 50%;
-      width: 190px;
-      height: 190px;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 241, 173, 0.75), transparent 66%);
-      pointer-events: none;
-    }
-
-    .card-inner h2 {
-      position: relative;
-      font-size: 28px;
-      color: #fff2bd;
-      margin-bottom: 10px;
-      text-shadow:
-        0 2px 8px rgba(54, 22, 0, 0.95),
-        0 0 18px rgba(255, 205, 88, 0.8);
-    }
-
-    .card-inner p {
-      position: relative;
-      font-size: 16px;
-      line-height: 1.45;
-      color: #fff9e9;
-      margin-bottom: 18px;
-      text-shadow: 0 2px 5px rgba(43, 17, 0, 0.75);
-    }
-
-    .card-action {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 24px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 247, 210, 0.95);
-      background:
-        linear-gradient(180deg, #fff0a8, #d99030);
-      color: #5d300d;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow:
-        0 0 14px rgba(255, 231, 136, 0.9),
-        0 0 34px rgba(255, 160, 28, 0.52);
-    }
-
-    .close-card {
-      position: absolute;
-      right: 14px;
-      top: 12px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 240, 190, 0.85);
-      background: rgba(255, 230, 160, 0.16);
-      color: #fff6d0;
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 5;
     }
 
     .screen-flash {
@@ -494,7 +311,7 @@
     }
 
     .screen-flash.active {
-      animation: screenFlash 0.72s ease forwards;
+      animation: screenFlash 0.7s ease forwards;
     }
 
     @keyframes screenFlash {
@@ -512,91 +329,65 @@
     }
 
     @media (max-width: 430px) {
-      .title-box {
-        top: 82px;
+      .start-card {
+        min-height: 500px;
+        padding: 30px 22px 28px;
       }
 
-      .title-box h1 {
-        font-size: 20px;
+      h1 {
+        font-size: 31px;
       }
 
-      .magic-btn {
-        width: 54px;
-        height: 54px;
+      .main-text {
+        font-size: 17px;
       }
 
-      .location-point {
-        width: 54px;
-        height: 54px;
-        font-size: 25px;
+      .date-box {
+        width: 138px;
+        height: 138px;
+      }
+
+      .date-number {
+        font-size: 50px;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="page">
+
+  <div class="start-screen">
 
     <audio id="bgMusic" src="assets/music.mp3" loop></audio>
 
-    <div class="map-wrap">
-      <img src="assets/map.png" class="map-image" alt="Казкова мапа Софії">
+    <div class="background-glow"></div>
+
+    <div class="top-buttons">
+      <button class="music-btn" id="musicBtn" aria-label="Музика">♪</button>
     </div>
-
-    <div class="vignette"></div>
-
-    <div class="top-panel">
-      <button class="magic-btn back-btn" id="backBtn" aria-label="Назад">‹</button>
-      <button class="magic-btn music-btn" id="musicBtn" aria-label="Музика">♪</button>
-    </div>
-
-    <div class="title-box">
-      <h1>Казкова мапа Софії</h1>
-      <p>Натисни на сяючу локацію, щоб відкрити підказку</p>
-    </div>
-
-    <button
-      class="location-point location-one"
-      data-title="Перша локація"
-      data-text="Тут починається наша казкова історія. Саме звідси гості дізнаються першу важливу частину запрошення."
-    >
-      ✦
-    </button>
-
-    <button
-      class="location-point location-two"
-      data-title="Святкова подія"
-      data-text="Тут можна буде розмістити інформацію про хрещення, час, дату або місце проведення."
-    >
-      ✧
-    </button>
-
-    <button
-      class="location-point location-three"
-      data-title="Сюрприз для гостей"
-      data-text="Ця локація може вести до завдання, опитування або підтвердження присутності."
-    >
-      ❋
-    </button>
 
     <div class="sparkle-layer" id="sparkleLayer"></div>
 
-    <div class="flare flare-one"></div>
-    <div class="flare flare-two"></div>
-    <div class="flare flare-three"></div>
-    <div class="flare flare-four"></div>
+    <div class="start-card">
 
-    <div class="bottom-hint">
-      Мапа ожила. Обери першу сяючу точку, щоб продовжити подорож.
-    </div>
+      <div class="small-title">Запрошення</div>
 
-    <div class="location-card" id="locationCard">
-      <div class="card-inner">
-        <button class="close-card" id="closeCard">×</button>
-        <h2 id="cardTitle">Перша локація</h2>
-        <p id="cardText">Тут буде опис першої локації.</p>
-        <button class="card-action" id="cardAction">Продовжити</button>
+      <h1>Казкова подорож Софії</h1>
+
+      <p class="main-text">
+        Ми запрошуємо тебе у маленьку чарівну історію,
+        де кожна локація відкриває частинку свята.
+      </p>
+
+      <div class="date-box">
+        <div class="date-number">27</div>
+        <div class="date-month">червня</div>
       </div>
+
+      <button class="start-btn" id="startBtn">
+        Почати подорож
+      </button>
+
     </div>
 
     <div class="screen-flash" id="screenFlash"></div>
@@ -606,13 +397,8 @@
   <script>
     const musicBtn = document.getElementById("musicBtn");
     const bgMusic = document.getElementById("bgMusic");
-    const backBtn = document.getElementById("backBtn");
+    const startBtn = document.getElementById("startBtn");
     const sparkleLayer = document.getElementById("sparkleLayer");
-    const locationCard = document.getElementById("locationCard");
-    const closeCard = document.getElementById("closeCard");
-    const cardTitle = document.getElementById("cardTitle");
-    const cardText = document.getElementById("cardText");
-    const cardAction = document.getElementById("cardAction");
     const screenFlash = document.getElementById("screenFlash");
 
     let musicPlaying = false;
@@ -636,50 +422,13 @@
       }
     });
 
-    backBtn.addEventListener("click", () => {
-      makeFlash();
-
-      if (locationCard.classList.contains("show")) {
-        closeLocationCard();
-        return;
-      }
-
-      if (window.history.length > 1) {
-        setTimeout(() => {
-          window.history.back();
-        }, 250);
-      }
-    });
-
-    document.querySelectorAll(".location-point").forEach((point) => {
-      point.addEventListener("click", () => {
-        const title = point.dataset.title;
-        const text = point.dataset.text;
-
-        cardTitle.textContent = title;
-        cardText.textContent = text;
-
-        makeFlash();
-
-        setTimeout(() => {
-          locationCard.classList.add("show");
-        }, 180);
-      });
-    });
-
-    closeCard.addEventListener("click", closeLocationCard);
-
-    cardAction.addEventListener("click", () => {
+    startBtn.addEventListener("click", () => {
       makeFlash();
 
       setTimeout(() => {
-        closeLocationCard();
-      }, 250);
+        alert("Тут далі відкриємо мапу Софії");
+      }, 350);
     });
-
-    function closeLocationCard() {
-      locationCard.classList.remove("show");
-    }
 
     function makeFlash() {
       screenFlash.classList.remove("active");
@@ -688,7 +437,7 @@
     }
 
     function createSparkles() {
-      const sparkleCount = 54;
+      const sparkleCount = 48;
 
       for (let i = 0; i < sparkleCount; i++) {
         const sparkle = document.createElement("span");
@@ -701,7 +450,7 @@
         const delay = Math.random() * 4;
 
         sparkle.style.width = `${size}px`;
-        sparkle.style.hei= `${size}px`;
+        sparkle.style.height = `${size}px`;
         sparkle.style.left = `${left}%`;
         sparkle.style.top = `${top}%`;
         sparkle.style.animationDuration = `${duration}s`;
@@ -711,4 +460,8 @@
       }
     }
 
-    cr
+    createSparkles();
+  </script>
+
+</body>
+</html>

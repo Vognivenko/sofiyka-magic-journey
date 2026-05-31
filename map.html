@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="uk" translate="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
+  <title>Карта подорожі Софійки</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      font-family: 'Cormorant Garamond', serif;
+      background: #f7e6ff;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background:
+        radial-gradient(circle at 20% 12%, rgba(255,255,255,.95) 0 7%, transparent 18%),
+        radial-gradient(circle at 85% 18%, rgba(255,255,255,.85) 0 6%, transparent 17%),
+        radial-gradient(circle at 50% 78%, rgba(255,255,255,.55) 0 9%, transparent 21%),
+        linear-gradient(180deg, #ffe4f7 0%, #eadcff 42%, #d9edff 100%);
+      color: #5a2e72;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 26px 16px 34px;
+      overflow: hidden;
+    }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 70%, rgba(255,232,150,.35), transparent 20%),
+        radial-gradient(circle at 90% 60%, rgba(255,170,225,.24), transparent 21%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .back-btn,
+    .music-toggle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 218, 112, .95);
+      background: rgba(255, 244, 225, .66);
+      box-shadow:
+        0 0 12px rgba(255, 220, 120, .75),
+        inset 0 0 10px rgba(255, 255, 255, .75);
+      color: #7a3d82;
+      font-size: 20px;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .music-toggle.playing {
+      background: rgba(255, 204, 236, .78);
+      color: #9b2c7b;
+      animation: musicPulse 1.8s infinite;
+    }
+
+    .title-block {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin: 0 auto 20px;
+      max-width: 430px;
+    }
+
+    .title {
+      font-size: 34px;
+      line-height: .95;
+      color: #6d347d;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.95),
+        0 0 12px rgba(255,255,255,.75);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      line-height: 1.05;
+      color: #7c4a88;
+      text-shadow: 0 1px 0 rgba(255,255,255,.9);
+    }
+
+    .map-card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+      min-height: 620px;
+      border-radius: 38px;
+      padding: 26px 20px 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.58), rgba(255,226,246,.38)),
+        radial-gradient(circle at 50% 18%, rgba(255,245,190,.45), transparent 23%);
+      border: 2px solid rgba(255, 224, 133, .72);
+      box-shadow:
+        0 0 24px rgba(255, 220, 120, .38),
+        inset 0 0 18px rgba(255,255,255,.55);
+      overflow: hidden;
+    }
+
+    .map-card::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 82px;
+      width: 5px;
+      height: 435px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #ffd66d, #ff9fd0, #b989ff, #ffd66d);
+      border-radius: 999px;
+      box-shadow:
+        0 0 10px rgba(255,220,120,.8),
+        0 0 22px rgba(255,158,218,.45);
+      opacity: .72;
+    }
+
+    .location {
+      position: relative;
+      min-height: 92px;
+      display: flex;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .location:nth-child(even) {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    .location:nth-child(odd) {
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .location + .location {
+      margin-top: 18px;
+    }
+
+    .node-btn {
+      position: relative;
+      width: 76%;
+      min-height: 76px;
+      border: none;
+      border-radius: 28px;
+      padding: 11px 14px 11px 72px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,230,247,.86));
+      border: 2px solid rgba(255,218,112,.92);
+      box-shadow:
+        0 0 14px rgba(255,220,120,.55),
+        0 8px 16px rgba(124,60,120,.13),
+        inset 0 0 13px rgba(255,255,255,.8);
+      cursor: pointer;
+      color: #623074;
+      font-family: 'Cormorant Garamond', serif;
+      transition: transform .25s ease, opacity .25s ease, filter .25s ease;
+    }
+
+    .location:nth-child(even) .node-btn {
+      padding: 11px 72px 11px 14px;
+    }
+
+    .node-btn:active {
+      transform: scale(.98);
+    }
+
+    .node-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 35% 25%, #fff8d6, #ffd46d 56%, #e49531);
+      color: white;
+      font-size: 25px;
+      box-shadow:
+        0 0 12px rgba(255,220,100,.95),
+        inset 0 2px 6px rgba(255,255,255,.65);
+    }
+
+    .location:nth-child(even) .node-icon {
+      left: auto;
+      right: 12px;
+    }
+
+    .node-title {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: .98;
+      margin-bottom: 5px;
+    }
+
+    .node-desc {
+      display: block;
+      font-size: 15px;
+      line-height: 1;
+      color: #7f5688;
+    }
+
+    .node-btn.locked {
+      opacity: .55;
+      filter: grayscale(.25);
+    }
+
+    .node-btn.locked::after {
+      content: "🔒";
+      position: absolute;
+      top: -10px;
+      right: -5px;
+      font-size: 20px;
+      filter: drop-shadow(0 2px 3px rgba(80,30,90,.25));
+    }
+
+    .location:nth-child(even) .node-btn.locked::after {
+      right: auto;
+      left: -5px;
+    }
+
+    .progress {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      margin-top: 26px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #7b4386;
+      text-shadow: 0 1px 0 rgba(255,255,255,.75);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(58, 22, 74, .46);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 430px;
+      max-height: 88vh;
+      overflow-y: auto;
+      border-radius: 34px;
+      padding: 22px 18px 20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,229,247,.94));
+      border: 2px solid rgba(255,218,112,.95);
+      box-shadow:
+        0 0 24px rgba(255,220,120,.76),
+        0 16px 34px rgba(70,25,80,.22),
+        inset 0 0 18px rgba(255,255,255,.88);
+      text-align: center;
+      animation: popIn .35s ease;
+    }
+
+    .modal-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 35% 25%, #fff8d6, #ffd46d 56%, #e49531);
+      font-size: 30px;
+      box-shadow: 0 0 16px rgba(255,220,100,.9);
+    }
+
+    .modal-title {
+      font-size: 29px;
+      line-height: .95;
+      color: #673179;
+      margin-bottom: 12px;
+      text-shadow: 0 1px 0 rgba(255,255,255,.8);
+    }
+
+    .modal-text {
+      font-size: 21px;
+      line-height: 1.08;
+      color: #6b4374;
+      margin-bottom: 16px;
+    }
+
+    .info-box {
+      margin: 12px 0 15px;
+      padding: 13px 14px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(255,218,112,.72);
+      text-align: left;
+      font-size: 19px;
+      line-height: 1.15;
+      color: #633374;
+    }
+
+    .info-box b {
+      color: #9b4c7e;
+    }
+
+    .form-block {
+      text-align: left;
+      margin: 12px 0;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #633374;
+    }
+
+    .field,
+    .select-field,
+    .textarea-field {
+      width: 100%;
+      border: 2px solid rgba(215,164,72,.55);
+      border-radius: 18px;
+      padding: 11px 13px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      color: #5c2f6f;
+      background: rgba(255,255,255,.82);
+      outline: none;
+    }
+
+    .textarea-field {
+      min-height: 74px;
+      resize: vertical;
+    }
+
+    .checks {
+      display: grid;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .checks label {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 18px;
+      color: #633374;
+    }
+
+    .modal-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .main-action,
+    .second-action {
+      border: none;
+      border-radius: 28px;
+      padding: 13px 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .main-action {
+      color: #fff2b3;
+      background: linear-gradient(180deg, #ff91d6, #e348a6, #b92b83);
+      border: 2px solid rgba(255,218,112,.95);
+      box-shadow:
+        0 0 13px rgba(255,220,120,.72),
+        inset 0 3px 8px rgba(255,255,255,.44);
+      text-shadow: 0 2px 4px rgba(100,25,75,.7);
+    }
+
+    .second-action {
+      color: #7a3c82;
+      background: rgba(255,255,255,.72);
+      border: 2px solid rgba(255,218,112,.55);
+    }
+
+    .map-link {
+      display: inline-block;
+      margin-top: 8px;
+      color: #ba3a91;
+      font-size: 19px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .final-message {
+      display: none;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 20px;
+      background: rgba(255,247,210,.7);
+      color: #633374;
+      font-size: 20px;
+      line-height: 1.05;
+    }
+
+    .final-message.show {
+      display: block;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes musicPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes floatStar {
+      0% { opacity: .45; transform: translateY(0) scale(.9); }
+      50% { opacity: 1; transform: translateY(-8px) scale(1.12); }
+      100% { opacity: .45; transform: translateY(0) scale(.9); }
+    }
+
+    @media (max-width: 390px) {
+      .title {
+        font-size: 30px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+
+      .map-card {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .node-btn {
+        width: 79%;
+      }
+
+      .node-title {
+        font-size: 18px;
+      }
+
+      .node-desc {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body class="notranslate">
+
+  <audio 
+    id="bgMusic" 
+    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3?v=1" 
+    autoplay 
+    loop 
+    preload="auto">
+  </audio>
+
+  <main class="page">
+
+    <div class="topbar">
+      <button class="back-btn" type="button" onclick="location.href='index.html'" aria-label="Назад">←</button>
+
+      <button id="musicToggle" class="music-toggle playing" type="button" aria-label="Вимкнути музику">
+        🔊
+      </button>
+    </div>
+
+    <section class="title-block">
+      <h1 class="title">Карта чарівної подорожі</h1>
+      <p class="subtitle">Пройди локації та знайди запрошення Софійки</p>
+    </section>
+
+    <section class="map-card">
+
+      <div class="location">
+        <button class="node-btn" data-location="0">
+          <span class="node-icon">⭐</span>
+          <span class="node-title">Знайомство з Софійкою</span>
+          <span class="node-desc">початок казкової подорожі</span>
+        </button>
+      </div>
+
+      <div class="location">
+        <button class="node-btn locked" data-location="1">
+          <span class="node-icon">⛪</span>
+          <span class="node-title">День хрещення</span>
+          <span class="node-desc">час і місце таїнства</span>
+        </button>
+      </div>
+
+      <div class="location">
+        <button class="node-btn locked" data-location="2">
+          <span class="node-icon">🏰</span>
+          <span class="node-title">Святковий замок</span>
+          <span class="node-desc">де будемо святкувати</span>
+        </button>
+      </div>
+
+      <div class="location">
+        <button class="node-btn locked" data-location="3">
+          <span class="node-icon">🍰</span>
+          <span class="node-title">Королівська трапеза</span>
+          <span class="node-desc">побажання для гостей</span>
+        </button>
+      </div>
+
+      <div class="location">
+        <button class="node-btn locked" data-location="4">
+          <span class="node-icon">💌</span>
+          <span class="node-title">Підтвердження</span>
+          <span class="node-desc">чарівна відповідь</span>
+        </button>
+      </div>
+
+      <div class="progress" id="progressText">
+        Відкрито 1 з 5 локацій
+      </div>
+
+    </section>
+
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="modal-card">
+      <div class="modal-icon" id="modalIcon">⭐</div>
+      <h2 class="modal-title" id="modalTitle">Знайомство з Софійкою</h2>
+      <div id="modalContent"></div>
+
+      <div class="modal-actions">
+        <button class="main-action" id="nextBtn" type="button">Далі</button>
+        <button class="second-action" id="closeBtn" type="button">Закрити</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bgMusic = document.getElementById("bgMusic");
+    const musicToggle = document.getElementById("musicToggle");
+
+    bgMusic.volume = 0.35;
+
+    let musicStarted = false;
+    let musicMutedByUser = false;
+
+    async function startMusicImmediately() {
+      if (musicMutedByUser) return;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.remove("off");
+        musicToggle.classList.add("playing");
+        musicToggle.textContent = "🔊";
+      } catch (error) {
+        musicStarted = false;
+        musicToggle.classList.remove("playing");
+        musicToggle.textContent = "🎵";
+
+        window.addEventListener("click", firstUserInteraction, { once: true });
+        window.addEventListener("touchstart", firstUserInteraction, { once: true });
+      }
+    }
+
+    async function firstUserInteraction() {
+      if (musicMutedByUser) return;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.add("playing");
+        musicToggle.textContent = "🔊";
+      } catch (error) {
+        musicStarted = false;
+      }
+    }
+
+    function pauseMusic() {
+      bgMusic.pause();
+      musicStarted = false;
+      musicMutedByUser = true;
+      musicToggle.classList.remove("playing");
+      musicToggle.textContent = "🎵";
+    }
+
+    async function resumeMusic() {
+      musicMutedByUser = false;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.add("playing");
+        musicToggle.textContent = "🔊";
+      } catch (error) {
+        musicStarted = false;
+        musicToggle.classList.remove("playing");
+        musicToggle.textContent = "🎵";
+      }
+    }
+
+    musicToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      if (musicStarted && !bgMusic.paused) {
+        pauseMusic();
+      } else {
+        resumeMusic();
+      }
+    });
+
+    const modal = document.getElementById("modal");
+    const modalIcon = document.getElementById("modalIcon");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalContent = document.getElementById("modalContent");
+    const nextBtn = document.getElementById("nextBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const progressText = document.getElementById("progressText");
+    const nodeButtons = Array.from(document.querySelectorAll(".node-btn"));
+
+    let currentLocation = 0;
+    let unlockedLocation = Number(localStorage.getItem("sofiykaUnlockedLocation") || 0);
+
+    const locations = [
+      {
+        icon: "⭐",
+        title: "Знайомство з Софійкою",
+        button: "Відкрити наступну локацію",
+        content: `
+          <p class="modal-text">
+            Привіт! Я Софійка.<br><br>
+            Запрошую тебе у маленьку чарівну подорож,
+            щоб знайти моє особливе запрошення.
+          </p>
+        `
+      },
+      {
+        icon: "⛪",
+        title: "День хрещення",
+        button: "Далі до святкового замку",
+        content: `
+          <p class="modal-text">
+            Тут буде найважливіша частина нашого дня.
+          </p>
+
+          <div class="info-box">
+            <b>Таїнство Хрещення</b><br>
+            Дата: 27 червня 2026 року<br>
+            Час: __:__<br>
+            Місце: __________________<br>
+            Адреса: __________________
+          </div>
+
+          <a class="map-link" href="#" onclick="alert('Посилання на Google Maps додамо пізніше'); return false;">
+            Відкрити на карті
+          </a>
+        `
+      },
+      {
+        icon: "🏰",
+        title: "Святковий замок",
+        button: "Далі до трапези",
+        content: `
+          <p class="modal-text">
+            Після хрещення ми запрошуємо вас
+            розділити з нами цей особливий день.
+          </p>
+
+          <div class="info-box">
+            <b>Святкування</b><br>
+            Дата: 27 червня 2026 року<br>
+            Час: __:__<br>
+            Місце: __________________<br>
+            Адреса: __________________
+          </div>
+
+          <a class="map-link" href="#" onclick="alert('Посилання на Google Maps додамо пізніше'); return false;">
+            Відкрити на карті
+          </a>
+        `
+      },
+      {
+        icon: "🍰",
+        title: "Королівська трапеза",
+        button: "Далі до підтвердження",
+        content: `
+          <p class="modal-text">
+            Допоможіть нам підготувати свято зручно для всіх гостей.
+          </p>
+
+          <div class="form-block">
+            <label class="form-label">Чи потрібне дитяче меню?</label>
+            <div class="checks">
+              <label><input type="radio" name="childMenu"> Так</label>
+              <label><input type="radio" name="childMenu"> Ні</label>
+            </div>
+          </div>
+
+          <div class="form-block">
+            <label class="form-label">Який алкоголь буде доречний?</label>
+            <div class="checks">
+              <label><input type="checkbox"> Вино</label>
+              <label><input type="checkbox"> Шампанське</label>
+              <label><input type="checkbox"> Без алкоголю</label>
+              <label><input type="checkbox"> Інше</label>
+            </div>
+          </div>
+
+          <div class="form-block">
+            <label class="form-label">Побажання по меню</label>
+            <textarea class="textarea-field" placeholder="Напишіть побажання"></textarea>
+          </div>
+        `
+      },
+      {
+        icon: "💌",
+        title: "Чарівне підтвердження",
+        button: "Надіслати відповідь",
+        content: `
+          <p class="modal-text">
+            Чи будете ви з нами у цей день?
+          </p>
+
+          <div class="form-block">
+            <label class="form-label">Ім’я гостя</label>
+            <input class="field" type="text" placeholder="Ваше ім’я">
+          </div>
+
+          <div class="form-block">
+            <label class="form-label">Кількість гостей</label>
+            <input class="field" type="number" min="1" placeholder="Наприклад: 2">
+          </div>
+
+          <div class="form-block">
+            <label class="form-label">Підтвердження</label>
+            <select class="select-field">
+              <option>Так, будемо</option>
+              <option>Поки не знаємо</option>
+              <option>На жаль, не зможемо</option>
+            </select>
+          </div>
+
+          <div class="final-message" id="finalMessage">
+            Дякуємо!<br>
+            Софійка дуже чекає на вас 💛
+          </div>
+        `
+      }
+    ];
+
+    function updateMap() {
+      nodeButtons.forEach((button, index) => {
+        if (index <= unlockedLocation) {
+          button.classList.remove("locked");
+        } else {
+          button.classList.add("locked");
+        }
+      });
+
+      progressText.textContent = `Відкрито ${Math.min(unlockedLocation + 1, 5)} з 5 локацій`;
+    }
+
+    function openLocation(index) {
+      if (index > unlockedLocation) {
+        alert("Спочатку відкрий попередню локацію ✨");
+        return;
+      }
+
+      currentLocation = index;
+      const location = locations[index];
+
+      modalIcon.textContent = location.icon;
+      modalTitle.textContent = location.title;
+      modalContent.innerHTML = location.content;
+      nextBtn.textContent = location.button;
+
+      modal.classList.add("show");
+    }
+
+    function closeModal() {
+      modal.classList.remove("show");
+    }
+
+    function nextLocation() {
+      if (currentLocation === locations.length - 1) {
+        const finalMessage = document.getElementById("finalMessage");
+
+        if (finalMessage) {
+          finalMessage.classList.add("show");
+          nextBtn.textContent = "Готово";
+          nextBtn.onclick = closeModal;
+        }
+
+        return;
+      }
+
+      unlockedLocation = Math.max(unlockedLocation, currentLocation + 1);
+      localStorage.setItem("sofiykaUnlockedLocation", unlockedLocation);
+      updateMap();
+      openLocation(currentLocation + 1);
+    }
+
+    nodeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        openLocation(Number(button.dataset.location));
+      });
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    nextBtn.addEventListener("click", nextLocation);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    window.addEventListener("load", () => {
+      updateMap();
+      startMusicImmediately();
+    });
+  </script>
+
+</body>
+</html>

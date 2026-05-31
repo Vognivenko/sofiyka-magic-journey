@@ -7,302 +7,304 @@
   <title>Подорож Софійки</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Playfair+Display:wght@700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    html, body{
-      width:100%;
-      height:100%;
+    html, body {
+      width: 100%;
+      height: 100%;
     }
 
-    body{
-      min-height:100vh;
-      min-height:100dvh;
-      overflow:hidden;
-      background:#f4ddea url("./file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
-      font-family:'Cormorant Garamond', serif;
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+      background: #f4ddea url("./file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
+      font-family: 'Cormorant Garamond', serif;
     }
 
-    .screen{
-      position:relative;
-      width:100%;
-      height:100vh;
-      height:100dvh;
-      overflow:hidden;
+    .screen {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
     }
 
-    .screen::after{
-      content:"";
-      position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
-      height:30%;
-      background:linear-gradient(
+    .screen::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 30%;
+      background: linear-gradient(
         to bottom,
         rgba(40,10,55,0) 0%,
-        rgba(40,10,55,0.14) 55%,
-        rgba(40,10,55,0.32) 100%
+        rgba(40,10,55,0.10) 55%,
+        rgba(40,10,55,0.26) 100%
       );
-      z-index:1;
-      pointer-events:none;
+      z-index: 1;
+      pointer-events: none;
     }
 
-    .float-star{
-      position:absolute;
-      color:#fff0a8;
-      font-size:18px;
-      text-shadow:0 0 12px rgba(255,230,120,1);
-      z-index:4;
-      opacity:.85;
-      animation:floatStar 3s ease-in-out infinite;
-      pointer-events:none;
+    .float-star {
+      position: absolute;
+      color: #fff0a8;
+      font-size: 18px;
+      text-shadow: 0 0 12px rgba(255,230,120,1);
+      z-index: 4;
+      opacity: .85;
+      animation: floatStar 3s ease-in-out infinite;
+      pointer-events: none;
     }
 
-    .star1{
-      top:155px;
-      left:18%;
+    .star1 {
+      top: 155px;
+      left: 18%;
     }
 
-    .star2{
-      top:130px;
-      right:15%;
-      animation-delay:.9s;
+    .star2 {
+      top: 130px;
+      right: 15%;
+      animation-delay: .9s;
     }
 
-    .star3{
-      top:212px;
-      right:26%;
-      animation-delay:1.5s;
+    .star3 {
+      top: 212px;
+      right: 26%;
+      animation-delay: 1.5s;
     }
 
-    .message-area{
-      position:absolute;
-      top:58px;
-      left:50%;
-      transform:translateX(-50%);
-      width:min(108vw, 760px);
-      z-index:5;
-      pointer-events:none;
+    .message-area {
+      position: absolute;
+      top: 58px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(108vw, 760px);
+      z-index: 5;
+      pointer-events: none;
     }
 
-    .banner-wrap{
-      position:relative;
-      width:100%;
+    .banner-wrap {
+      position: relative;
+      width: 100%;
     }
 
-    .banner-png{
-      display:block;
-      width:100%;
-      height:auto;
-      filter:drop-shadow(0 0 14px rgba(255,220,100,0.55));
-      user-select:none;
-      -webkit-user-drag:none;
-      pointer-events:none;
+    .banner-png {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 14px rgba(255,220,100,0.55));
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
     }
 
-    .animated-text{
-      position:absolute;
-      left:50%;
-      top:58%;
-      transform:translate(-50%, -50%) scale(.98);
-      width:78%;
-      text-align:center;
-      opacity:0;
-      transition:
-        opacity .72s ease,
-        transform .72s ease,
-        filter .72s ease;
-      filter:blur(2px);
-      color:#f7ebc2;
-      font-family:'Cormorant Garamond', serif;
-      font-weight:700;
-      letter-spacing:-0.01em;
-      line-height:1.02;
+    /* БЕЗПЕЧНА ЗОНА ДЛЯ ТЕКСТУ */
+    .banner-text-zone {
+      position: absolute;
+      left: 11%;
+      right: 11%;
+      top: 31%;
+      height: 43%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .animated-text {
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(8px) scale(.98);
+      transition: opacity .65s ease, transform .65s ease, filter .65s ease;
+      filter: blur(2px);
+      color: #704088;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1.02;
       text-shadow:
-        0 1px 0 rgba(255,255,255,0.96),
-        0 2px 0 rgba(235,204,122,0.96),
-        0 3px 0 rgba(196,153,76,0.92),
-        0 4px 8px rgba(98,53,104,0.30),
-        0 0 8px rgba(255,235,170,0.30);
-      -webkit-text-stroke:0.45px rgba(132,91,40,0.55);
-      pointer-events:none;
+        0 1px 0 rgba(255,255,255,0.95),
+        0 2px 4px rgba(255,233,190,0.65);
+      pointer-events: none;
     }
 
-    .animated-text.show{
-      opacity:1;
-      transform:translate(-50%, -50%) scale(1);
-      filter:blur(0);
+    .animated-text.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
 
-    .animated-text.hello{
-      font-family:'Playfair Display', serif;
-      font-size:clamp(50px, 8.8vw, 72px);
-      width:64%;
-      top:58%;
+    .animated-text.hello {
+      font-size: clamp(50px, 9vw, 72px);
+      width: 70%;
+      line-height: .95;
     }
 
-    .animated-text.name{
-      font-size:clamp(38px, 6.7vw, 54px);
-      width:66%;
-      top:58%;
+    .animated-text.name {
+      font-size: clamp(38px, 6.9vw, 54px);
+      width: 74%;
+      line-height: .95;
     }
 
-    .animated-text.day{
-      font-size:clamp(34px, 5.8vw, 48px);
-      width:70%;
-      top:58%;
+    .animated-text.day {
+      font-size: clamp(36px, 6.2vw, 50px);
+      width: 78%;
+      line-height: .98;
     }
 
-    .animated-text.question{
-      width:84%;
-      top:60%;
-      line-height:0.98;
+    .animated-text.question {
+      width: 88%;
+      line-height: .95;
     }
 
-    .animated-text.question .q-top{
-      display:block;
-      font-size:clamp(24px, 4.0vw, 33px);
-      white-space:nowrap;
+    .animated-text.question .q-top {
+      display: block;
+      font-size: clamp(28px, 4.6vw, 37px);
+      white-space: nowrap;
     }
 
-    .animated-text.question .q-bottom{
-      display:block;
-      margin-top:2px;
-      font-size:clamp(42px, 6.2vw, 58px);
-      line-height:.95;
+    .animated-text.question .q-bottom {
+      display: block;
+      margin-top: 2px;
+      font-size: clamp(40px, 6.5vw, 56px);
+      line-height: .92;
     }
 
-    .button-wrap{
-      position:absolute;
-      left:50%;
-      bottom:48px;
-      transform:translateX(-50%) translateY(22px);
-      width:92%;
-      max-width:470px;
-      z-index:6;
-      opacity:0;
-      pointer-events:none;
-      transition:
-        opacity 1s ease,
-        transform 1s ease;
+    .button-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: 48px;
+      transform: translateX(-50%) translateY(22px);
+      width: 92%;
+      max-width: 470px;
+      z-index: 6;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease, transform 1s ease;
     }
 
-    .button-wrap.show{
-      opacity:1;
-      pointer-events:auto;
-      transform:translateX(-50%) translateY(0);
+    .button-wrap.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
     }
 
-    .image-btn{
-      position:relative;
-      width:100%;
-      display:block;
-      border:none;
-      background:none;
-      padding:0;
-      cursor:pointer;
-      animation:pulse 2.2s infinite;
+    .image-btn {
+      position: relative;
+      width: 100%;
+      display: block;
+      border: none;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+      animation: pulse 2.2s infinite;
     }
 
-    .btn-png{
-      display:block;
-      width:100%;
-      height:auto;
-      filter:drop-shadow(0 0 18px rgba(255,220,95,0.72));
-      user-select:none;
-      -webkit-user-drag:none;
-      pointer-events:none;
+    .btn-png {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 18px rgba(255,220,95,0.72));
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
     }
 
-    .btn-text{
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform:translate(-50%, -50%);
-      width:74%;
-      text-align:center;
-      white-space:nowrap;
-      font-family:'Cormorant Garamond', serif;
-      font-size:clamp(24px, 5vw, 33px);
-      font-weight:700;
-      letter-spacing:.2px;
-      color:#fff2b3;
+    .btn-text {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 74%;
+      text-align: center;
+      white-space: nowrap;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 5vw, 33px);
+      font-weight: 700;
+      letter-spacing: .2px;
+      color: #fff2b3;
       text-shadow:
         0 1px 0 rgba(255,255,255,0.55),
         0 2px 0 rgba(244,207,108,0.55),
         0 3px 5px rgba(108,36,82,0.90),
         0 0 8px rgba(255,235,140,0.92);
-      pointer-events:none;
+      pointer-events: none;
     }
 
-    @keyframes pulse{
-      0%{transform:scale(1);}
-      50%{transform:scale(1.022);}
-      100%{transform:scale(1);}
+    @keyframes pulse {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.022); }
+      100% { transform: scale(1); }
     }
 
-    @keyframes floatStar{
-      0%{opacity:.45; transform:translateY(0) scale(.9);}
-      50%{opacity:1; transform:translateY(-8px) scale(1.12);}
-      100%{opacity:.45; transform:translateY(0) scale(.9);}
+    @keyframes floatStar {
+      0%   { opacity: .45; transform: translateY(0) scale(.9); }
+      50%  { opacity: 1; transform: translateY(-8px) scale(1.12); }
+      100% { opacity: .45; transform: translateY(0) scale(.9); }
     }
 
-    @media (max-height: 760px){
-      .message-area{
-        top:50px;
+    @media (max-height: 760px) {
+      .message-area {
+        top: 50px;
       }
 
-      .animated-text.hello{
-        font-size:clamp(46px, 8vw, 66px);
+      .banner-text-zone {
+        top: 32%;
+        height: 42%;
       }
 
-      .animated-text.name{
-        font-size:clamp(34px, 6.2vw, 48px);
+      .animated-text.hello {
+        font-size: clamp(46px, 8.2vw, 66px);
       }
 
-      .animated-text.day{
-        font-size:clamp(31px, 5.3vw, 43px);
+      .animated-text.name {
+        font-size: clamp(34px, 6.2vw, 48px);
       }
 
-      .animated-text.question .q-top{
-        font-size:clamp(21px, 3.8vw, 29px);
+      .animated-text.day {
+        font-size: clamp(32px, 5.8vw, 44px);
       }
 
-      .animated-text.question .q-bottom{
-        font-size:clamp(36px, 5.6vw, 50px);
+      .animated-text.question .q-top {
+        font-size: clamp(24px, 4.2vw, 33px);
       }
 
-      .button-wrap{
-        bottom:34px;
+      .animated-text.question .q-bottom {
+        font-size: clamp(36px, 5.8vw, 50px);
+      }
+
+      .button-wrap {
+        bottom: 34px;
       }
     }
 
-    @media (max-height: 680px){
-      .message-area{
-        top:42px;
+    @media (max-height: 680px) {
+      .message-area {
+        top: 42px;
       }
 
-      .animated-text{
-        top:59%;
+      .banner-text-zone {
+        top: 33%;
+        height: 41%;
       }
 
-      .animated-text.question{
-        top:60%;
+      .button-wrap {
+        bottom: 24px;
+        width: 90%;
       }
 
-      .button-wrap{
-        bottom:24px;
-        width:90%;
-      }
-
-      .btn-text{
-        font-size:clamp(22px, 4.8vw, 30px);
+      .btn-text {
+        font-size: clamp(22px, 4.8vw, 30px);
       }
     }
   </style>
@@ -317,17 +319,19 @@
 
     <div class="message-area">
       <div class="banner-wrap">
-        <img src="./crown.png?v=30" alt="Казкова стрічка" class="banner-png">
+        <img src="./crown.png?v=31" alt="Казкова стрічка" class="banner-png">
 
-        <div id="animatedText" class="animated-text hello show notranslate">
-          Привіт!
+        <div class="banner-text-zone">
+          <div id="animatedText" class="animated-text hello show notranslate">
+            Привіт!
+          </div>
         </div>
       </div>
     </div>
 
     <div id="buttonWrap" class="button-wrap">
       <button class="image-btn" onclick="location.href='map.html'">
-        <img src="./button.png?v=30" alt="Почати подорож" class="btn-png">
+        <img src="./button.png?v=31" alt="Почати подорож" class="btn-png">
         <span class="btn-text">Почати подорож</span>
       </button>
     </div>
@@ -352,14 +356,14 @@
         className: "day"
       },
       {
-        html: '<span class="q-top">Допоможеш мені знайти чарівне</span><span class="q-bottom">запрошення?</span>',
+        html: '<span class="q-top">Допоможеш мені знайти</span><span class="q-bottom">чарівне запрошення?</span>',
         className: "question"
       }
     ];
 
     let index = 0;
 
-    function setPhrase(i){
+    function setPhrase(i) {
       animatedText.classList.remove("show");
 
       setTimeout(() => {
@@ -369,18 +373,18 @@
         requestAnimationFrame(() => {
           animatedText.classList.add("show");
         });
-      }, 520);
+      }, 450);
     }
 
-    function startTextAnimation(){
+    function startTextAnimation() {
       setPhrase(0);
 
       const timer = setInterval(() => {
         index++;
 
-        if(index < phrases.length){
+        if (index < phrases.length) {
           setPhrase(index);
-        }else{
+        } else {
           clearInterval(timer);
 
           setTimeout(() => {

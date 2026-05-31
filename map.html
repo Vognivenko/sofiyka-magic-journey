@@ -19,9 +19,9 @@
     body {
       width: 100%;
       min-height: 100%;
+      overflow-x: hidden;
       font-family: 'Cormorant Garamond', serif;
       background: #efd8ff;
-      overflow-x: hidden;
     }
 
     body {
@@ -38,7 +38,7 @@
       width: 100%;
       min-height: 100vh;
       min-height: 100dvh;
-      padding: 18px 10px 28px;
+      padding: 12px 8px 26px;
       overflow: hidden;
     }
 
@@ -47,7 +47,7 @@
       top: 14px;
       left: 14px;
       right: 14px;
-      z-index: 10;
+      z-index: 20;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -55,11 +55,11 @@
     }
 
     .round-btn {
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       border: 2px solid rgba(255, 220, 120, 0.95);
-      background: rgba(255, 244, 225, 0.72);
+      background: rgba(255, 244, 225, 0.76);
       color: #71347f;
       font-size: 23px;
       font-weight: 700;
@@ -72,17 +72,24 @@
       pointer-events: auto;
     }
 
+    .round-btn.playing {
+      background: rgba(255, 204, 236, 0.78);
+      color: #9b2c7b;
+      animation: musicPulse 1.8s infinite;
+    }
+
     .map-wrap {
       position: relative;
       width: 100%;
       max-width: 520px;
       margin: 0 auto;
-      border-radius: 28px;
+      border-radius: 26px;
       overflow: hidden;
       box-shadow:
         0 0 24px rgba(255, 220, 120, 0.5),
         0 18px 40px rgba(70, 25, 90, 0.26);
       animation: mapAppear 0.9s ease both;
+      background: rgba(255,255,255,0.22);
     }
 
     .map-image {
@@ -101,15 +108,15 @@
       background:
         linear-gradient(
           to bottom,
-          rgba(255,255,255,0.12) 0%,
+          rgba(255,255,255,0.10) 0%,
           rgba(255,255,255,0) 28%,
-          rgba(70,20,90,0.10) 100%
+          rgba(70,20,90,0.08) 100%
         );
     }
 
     .butterfly {
       position: fixed;
-      z-index: 8;
+      z-index: 18;
       font-size: 24px;
       pointer-events: none;
       filter: drop-shadow(0 4px 8px rgba(80, 30, 100, 0.28));
@@ -136,14 +143,36 @@
       animation-delay: -4s;
     }
 
+    .b4 {
+      top: 72%;
+      right: -14%;
+      animation: flyLeft2 20s linear infinite;
+      animation-delay: -9s;
+    }
+
     @keyframes mapAppear {
       from {
         opacity: 0;
         transform: translateY(18px) scale(0.97);
       }
+
       to {
         opacity: 1;
         transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes musicPulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+
+      100% {
+        transform: scale(1);
       }
     }
 
@@ -152,12 +181,15 @@
         transform: translateX(0) translateY(0) rotate(0deg);
         opacity: 0;
       }
+
       10% {
         opacity: 1;
       }
+
       50% {
         transform: translateX(58vw) translateY(34px) rotate(8deg);
       }
+
       100% {
         transform: translateX(122vw) translateY(-24px) rotate(-8deg);
         opacity: 0;
@@ -169,12 +201,15 @@
         transform: translateX(0) translateY(0) rotate(0deg);
         opacity: 0;
       }
+
       10% {
         opacity: 1;
       }
+
       45% {
         transform: translateX(48vw) translateY(-28px) rotate(-7deg);
       }
+
       100% {
         transform: translateX(122vw) translateY(18px) rotate(7deg);
         opacity: 0;
@@ -186,14 +221,37 @@
         transform: translateX(0) translateY(0) scaleX(-1) rotate(0deg);
         opacity: 0;
       }
+
       10% {
         opacity: 1;
       }
+
       50% {
         transform: translateX(-54vw) translateY(32px) scaleX(-1) rotate(8deg);
       }
+
       100% {
         transform: translateX(-122vw) translateY(-20px) scaleX(-1) rotate(-7deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes flyLeft2 {
+      0% {
+        transform: translateX(0) translateY(0) scaleX(-1) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateX(-60vw) translateY(-26px) scaleX(-1) rotate(-6deg);
+      }
+
+      100% {
+        transform: translateX(-122vw) translateY(18px) scaleX(-1) rotate(8deg);
         opacity: 0;
       }
     }
@@ -202,6 +260,14 @@
 
 <body class="notranslate">
 
+  <audio
+    id="bgMusic"
+    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3?v=1"
+    autoplay
+    loop
+    preload="auto">
+  </audio>
+
   <main class="page">
 
     <div class="topbar">
@@ -209,7 +275,7 @@
         ←
       </button>
 
-      <button class="round-btn" type="button" aria-label="Музика">
+      <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику">
         ♪
       </button>
     </div>
@@ -217,16 +283,98 @@
     <div class="butterfly b1">🦋</div>
     <div class="butterfly b2">🦋</div>
     <div class="butterfly b3">🦋</div>
+    <div class="butterfly b4">🦋</div>
 
     <section class="map-wrap">
       <img
         class="map-image"
-        src="./карта_чарівної_подорожі.png?v=1"
+        src="./map.png?v=1"
         alt="Карта чарівної подорожі Софійки"
       />
     </section>
 
   </main>
+
+  <script>
+    const bgMusic = document.getElementById("bgMusic");
+    const musicToggle = document.getElementById("musicToggle");
+
+    bgMusic.volume = 0.35;
+
+    let musicStarted = false;
+    let musicMutedByUser = false;
+
+    async function startMusicImmediately() {
+      if (musicMutedByUser) return;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.add("playing");
+        musicToggle.textContent = "🔊";
+        musicToggle.setAttribute("aria-label", "Вимкнути музику");
+      } catch (error) {
+        musicStarted = false;
+        musicToggle.classList.remove("playing");
+        musicToggle.textContent = "♪";
+        musicToggle.setAttribute("aria-label", "Увімкнути музику");
+
+        window.addEventListener("click", firstUserInteraction, { once: true });
+        window.addEventListener("touchstart", firstUserInteraction, { once: true });
+      }
+    }
+
+    async function firstUserInteraction() {
+      if (musicMutedByUser) return;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.add("playing");
+        musicToggle.textContent = "🔊";
+        musicToggle.setAttribute("aria-label", "Вимкнути музику");
+      } catch (error) {
+        musicStarted = false;
+      }
+    }
+
+    function pauseMusic() {
+      bgMusic.pause();
+      musicStarted = false;
+      musicMutedByUser = true;
+      musicToggle.classList.remove("playing");
+      musicToggle.textContent = "♪";
+      musicToggle.setAttribute("aria-label", "Увімкнути музику");
+    }
+
+    async function resumeMusic() {
+      musicMutedByUser = false;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.add("playing");
+        musicToggle.textContent = "🔊";
+        musicToggle.setAttribute("aria-label", "Вимкнути музику");
+      } catch (error) {
+        musicStarted = false;
+        musicToggle.classList.remove("playing");
+        musicToggle.textContent = "♪";
+      }
+    }
+
+    musicToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      if (musicStarted && !bgMusic.paused) {
+        pauseMusic();
+      } else {
+        resumeMusic();
+      }
+    });
+
+    window.addEventListener("load", startMusicImmediately);
+  </script>
 
 </body>
 </html>

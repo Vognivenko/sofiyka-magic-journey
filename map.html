@@ -1,749 +1,232 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Карта чарівної подорожі</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Marck+Script&display=swap" rel="stylesheet" />
+  <meta name="google" content="notranslate" />
+  <title>Карта подорожі Софійки</title>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    :root {
-      --bg1: #29145b;
-      --bg2: #6f47c7;
-      --bg3: #f6a8d8;
-      --gold: #f6d77e;
-      --gold-soft: #fff4cc;
-      --purple: #6b3fa0;
-      --purple-dark: #4d2d79;
-      --pink: #ff8fd4;
-      --white: #ffffff;
-      --cream: rgba(255, 250, 240, 0.95);
-      --shadow: 0 12px 35px rgba(41, 20, 91, 0.30);
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      font-family: 'Cormorant Garamond', serif;
+      background: #efd8ff;
+      overflow-x: hidden;
     }
 
     body {
       min-height: 100vh;
-      font-family: "Cinzel", serif;
-      color: #fff;
+      min-height: 100dvh;
       background:
-        radial-gradient(circle at top left, rgba(255, 220, 120, 0.18), transparent 18%),
-        radial-gradient(circle at top right, rgba(255, 170, 220, 0.20), transparent 20%),
-        linear-gradient(180deg, #24114d 0%, #4c2d8f 38%, #9263d6 68%, #f0a2cf 100%);
-      overflow-x: hidden;
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.9), transparent 18%),
+        radial-gradient(circle at 85% 18%, rgba(255,220,245,0.65), transparent 22%),
+        linear-gradient(180deg, #ffe3f7 0%, #eadcff 45%, #d8edff 100%);
+    }
+
+    .page {
       position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.85) 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(255,240,180,0.7) 1px, transparent 1.5px);
-      background-size: 120px 120px, 180px 180px;
-      background-position: 0 0, 40px 60px;
-      opacity: 0.35;
-      animation: starsTwinkle 6s ease-in-out infinite alternate;
-    }
-
-    @keyframes starsTwinkle {
-      0% { opacity: 0.20; }
-      100% { opacity: 0.45; }
-    }
-
-    .page-wrap {
       width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 56px 16px 80px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .magic-map-section {
-      position: relative;
-      padding: 28px 0 10px;
-      animation: fadeUp 0.9s ease;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(28px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 28px;
-      padding: 0 8px;
-    }
-
-    .section-kicker {
-      font-size: 14px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #ffe9a9;
-      margin-bottom: 10px;
-      text-shadow: 0 0 12px rgba(255, 225, 140, 0.3);
-    }
-
-    .section-title {
-      font-size: clamp(28px, 6vw, 52px);
-      line-height: 1.1;
-      color: #fff8dc;
-      text-shadow:
-        0 2px 0 rgba(117, 64, 171, 0.8),
-        0 6px 20px rgba(30, 8, 72, 0.45);
-      margin-bottom: 12px;
-    }
-
-    .section-subtitle {
-      max-width: 760px;
-      margin: 0 auto;
-      font-size: clamp(15px, 3.8vw, 19px);
-      line-height: 1.65;
-      color: #fff6f8;
-      opacity: 0.95;
-    }
-
-    .map-layout {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 22px;
-      align-items: start;
-    }
-
-    .map-card,
-    .info-card {
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 245, 214, 0.35);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .map-card {
-      padding: 18px;
-      position: relative;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 18px 10px 28px;
       overflow: hidden;
     }
 
-    .map-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 28px;
+    .topbar {
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       pointer-events: none;
-      box-shadow: inset 0 0 0 1px rgba(255, 244, 200, 0.18);
     }
 
-    .map-stage {
+    .round-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 220, 120, 0.95);
+      background: rgba(255, 244, 225, 0.72);
+      color: #71347f;
+      font-size: 23px;
+      font-weight: 700;
+      box-shadow:
+        0 0 14px rgba(255, 220, 120, 0.75),
+        inset 0 0 10px rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .map-wrap {
       position: relative;
-      border-radius: 22px;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      border-radius: 28px;
       overflow: hidden;
-      background: rgba(255,255,255,0.08);
-      box-shadow: inset 0 0 25px rgba(255,255,255,0.08);
+      box-shadow:
+        0 0 24px rgba(255, 220, 120, 0.5),
+        0 18px 40px rgba(70, 25, 90, 0.26);
+      animation: mapAppear 0.9s ease both;
     }
 
     .map-image {
       display: block;
       width: 100%;
       height: auto;
-      border-radius: 22px;
       user-select: none;
       -webkit-user-drag: none;
     }
 
-    .map-glow {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 25% 30%, rgba(255, 230, 140, 0.12), transparent 18%),
-        radial-gradient(circle at 80% 22%, rgba(255, 180, 230, 0.15), transparent 16%),
-        radial-gradient(circle at 55% 78%, rgba(255, 240, 170, 0.10), transparent 20%);
-    }
-
-    .marker {
-      position: absolute;
-      width: 46px;
-      height: 46px;
-      border: none;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 35% 30%, #fff8d8 0%, #ffd978 45%, #ffb84a 70%, #d27a00 100%);
-      box-shadow:
-        0 0 0 4px rgba(255, 246, 204, 0.45),
-        0 0 18px rgba(255, 210, 90, 0.85),
-        0 8px 20px rgba(89, 37, 122, 0.35);
-      cursor: pointer;
-      transform: translate(-50%, -50%);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      z-index: 5;
-    }
-
-    .marker::before {
-      content: "✦";
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      font-size: 20px;
-      color: #7a3a9d;
-      text-shadow: 0 1px 0 #fff3c7;
-    }
-
-    .marker::after {
+    .map-wrap::after {
       content: "";
       position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 230, 130, 0.55);
-      animation: pulse 2.2s infinite ease-out;
-    }
-
-    .marker:hover,
-    .marker.active {
-      transform: translate(-50%, -50%) scale(1.12);
-      box-shadow:
-        0 0 0 5px rgba(255, 246, 204, 0.65),
-        0 0 26px rgba(255, 216, 114, 0.95),
-        0 12px 26px rgba(89, 37, 122, 0.45);
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(0.92);
-        opacity: 0.9;
-      }
-      70% {
-        transform: scale(1.45);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1.45);
-        opacity: 0;
-      }
-    }
-
-    .marker-label {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(84, 38, 126, 0.82);
-      color: #fff7db;
-      font-size: 12px;
-      letter-spacing: 0.04em;
-      white-space: nowrap;
-      box-shadow: 0 8px 20px rgba(32, 10, 68, 0.25);
-      z-index: 4;
-      pointer-events: none;
-    }
-
-    .info-card {
-      padding: 22px;
-      position: sticky;
-      top: 16px;
-    }
-
-    .info-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-
-    .info-icon {
-      width: 58px;
-      height: 58px;
-      min-width: 58px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      background:
-        linear-gradient(135deg, #fff6cd 0%, #ffd772 55%, #ffb45e 100%);
-      color: #6a338f;
-      font-size: 28px;
-      box-shadow:
-        0 8px 20px rgba(255, 193, 90, 0.35),
-        inset 0 1px 0 rgba(255,255,255,0.55);
-    }
-
-    .info-heading {
-      min-width: 0;
-    }
-
-    .info-kicker {
-      font-size: 13px;
-      color: #ffecad;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .info-title {
-      font-size: clamp(22px, 4vw, 30px);
-      line-height: 1.15;
-      color: #fff5d4;
-      text-shadow: 0 2px 10px rgba(48, 16, 88, 0.35);
-    }
-
-    .info-text {
-      background: rgba(255, 252, 245, 0.92);
-      color: #573478;
-      border-radius: 20px;
-      padding: 16px;
-      box-shadow: inset 0 0 0 1px rgba(240, 212, 140, 0.28);
-    }
-
-    .info-row {
-      margin-bottom: 12px;
-    }
-
-    .info-row:last-child {
-      margin-bottom: 0;
-    }
-
-    .info-label {
-      display: block;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #9a6a2e;
-      margin-bottom: 4px;
-      font-weight: 700;
-    }
-
-    .info-value {
-      font-size: 16px;
-      line-height: 1.55;
-      color: #5f3a83;
-      font-family: "Cinzel", serif;
-    }
-
-    .info-note {
-      margin-top: 14px;
-      font-size: 14px;
-      line-height: 1.6;
-      color: #6d4a8f;
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(255, 244, 216, 0.95), rgba(255, 250, 241, 0.95));
-      border: 1px solid rgba(233, 199, 112, 0.42);
-    }
-
-    .location-list {
-      margin-top: 18px;
-      display: grid;
-      gap: 10px;
-    }
-
-    .location-mini {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      border: 1px solid rgba(255, 241, 197, 0.25);
-      background: rgba(255,255,255,0.12);
-      color: #fffaf0;
-      border-radius: 16px;
-      padding: 12px 14px;
-      cursor: pointer;
-      transition: 0.25s ease;
-      font-family: inherit;
-      text-align: left;
-    }
-
-    .location-mini:hover,
-    .location-mini.active {
-      background: rgba(255, 232, 176, 0.18);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(38, 9, 81, 0.22);
-    }
-
-    .location-mini .dot {
-      width: 12px;
-      height: 12px;
-      min-width: 12px;
-      border-radius: 50%;
-      background: linear-gradient(180deg, #fff8d2, #ffc95d);
-      box-shadow: 0 0 10px rgba(255, 208, 92, 0.85);
-    }
-
-    .location-mini .mini-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: #fff3d2;
-    }
-
-    .location-mini .mini-sub {
-      margin-top: 2px;
-      font-size: 12px;
-      color: #ffe9b4;
-      opacity: 0.95;
-    }
-
-    /* Метелики */
-    .butterflies {
-      position: absolute;
       inset: 0;
       pointer-events: none;
-      overflow: hidden;
-      z-index: 10;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(255,255,255,0.12) 0%,
+          rgba(255,255,255,0) 28%,
+          rgba(70,20,90,0.10) 100%
+        );
     }
 
     .butterfly {
-      position: absolute;
-      font-size: clamp(18px, 3vw, 28px);
-      filter: drop-shadow(0 4px 8px rgba(77, 31, 121, 0.28));
-      opacity: 0.95;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
+      position: fixed;
+      z-index: 8;
+      font-size: 24px;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 8px rgba(80, 30, 100, 0.28));
+      opacity: 0;
     }
 
     .b1 {
-      left: -8%;
-      top: 18%;
-      animation: fly1 14s infinite;
+      top: 22%;
+      left: -12%;
+      animation: flyRight 14s linear infinite;
     }
 
     .b2 {
-      left: -10%;
-      top: 62%;
-      animation: fly2 18s infinite;
-      animation-delay: -5s;
-      font-size: 24px;
+      top: 58%;
+      left: -14%;
+      animation: flyRight2 18s linear infinite;
+      animation-delay: -6s;
     }
 
     .b3 {
-      right: -8%;
-      top: 30%;
-      animation: fly3 16s infinite;
-      animation-delay: -3s;
+      top: 36%;
+      right: -12%;
+      animation: flyLeft 16s linear infinite;
+      animation-delay: -4s;
     }
 
-    .b4 {
-      right: -10%;
-      top: 70%;
-      animation: fly4 20s infinite;
-      animation-delay: -8s;
-      font-size: 22px;
-    }
-
-    @keyframes fly1 {
-      0%   { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0; }
-      10%  { opacity: 1; }
-      50%  { transform: translateX(55vw) translateY(40px) rotate(8deg); }
-      100% { transform: translateX(115vw) translateY(-25px) rotate(-6deg); opacity: 0; }
-    }
-
-    @keyframes fly2 {
-      0%   { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0; }
-      10%  { opacity: 1; }
-      40%  { transform: translateX(36vw) translateY(-28px) rotate(-6deg); }
-      70%  { transform: translateX(70vw) translateY(30px) rotate(7deg); }
-      100% { transform: translateX(115vw) translateY(-10px) rotate(-4deg); opacity: 0; }
-    }
-
-    @keyframes fly3 {
-      0%   { transform: translateX(0) translateY(0) scaleX(-1); opacity: 0; }
-      10%  { opacity: 1; }
-      50%  { transform: translateX(-45vw) translateY(35px) scaleX(-1) rotate(8deg); }
-      100% { transform: translateX(-115vw) translateY(-22px) scaleX(-1) rotate(-6deg); opacity: 0; }
-    }
-
-    @keyframes fly4 {
-      0%   { transform: translateX(0) translateY(0) scaleX(-1); opacity: 0; }
-      10%  { opacity: 1; }
-      50%  { transform: translateX(-55vw) translateY(-30px) scaleX(-1) rotate(-5deg); }
-      100% { transform: translateX(-115vw) translateY(10px) scaleX(-1) rotate(7deg); opacity: 0; }
-    }
-
-    /* Мобілка */
-    @media (max-width: 920px) {
-      .map-layout {
-        grid-template-columns: 1fr;
+    @keyframes mapAppear {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
       }
-
-      .info-card {
-        position: static;
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
       }
     }
 
-    @media (max-width: 640px) {
-      .page-wrap {
-        padding: 38px 12px 64px;
+    @keyframes flyRight {
+      0% {
+        transform: translateX(0) translateY(0) rotate(0deg);
+        opacity: 0;
       }
-
-      .map-card,
-      .info-card {
-        border-radius: 22px;
+      10% {
+        opacity: 1;
       }
-
-      .map-card {
-        padding: 12px;
+      50% {
+        transform: translateX(58vw) translateY(34px) rotate(8deg);
       }
-
-      .marker {
-        width: 40px;
-        height: 40px;
+      100% {
+        transform: translateX(122vw) translateY(-24px) rotate(-8deg);
+        opacity: 0;
       }
+    }
 
-      .marker::before {
-        font-size: 17px;
+    @keyframes flyRight2 {
+      0% {
+        transform: translateX(0) translateY(0) rotate(0deg);
+        opacity: 0;
       }
-
-      .marker-label {
-        font-size: 11px;
-        padding: 5px 10px;
+      10% {
+        opacity: 1;
       }
-
-      .info-card {
-        padding: 16px;
+      45% {
+        transform: translateX(48vw) translateY(-28px) rotate(-7deg);
       }
-
-      .info-icon {
-        width: 52px;
-        height: 52px;
-        min-width: 52px;
-        font-size: 24px;
+      100% {
+        transform: translateX(122vw) translateY(18px) rotate(7deg);
+        opacity: 0;
       }
+    }
 
-      .info-value {
-        font-size: 15px;
+    @keyframes flyLeft {
+      0% {
+        transform: translateX(0) translateY(0) scaleX(-1) rotate(0deg);
+        opacity: 0;
       }
-
-      .location-mini {
-        padding: 11px 12px;
+      10% {
+        opacity: 1;
+      }
+      50% {
+        transform: translateX(-54vw) translateY(32px) scaleX(-1) rotate(8deg);
+      }
+      100% {
+        transform: translateX(-122vw) translateY(-20px) scaleX(-1) rotate(-7deg);
+        opacity: 0;
       }
     }
   </style>
 </head>
-<body>
-  <div class="butterflies">
+
+<body class="notranslate">
+
+  <main class="page">
+
+    <div class="topbar">
+      <button class="round-btn" type="button" onclick="location.href='index.html'" aria-label="Назад">
+        ←
+      </button>
+
+      <button class="round-btn" type="button" aria-label="Музика">
+        ♪
+      </button>
+    </div>
+
     <div class="butterfly b1">🦋</div>
     <div class="butterfly b2">🦋</div>
     <div class="butterfly b3">🦋</div>
-    <div class="butterfly b4">🦋</div>
-  </div>
 
-  <main class="page-wrap">
-    <section class="magic-map-section" id="magic-map">
-      <div class="section-header">
-        <div class="section-kicker">Чарівна пригода</div>
-        <h1 class="section-title">Карта чарівної подорожі</h1>
-        <p class="section-subtitle">
-          Натискай на сяючі точки на мапі — і дізнавайся, де саме відбудуться
-          найважливіші події нашого святкового дня.
-        </p>
-      </div>
-
-      <div class="map-layout">
-        <!-- Ліва частина: мапа -->
-        <div class="map-card">
-          <div class="map-stage">
-            <img
-              src="карта_чарівної_подорожі.png"
-              alt="Карта чарівної подорожі"
-              class="map-image"
-            />
-            <div class="map-glow"></div>
-
-            <!-- Точка 1 -->
-            <button
-              class="marker active"
-              style="left: 20%; top: 74%;"
-              data-location="start"
-              aria-label="Збір гостей"
-            ></button>
-            <div class="marker-label" style="left: 20%; top: 67%;">Збір гостей</div>
-
-            <!-- Точка 2 -->
-            <button
-              class="marker"
-              style="left: 49%; top: 38%;"
-              data-location="church"
-              aria-label="Хрестини"
-            ></button>
-            <div class="marker-label" style="left: 49%; top: 31%;">Хрестини</div>
-
-            <!-- Точка 3 -->
-            <button
-              class="marker"
-              style="left: 78%; top: 61%;"
-              data-location="party"
-              aria-label="Святкування"
-            ></button>
-            <div class="marker-label" style="left: 78%; top: 54%;">Святкування</div>
-          </div>
-        </div>
-
-        <!-- Права частина: інформація -->
-        <aside class="info-card">
-          <div class="info-top">
-            <div class="info-icon" id="infoIcon">✨</div>
-            <div class="info-heading">
-              <div class="info-kicker" id="infoKicker">Локація</div>
-              <h2 class="info-title" id="infoTitle">Збір гостей</h2>
-            </div>
-          </div>
-
-          <div class="info-text">
-            <div class="info-row">
-              <span class="info-label">Час</span>
-              <div class="info-value" id="infoTime">11:30</div>
-            </div>
-
-            <div class="info-row">
-              <span class="info-label">Місце</span>
-              <div class="info-value" id="infoPlace">Місце зустрічі гостей</div>
-            </div>
-
-            <div class="info-row">
-              <span class="info-label">Адреса</span>
-              <div class="info-value" id="infoAddress">Вкажіть точну адресу тут</div>
-            </div>
-
-            <div class="info-row">
-              <span class="info-label">Опис</span>
-              <div class="info-value" id="infoDescription">
-                Саме тут почнеться наша казкова подорож. Зустрічаємось,
-                усміхаємось і готуємось до чарівного дня.
-              </div>
-            </div>
-          </div>
-
-          <div class="info-note" id="infoNote">
-            Підказка: натискай на інші сяючі точки на мапі, щоб переглянути всі локації.
-          </div>
-
-          <div class="location-list">
-            <button class="location-mini active" data-location="start">
-              <span class="dot"></span>
-              <span>
-                <div class="mini-title">Збір гостей</div>
-                <div class="mini-sub">Початок подорожі</div>
-              </span>
-            </button>
-
-            <button class="location-mini" data-location="church">
-              <span class="dot"></span>
-              <span>
-                <div class="mini-title">Хрестини</div>
-                <div class="mini-sub">Світла та особлива подія</div>
-              </span>
-            </button>
-
-            <button class="location-mini" data-location="party">
-              <span class="dot"></span>
-              <span>
-                <div class="mini-title">Святкування</div>
-                <div class="mini-sub">Тепла зустріч з рідними</div>
-              </span>
-            </button>
-          </div>
-        </aside>
-      </div>
+    <section class="map-wrap">
+      <img
+        class="map-image"
+        src="./карта_чарівної_подорожі.png?v=1"
+        alt="Карта чарівної подорожі Софійки"
+      />
     </section>
+
   </main>
 
-  <script>
-    const locations = {
-      start: {
-        kicker: "Початок маршруту",
-        icon: "✨",
-        title: "Збір гостей",
-        time: "11:30",
-        place: "Місце зустрічі гостей",
-        address: "Вкажіть точну адресу тут",
-        description:
-          "Саме тут почнеться наша казкова подорож. Збираємось разом, вітаємось і налаштовуємось на особливий день.",
-        note:
-          "Тут можна додати коротку підказку для гостей: де саме збір, чи є паркування, як знайти вхід."
-      },
-
-      church: {
-        kicker: "Святкова локація",
-        icon: "⛪",
-        title: "Хрестини",
-        time: "12:00",
-        place: "Храм / Церква",
-        address: "Вкажіть точну адресу храму тут",
-        description:
-          "Тут відбудеться світла та особлива подія — хрестини. Саме тут народиться ще одна тепла сімейна згадка.",
-        note:
-          "Можна вказати додатково: скільки триватиме подія, де краще чекати, чи можна фотографувати."
-      },
-
-      party: {
-        kicker: "Фінальна зупинка",
-        icon: "🎉",
-        title: "Святкування",
-        time: "14:00",
-        place: "Ресторан / Локація святкування",
-        address: "Вкажіть точну адресу святкування тут",
-        description:
-          "Після урочистої частини ми продовжимо наш день у святковій атмосфері: обійми, теплі слова, посмішки та радість.",
-        note:
-          "Тут можна додати важливу інформацію: чи є дрес-код, до котрої години триває святкування, чи є дитяча зона."
-      }
-    };
-
-    const infoIcon = document.getElementById("infoIcon");
-    const infoKicker = document.getElementById("infoKicker");
-    const infoTitle = document.getElementById("infoTitle");
-    const infoTime = document.getElementById("infoTime");
-    const infoPlace = document.getElementById("infoPlace");
-    const infoAddress = document.getElementById("infoAddress");
-    const infoDescription = document.getElementById("infoDescription");
-    const infoNote = document.getElementById("infoNote");
-
-    const markerButtons = document.querySelectorAll(".marker");
-    const miniButtons = document.querySelectorAll(".location-mini");
-
-    function setActiveLocation(key) {
-      const location = locations[key];
-      if (!location) return;
-
-      infoIcon.textContent = location.icon;
-      infoKicker.textContent = location.kicker;
-      infoTitle.textContent = location.title;
-      infoTime.textContent = location.time;
-      infoPlace.textContent = location.place;
-      infoAddress.textContent = location.address;
-      infoDescription.textContent = location.description;
-      infoNote.textContent = location.note;
-
-      markerButtons.forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.location === key);
-      });
-
-      miniButtons.forEach((btn) => {
-        btn.classList.toggle("active", btn.dataset.location === key);
-      });
-    }
-
-    markerButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        setActiveLocation(btn.dataset.location);
-      });
-    });
-
-    mi
+</body>
+</html>

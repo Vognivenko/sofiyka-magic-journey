@@ -120,7 +120,7 @@
     }
 
     .map-title {
-      font-size: clamp(34px, 7.6vw, 52px);
+      font-size: clamp(32px, 7.2vw, 50px);
       line-height: 0.9;
       font-weight: 700;
       color: #7d3f97;
@@ -131,8 +131,8 @@
     }
 
     .map-subtitle {
-      margin-top: 10px;
-      font-size: clamp(14px, 3.1vw, 19px);
+      margin-top: 9px;
+      font-size: clamp(13px, 3vw, 18px);
       font-weight: 700;
       color: #74418a;
       text-shadow: 0 1px 0 rgba(255,255,255,0.9);
@@ -190,8 +190,11 @@
       transform-origin: center center;
       -webkit-tap-highlight-color: transparent;
       filter:
-        drop-shadow(0 10px 14px rgba(88, 35, 110, 0.22))
-        drop-shadow(0 0 14px rgba(255, 225, 120, 0.7));
+        brightness(1.08)
+        contrast(1.08)
+        saturate(1.12)
+        drop-shadow(0 10px 14px rgba(88, 35, 110, 0.25))
+        drop-shadow(0 0 16px rgba(255, 225, 120, 0.78));
     }
 
     .location::before {
@@ -200,7 +203,7 @@
       inset: -6px;
       border-radius: 34px;
       background:
-        radial-gradient(circle at 28% 50%, rgba(255,255,255,0.48), rgba(255,229,124,0.24) 36%, transparent 66%);
+        radial-gradient(circle at 28% 50%, rgba(255,255,255,0.38), rgba(255,229,124,0.18) 36%, transparent 66%);
       opacity: 0;
       animation: locationGlow 2.6s ease-in-out infinite;
       pointer-events: none;
@@ -208,44 +211,44 @@
 
     .location1 {
       left: 8.5%;
-      top: 20.9%;
-      width: 52%;
+      top: 21%;
+      width: 54%;
       aspect-ratio: 800 / 433;
       background-image: url("location1.png");
       animation: pulse1 2.4s ease-in-out infinite;
     }
 
     .location2 {
-      left: 39.8%;
-      top: 36.6%;
-      width: 51%;
+      left: 39.2%;
+      top: 36.5%;
+      width: 53%;
       aspect-ratio: 535 / 243;
       background-image: url("location2.png");
       animation: pulse2 2.8s ease-in-out infinite;
     }
 
     .location3 {
-      left: 8.6%;
-      top: 50.8%;
-      width: 48%;
+      left: 8.3%;
+      top: 50.6%;
+      width: 50%;
       aspect-ratio: 535 / 243;
       background-image: url("location3.png");
       animation: float3 3.1s ease-in-out infinite;
     }
 
     .location4 {
-      left: 39.3%;
-      top: 63.9%;
-      width: 51%;
+      left: 39%;
+      top: 63.6%;
+      width: 53%;
       aspect-ratio: 535 / 243;
       background-image: url("location4.png");
       animation: cake4 2.7s ease-in-out infinite;
     }
 
     .location5 {
-      left: 8.4%;
-      top: 77.1%;
-      width: 50%;
+      left: 7.7%;
+      top: 75.5%;
+      width: 52%;
       aspect-ratio: 535 / 243;
       background-image: url("location5.png");
       animation: heart5 2.45s ease-in-out infinite;
@@ -258,9 +261,9 @@
     .progress-btn {
       position: absolute;
       left: 50%;
-      bottom: 3.1%;
-      width: 72%;
-      max-width: 365px;
+      bottom: 2.1%;
+      width: 66%;
+      max-width: 340px;
       aspect-ratio: 620 / 160;
       z-index: 40;
       transform: translateX(-50%);
@@ -272,20 +275,22 @@
       background-size: contain;
       cursor: pointer;
       filter:
-        drop-shadow(0 10px 18px rgba(80, 30, 100, 0.24))
-        drop-shadow(0 0 16px rgba(255, 225, 120, 0.65));
+        brightness(1.05)
+        contrast(1.04)
+        drop-shadow(0 9px 16px rgba(80, 30, 100, 0.24))
+        drop-shadow(0 0 14px rgba(255, 225, 120, 0.62));
       animation: progressFloat 2.8s ease-in-out infinite;
     }
 
     .progress-overlay {
       position: absolute;
       left: 25%;
-      right: 10%;
-      top: 31%;
+      right: 8%;
+      top: 32%;
       text-align: center;
       color: #7d3f97;
       font-weight: 700;
-      font-size: clamp(16px, 3.8vw, 22px);
+      font-size: clamp(14px, 3.3vw, 19px);
       line-height: 1;
       text-shadow:
         0 1px 0 rgba(255,255,255,0.9),
@@ -297,16 +302,16 @@
       position: absolute;
       left: 32%;
       right: 17%;
-      top: 58%;
+      top: 60%;
       display: flex;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
       pointer-events: none;
     }
 
     .progress-dot {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: rgba(158, 128, 180, 0.32);
       box-shadow:
@@ -409,8 +414,8 @@
     }
 
     @keyframes locationGlow {
-      0%, 100% { opacity: 0.22; transform: scale(0.96); }
-      50% { opacity: 0.85; transform: scale(1.04); }
+      0%, 100% { opacity: 0.18; transform: scale(0.96); }
+      50% { opacity: 0.65; transform: scale(1.04); }
     }
 
     @keyframes pulse1 {
@@ -465,16 +470,25 @@
       }
 
       .map-title {
-        font-size: clamp(32px, 7.4vw, 46px);
+        font-size: clamp(31px, 7.1vw, 45px);
       }
 
       .map-subtitle {
-        font-size: clamp(13px, 3vw, 17px);
+        font-size: clamp(13px, 2.9vw, 17px);
+      }
+
+      .progress-btn {
+        width: 66%;
+        bottom: 2.1%;
+      }
+
+      .progress-overlay {
+        font-size: clamp(14px, 3.2vw, 18px);
       }
 
       .progress-dot {
-        width: 11px;
-        height: 11px;
+        width: 10px;
+        height: 10px;
       }
 
       .modal-title {
@@ -742,14 +756,4 @@
         `
           <p><strong>Ти майже знайшов чарівне запрошення!</strong></p>
           <p>Залишився останній крок — підтвердити свою присутність.</p>
-          <p>Натисни кнопку підтвердження, щоб ми знали, що ти будеш з нами.</p>
-        `
-      );
-    });
-
-    closeModal.addEventListener("click", () => {
-      modal.classList.remove("active");
-    });
-
-    modal.addEventListener("click", (event) => {
-      if (event.target ===
+          <p>Нат

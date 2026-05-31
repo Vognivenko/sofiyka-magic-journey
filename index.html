@@ -1,467 +1,557 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Запрошення Софії</title>
+  <meta name="google" content="notranslate" />
+  <title>Подорож Софійки</title>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
     }
 
     body {
-      width: 100%;
       min-height: 100vh;
+      min-height: 100dvh;
       overflow: hidden;
-      font-family: Georgia, "Times New Roman", serif;
-      background:
-        radial-gradient(circle at 50% 18%, rgba(255, 245, 207, 0.95), transparent 28%),
-        radial-gradient(circle at 20% 75%, rgba(255, 212, 126, 0.45), transparent 32%),
-        linear-gradient(180deg, #f8e7c7 0%, #dfb979 48%, #9b6635 100%);
-      color: #fff;
+      background: #f4ddea url("./file_00000000f1f0720a96c83b0635f64e3b.png") center/cover no-repeat;
+      font-family: 'Cormorant Garamond', serif;
     }
 
-    .start-screen {
+    .screen {
       position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .background-glow {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 50% 35%, rgba(255, 248, 214, 0.52), transparent 34%),
-        radial-gradient(circle at 72% 20%, rgba(255, 230, 151, 0.38), transparent 20%),
-        radial-gradient(circle at 20% 28%, rgba(255, 236, 178, 0.32), transparent 24%);
-      animation: glowBreath 6s ease-in-out infinite;
-    }
-
-    @keyframes glowBreath {
-      0%, 100% {
-        opacity: 0.65;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 1;
-        transform: scale(1.04);
-      }
-    }
-
-    .top-buttons {
-      position: fixed;
-      top: 18px;
-      right: 18px;
-      z-index: 20;
-      display: flex;
-      gap: 12px;
-    }
-
-    .music-btn {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.9);
-      background:
-        radial-gradient(circle at 30% 25%, #fff7c9, #e8b95e 45%, #8b4f1f 100%);
-      color: #fff;
-      font-size: 25px;
-      font-weight: bold;
-      box-shadow:
-        0 0 16px rgba(255, 238, 160, 0.95),
-        0 0 34px rgba(255, 191, 71, 0.75),
-        inset 0 0 12px rgba(255, 255, 255, 0.35);
-      cursor: pointer;
-      animation: buttonPulse 1.8s infinite ease-in-out;
-    }
-
-    .music-btn.active {
-      background:
-        radial-gradient(circle at 30% 25%, #fff8d5, #ffd25f 42%, #a55a1b 100%);
-      box-shadow:
-        0 0 20px rgba(255, 250, 190, 1),
-        0 0 48px rgba(255, 209, 82, 0.95),
-        0 0 75px rgba(255, 177, 27, 0.65),
-        inset 0 0 14px rgba(255, 255, 255, 0.45);
-    }
-
-    @keyframes buttonPulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.08);
-      }
-    }
-
-    .start-card {
-      position: relative;
-      z-index: 10;
       width: 100%;
-      max-width: 430px;
-      min-height: 520px;
-      padding: 34px 24px 30px;
-      border-radius: 36px;
-      text-align: center;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 246, 196, 0.26), transparent 35%),
-        linear-gradient(180deg, rgba(124, 72, 29, 0.72), rgba(78, 40, 15, 0.76));
-      border: 1px solid rgba(255, 235, 175, 0.82);
-      box-shadow:
-        0 0 28px rgba(255, 221, 128, 0.72),
-        0 0 80px rgba(255, 162, 32, 0.36),
-        inset 0 0 24px rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(8px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      height: 100vh;
+      height: 100dvh;
       overflow: hidden;
     }
 
-    .start-card::before {
+    .screen::after {
       content: "";
       position: absolute;
-      top: -90px;
-      left: 50%;
-      width: 220px;
-      height: 220px;
-      transform: translateX(-50%);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 241, 173, 0.78), transparent 66%);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 30%;
+      background: linear-gradient(
+        to bottom,
+        rgba(40, 10, 55, 0) 0%,
+        rgba(40, 10, 55, 0.10) 55%,
+        rgba(40, 10, 55, 0.28) 100%
+      );
+      z-index: 1;
       pointer-events: none;
     }
 
-    .small-title {
-      position: relative;
-      z-index: 2;
-      font-size: 15px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #fff1bd;
-      margin-bottom: 12px;
-      text-shadow: 0 2px 7px rgba(50, 20, 0, 0.8);
-    }
-
-    h1 {
-      position: relative;
-      z-index: 2;
-      font-size: 35px;
-      line-height: 1.1;
-      color: #fff5cf;
-      margin-bottom: 16px;
-      text-shadow:
-        0 3px 10px rgba(55, 23, 0, 0.9),
-        0 0 20px rgba(255, 220, 120, 0.8);
-    }
-
-    .main-text {
-      position: relative;
-      z-index: 2;
-      font-size: 18px;
-      line-height: 1.45;
-      color: #fff9e9;
-      margin-bottom: 26px;
-      text-shadow: 0 2px 6px rgba(47, 19, 0, 0.75);
-    }
-
-    .date-box {
-      position: relative;
-      z-index: 2;
-      width: 150px;
-      height: 150px;
-      margin: 0 auto 28px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 35% 25%, #fffbe0 0%, #ffd86d 35%, #d9892f 78%, #7b3f16 100%);
-      border: 2px solid rgba(255, 248, 220, 0.95);
-      box-shadow:
-        0 0 24px rgba(255, 228, 135, 0.9),
-        0 0 60px rgba(255, 172, 41, 0.62),
-        inset 0 0 18px rgba(255, 255, 255, 0.35);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      animation: datePulse 2.4s ease-in-out infinite;
-    }
-
-    @keyframes datePulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.06);
-      }
-    }
-
-    .date-number {
-      font-size: 54px;
-      font-weight: bold;
-      line-height: 1;
-      color: #fff8d9;
-      text-shadow:
-        0 3px 8px rgba(79, 35, 0, 0.8),
-        0 0 16px rgba(255, 232, 145, 0.9);
-    }
-
-    .date-month {
-      font-size: 17px;
-      color: #fff8dc;
-      text-shadow: 0 2px 5px rgba(60, 25, 0, 0.8);
-    }
-
-    .start-btn {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      min-height: 58px;
-      border: 1px solid rgba(255, 248, 214, 0.95);
-      border-radius: 999px;
-      background:
-        linear-gradient(180deg, #fff0a8 0%, #e4a340 52%, #9d561f 100%);
-      color: #5d300d;
-      font-size: 19px;
-      font-weight: bold;
-      font-family: Georgia, "Times New Roman", serif;
-      cursor: pointer;
-      box-shadow:
-        0 0 18px rgba(255, 232, 140, 0.9),
-        0 0 42px rgba(255, 160, 28, 0.52),
-        inset 0 0 12px rgba(255, 255, 255, 0.34);
-      animation: startBtnPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes startBtnPulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.04);
-      }
-    }
-
-    .start-btn:active {
-      transform: scale(0.96);
-    }
-
-    .sparkle-layer {
+    .music-toggle {
       position: absolute;
-      inset: 0;
+      top: 16px;
+      right: 16px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 225, 135, 0.95);
+      background: rgba(255, 204, 236, 0.72);
+      color: #9b2c7b;
+      font-size: 20px;
+      z-index: 20;
+      box-shadow:
+        0 0 12px rgba(255, 220, 120, 0.75),
+        inset 0 0 10px rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      cursor: pointer;
+      animation: musicPulse 1.8s infinite;
+    }
+
+    .music-toggle.off {
+      background: rgba(255, 230, 190, 0.55);
+      color: #6d3578;
+      animation: none;
+    }
+
+    .float-star {
+      position: absolute;
+      color: #fff0a8;
+      font-size: 18px;
+      text-shadow: 0 0 12px rgba(255, 230, 120, 1);
+      z-index: 4;
+      opacity: .85;
+      animation: floatStar 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .star1 {
+      top: 155px;
+      left: 18%;
+    }
+
+    .star2 {
+      top: 130px;
+      right: 15%;
+      animation-delay: .9s;
+    }
+
+    .star3 {
+      top: 212px;
+      right: 26%;
+      animation-delay: 1.5s;
+    }
+
+    .message-area {
+      position: absolute;
+      top: 58px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(108vw, 760px);
       z-index: 5;
       pointer-events: none;
-      overflow: hidden;
     }
 
-    .sparkle {
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #fff8c9;
-      box-shadow:
-        0 0 8px #fff8c9,
-        0 0 18px #ffd35c,
-        0 0 34px rgba(255, 173, 40, 0.9);
-      animation: sparkleFloat linear infinite;
+    .banner-wrap {
+      position: relative;
+      width: 100%;
     }
 
-    @keyframes sparkleFloat {
-      0% {
-        transform: translateY(40px) scale(0.4);
-        opacity: 0;
-      }
-
-      15% {
-        opacity: 1;
-      }
-
-      60% {
-        opacity: 0.95;
-      }
-
-      100% {
-        transform: translateY(-140px) scale(1.15);
-        opacity: 0;
-      }
-    }
-
-    .screen-flash {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
+    .banner-png {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 14px rgba(255, 220, 100, 0.55));
+      user-select: none;
+      -webkit-user-drag: none;
       pointer-events: none;
-      background: radial-gradient(circle, rgba(255, 255, 235, 0.95), transparent 65%);
+    }
+
+    .banner-text-zone {
+      position: absolute;
+      left: 13%;
+      right: 13%;
+      top: 47%;
+      height: 34%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .animated-text {
+      width: 100%;
+      text-align: center;
       opacity: 0;
+      transform: translateY(8px) scale(.98);
+      transition:
+        opacity .62s ease,
+        transform .62s ease,
+        filter .62s ease;
+      filter: blur(2px);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      color: #5b3471;
+      letter-spacing: .2px;
+      line-height: .92;
+      text-shadow:
+        0 1px 0 rgba(255, 255, 255, .92),
+        0 2px 2px rgba(255, 240, 210, .55),
+        0 3px 5px rgba(80, 30, 90, .22);
+      pointer-events: none;
     }
 
-    .screen-flash.active {
-      animation: screenFlash 0.7s ease forwards;
+    .animated-text.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
 
-    @keyframes screenFlash {
+    .animated-text.hello {
+      font-size: clamp(50px, 8.4vw, 66px);
+      line-height: .9;
+    }
+
+    .animated-text.name {
+      font-size: clamp(36px, 6.2vw, 48px);
+      line-height: .88;
+    }
+
+    .animated-text.day {
+      font-size: clamp(33px, 5.6vw, 44px);
+      line-height: .9;
+    }
+
+    .animated-text.question {
+      line-height: .88;
+    }
+
+    .animated-text.question .q-top {
+      display: block;
+      font-size: clamp(28px, 4.6vw, 36px);
+      white-space: nowrap;
+    }
+
+    .animated-text.question .q-bottom {
+      display: block;
+      margin-top: 2px;
+      font-size: clamp(36px, 5.8vw, 48px);
+      white-space: nowrap;
+    }
+
+    .button-wrap {
+      position: absolute;
+      left: 50%;
+      bottom: 48px;
+      transform: translateX(-50%) translateY(22px);
+      width: 92%;
+      max-width: 470px;
+      z-index: 6;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        opacity 1s ease,
+        transform 1s ease;
+    }
+
+    .button-wrap.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .image-btn {
+      position: relative;
+      width: 100%;
+      display: block;
+      border: none;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+      animation: pulse 2.2s infinite;
+    }
+
+    .btn-png {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 18px rgba(255, 220, 95, 0.72));
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    .btn-text {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 74%;
+      text-align: center;
+      white-space: nowrap;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(24px, 5vw, 33px);
+      font-weight: 700;
+      letter-spacing: .2px;
+      color: #fff2b3;
+      text-shadow:
+        0 1px 0 rgba(255, 255, 255, .55),
+        0 2px 0 rgba(244, 207, 108, .55),
+        0 3px 5px rgba(108, 36, 82, .90),
+        0 0 8px rgba(255, 235, 140, .92);
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.022); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes musicPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes floatStar {
       0% {
-        opacity: 0;
+        opacity: .45;
+        transform: translateY(0) scale(.9);
       }
 
-      25% {
-        opacity: 0.95;
+      50% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.12);
       }
 
       100% {
-        opacity: 0;
+        opacity: .45;
+        transform: translateY(0) scale(.9);
       }
     }
 
-    @media (max-width: 430px) {
-      .start-card {
-        min-height: 500px;
-        padding: 30px 22px 28px;
+    @media (max-height: 760px) {
+      .message-area {
+        top: 50px;
       }
 
-      h1 {
-        font-size: 31px;
+      .banner-text-zone {
+        top: 48%;
+        height: 33%;
       }
 
-      .main-text {
-        font-size: 17px;
+      .animated-text.hello {
+        font-size: clamp(46px, 7.8vw, 60px);
       }
 
-      .date-box {
-        width: 138px;
-        height: 138px;
+      .animated-text.name {
+        font-size: clamp(33px, 5.8vw, 44px);
       }
 
-      .date-number {
-        font-size: 50px;
+      .animated-text.day {
+        font-size: clamp(30px, 5.2vw, 40px);
+      }
+
+      .animated-text.question .q-top {
+        font-size: clamp(25px, 4.1vw, 32px);
+      }
+
+      .animated-text.question .q-bottom {
+        font-size: clamp(32px, 5.1vw, 42px);
+      }
+
+      .button-wrap {
+        bottom: 34px;
+      }
+    }
+
+    @media (max-height: 680px) {
+      .message-area {
+        top: 42px;
+      }
+
+      .banner-text-zone {
+        top: 49%;
+        height: 32%;
+      }
+
+      .animated-text.hello {
+        font-size: clamp(42px, 7.4vw, 54px);
+      }
+
+      .animated-text.name {
+        font-size: clamp(30px, 5.3vw, 40px);
+      }
+
+      .animated-text.day {
+        font-size: clamp(28px, 4.9vw, 36px);
+      }
+
+      .animated-text.question .q-top {
+        font-size: clamp(22px, 3.8vw, 28px);
+      }
+
+      .animated-text.question .q-bottom {
+        font-size: clamp(29px, 4.8vw, 38px);
+      }
+
+      .button-wrap {
+        bottom: 24px;
+        width: 90%;
+      }
+
+      .btn-text {
+        font-size: clamp(22px, 4.8vw, 30px);
       }
     }
   </style>
 </head>
 
-<body>
+<body class="notranslate">
 
-  <div class="start-screen">
+  <audio 
+    id="bgMusic" 
+    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3?v=2" 
+    autoplay 
+    loop 
+    preload="auto">
+  </audio>
 
-    <audio id="bgMusic" src="assets/music.mp3" loop></audio>
+  <div class="screen">
 
-    <div class="background-glow"></div>
+    <button id="musicToggle" class="music-toggle" type="button" aria-label="Вимкнути музику">
+      🔊
+    </button>
 
-    <div class="top-buttons">
-      <button class="music-btn" id="musicBtn" aria-label="Музика">♪</button>
-    </div>
+    <div class="float-star star1">✨</div>
+    <div class="float-star star2">✨</div>
+    <div class="float-star star3">✦</div>
 
-    <div class="sparkle-layer" id="sparkleLayer"></div>
+    <div class="message-area">
+      <div class="banner-wrap">
+        <img src="./crown.png?v=40" alt="Казкова стрічка" class="banner-png">
 
-    <div class="start-card">
-
-      <div class="small-title">Запрошення</div>
-
-      <h1>Казкова подорож Софії</h1>
-
-      <p class="main-text">
-        Ми запрошуємо тебе у маленьку чарівну історію,
-        де кожна локація відкриває частинку свята.
-      </p>
-
-      <div class="date-box">
-        <div class="date-number">27</div>
-        <div class="date-month">червня</div>
+        <div class="banner-text-zone">
+          <div id="animatedText" class="animated-text hello show notranslate">
+            Привіт!
+          </div>
+        </div>
       </div>
-
-      <button class="start-btn" id="startBtn">
-        Почати подорож
-      </button>
-
     </div>
 
-    <div class="screen-flash" id="screenFlash"></div>
+    <div id="buttonWrap" class="button-wrap">
+      <button class="image-btn" onclick="location.href='map.html'">
+        <img src="./button.png?v=40" alt="Почати подорож" class="btn-png">
+        <span class="btn-text">Почати подорож</span>
+      </button>
+    </div>
 
   </div>
 
   <script>
-    const musicBtn = document.getElementById("musicBtn");
+    const animatedText = document.getElementById("animatedText");
+    const buttonWrap = document.getElementById("buttonWrap");
     const bgMusic = document.getElementById("bgMusic");
-    const startBtn = document.getElementById("startBtn");
-    const sparkleLayer = document.getElementById("sparkleLayer");
-    const screenFlash = document.getElementById("screenFlash");
+    const musicToggle = document.getElementById("musicToggle");
 
-    let musicPlaying = false;
+    bgMusic.volume = 0.45;
 
-    musicBtn.addEventListener("click", async () => {
-      try {
-        if (!musicPlaying) {
-          await bgMusic.play();
-          musicPlaying = true;
-          musicBtn.classList.add("active");
-          musicBtn.textContent = "♫";
-          makeFlash();
-        } else {
-          bgMusic.pause();
-          musicPlaying = false;
-          musicBtn.classList.remove("active");
-          musicBtn.textContent = "♪";
-        }
-      } catch (error) {
-        console.log("Музика не запустилась:", error);
+    let musicStarted = false;
+    let musicMutedByUser = false;
+
+    const phrases = [
+      {
+        html: "Привіт!",
+        className: "hello"
+      },
+      {
+        html: "Мене звати<br>Софійка.",
+        className: "name"
+      },
+      {
+        html: "Скоро у мене<br>особливий день.",
+        className: "day"
+      },
+      {
+        html: '<span class="q-top">Допоможеш знайти</span><span class="q-bottom">чарівне запрошення?</span>',
+        className: "question"
       }
-    });
+    ];
 
-    startBtn.addEventListener("click", () => {
-      makeFlash();
+    let index = 0;
+
+    function setPhrase(i) {
+      animatedText.classList.remove("show");
 
       setTimeout(() => {
-        alert("Тут далі відкриємо мапу Софії");
-      }, 350);
-    });
+        animatedText.innerHTML = phrases[i].html;
+        animatedText.className = "animated-text notranslate " + phrases[i].className;
 
-    function makeFlash() {
-      screenFlash.classList.remove("active");
-      void screenFlash.offsetWidth;
-      screenFlash.classList.add("active");
+        requestAnimationFrame(() => {
+          animatedText.classList.add("show");
+        });
+      }, 450);
     }
 
-    function createSparkles() {
-      const sparkleCount = 48;
+    function startTextAnimation() {
+      setPhrase(0);
 
-      for (let i = 0; i < sparkleCount; i++) {
-        const sparkle = document.createElement("span");
-        sparkle.className = "sparkle";
+      const timer = setInterval(() => {
+        index++;
 
-        const size = Math.random() * 5 + 3;
-        const left = Math.random() * 100;
-        const top = Math.random() * 100;
-        const duration = Math.random() * 3 + 3;
-        const delay = Math.random() * 4;
+        if (index < phrases.length) {
+          setPhrase(index);
+        } else {
+          clearInterval(timer);
 
-        sparkle.style.width = `${size}px`;
-        sparkle.style.height = `${size}px`;
-        sparkle.style.left = `${left}%`;
-        sparkle.style.top = `${top}%`;
-        sparkle.style.animationDuration = `${duration}s`;
-        sparkle.style.animationDelay = `${delay}s`;
+          setTimeout(() => {
+            buttonWrap.classList.add("show");
+          }, 900);
+        }
+      }, 2500);
+    }
 
-        sparkleLayer.appendChild(sparkle);
+    async function startMusicImmediately() {
+      if (musicMutedByUser) return;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.remove("off");
+        musicToggle.textContent = "🔊";
+        musicToggle.setAttribute("aria-label", "Вимкнути музику");
+      } catch (error) {
+        musicStarted = false;
+        musicToggle.classList.add("off");
+        musicToggle.textContent = "🎵";
+        musicToggle.setAttribute("aria-label", "Увімкнути музику");
+
+        window.addEventListener("click", firstUserInteraction, { once: true });
+        window.addEventListener("touchstart", firstUserInteraction, { once: true });
       }
     }
 
-    createSparkles();
-  </script>
+    async function firstUserInteraction() {
+      if (musicMutedByUser) return;
 
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.remove("off");
+        musicToggle.textContent = "🔊";
+        musicToggle.setAttribute("aria-label", "Вимкнути музику");
+      } catch (error) {
+        musicStarted = false;
+      }
+    }
+
+    function pauseMusic() {
+      bgMusic.pause();
+      musicStarted = false;
+      musicMutedByUser = true;
+      musicToggle.classList.add("off");
+      musicToggle.textContent = "🎵";
+      musicToggle.setAttribute("aria-label", "Увімкнути музику");
+    }
+
+    async function resumeMusic() {
+      musicMutedByUser = false;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.remove("off");
+        musicToggle.textContent = "🔊";
+        musicToggle.setAttribute("aria-label", "Вимкнути музику");
+      } catch (error) {
+        musicStarted = false;
+        musicToggle.classList.add("off");
+        musicToggle.textContent = "🎵";
+      }
+    }
+
+    musicToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      if (musicStarted && !bgMusic.paused) {
+        pauseMusic();
+      } else {
+        resumeMusic();
+      }
+    });
+
+    window.addEventListener("load", () => {
+      startTextAnimation();
+      startMusicImmediately();
+    });
+  </script>
 </body>
 </html>

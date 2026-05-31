@@ -6,7 +6,7 @@
   <title>Подорож Софійки</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Cormorant+Garamond:wght@500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Yeseva+One&display=swap');
 
     *{
       margin:0;
@@ -75,13 +75,14 @@
       pointer-events:none;
     }
 
-    .curved-text-svg{
+    /* Прямий 3D-текст поверх стрічки */
+    .magic-text-svg{
       position:absolute;
       left:50%;
-      top:62%;
+      top:63%;
       transform:translate(-50%, -50%) scale(0.98);
-      width:94%;
-      height:68%;
+      width:88%;
+      height:58%;
       overflow:visible;
       opacity:0;
       transition:
@@ -90,53 +91,61 @@
       pointer-events:none;
     }
 
-    .curved-text-svg.show{
+    .magic-text-svg.show{
       opacity:1;
       transform:translate(-50%, -50%) scale(1);
     }
 
-    .curved-text-svg text{
+    .magic-text-svg text{
+      font-family:'Cormorant Garamond', serif;
       text-anchor:middle;
       dominant-baseline:middle;
-      paint-order:stroke;
-      font-family:'Lobster', cursive;
-      stroke:rgba(255,250,245,0.96);
-      stroke-width:2.9px;
+      paint-order:stroke fill;
+      stroke:#7b3f21;
+      stroke-width:1.7px;
       stroke-linejoin:round;
-      fill:#5a246f;
-      letter-spacing:0.2px;
+      fill:#fff3c4;
+      letter-spacing:0.3px;
+
       filter:
-        drop-shadow(0 2px 3px rgba(75,20,90,0.25))
-        drop-shadow(0 0 5px rgba(255,255,255,0.7));
+        drop-shadow(0 1px 0 rgba(255,255,255,0.95))
+        drop-shadow(0 2px 0 rgba(219,158,65,0.95))
+        drop-shadow(0 4px 3px rgba(78,30,92,0.55))
+        drop-shadow(0 0 7px rgba(255,236,165,0.75));
     }
 
-    .curved-text-svg.hello text{
-      font-size:108px;
-      font-weight:400;
-      fill:#e94ea3;
-      stroke-width:2.3px;
-      filter:
-        drop-shadow(0 0 8px rgba(255,255,255,0.95))
-        drop-shadow(0 3px 5px rgba(123,58,98,0.28));
+    .magic-text-svg .line-gold{
+      fill:#fff0b6;
+      stroke:#8a4b25;
     }
 
-    .curved-text-svg.normal text{
-      font-size:76px;
-      font-weight:400;
-      fill:#56266b;
+    .magic-text-svg.hello text{
+      font-family:'Yeseva One', serif;
+      font-size:82px;
+      fill:#ffe9a6;
+      stroke:#8a3e2a;
+      stroke-width:1.9px;
+      letter-spacing:0.5px;
     }
 
-    .curved-text-svg.small text{
-      font-size:66px;
-      font-weight:400;
-      fill:#56266b;
+    .magic-text-svg.normal text{
+      font-size:56px;
+      font-weight:700;
     }
 
-    .curved-text-svg.question text{
-      font-size:57px;
-      font-weight:400;
-      fill:#56266b;
-      letter-spacing:0px;
+    .magic-text-svg.small text{
+      font-size:48px;
+      font-weight:700;
+    }
+
+    .magic-text-svg.question text{
+      font-size:39px;
+      font-weight:700;
+      letter-spacing:0.1px;
+    }
+
+    .magic-text-svg.question #lineTwo{
+      font-size:60px;
     }
 
     .button-wrap{
@@ -241,26 +250,30 @@
         width:108%;
       }
 
-      .curved-text-svg{
-        top:62%;
-        width:96%;
-        height:70%;
+      .magic-text-svg{
+        top:63%;
+        width:90%;
+        height:60%;
       }
 
-      .curved-text-svg.hello text{
-        font-size:92px;
+      .magic-text-svg.hello text{
+        font-size:70px;
       }
 
-      .curved-text-svg.normal text{
-        font-size:66px;
+      .magic-text-svg.normal text{
+        font-size:49px;
       }
 
-      .curved-text-svg.small text{
-        font-size:58px;
+      .magic-text-svg.small text{
+        font-size:42px;
       }
 
-      .curved-text-svg.question text{
-        font-size:50px;
+      .magic-text-svg.question text{
+        font-size:34px;
+      }
+
+      .magic-text-svg.question #lineTwo{
+        font-size:52px;
       }
 
       .button-wrap{
@@ -280,26 +293,30 @@
         width:108%;
       }
 
-      .curved-text-svg{
-        top:63%;
-        width:98%;
-        height:72%;
+      .magic-text-svg{
+        top:64%;
+        width:92%;
+        height:62%;
       }
 
-      .curved-text-svg.hello text{
-        font-size:80px;
+      .magic-text-svg.hello text{
+        font-size:62px;
       }
 
-      .curved-text-svg.normal text{
-        font-size:57px;
-      }
-
-      .curved-text-svg.small text{
-        font-size:50px;
-      }
-
-      .curved-text-svg.question text{
+      .magic-text-svg.normal text{
         font-size:43px;
+      }
+
+      .magic-text-svg.small text{
+        font-size:37px;
+      }
+
+      .magic-text-svg.question text{
+        font-size:30px;
+      }
+
+      .magic-text-svg.question #lineTwo{
+        font-size:46px;
       }
 
       .button-wrap{
@@ -324,30 +341,18 @@
 
     <div class="message-area">
       <div class="banner-wrap">
-        <img src="/sofiyka-magic-journey/crown.png?v=15" alt="Казкова стрічка" class="banner-png">
+        <img src="/sofiyka-magic-journey/crown.png?v=16" alt="Казкова стрічка" class="banner-png">
 
-        <svg id="animatedText" class="curved-text-svg hello show" viewBox="0 0 1000 250" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <path id="curveLineOne" d="M 135 92 C 325 136, 675 136, 865 92"></path>
-            <path id="curveLineTwo" d="M 145 158 C 335 200, 665 200, 855 158"></path>
-          </defs>
-
-          <text>
-            <textPath id="lineOne" href="#curveLineOne" startOffset="50%">
-              Привіт!
-            </textPath>
-          </text>
-
-          <text>
-            <textPath id="lineTwo" href="#curveLineTwo" startOffset="50%"></textPath>
-          </text>
+        <svg id="animatedText" class="magic-text-svg hello show" viewBox="0 0 1000 250" preserveAspectRatio="xMidYMid meet">
+          <text id="lineOne" x="500" y="102" class="line-gold">Привіт!</text>
+          <text id="lineTwo" x="500" y="164" class="line-gold"></text>
         </svg>
       </div>
     </div>
 
     <div id="buttonWrap" class="button-wrap">
       <button class="image-btn" onclick="location.href='map.html'">
-        <img src="/sofiyka-magic-journey/button.png?v=15" alt="Почати подорож" class="btn-png">
+        <img src="/sofiyka-magic-journey/button.png?v=16" alt="Почати подорож" class="btn-png">
         <span class="btn-text">Почати подорож</span>
       </button>
     </div>
@@ -364,22 +369,30 @@
       {
         line1: "Привіт!",
         line2: "",
-        className: "hello"
+        className: "hello",
+        y1: 126,
+        y2: 170
       },
       {
         line1: "Мене звати",
         line2: "Софійка.",
-        className: "normal"
+        className: "normal",
+        y1: 104,
+        y2: 166
       },
       {
         line1: "Скоро у мене",
         line2: "особливий день.",
-        className: "small"
+        className: "small",
+        y1: 104,
+        y2: 166
       },
       {
-        line1: "Допоможеш знайти",
-        line2: "чарівне запрошення?",
-        className: "question"
+        line1: "Допоможеш мені знайти чарівне",
+        line2: "запрошення?",
+        className: "question",
+        y1: 103,
+        y2: 170
       }
     ];
 
@@ -392,7 +405,10 @@
         lineOne.textContent = phrases[i].line1;
         lineTwo.textContent = phrases[i].line2;
 
-        animatedText.setAttribute("class", "curved-text-svg " + phrases[i].className);
+        lineOne.setAttribute("y", phrases[i].y1);
+        lineTwo.setAttribute("y", phrases[i].y2);
+
+        animatedText.setAttribute("class", "magic-text-svg " + phrases[i].className);
 
         requestAnimationFrame(() => {
           animatedText.classList.add("show");

@@ -1,883 +1,749 @@
 <!DOCTYPE html>
-<html lang="uk" translate="no">
+<html lang="uk">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google" content="notranslate" />
-  <title>Карта подорожі Софійки</title>
+  <title>Карта чарівної подорожі</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Marck+Script&display=swap" rel="stylesheet" />
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
-
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      font-family: 'Cormorant Garamond', serif;
-      background: #f7e6ff;
-      overflow-x: hidden;
+    :root {
+      --bg1: #29145b;
+      --bg2: #6f47c7;
+      --bg3: #f6a8d8;
+      --gold: #f6d77e;
+      --gold-soft: #fff4cc;
+      --purple: #6b3fa0;
+      --purple-dark: #4d2d79;
+      --pink: #ff8fd4;
+      --white: #ffffff;
+      --cream: rgba(255, 250, 240, 0.95);
+      --shadow: 0 12px 35px rgba(41, 20, 91, 0.30);
     }
 
     body {
       min-height: 100vh;
-      min-height: 100dvh;
+      font-family: "Cinzel", serif;
+      color: #fff;
       background:
-        radial-gradient(circle at 20% 12%, rgba(255,255,255,.95) 0 7%, transparent 18%),
-        radial-gradient(circle at 85% 18%, rgba(255,255,255,.85) 0 6%, transparent 17%),
-        radial-gradient(circle at 50% 78%, rgba(255,255,255,.55) 0 9%, transparent 21%),
-        linear-gradient(180deg, #ffe4f7 0%, #eadcff 42%, #d9edff 100%);
-      color: #5a2e72;
-    }
-
-    .page {
+        radial-gradient(circle at top left, rgba(255, 220, 120, 0.18), transparent 18%),
+        radial-gradient(circle at top right, rgba(255, 170, 220, 0.20), transparent 20%),
+        linear-gradient(180deg, #24114d 0%, #4c2d8f 38%, #9263d6 68%, #f0a2cf 100%);
+      overflow-x: hidden;
       position: relative;
-      width: 100%;
-      min-height: 100vh;
-      min-height: 100dvh;
-      padding: 26px 16px 34px;
-      overflow: hidden;
     }
 
-    .page::before {
+    body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background:
-        radial-gradient(circle at 15% 70%, rgba(255,232,150,.35), transparent 20%),
-        radial-gradient(circle at 90% 60%, rgba(255,170,225,.24), transparent 21%);
       pointer-events: none;
-      z-index: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.85) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,240,180,0.7) 1px, transparent 1.5px);
+      background-size: 120px 120px, 180px 180px;
+      background-position: 0 0, 40px 60px;
+      opacity: 0.35;
+      animation: starsTwinkle 6s ease-in-out infinite alternate;
     }
 
-    .topbar {
+    @keyframes starsTwinkle {
+      0% { opacity: 0.20; }
+      100% { opacity: 0.45; }
+    }
+
+    .page-wrap {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 56px 16px 80px;
       position: relative;
       z-index: 2;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
     }
 
-    .back-btn,
-    .music-toggle {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 218, 112, .95);
-      background: rgba(255, 244, 225, .66);
-      box-shadow:
-        0 0 12px rgba(255, 220, 120, .75),
-        inset 0 0 10px rgba(255, 255, 255, .75);
-      color: #7a3d82;
-      font-size: 20px;
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-
-    .music-toggle.playing {
-      background: rgba(255, 204, 236, .78);
-      color: #9b2c7b;
-      animation: musicPulse 1.8s infinite;
-    }
-
-    .title-block {
+    .magic-map-section {
       position: relative;
-      z-index: 2;
+      padding: 28px 0 10px;
+      animation: fadeUp 0.9s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-header {
       text-align: center;
-      margin: 0 auto 20px;
-      max-width: 430px;
+      margin-bottom: 28px;
+      padding: 0 8px;
     }
 
-    .title {
-      font-size: 34px;
-      line-height: .95;
-      color: #6d347d;
+    .section-kicker {
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ffe9a9;
+      margin-bottom: 10px;
+      text-shadow: 0 0 12px rgba(255, 225, 140, 0.3);
+    }
+
+    .section-title {
+      font-size: clamp(28px, 6vw, 52px);
+      line-height: 1.1;
+      color: #fff8dc;
       text-shadow:
-        0 1px 0 rgba(255,255,255,.95),
-        0 0 12px rgba(255,255,255,.75);
-      margin-bottom: 8px;
+        0 2px 0 rgba(117, 64, 171, 0.8),
+        0 6px 20px rgba(30, 8, 72, 0.45);
+      margin-bottom: 12px;
     }
 
-    .subtitle {
-      font-size: 20px;
-      line-height: 1.05;
-      color: #7c4a88;
-      text-shadow: 0 1px 0 rgba(255,255,255,.9);
+    .section-subtitle {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: clamp(15px, 3.8vw, 19px);
+      line-height: 1.65;
+      color: #fff6f8;
+      opacity: 0.95;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .map-card,
+    .info-card {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 245, 214, 0.35);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .map-card {
+      padding: 18px;
       position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 460px;
-      margin: 0 auto;
-      min-height: 620px;
-      border-radius: 38px;
-      padding: 26px 20px 28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.58), rgba(255,226,246,.38)),
-        radial-gradient(circle at 50% 18%, rgba(255,245,190,.45), transparent 23%);
-      border: 2px solid rgba(255, 224, 133, .72);
-      box-shadow:
-        0 0 24px rgba(255, 220, 120, .38),
-        inset 0 0 18px rgba(255,255,255,.55);
       overflow: hidden;
     }
 
     .map-card::before {
       content: "";
       position: absolute;
-      left: 50%;
-      top: 82px;
-      width: 5px;
-      height: 435px;
-      transform: translateX(-50%);
-      background: linear-gradient(180deg, #ffd66d, #ff9fd0, #b989ff, #ffd66d);
-      border-radius: 999px;
-      box-shadow:
-        0 0 10px rgba(255,220,120,.8),
-        0 0 22px rgba(255,158,218,.45);
-      opacity: .72;
-    }
-
-    .location {
-      position: relative;
-      min-height: 92px;
-      display: flex;
-      align-items: center;
-      z-index: 3;
-    }
-
-    .location:nth-child(even) {
-      justify-content: flex-end;
-      text-align: right;
-    }
-
-    .location:nth-child(odd) {
-      justify-content: flex-start;
-      text-align: left;
-    }
-
-    .location + .location {
-      margin-top: 18px;
-    }
-
-    .node-btn {
-      position: relative;
-      width: 76%;
-      min-height: 76px;
-      border: none;
-      border-radius: 28px;
-      padding: 11px 14px 11px 72px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,230,247,.86));
-      border: 2px solid rgba(255,218,112,.92);
-      box-shadow:
-        0 0 14px rgba(255,220,120,.55),
-        0 8px 16px rgba(124,60,120,.13),
-        inset 0 0 13px rgba(255,255,255,.8);
-      cursor: pointer;
-      color: #623074;
-      font-family: 'Cormorant Garamond', serif;
-      transition: transform .25s ease, opacity .25s ease, filter .25s ease;
-    }
-
-    .location:nth-child(even) .node-btn {
-      padding: 11px 72px 11px 14px;
-    }
-
-    .node-btn:active {
-      transform: scale(.98);
-    }
-
-    .node-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:
-        radial-gradient(circle at 35% 25%, #fff8d6, #ffd46d 56%, #e49531);
-      color: white;
-      font-size: 25px;
-      box-shadow:
-        0 0 12px rgba(255,220,100,.95),
-        inset 0 2px 6px rgba(255,255,255,.65);
-    }
-
-    .location:nth-child(even) .node-icon {
-      left: auto;
-      right: 12px;
-    }
-
-    .node-title {
-      display: block;
-      font-size: 20px;
-      font-weight: 700;
-      line-height: .98;
-      margin-bottom: 5px;
-    }
-
-    .node-desc {
-      display: block;
-      font-size: 15px;
-      line-height: 1;
-      color: #7f5688;
-    }
-
-    .node-btn.locked {
-      opacity: .55;
-      filter: grayscale(.25);
-    }
-
-    .node-btn.locked::after {
-      content: "🔒";
-      position: absolute;
-      top: -10px;
-      right: -5px;
-      font-size: 20px;
-      filter: drop-shadow(0 2px 3px rgba(80,30,90,.25));
-    }
-
-    .location:nth-child(even) .node-btn.locked::after {
-      right: auto;
-      left: -5px;
-    }
-
-    .progress {
-      position: relative;
-      z-index: 3;
-      width: 100%;
-      margin-top: 26px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: 700;
-      color: #7b4386;
-      text-shadow: 0 1px 0 rgba(255,255,255,.75);
-    }
-
-    .modal {
-      position: fixed;
       inset: 0;
-      z-index: 50;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      background: rgba(58, 22, 74, .46);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      border-radius: 28px;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px rgba(255, 244, 200, 0.18);
     }
 
-    .modal.show {
-      display: flex;
+    .map-stage {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.08);
+      box-shadow: inset 0 0 25px rgba(255,255,255,0.08);
     }
 
-    .modal-card {
+    .map-image {
+      display: block;
       width: 100%;
-      max-width: 430px;
-      max-height: 88vh;
-      overflow-y: auto;
-      border-radius: 34px;
-      padding: 22px 18px 20px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,229,247,.94));
-      border: 2px solid rgba(255,218,112,.95);
-      box-shadow:
-        0 0 24px rgba(255,220,120,.76),
-        0 16px 34px rgba(70,25,80,.22),
-        inset 0 0 18px rgba(255,255,255,.88);
-      text-align: center;
-      animation: popIn .35s ease;
+      height: auto;
+      border-radius: 22px;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
-    .modal-icon {
-      width: 58px;
-      height: 58px;
-      margin: 0 auto 10px;
+    .map-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(255, 230, 140, 0.12), transparent 18%),
+        radial-gradient(circle at 80% 22%, rgba(255, 180, 230, 0.15), transparent 16%),
+        radial-gradient(circle at 55% 78%, rgba(255, 240, 170, 0.10), transparent 20%);
+    }
+
+    .marker {
+      position: absolute;
+      width: 46px;
+      height: 46px;
+      border: none;
       border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, #fff8d8 0%, #ffd978 45%, #ffb84a 70%, #d27a00 100%);
+      box-shadow:
+        0 0 0 4px rgba(255, 246, 204, 0.45),
+        0 0 18px rgba(255, 210, 90, 0.85),
+        0 8px 20px rgba(89, 37, 122, 0.35);
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      z-index: 5;
+    }
+
+    .marker::before {
+      content: "✦";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      color: #7a3a9d;
+      text-shadow: 0 1px 0 #fff3c7;
+    }
+
+    .marker::after {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 230, 130, 0.55);
+      animation: pulse 2.2s infinite ease-out;
+    }
+
+    .marker:hover,
+    .marker.active {
+      transform: translate(-50%, -50%) scale(1.12);
+      box-shadow:
+        0 0 0 5px rgba(255, 246, 204, 0.65),
+        0 0 26px rgba(255, 216, 114, 0.95),
+        0 12px 26px rgba(89, 37, 122, 0.45);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.92);
+        opacity: 0.9;
+      }
+      70% {
+        transform: scale(1.45);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1.45);
+        opacity: 0;
+      }
+    }
+
+    .marker-label {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(84, 38, 126, 0.82);
+      color: #fff7db;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      box-shadow: 0 8px 20px rgba(32, 10, 68, 0.25);
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .info-card {
+      padding: 22px;
+      position: sticky;
+      top: 16px;
+    }
+
+    .info-top {
       display: flex;
       align-items: center;
-      justify-content: center;
-      background:
-        radial-gradient(circle at 35% 25%, #fff8d6, #ffd46d 56%, #e49531);
-      font-size: 30px;
-      box-shadow: 0 0 16px rgba(255,220,100,.9);
-    }
-
-    .modal-title {
-      font-size: 29px;
-      line-height: .95;
-      color: #673179;
-      margin-bottom: 12px;
-      text-shadow: 0 1px 0 rgba(255,255,255,.8);
-    }
-
-    .modal-text {
-      font-size: 21px;
-      line-height: 1.08;
-      color: #6b4374;
+      gap: 14px;
       margin-bottom: 16px;
     }
 
-    .info-box {
-      margin: 12px 0 15px;
-      padding: 13px 14px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.68);
-      border: 1px solid rgba(255,218,112,.72);
-      text-align: left;
-      font-size: 19px;
-      line-height: 1.15;
-      color: #633374;
-    }
-
-    .info-box b {
-      color: #9b4c7e;
-    }
-
-    .form-block {
-      text-align: left;
-      margin: 12px 0;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 19px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #633374;
-    }
-
-    .field,
-    .select-field,
-    .textarea-field {
-      width: 100%;
-      border: 2px solid rgba(215,164,72,.55);
+    .info-icon {
+      width: 58px;
+      height: 58px;
+      min-width: 58px;
       border-radius: 18px;
-      padding: 11px 13px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 19px;
-      color: #5c2f6f;
-      background: rgba(255,255,255,.82);
-      outline: none;
-    }
-
-    .textarea-field {
-      min-height: 74px;
-      resize: vertical;
-    }
-
-    .checks {
       display: grid;
-      gap: 8px;
-      margin-top: 6px;
-    }
-
-    .checks label {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      font-size: 18px;
-      color: #633374;
-    }
-
-    .modal-actions {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .main-action,
-    .second-action {
-      border: none;
-      border-radius: 28px;
-      padding: 13px 14px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .main-action {
-      color: #fff2b3;
-      background: linear-gradient(180deg, #ff91d6, #e348a6, #b92b83);
-      border: 2px solid rgba(255,218,112,.95);
+      place-items: center;
+      background:
+        linear-gradient(135deg, #fff6cd 0%, #ffd772 55%, #ffb45e 100%);
+      color: #6a338f;
+      font-size: 28px;
       box-shadow:
-        0 0 13px rgba(255,220,120,.72),
-        inset 0 3px 8px rgba(255,255,255,.44);
-      text-shadow: 0 2px 4px rgba(100,25,75,.7);
+        0 8px 20px rgba(255, 193, 90, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.55);
     }
 
-    .second-action {
-      color: #7a3c82;
-      background: rgba(255,255,255,.72);
-      border: 2px solid rgba(255,218,112,.55);
+    .info-heading {
+      min-width: 0;
     }
 
-    .map-link {
-      display: inline-block;
-      margin-top: 8px;
-      color: #ba3a91;
-      font-size: 19px;
-      font-weight: 700;
-      text-decoration: none;
+    .info-kicker {
+      font-size: 13px;
+      color: #ffecad;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
     }
 
-    .final-message {
-      display: none;
-      padding: 14px;
-      margin-top: 12px;
+    .info-title {
+      font-size: clamp(22px, 4vw, 30px);
+      line-height: 1.15;
+      color: #fff5d4;
+      text-shadow: 0 2px 10px rgba(48, 16, 88, 0.35);
+    }
+
+    .info-text {
+      background: rgba(255, 252, 245, 0.92);
+      color: #573478;
       border-radius: 20px;
-      background: rgba(255,247,210,.7);
-      color: #633374;
-      font-size: 20px;
-      line-height: 1.05;
+      padding: 16px;
+      box-shadow: inset 0 0 0 1px rgba(240, 212, 140, 0.28);
     }
 
-    .final-message.show {
+    .info-row {
+      margin-bottom: 12px;
+    }
+
+    .info-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-label {
       display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9a6a2e;
+      margin-bottom: 4px;
+      font-weight: 700;
     }
 
-    @keyframes popIn {
-      from {
-        opacity: 0;
-        transform: translateY(14px) scale(.96);
+    .info-value {
+      font-size: 16px;
+      line-height: 1.55;
+      color: #5f3a83;
+      font-family: "Cinzel", serif;
+    }
+
+    .info-note {
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #6d4a8f;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 244, 216, 0.95), rgba(255, 250, 241, 0.95));
+      border: 1px solid rgba(233, 199, 112, 0.42);
+    }
+
+    .location-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .location-mini {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      border: 1px solid rgba(255, 241, 197, 0.25);
+      background: rgba(255,255,255,0.12);
+      color: #fffaf0;
+      border-radius: 16px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: 0.25s ease;
+      font-family: inherit;
+      text-align: left;
+    }
+
+    .location-mini:hover,
+    .location-mini.active {
+      background: rgba(255, 232, 176, 0.18);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(38, 9, 81, 0.22);
+    }
+
+    .location-mini .dot {
+      width: 12px;
+      height: 12px;
+      min-width: 12px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #fff8d2, #ffc95d);
+      box-shadow: 0 0 10px rgba(255, 208, 92, 0.85);
+    }
+
+    .location-mini .mini-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff3d2;
+    }
+
+    .location-mini .mini-sub {
+      margin-top: 2px;
+      font-size: 12px;
+      color: #ffe9b4;
+      opacity: 0.95;
+    }
+
+    /* Метелики */
+    .butterflies {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .butterfly {
+      position: absolute;
+      font-size: clamp(18px, 3vw, 28px);
+      filter: drop-shadow(0 4px 8px rgba(77, 31, 121, 0.28));
+      opacity: 0.95;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    .b1 {
+      left: -8%;
+      top: 18%;
+      animation: fly1 14s infinite;
+    }
+
+    .b2 {
+      left: -10%;
+      top: 62%;
+      animation: fly2 18s infinite;
+      animation-delay: -5s;
+      font-size: 24px;
+    }
+
+    .b3 {
+      right: -8%;
+      top: 30%;
+      animation: fly3 16s infinite;
+      animation-delay: -3s;
+    }
+
+    .b4 {
+      right: -10%;
+      top: 70%;
+      animation: fly4 20s infinite;
+      animation-delay: -8s;
+      font-size: 22px;
+    }
+
+    @keyframes fly1 {
+      0%   { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0; }
+      10%  { opacity: 1; }
+      50%  { transform: translateX(55vw) translateY(40px) rotate(8deg); }
+      100% { transform: translateX(115vw) translateY(-25px) rotate(-6deg); opacity: 0; }
+    }
+
+    @keyframes fly2 {
+      0%   { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0; }
+      10%  { opacity: 1; }
+      40%  { transform: translateX(36vw) translateY(-28px) rotate(-6deg); }
+      70%  { transform: translateX(70vw) translateY(30px) rotate(7deg); }
+      100% { transform: translateX(115vw) translateY(-10px) rotate(-4deg); opacity: 0; }
+    }
+
+    @keyframes fly3 {
+      0%   { transform: translateX(0) translateY(0) scaleX(-1); opacity: 0; }
+      10%  { opacity: 1; }
+      50%  { transform: translateX(-45vw) translateY(35px) scaleX(-1) rotate(8deg); }
+      100% { transform: translateX(-115vw) translateY(-22px) scaleX(-1) rotate(-6deg); opacity: 0; }
+    }
+
+    @keyframes fly4 {
+      0%   { transform: translateX(0) translateY(0) scaleX(-1); opacity: 0; }
+      10%  { opacity: 1; }
+      50%  { transform: translateX(-55vw) translateY(-30px) scaleX(-1) rotate(-5deg); }
+      100% { transform: translateX(-115vw) translateY(10px) scaleX(-1) rotate(7deg); opacity: 0; }
+    }
+
+    /* Мобілка */
+    @media (max-width: 920px) {
+      .map-layout {
+        grid-template-columns: 1fr;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+
+      .info-card {
+        position: static;
       }
     }
 
-    @keyframes musicPulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes floatStar {
-      0% { opacity: .45; transform: translateY(0) scale(.9); }
-      50% { opacity: 1; transform: translateY(-8px) scale(1.12); }
-      100% { opacity: .45; transform: translateY(0) scale(.9); }
-    }
-
-    @media (max-width: 390px) {
-      .title {
-        font-size: 30px;
+    @media (max-width: 640px) {
+      .page-wrap {
+        padding: 38px 12px 64px;
       }
 
-      .subtitle {
-        font-size: 18px;
+      .map-card,
+      .info-card {
+        border-radius: 22px;
       }
 
       .map-card {
-        padding-left: 14px;
-        padding-right: 14px;
+        padding: 12px;
       }
 
-      .node-btn {
-        width: 79%;
+      .marker {
+        width: 40px;
+        height: 40px;
       }
 
-      .node-title {
-        font-size: 18px;
+      .marker::before {
+        font-size: 17px;
       }
 
-      .node-desc {
-        font-size: 14px;
+      .marker-label {
+        font-size: 11px;
+        padding: 5px 10px;
+      }
+
+      .info-card {
+        padding: 16px;
+      }
+
+      .info-icon {
+        width: 52px;
+        height: 52px;
+        min-width: 52px;
+        font-size: 24px;
+      }
+
+      .info-value {
+        font-size: 15px;
+      }
+
+      .location-mini {
+        padding: 11px 12px;
       }
     }
   </style>
 </head>
-
-<body class="notranslate">
-
-  <audio 
-    id="bgMusic" 
-    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3?v=1" 
-    autoplay 
-    loop 
-    preload="auto">
-  </audio>
-
-  <main class="page">
-
-    <div class="topbar">
-      <button class="back-btn" type="button" onclick="location.href='index.html'" aria-label="Назад">←</button>
-
-      <button id="musicToggle" class="music-toggle playing" type="button" aria-label="Вимкнути музику">
-        🔊
-      </button>
-    </div>
-
-    <section class="title-block">
-      <h1 class="title">Карта чарівної подорожі</h1>
-      <p class="subtitle">Пройди локації та знайди запрошення Софійки</p>
-    </section>
-
-    <section class="map-card">
-
-      <div class="location">
-        <button class="node-btn" data-location="0">
-          <span class="node-icon">⭐</span>
-          <span class="node-title">Знайомство з Софійкою</span>
-          <span class="node-desc">початок казкової подорожі</span>
-        </button>
-      </div>
-
-      <div class="location">
-        <button class="node-btn locked" data-location="1">
-          <span class="node-icon">⛪</span>
-          <span class="node-title">День хрещення</span>
-          <span class="node-desc">час і місце таїнства</span>
-        </button>
-      </div>
-
-      <div class="location">
-        <button class="node-btn locked" data-location="2">
-          <span class="node-icon">🏰</span>
-          <span class="node-title">Святковий замок</span>
-          <span class="node-desc">де будемо святкувати</span>
-        </button>
-      </div>
-
-      <div class="location">
-        <button class="node-btn locked" data-location="3">
-          <span class="node-icon">🍰</span>
-          <span class="node-title">Королівська трапеза</span>
-          <span class="node-desc">побажання для гостей</span>
-        </button>
-      </div>
-
-      <div class="location">
-        <button class="node-btn locked" data-location="4">
-          <span class="node-icon">💌</span>
-          <span class="node-title">Підтвердження</span>
-          <span class="node-desc">чарівна відповідь</span>
-        </button>
-      </div>
-
-      <div class="progress" id="progressText">
-        Відкрито 1 з 5 локацій
-      </div>
-
-    </section>
-
-  </main>
-
-  <div class="modal" id="modal">
-    <div class="modal-card">
-      <div class="modal-icon" id="modalIcon">⭐</div>
-      <h2 class="modal-title" id="modalTitle">Знайомство з Софійкою</h2>
-      <div id="modalContent"></div>
-
-      <div class="modal-actions">
-        <button class="main-action" id="nextBtn" type="button">Далі</button>
-        <button class="second-action" id="closeBtn" type="button">Закрити</button>
-      </div>
-    </div>
+<body>
+  <div class="butterflies">
+    <div class="butterfly b1">🦋</div>
+    <div class="butterfly b2">🦋</div>
+    <div class="butterfly b3">🦋</div>
+    <div class="butterfly b4">🦋</div>
   </div>
 
+  <main class="page-wrap">
+    <section class="magic-map-section" id="magic-map">
+      <div class="section-header">
+        <div class="section-kicker">Чарівна пригода</div>
+        <h1 class="section-title">Карта чарівної подорожі</h1>
+        <p class="section-subtitle">
+          Натискай на сяючі точки на мапі — і дізнавайся, де саме відбудуться
+          найважливіші події нашого святкового дня.
+        </p>
+      </div>
+
+      <div class="map-layout">
+        <!-- Ліва частина: мапа -->
+        <div class="map-card">
+          <div class="map-stage">
+            <img
+              src="карта_чарівної_подорожі.png"
+              alt="Карта чарівної подорожі"
+              class="map-image"
+            />
+            <div class="map-glow"></div>
+
+            <!-- Точка 1 -->
+            <button
+              class="marker active"
+              style="left: 20%; top: 74%;"
+              data-location="start"
+              aria-label="Збір гостей"
+            ></button>
+            <div class="marker-label" style="left: 20%; top: 67%;">Збір гостей</div>
+
+            <!-- Точка 2 -->
+            <button
+              class="marker"
+              style="left: 49%; top: 38%;"
+              data-location="church"
+              aria-label="Хрестини"
+            ></button>
+            <div class="marker-label" style="left: 49%; top: 31%;">Хрестини</div>
+
+            <!-- Точка 3 -->
+            <button
+              class="marker"
+              style="left: 78%; top: 61%;"
+              data-location="party"
+              aria-label="Святкування"
+            ></button>
+            <div class="marker-label" style="left: 78%; top: 54%;">Святкування</div>
+          </div>
+        </div>
+
+        <!-- Права частина: інформація -->
+        <aside class="info-card">
+          <div class="info-top">
+            <div class="info-icon" id="infoIcon">✨</div>
+            <div class="info-heading">
+              <div class="info-kicker" id="infoKicker">Локація</div>
+              <h2 class="info-title" id="infoTitle">Збір гостей</h2>
+            </div>
+          </div>
+
+          <div class="info-text">
+            <div class="info-row">
+              <span class="info-label">Час</span>
+              <div class="info-value" id="infoTime">11:30</div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">Місце</span>
+              <div class="info-value" id="infoPlace">Місце зустрічі гостей</div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">Адреса</span>
+              <div class="info-value" id="infoAddress">Вкажіть точну адресу тут</div>
+            </div>
+
+            <div class="info-row">
+              <span class="info-label">Опис</span>
+              <div class="info-value" id="infoDescription">
+                Саме тут почнеться наша казкова подорож. Зустрічаємось,
+                усміхаємось і готуємось до чарівного дня.
+              </div>
+            </div>
+          </div>
+
+          <div class="info-note" id="infoNote">
+            Підказка: натискай на інші сяючі точки на мапі, щоб переглянути всі локації.
+          </div>
+
+          <div class="location-list">
+            <button class="location-mini active" data-location="start">
+              <span class="dot"></span>
+              <span>
+                <div class="mini-title">Збір гостей</div>
+                <div class="mini-sub">Початок подорожі</div>
+              </span>
+            </button>
+
+            <button class="location-mini" data-location="church">
+              <span class="dot"></span>
+              <span>
+                <div class="mini-title">Хрестини</div>
+                <div class="mini-sub">Світла та особлива подія</div>
+              </span>
+            </button>
+
+            <button class="location-mini" data-location="party">
+              <span class="dot"></span>
+              <span>
+                <div class="mini-title">Святкування</div>
+                <div class="mini-sub">Тепла зустріч з рідними</div>
+              </span>
+            </button>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
   <script>
-    const bgMusic = document.getElementById("bgMusic");
-    const musicToggle = document.getElementById("musicToggle");
-
-    bgMusic.volume = 0.35;
-
-    let musicStarted = false;
-    let musicMutedByUser = false;
-
-    async function startMusicImmediately() {
-      if (musicMutedByUser) return;
-
-      try {
-        await bgMusic.play();
-        musicStarted = true;
-        musicToggle.classList.remove("off");
-        musicToggle.classList.add("playing");
-        musicToggle.textContent = "🔊";
-      } catch (error) {
-        musicStarted = false;
-        musicToggle.classList.remove("playing");
-        musicToggle.textContent = "🎵";
-
-        window.addEventListener("click", firstUserInteraction, { once: true });
-        window.addEventListener("touchstart", firstUserInteraction, { once: true });
-      }
-    }
-
-    async function firstUserInteraction() {
-      if (musicMutedByUser) return;
-
-      try {
-        await bgMusic.play();
-        musicStarted = true;
-        musicToggle.classList.add("playing");
-        musicToggle.textContent = "🔊";
-      } catch (error) {
-        musicStarted = false;
-      }
-    }
-
-    function pauseMusic() {
-      bgMusic.pause();
-      musicStarted = false;
-      musicMutedByUser = true;
-      musicToggle.classList.remove("playing");
-      musicToggle.textContent = "🎵";
-    }
-
-    async function resumeMusic() {
-      musicMutedByUser = false;
-
-      try {
-        await bgMusic.play();
-        musicStarted = true;
-        musicToggle.classList.add("playing");
-        musicToggle.textContent = "🔊";
-      } catch (error) {
-        musicStarted = false;
-        musicToggle.classList.remove("playing");
-        musicToggle.textContent = "🎵";
-      }
-    }
-
-    musicToggle.addEventListener("click", (event) => {
-      event.stopPropagation();
-
-      if (musicStarted && !bgMusic.paused) {
-        pauseMusic();
-      } else {
-        resumeMusic();
-      }
-    });
-
-    const modal = document.getElementById("modal");
-    const modalIcon = document.getElementById("modalIcon");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalContent = document.getElementById("modalContent");
-    const nextBtn = document.getElementById("nextBtn");
-    const closeBtn = document.getElementById("closeBtn");
-    const progressText = document.getElementById("progressText");
-    const nodeButtons = Array.from(document.querySelectorAll(".node-btn"));
-
-    let currentLocation = 0;
-    let unlockedLocation = Number(localStorage.getItem("sofiykaUnlockedLocation") || 0);
-
-    const locations = [
-      {
-        icon: "⭐",
-        title: "Знайомство з Софійкою",
-        button: "Відкрити наступну локацію",
-        content: `
-          <p class="modal-text">
-            Привіт! Я Софійка.<br><br>
-            Запрошую тебе у маленьку чарівну подорож,
-            щоб знайти моє особливе запрошення.
-          </p>
-        `
+    const locations = {
+      start: {
+        kicker: "Початок маршруту",
+        icon: "✨",
+        title: "Збір гостей",
+        time: "11:30",
+        place: "Місце зустрічі гостей",
+        address: "Вкажіть точну адресу тут",
+        description:
+          "Саме тут почнеться наша казкова подорож. Збираємось разом, вітаємось і налаштовуємось на особливий день.",
+        note:
+          "Тут можна додати коротку підказку для гостей: де саме збір, чи є паркування, як знайти вхід."
       },
-      {
+
+      church: {
+        kicker: "Святкова локація",
         icon: "⛪",
-        title: "День хрещення",
-        button: "Далі до святкового замку",
-        content: `
-          <p class="modal-text">
-            Тут буде найважливіша частина нашого дня.
-          </p>
-
-          <div class="info-box">
-            <b>Таїнство Хрещення</b><br>
-            Дата: 27 червня 2026 року<br>
-            Час: __:__<br>
-            Місце: __________________<br>
-            Адреса: __________________
-          </div>
-
-          <a class="map-link" href="#" onclick="alert('Посилання на Google Maps додамо пізніше'); return false;">
-            Відкрити на карті
-          </a>
-        `
+        title: "Хрестини",
+        time: "12:00",
+        place: "Храм / Церква",
+        address: "Вкажіть точну адресу храму тут",
+        description:
+          "Тут відбудеться світла та особлива подія — хрестини. Саме тут народиться ще одна тепла сімейна згадка.",
+        note:
+          "Можна вказати додатково: скільки триватиме подія, де краще чекати, чи можна фотографувати."
       },
-      {
-        icon: "🏰",
-        title: "Святковий замок",
-        button: "Далі до трапези",
-        content: `
-          <p class="modal-text">
-            Після хрещення ми запрошуємо вас
-            розділити з нами цей особливий день.
-          </p>
 
-          <div class="info-box">
-            <b>Святкування</b><br>
-            Дата: 27 червня 2026 року<br>
-            Час: __:__<br>
-            Місце: __________________<br>
-            Адреса: __________________
-          </div>
-
-          <a class="map-link" href="#" onclick="alert('Посилання на Google Maps додамо пізніше'); return false;">
-            Відкрити на карті
-          </a>
-        `
-      },
-      {
-        icon: "🍰",
-        title: "Королівська трапеза",
-        button: "Далі до підтвердження",
-        content: `
-          <p class="modal-text">
-            Допоможіть нам підготувати свято зручно для всіх гостей.
-          </p>
-
-          <div class="form-block">
-            <label class="form-label">Чи потрібне дитяче меню?</label>
-            <div class="checks">
-              <label><input type="radio" name="childMenu"> Так</label>
-              <label><input type="radio" name="childMenu"> Ні</label>
-            </div>
-          </div>
-
-          <div class="form-block">
-            <label class="form-label">Який алкоголь буде доречний?</label>
-            <div class="checks">
-              <label><input type="checkbox"> Вино</label>
-              <label><input type="checkbox"> Шампанське</label>
-              <label><input type="checkbox"> Без алкоголю</label>
-              <label><input type="checkbox"> Інше</label>
-            </div>
-          </div>
-
-          <div class="form-block">
-            <label class="form-label">Побажання по меню</label>
-            <textarea class="textarea-field" placeholder="Напишіть побажання"></textarea>
-          </div>
-        `
-      },
-      {
-        icon: "💌",
-        title: "Чарівне підтвердження",
-        button: "Надіслати відповідь",
-        content: `
-          <p class="modal-text">
-            Чи будете ви з нами у цей день?
-          </p>
-
-          <div class="form-block">
-            <label class="form-label">Ім’я гостя</label>
-            <input class="field" type="text" placeholder="Ваше ім’я">
-          </div>
-
-          <div class="form-block">
-            <label class="form-label">Кількість гостей</label>
-            <input class="field" type="number" min="1" placeholder="Наприклад: 2">
-          </div>
-
-          <div class="form-block">
-            <label class="form-label">Підтвердження</label>
-            <select class="select-field">
-              <option>Так, будемо</option>
-              <option>Поки не знаємо</option>
-              <option>На жаль, не зможемо</option>
-            </select>
-          </div>
-
-          <div class="final-message" id="finalMessage">
-            Дякуємо!<br>
-            Софійка дуже чекає на вас 💛
-          </div>
-        `
+      party: {
+        kicker: "Фінальна зупинка",
+        icon: "🎉",
+        title: "Святкування",
+        time: "14:00",
+        place: "Ресторан / Локація святкування",
+        address: "Вкажіть точну адресу святкування тут",
+        description:
+          "Після урочистої частини ми продовжимо наш день у святковій атмосфері: обійми, теплі слова, посмішки та радість.",
+        note:
+          "Тут можна додати важливу інформацію: чи є дрес-код, до котрої години триває святкування, чи є дитяча зона."
       }
-    ];
+    };
 
-    function updateMap() {
-      nodeButtons.forEach((button, index) => {
-        if (index <= unlockedLocation) {
-          button.classList.remove("locked");
-        } else {
-          button.classList.add("locked");
-        }
+    const infoIcon = document.getElementById("infoIcon");
+    const infoKicker = document.getElementById("infoKicker");
+    const infoTitle = document.getElementById("infoTitle");
+    const infoTime = document.getElementById("infoTime");
+    const infoPlace = document.getElementById("infoPlace");
+    const infoAddress = document.getElementById("infoAddress");
+    const infoDescription = document.getElementById("infoDescription");
+    const infoNote = document.getElementById("infoNote");
+
+    const markerButtons = document.querySelectorAll(".marker");
+    const miniButtons = document.querySelectorAll(".location-mini");
+
+    function setActiveLocation(key) {
+      const location = locations[key];
+      if (!location) return;
+
+      infoIcon.textContent = location.icon;
+      infoKicker.textContent = location.kicker;
+      infoTitle.textContent = location.title;
+      infoTime.textContent = location.time;
+      infoPlace.textContent = location.place;
+      infoAddress.textContent = location.address;
+      infoDescription.textContent = location.description;
+      infoNote.textContent = location.note;
+
+      markerButtons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.location === key);
       });
 
-      progressText.textContent = `Відкрито ${Math.min(unlockedLocation + 1, 5)} з 5 локацій`;
+      miniButtons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.location === key);
+      });
     }
 
-    function openLocation(index) {
-      if (index > unlockedLocation) {
-        alert("Спочатку відкрий попередню локацію ✨");
-        return;
-      }
-
-      currentLocation = index;
-      const location = locations[index];
-
-      modalIcon.textContent = location.icon;
-      modalTitle.textContent = location.title;
-      modalContent.innerHTML = location.content;
-      nextBtn.textContent = location.button;
-
-      modal.classList.add("show");
-    }
-
-    function closeModal() {
-      modal.classList.remove("show");
-    }
-
-    function nextLocation() {
-      if (currentLocation === locations.length - 1) {
-        const finalMessage = document.getElementById("finalMessage");
-
-        if (finalMessage) {
-          finalMessage.classList.add("show");
-          nextBtn.textContent = "Готово";
-          nextBtn.onclick = closeModal;
-        }
-
-        return;
-      }
-
-      unlockedLocation = Math.max(unlockedLocation, currentLocation + 1);
-      localStorage.setItem("sofiykaUnlockedLocation", unlockedLocation);
-      updateMap();
-      openLocation(currentLocation + 1);
-    }
-
-    nodeButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        openLocation(Number(button.dataset.location));
+    markerButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setActiveLocation(btn.dataset.location);
       });
     });
 
-    closeBtn.addEventListener("click", closeModal);
-    nextBtn.addEventListener("click", nextLocation);
-
-    modal.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        closeModal();
-      }
-    });
-
-    window.addEventListener("load", () => {
-      updateMap();
-      startMusicImmediately();
-    });
-  </script>
-
-</body>
-</html>
+    mi

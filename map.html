@@ -351,39 +351,87 @@
         0 0 28px rgba(224, 190, 255, 0.35);
     }
 
-    .location-btn:active {
-      animation: none;
-      transform: scale(0.98);
+    .location4-btn {
+      left: 39.5%;
+      top: 65.4%;
+      width: 56%;
+      animation: locationCake4 2.7s ease-in-out infinite;
+      filter:
+        drop-shadow(0 12px 15px rgba(88, 35, 110, 0.22))
+        drop-shadow(0 0 13px rgba(255, 205, 160, 0.68));
     }
 
-    .hotspots {
+    .location4-btn::before {
+      content: "";
       position: absolute;
-      inset: 0;
-      z-index: 10;
+      inset: -8px;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 25% 48%, rgba(255,255,255,0.50), rgba(255,205,170,0.30) 36%, transparent 66%);
+      opacity: 0;
+      animation: locationGlow4 2.7s ease-in-out infinite;
       pointer-events: none;
     }
 
-    .hotspot {
+    .location4-btn::after {
+      content: "";
       position: absolute;
-      pointer-events: auto;
-      background: rgba(255,255,255,0);
-      border: none;
-      cursor: pointer;
-      border-radius: 28px;
+      left: 20%;
+      top: 50%;
+      width: 34%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 222, 170, 0.82);
+      transform: translate(-50%, -50%);
+      animation: locationRing4 2.25s ease-out infinite;
+      pointer-events: none;
+      box-shadow:
+        0 0 16px rgba(255, 206, 150, 0.85),
+        0 0 28px rgba(255, 235, 160, 0.35);
     }
 
-    .hotspot.loc4 {
-      left: 41%;
-      top: 67%;
-      width: 43%;
-      height: 12%;
+    .location5-btn {
+      left: 7.7%;
+      top: 79.8%;
+      width: 57%;
+      animation: locationHeart5 2.45s ease-in-out infinite;
+      filter:
+        drop-shadow(0 12px 15px rgba(88, 35, 110, 0.22))
+        drop-shadow(0 0 13px rgba(255, 170, 215, 0.72));
     }
 
-    .hotspot.loc5 {
-      left: 10%;
-      top: 80%;
-      width: 43%;
-      height: 10%;
+    .location5-btn::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 24% 50%, rgba(255,255,255,0.50), rgba(255,170,215,0.30) 35%, transparent 66%);
+      opacity: 0;
+      animation: locationGlow5 2.45s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .location5-btn::after {
+      content: "";
+      position: absolute;
+      left: 20%;
+      top: 50%;
+      width: 34%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 190, 225, 0.82);
+      transform: translate(-50%, -50%);
+      animation: locationRing5 2.15s ease-out infinite;
+      pointer-events: none;
+      box-shadow:
+        0 0 16px rgba(255, 175, 220, 0.85),
+        0 0 28px rgba(255, 235, 160, 0.32);
+    }
+
+    .location-btn:active {
+      animation: none;
+      transform: scale(0.98);
     }
 
     .modal-overlay {
@@ -588,6 +636,67 @@
       100% { transform: translate(-50%, -50%) scale(1.30); opacity: 0; }
     }
 
+    @keyframes locationCake4 {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        filter:
+          drop-shadow(0 12px 15px rgba(88, 35, 110, 0.22))
+          drop-shadow(0 0 12px rgba(255, 205, 160, 0.65));
+      }
+      45% {
+        transform: translateY(-4px) scale(1.035);
+        filter:
+          drop-shadow(0 16px 20px rgba(88, 35, 110, 0.30))
+          drop-shadow(0 0 25px rgba(255, 210, 165, 0.95));
+      }
+      60% {
+        transform: translateY(-2px) scale(1.02);
+      }
+    }
+
+    @keyframes locationGlow4 {
+      0%, 100% { opacity: 0.22; transform: scale(0.97); }
+      50% { opacity: 0.86; transform: scale(1.04); }
+    }
+
+    @keyframes locationRing4 {
+      0% { transform: translate(-50%, -50%) scale(0.72); opacity: 0.85; }
+      75% { transform: translate(-50%, -50%) scale(1.28); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1.28); opacity: 0; }
+    }
+
+    @keyframes locationHeart5 {
+      0%, 100% {
+        transform: scale(1);
+        filter:
+          drop-shadow(0 12px 15px rgba(88, 35, 110, 0.22))
+          drop-shadow(0 0 12px rgba(255, 170, 215, 0.65));
+      }
+      35% {
+        transform: scale(1.035);
+      }
+      50% {
+        transform: scale(1.065);
+        filter:
+          drop-shadow(0 16px 20px rgba(88, 35, 110, 0.30))
+          drop-shadow(0 0 25px rgba(255, 170, 215, 0.95));
+      }
+      68% {
+        transform: scale(1.025);
+      }
+    }
+
+    @keyframes locationGlow5 {
+      0%, 100% { opacity: 0.22; transform: scale(0.97); }
+      50% { opacity: 0.88; transform: scale(1.04); }
+    }
+
+    @keyframes locationRing5 {
+      0% { transform: translate(-50%, -50%) scale(0.70); opacity: 0.85; }
+      75% { transform: translate(-50%, -50%) scale(1.28); opacity: 0; }
+      100% { transform: translate(-50%, -50%) scale(1.28); opacity: 0; }
+    }
+
     @keyframes modalIn {
       from {
         opacity: 0;
@@ -638,6 +747,18 @@
         width: 56%;
       }
 
+      .location4-btn {
+        left: 39.5%;
+        top: 65.4%;
+        width: 56%;
+      }
+
+      .location5-btn {
+        left: 7.7%;
+        top: 79.8%;
+        width: 57%;
+      }
+
       .modal-title {
         font-size: 25px;
       }
@@ -674,7 +795,7 @@
     <section class="map-wrap">
       <img
         class="map-image"
-        src="./map.png?v=5"
+        src="./map.png?v=6"
         alt="Карта чарівної подорожі Софійки"
       />
 
@@ -700,10 +821,13 @@
         <img class="location-img" src="./location3.png?v=1" alt="Святковий замок" />
       </button>
 
-      <div class="hotspots">
-        <button class="hotspot loc4" aria-label="Королівська трапеза"></button>
-        <button class="hotspot loc5" aria-label="Підтвердження"></button>
-      </div>
+      <button class="location-btn location4-btn" id="loc4" type="button" aria-label="Королівська трапеза">
+        <img class="location-img" src="./location4.png?v=1" alt="Королівська трапеза" />
+      </button>
+
+      <button class="location-btn location5-btn" id="loc5" type="button" aria-label="Підтвердження">
+        <img class="location-img" src="./location5.png?v=1" alt="Підтвердження" />
+      </button>
     </section>
 
   </main>
@@ -736,6 +860,8 @@
     const loc1 = document.getElementById("loc1");
     const loc2 = document.getElementById("loc2");
     const loc3 = document.getElementById("loc3");
+    const loc4 = document.getElementById("loc4");
+    const loc5 = document.getElementById("loc5");
     const closeModal = document.getElementById("closeModal");
 
     bgMusic.volume = 0.35;
@@ -858,6 +984,28 @@
           <p><strong>Після хрещення ми вирушимо до святкового замку.</strong></p>
           <p>Тут буде тепло, красиво і по-сімейному затишно.</p>
           <p>Саме тут ми продовжимо святкування особливого дня Софійки.</p>
+        `
+      );
+    });
+
+    loc4.addEventListener("click", () => {
+      openModal(
+        "Королівська трапеза",
+        `
+          <p><strong>Час для святкової трапези.</strong></p>
+          <p>Тут ми зберемося разом, щоб відсвяткувати особливий день Софійки.</p>
+          <p>Попереду буде смачно, красиво і дуже по-родинному.</p>
+        `
+      );
+    });
+
+    loc5.addEventListener("click", () => {
+      openModal(
+        "Підтвердження",
+        `
+          <p><strong>Ти майже знайшов чарівне запрошення!</strong></p>
+          <p>Залишився останній крок — підтвердити свою присутність.</p>
+          <p>Натисни кнопку підтвердження, щоб ми знали, що ти будеш з нами.</p>
         `
       );
     });

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
-  <title>Карта подорожі Софійки</title>
+  <title>Карта чарівної подорожі Софійки</title>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
@@ -38,7 +38,7 @@
       width: 100%;
       min-height: 100vh;
       min-height: 100dvh;
-      padding: 12px 8px 26px;
+      padding: 10px 8px 26px;
       overflow: hidden;
     }
 
@@ -47,7 +47,7 @@
       top: 14px;
       left: 14px;
       right: 14px;
-      z-index: 20;
+      z-index: 30;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -55,27 +55,79 @@
     }
 
     .round-btn {
-      width: 46px;
-      height: 46px;
+      position: relative;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      border: 2px solid rgba(255, 220, 120, 0.95);
-      background: rgba(255, 244, 225, 0.76);
-      color: #71347f;
-      font-size: 23px;
+      border: none;
+      background:
+        radial-gradient(circle at 32% 26%, #ffffff 0%, #fff7df 34%, #ffd983 68%, #d79a2f 100%);
+      color: #6c2f86;
+      font-size: 28px;
       font-weight: 700;
+      line-height: 1;
       box-shadow:
-        0 0 14px rgba(255, 220, 120, 0.75),
-        inset 0 0 10px rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+        0 0 0 3px rgba(255, 246, 205, 0.78),
+        0 0 0 6px rgba(255, 210, 94, 0.35),
+        0 0 18px rgba(255, 222, 116, 0.95),
+        0 8px 18px rgba(92, 42, 120, 0.28),
+        inset 0 3px 5px rgba(255,255,255,0.92),
+        inset 0 -6px 10px rgba(139, 83, 18, 0.20);
       cursor: pointer;
       pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        filter .2s ease;
+    }
+
+    .round-btn::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 22%, rgba(255,255,255,0.95), rgba(255,255,255,0.15) 45%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .round-btn::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 239, 170, 0.65);
+      box-shadow: 0 0 18px rgba(255, 230, 125, 0.75);
+      pointer-events: none;
+    }
+
+    .round-btn span {
+      position: relative;
+      z-index: 2;
+      transform: translateY(-1px);
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.8),
+        0 2px 5px rgba(90, 35, 100, 0.35);
+    }
+
+    .round-btn:active {
+      transform: scale(0.94);
+      filter: brightness(1.04);
     }
 
     .round-btn.playing {
-      background: rgba(255, 204, 236, 0.78);
-      color: #9b2c7b;
-      animation: musicPulse 1.8s infinite;
+      animation: musicPulse 1.9s ease-in-out infinite;
+    }
+
+    .round-btn.off {
+      background:
+        radial-gradient(circle at 32% 26%, #ffffff 0%, #f5e9ff 38%, #d9b7ff 70%, #9d65c9 100%);
+      color: #ffffff;
     }
 
     .map-wrap {
@@ -83,7 +135,7 @@
       width: 100%;
       max-width: 520px;
       margin: 0 auto;
-      border-radius: 26px;
+      border-radius: 28px;
       overflow: hidden;
       box-shadow:
         0 0 24px rgba(255, 220, 120, 0.5),
@@ -112,42 +164,203 @@
           rgba(255,255,255,0) 28%,
           rgba(70,20,90,0.08) 100%
         );
+      z-index: 2;
     }
 
-    .butterfly {
-      position: fixed;
-      z-index: 18;
-      font-size: 24px;
+    .lights-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
       pointer-events: none;
-      filter: drop-shadow(0 4px 8px rgba(80, 30, 100, 0.28));
-      opacity: 0;
+      overflow: hidden;
     }
 
-    .b1 {
-      top: 22%;
-      left: -12%;
-      animation: flyRight 14s linear infinite;
+    .spark {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,242,171,0.95) 35%, rgba(255,242,171,0) 72%);
+      box-shadow: 0 0 18px rgba(255, 235, 150, 0.95);
+      opacity: 0.85;
+      animation: twinkle 2.8s ease-in-out infinite;
     }
 
-    .b2 {
-      top: 58%;
-      left: -14%;
-      animation: flyRight2 18s linear infinite;
-      animation-delay: -6s;
+    .spark::before,
+    .spark::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: rgba(255, 245, 190, 0.95);
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
     }
 
-    .b3 {
-      top: 36%;
-      right: -12%;
-      animation: flyLeft 16s linear infinite;
-      animation-delay: -4s;
+    .spark::before {
+      width: 2px;
+      height: 25px;
     }
 
-    .b4 {
-      top: 72%;
-      right: -14%;
-      animation: flyLeft2 20s linear infinite;
-      animation-delay: -9s;
+    .spark::after {
+      width: 25px;
+      height: 2px;
+    }
+
+    .spark.s1 { top: 8%;  left: 22%; animation-delay: 0s; }
+    .spark.s2 { top: 14%; right: 18%; animation-delay: .8s; }
+    .spark.s3 { top: 31%; left: 46%; animation-delay: 1.4s; }
+    .spark.s4 { top: 48%; right: 14%; animation-delay: .4s; }
+    .spark.s5 { top: 66%; left: 20%; animation-delay: 1.2s; }
+    .spark.s6 { bottom: 16%; left: 58%; animation-delay: 1.8s; }
+    .spark.s7 { bottom: 10%; right: 26%; animation-delay: .6s; }
+
+    .hotspots {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .hotspot {
+      position: absolute;
+      pointer-events: auto;
+      background: rgba(255,255,255,0);
+      border: none;
+      cursor: pointer;
+      border-radius: 28px;
+    }
+
+    .hotspot.loc1 {
+      left: 12%;
+      top: 19%;
+      width: 43%;
+      height: 12%;
+    }
+
+    .hotspot.loc2 {
+      left: 41%;
+      top: 38%;
+      width: 43%;
+      height: 12%;
+    }
+
+    .hotspot.loc3 {
+      left: 10%;
+      top: 52%;
+      width: 44%;
+      height: 12%;
+    }
+
+    .hotspot.loc4 {
+      left: 41%;
+      top: 67%;
+      width: 43%;
+      height: 12%;
+    }
+
+    .hotspot.loc5 {
+      left: 10%;
+      top: 80%;
+      width: 43%;
+      height: 10%;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(76, 39, 98, 0.42);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 50;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(255,250,252,0.98), rgba(252,241,255,0.98));
+      box-shadow:
+        0 16px 42px rgba(100, 52, 128, 0.30),
+        0 0 0 2px rgba(255, 242, 200, 0.75);
+      padding: 25px 22px 22px;
+      overflow: hidden;
+      animation: modalIn .3s ease both;
+    }
+
+    .modal-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.85) 0%, transparent 25%),
+        radial-gradient(circle at 80% 25%, rgba(255,240,190,0.5) 0%, transparent 22%),
+        radial-gradient(circle at 70% 80%, rgba(240,220,255,0.5) 0%, transparent 24%);
+      pointer-events: none;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      background:
+        radial-gradient(circle at 35% 35%, #fffdf8 0%, #fff0db 55%, #f4d8ff 100%);
+      color: #7d3f97;
+      font-size: 24px;
+      box-shadow:
+        0 0 0 2px rgba(250, 220, 119, 0.8),
+        0 6px 16px rgba(143, 82, 173, 0.22);
+      z-index: 2;
+    }
+
+    .modal-title {
+      position: relative;
+      z-index: 1;
+      color: #8b53a8;
+      font-size: 28px;
+      line-height: 1.12;
+      text-align: center;
+      margin-bottom: 14px;
+      font-weight: 700;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .modal-text {
+      position: relative;
+      z-index: 1;
+      color: #70407f;
+      font-size: 20px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .modal-text p + p {
+      margin-top: 10px;
+    }
+
+    .hint {
+      position: relative;
+      z-index: 1;
+      margin-top: 14px;
+      text-align: center;
+      font-size: 15px;
+      color: #9b78a8;
     }
 
     @keyframes mapAppear {
@@ -155,7 +368,6 @@
         opacity: 0;
         transform: translateY(18px) scale(0.97);
       }
-
       to {
         opacity: 1;
         transform: translateY(0) scale(1);
@@ -165,94 +377,85 @@
     @keyframes musicPulse {
       0% {
         transform: scale(1);
+        box-shadow:
+          0 0 0 3px rgba(255, 246, 205, 0.78),
+          0 0 0 6px rgba(255, 210, 94, 0.35),
+          0 0 18px rgba(255, 222, 116, 0.95),
+          0 8px 18px rgba(92, 42, 120, 0.28),
+          inset 0 3px 5px rgba(255,255,255,0.92),
+          inset 0 -6px 10px rgba(139, 83, 18, 0.20);
       }
-
       50% {
-        transform: scale(1.08);
+        transform: scale(1.06);
+        box-shadow:
+          0 0 0 5px rgba(255, 246, 205, 0.68),
+          0 0 0 10px rgba(255, 210, 94, 0.25),
+          0 0 34px rgba(255, 222, 116, 1),
+          0 10px 22px rgba(92, 42, 120, 0.32),
+          inset 0 3px 5px rgba(255,255,255,0.92),
+          inset 0 -6px 10px rgba(139, 83, 18, 0.20);
       }
-
       100% {
         transform: scale(1);
+        box-shadow:
+          0 0 0 3px rgba(255, 246, 205, 0.78),
+          0 0 0 6px rgba(255, 210, 94, 0.35),
+          0 0 18px rgba(255, 222, 116, 0.95),
+          0 8px 18px rgba(92, 42, 120, 0.28),
+          inset 0 3px 5px rgba(255,255,255,0.92),
+          inset 0 -6px 10px rgba(139, 83, 18, 0.20);
       }
     }
 
-    @keyframes flyRight {
-      0% {
-        transform: translateX(0) translateY(0) rotate(0deg);
-        opacity: 0;
+    @keyframes twinkle {
+      0%, 100% {
+        transform: scale(0.8);
+        opacity: 0.45;
       }
-
-      10% {
-        opacity: 1;
-      }
-
       50% {
-        transform: translateX(58vw) translateY(34px) rotate(8deg);
-      }
-
-      100% {
-        transform: translateX(122vw) translateY(-24px) rotate(-8deg);
-        opacity: 0;
+        transform: scale(1.15);
+        opacity: 1;
       }
     }
 
-    @keyframes flyRight2 {
-      0% {
-        transform: translateX(0) translateY(0) rotate(0deg);
+    @keyframes modalIn {
+      from {
         opacity: 0;
+        transform: translateY(12px) scale(.96);
       }
-
-      10% {
+      to {
         opacity: 1;
-      }
-
-      45% {
-        transform: translateX(48vw) translateY(-28px) rotate(-7deg);
-      }
-
-      100% {
-        transform: translateX(122vw) translateY(18px) rotate(7deg);
-        opacity: 0;
+        transform: translateY(0) scale(1);
       }
     }
 
-    @keyframes flyLeft {
-      0% {
-        transform: translateX(0) translateY(0) scaleX(-1) rotate(0deg);
-        opacity: 0;
+    @media (max-width: 430px) {
+      .round-btn {
+        width: 54px;
+        height: 54px;
+        font-size: 25px;
       }
 
-      10% {
-        opacity: 1;
+      .topbar {
+        top: 12px;
+        left: 12px;
+        right: 12px;
       }
 
-      50% {
-        transform: translateX(-54vw) translateY(32px) scaleX(-1) rotate(8deg);
+      .map-wrap {
+        border-radius: 25px;
       }
 
-      100% {
-        transform: translateX(-122vw) translateY(-20px) scaleX(-1) rotate(-7deg);
-        opacity: 0;
-      }
-    }
-
-    @keyframes flyLeft2 {
-      0% {
-        transform: translateX(0) translateY(0) scaleX(-1) rotate(0deg);
-        opacity: 0;
+      .map-image {
+        border-radius: 25px;
       }
 
-      10% {
-        opacity: 1;
+      .modal-title {
+        font-size: 25px;
       }
 
-      50% {
-        transform: translateX(-60vw) translateY(-26px) scaleX(-1) rotate(-6deg);
-      }
-
-      100% {
-        transform: translateX(-122vw) translateY(18px) scaleX(-1) rotate(8deg);
-        opacity: 0;
+      .modal-text {
+        font-size: 18px;
       }
     }
   </style>
@@ -271,19 +474,14 @@
   <main class="page">
 
     <div class="topbar">
-      <button class="round-btn" type="button" onclick="location.href='index.html'" aria-label="Назад">
-        ←
+      <button id="backBtn" class="round-btn" type="button" aria-label="Назад">
+        <span>←</span>
       </button>
 
       <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику">
-        ♪
+        <span>🔊</span>
       </button>
     </div>
-
-    <div class="butterfly b1">🦋</div>
-    <div class="butterfly b2">🦋</div>
-    <div class="butterfly b3">🦋</div>
-    <div class="butterfly b4">🦋</div>
 
     <section class="map-wrap">
       <img
@@ -291,13 +489,52 @@
         src="./map.png?v=1"
         alt="Карта чарівної подорожі Софійки"
       />
+
+      <div class="lights-layer">
+        <div class="spark s1"></div>
+        <div class="spark s2"></div>
+        <div class="spark s3"></div>
+        <div class="spark s4"></div>
+        <div class="spark s5"></div>
+        <div class="spark s6"></div>
+        <div class="spark s7"></div>
+      </div>
+
+      <div class="hotspots">
+        <button class="hotspot loc1" id="loc1" aria-label="Знайомство з Софійкою"></button>
+        <button class="hotspot loc2" aria-label="День хрещення"></button>
+        <button class="hotspot loc3" aria-label="Святковий замок"></button>
+        <button class="hotspot loc4" aria-label="Королівська трапеза"></button>
+        <button class="hotspot loc5" aria-label="Підтвердження"></button>
+      </div>
     </section>
 
   </main>
 
+  <div class="modal-overlay" id="modal">
+    <div class="modal-card">
+      <button class="modal-close" id="closeModal" aria-label="Закрити">×</button>
+
+      <div class="modal-title">Знайомство з Софійкою</div>
+
+      <div class="modal-text">
+        <p><strong>Привіт!</strong></p>
+        <p>Мене звати <strong>Софійка</strong>.</p>
+        <p>Я запрошую тебе у чарівну подорож, де наприкінці ти знайдеш моє особливе запрошення.</p>
+      </div>
+
+      <div class="hint">Натисни поза віконцем, щоб закрити</div>
+    </div>
+  </div>
+
   <script>
     const bgMusic = document.getElementById("bgMusic");
     const musicToggle = document.getElementById("musicToggle");
+    const backBtn = document.getElementById("backBtn");
+
+    const modal = document.getElementById("modal");
+    const loc1 = document.getElementById("loc1");
+    const closeModal = document.getElementById("closeModal");
 
     bgMusic.volume = 0.35;
 
@@ -310,13 +547,15 @@
       try {
         await bgMusic.play();
         musicStarted = true;
+        musicToggle.classList.remove("off");
         musicToggle.classList.add("playing");
-        musicToggle.textContent = "🔊";
+        musicToggle.querySelector("span").textContent = "🔊";
         musicToggle.setAttribute("aria-label", "Вимкнути музику");
       } catch (error) {
         musicStarted = false;
         musicToggle.classList.remove("playing");
-        musicToggle.textContent = "♪";
+        musicToggle.classList.add("off");
+        musicToggle.querySelector("span").textContent = "♪";
         musicToggle.setAttribute("aria-label", "Увімкнути музику");
 
         window.addEventListener("click", firstUserInteraction, { once: true });
@@ -330,8 +569,9 @@
       try {
         await bgMusic.play();
         musicStarted = true;
+        musicToggle.classList.remove("off");
         musicToggle.classList.add("playing");
-        musicToggle.textContent = "🔊";
+        musicToggle.querySelector("span").textContent = "🔊";
         musicToggle.setAttribute("aria-label", "Вимкнути музику");
       } catch (error) {
         musicStarted = false;
@@ -343,7 +583,8 @@
       musicStarted = false;
       musicMutedByUser = true;
       musicToggle.classList.remove("playing");
-      musicToggle.textContent = "♪";
+      musicToggle.classList.add("off");
+      musicToggle.querySelector("span").textContent = "♪";
       musicToggle.setAttribute("aria-label", "Увімкнути музику");
     }
 
@@ -353,13 +594,15 @@
       try {
         await bgMusic.play();
         musicStarted = true;
+        musicToggle.classList.remove("off");
         musicToggle.classList.add("playing");
-        musicToggle.textContent = "🔊";
+        musicToggle.querySelector("span").textContent = "🔊";
         musicToggle.setAttribute("aria-label", "Вимкнути музику");
       } catch (error) {
         musicStarted = false;
         musicToggle.classList.remove("playing");
-        musicToggle.textContent = "♪";
+        musicToggle.classList.add("off");
+        musicToggle.querySelector("span").textContent = "♪";
       }
     }
 
@@ -370,6 +613,24 @@
         pauseMusic();
       } else {
         resumeMusic();
+      }
+    });
+
+    backBtn.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+
+    loc1.addEventListener("click", () => {
+      modal.classList.add("active");
+    });
+
+    closeModal.addEventListener("click", () => {
+      modal.classList.remove("active");
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.classList.remove("active");
       }
     });
 

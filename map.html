@@ -430,101 +430,6 @@
         0 0 10px rgba(255,218,116,0.9);
     }
 
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      background: rgba(76,39,98,0.42);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-card {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      border-radius: 30px;
-      padding: 25px 22px 22px;
-      background:
-        linear-gradient(180deg, rgba(255,250,252,0.98), rgba(252,241,255,0.98));
-      box-shadow:
-        0 16px 42px rgba(100,52,128,0.30),
-        0 0 0 2px rgba(255,242,200,0.75);
-      animation: modalIn .3s ease both;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 42px;
-      height: 42px;
-      border: none;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 35% 35%, #fffdf8 0%, #fff0db 55%, #f4d8ff 100%);
-      color: #7d3f97;
-      font-size: 24px;
-      cursor: pointer;
-      box-shadow:
-        0 0 0 2px rgba(250,220,119,0.8),
-        0 6px 16px rgba(143,82,173,0.22);
-    }
-
-    .modal-title {
-      color: #8b53a8;
-      font-size: 28px;
-      line-height: 1.12;
-      text-align: center;
-      margin-bottom: 14px;
-      font-weight: 700;
-    }
-
-    .modal-text {
-      color: #70407f;
-      font-size: 20px;
-      line-height: 1.45;
-      text-align: center;
-    }
-
-    .modal-text p + p {
-      margin-top: 10px;
-    }
-
-    .hint {
-      margin-top: 14px;
-      text-align: center;
-      font-size: 15px;
-      color: #9b78a8;
-    }
-
-    .modal-action {
-      margin-top: 16px;
-      width: 100%;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 16px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: #7d3f97;
-      background:
-        linear-gradient(180deg, #fff7da 0%, #ffd86f 48%, #f3b84d 100%);
-      box-shadow:
-        0 0 0 2px rgba(255,235,160,0.9),
-        0 8px 16px rgba(90,35,115,0.18),
-        inset 0 2px 5px rgba(255,255,255,0.8);
-      cursor: pointer;
-    }
-
     @keyframes musicPulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.06); }
@@ -550,11 +455,6 @@
     @keyframes progressFloat {
       0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
       50% { transform: translateX(-50%) translateY(-1px) scale(1.002); }
-    }
-
-    @keyframes modalIn {
-      from { opacity: 0; transform: translateY(12px) scale(.96); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     @media (max-width: 430px) {
@@ -583,36 +483,6 @@
 
       .map-subtitle {
         font-size: clamp(13px, 2.9vw, 17px);
-      }
-
-      .progress-btn {
-        width: 58%;
-        bottom: 1.35%;
-        min-height: 54px;
-        padding-left: 53px;
-      }
-
-      .progress-btn::before {
-        width: 36px;
-        height: 36px;
-        font-size: 21px;
-      }
-
-      .progress-overlay {
-        font-size: clamp(13px, 3.1vw, 17px);
-      }
-
-      .progress-dot {
-        width: 8px;
-        height: 8px;
-      }
-
-      .modal-title {
-        font-size: 25px;
-      }
-
-      .modal-text {
-        font-size: 18px;
       }
     }
   </style>
@@ -652,8 +522,8 @@
       <div class="spark s4"></div>
       <div class="spark s5"></div>
 
-      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою" onclick="openFirstLocation(event)"></button>
-      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення" onclick="showLocked(event)"></button>
+      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою" onclick="goToLocation1(event)"></button>
+      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення" onclick="showSecondLocked(event)"></button>
       <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок" onclick="showLocked(event)"></button>
       <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза" onclick="showLocked(event)"></button>
       <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження" onclick="showLocked(event)"></button>
@@ -671,70 +541,79 @@
     </section>
   </main>
 
-  <div class="modal-overlay" id="modal">
-    <div class="modal-card">
-      <button class="modal-close" id="closeModal" aria-label="Закрити" onclick="closeCurrentModal(event)">×</button>
-      <div class="modal-title" id="modalTitle">Знайомство з Софійкою</div>
-      <div class="modal-text" id="modalText"></div>
-      <button class="modal-action" id="completeLocationBtn" type="button" onclick="completeFirstLocation(event)">Пройти локацію</button>
-      <div class="hint">Після проходження відкриється наступна локація</div>
-    </div>
-  </div>
-
   <script>
     var bgMusic = document.getElementById("bgMusic");
     var musicToggle = document.getElementById("musicToggle");
 
-    var modal = document.getElementById("modal");
-    var modalTitle = document.getElementById("modalTitle");
-    var modalText = document.getElementById("modalText");
-    var completeLocationBtn = document.getElementById("completeLocationBtn");
-
     var progressText = document.getElementById("progressText");
     var dot1 = document.getElementById("dot1");
     var loc1 = document.getElementById("loc1");
+    var loc2 = document.getElementById("loc2");
 
     if (bgMusic) {
       bgMusic.volume = 0.35;
     }
 
-    function openFirstLocation(event) {
+    function goToLocation1(event) {
       if (event) {
         event.preventDefault();
         event.stopPropagation();
       }
 
-      modalTitle.textContent = "Знайомство з Софійкою";
-
-      modalText.innerHTML =
-        "<p><strong>Привіт!</strong></p>" +
-        "<p>Мене звати <strong>Софійка</strong>.</p>" +
-        "<p>Я запрошую тебе у чарівну подорож, де наприкінці ти знайдеш моє особливе запрошення.</p>";
-
-      completeLocationBtn.style.display = "block";
-      completeLocationBtn.textContent = "Пройти локацію";
-
-      modal.classList.add("active");
+      window.location.href = "location1.html";
     }
 
-    function completeFirstLocation(event) {
+    function updateMapProgress() {
+      var location1Done = localStorage.getItem("sofiyka_location1_done");
+
+      if (location1Done === "true") {
+        progressText.textContent = "Відкрито 1 з 5";
+
+        if (dot1) {
+          dot1.classList.add("opened");
+        }
+
+        if (loc1) {
+          loc1.classList.remove("next");
+          loc1.classList.add("opened");
+        }
+
+        if (loc2) {
+          loc2.classList.remove("locked");
+          loc2.classList.add("next");
+        }
+      } else {
+        progressText.textContent = "Відкрито 0 з 5";
+
+        if (dot1) {
+          dot1.classList.remove("opened");
+        }
+
+        if (loc1) {
+          loc1.classList.remove("opened");
+          loc1.classList.add("next");
+        }
+
+        if (loc2) {
+          loc2.classList.remove("next");
+          loc2.classList.add("locked");
+        }
+      }
+    }
+
+    function showSecondLocked(event) {
       if (event) {
         event.preventDefault();
         event.stopPropagation();
       }
 
-      progressText.textContent = "Відкрито 1 з 5";
+      var location1Done = localStorage.getItem("sofiyka_location1_done");
 
-      if (dot1) {
-        dot1.classList.add("opened");
+      if (location1Done === "true") {
+        alert("Друга локація вже відкрита, але її сторінку ми ще не створили.");
+      } else {
+        alert("Спочатку пройди першу локацію ❤️");
       }
-
-      if (loc1) {
-        loc1.classList.remove("next");
-        loc1.classList.add("opened");
-      }
-
-      closeCurrentModal();
     }
 
     function showLocked(event) {
@@ -743,14 +622,7 @@
         event.stopPropagation();
       }
 
-      modalTitle.textContent = "Локація ще закрита";
-
-      modalText.innerHTML =
-        "<p><strong>Ця локація поки недоступна.</strong></p>" +
-        "<p>Спочатку пройди першу локацію, а потім відкриємо наступну частину подорожі.</p>";
-
-      completeLocationBtn.style.display = "none";
-      modal.classList.add("active");
+      alert("Ця локація поки закрита. Спочатку проходь подорож по черзі ❤️");
     }
 
     function showProgress(event) {
@@ -759,23 +631,7 @@
         event.stopPropagation();
       }
 
-      modalTitle.textContent = "Прогрес подорожі";
-
-      modalText.innerHTML =
-        "<p><strong>" + progressText.textContent + "</strong></p>" +
-        "<p>Зараз працює перша локація. Після її перевірки відкриємо наступну.</p>";
-
-      completeLocationBtn.style.display = "none";
-      modal.classList.add("active");
-    }
-
-    function closeCurrentModal(event) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-
-      modal.classList.remove("active");
+      alert(progressText.textContent);
     }
 
     async function toggleMusic(event) {
@@ -801,15 +657,11 @@
       } catch (error) {
         musicToggle.classList.remove("playing");
         musicToggle.classList.add("off");
-        alert("Музика не запустилась. Перевір, чи mp3 файл лежить поруч із map.html і назва файлу точна.");
+        alert("Музика не запустилась. Перевір, чи mp3 файл лежить поруч із map.html.");
       }
     }
 
-    modal.onclick = function(event) {
-      if (event.target === modal) {
-        closeCurrentModal(event);
-      }
-    };
+    updateMapProgress();
   </script>
 
 </body>

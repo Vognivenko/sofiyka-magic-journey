@@ -50,86 +50,47 @@
     }
 
     .round-btn {
-      position: relative;
       width: 58px;
       height: 58px;
       border-radius: 50%;
       border: none;
       pointer-events: auto !important;
       cursor: pointer;
-      font-size: 27px;
-      color: #79328f;
+      font-size: 28px;
+      color: #74318d;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       background:
-        radial-gradient(circle at 32% 25%, #ffffff 0%, #fff8dc 30%, #ffe58f 58%, #f1b94b 100%);
+        radial-gradient(circle at 30% 25%, #fff 0%, #fff4c8 38%, #ffd86f 70%, #c98923 100%);
       box-shadow:
-        0 0 0 2px rgba(255, 250, 220, 0.95),
-        0 0 0 5px rgba(255, 218, 95, 0.52),
-        0 0 18px rgba(255, 225, 105, 0.85),
-        0 8px 18px rgba(88, 32, 110, 0.26),
-        inset 0 4px 7px rgba(255, 255, 255, 0.98),
-        inset 0 -7px 12px rgba(145, 87, 18, 0.16);
+        0 0 0 3px rgba(255, 245, 200, 0.85),
+        0 0 0 6px rgba(255, 215, 90, 0.35),
+        0 0 24px rgba(255, 220, 95, 0.9),
+        0 8px 18px rgba(90, 35, 115, 0.28),
+        inset 0 4px 7px rgba(255,255,255,0.95),
+        inset 0 -7px 12px rgba(120,70,20,0.18);
       touch-action: manipulation;
-    }
-
-    .round-btn::before {
-      content: "";
-      position: absolute;
-      inset: 5px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      pointer-events: none;
-    }
-
-    .round-btn::after {
-      content: "";
-      position: absolute;
-      top: -30%;
-      left: -70%;
-      width: 55%;
-      height: 160%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.7),
-        transparent
-      );
-      transform: rotate(25deg);
-      animation: buttonShine 4.8s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    .round-btn span {
-      position: relative;
-      z-index: 2;
-      font-weight: 700;
-      text-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.95),
-        0 2px 4px rgba(96, 35, 115, 0.22);
     }
 
     .round-btn:active {
       transform: scale(0.94);
     }
 
+    .round-btn span {
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    }
+
     .round-btn.playing {
-      animation: buttonBreath 2.8s ease-in-out infinite;
+      animation: musicPulse 1.8s ease-in-out infinite;
     }
 
     .round-btn.off {
-      color: #ffffff;
       background:
-        radial-gradient(circle at 32% 25%, #ffffff 0%, #f1defc 33%, #ca8bff 64%, #7c3aa0 100%);
-      box-shadow:
-        0 0 0 2px rgba(255, 250, 255, 0.95),
-        0 0 0 5px rgba(212, 156, 255, 0.45),
-        0 0 16px rgba(207, 143, 255, 0.78),
-        0 8px 18px rgba(88, 32, 110, 0.26),
-        inset 0 4px 7px rgba(255, 255, 255, 0.9),
-        inset 0 -7px 12px rgba(85, 34, 115, 0.2);
+        radial-gradient(circle at 30% 25%, #fff 0%, #f6e9ff 40%, #d6a9ff 72%, #8e55b5 100%);
+      color: #fff;
     }
 
     .map-wrap {
@@ -537,49 +498,9 @@
       cursor: pointer;
     }
 
-    @keyframes buttonBreath {
-      0%, 100% {
-        transform: scale(1);
-        box-shadow:
-          0 0 0 2px rgba(255, 250, 220, 0.95),
-          0 0 0 5px rgba(255, 218, 95, 0.52),
-          0 0 18px rgba(255, 225, 105, 0.85),
-          0 8px 18px rgba(88, 32, 110, 0.26),
-          inset 0 4px 7px rgba(255, 255, 255, 0.98),
-          inset 0 -7px 12px rgba(145, 87, 18, 0.16);
-      }
-
-      50% {
-        transform: scale(1.025);
-        box-shadow:
-          0 0 0 2px rgba(255, 250, 220, 0.95),
-          0 0 0 6px rgba(255, 224, 115, 0.6),
-          0 0 24px rgba(255, 230, 130, 0.95),
-          0 9px 20px rgba(88, 32, 110, 0.28),
-          inset 0 4px 7px rgba(255, 255, 255, 0.98),
-          inset 0 -7px 12px rgba(145, 87, 18, 0.16);
-      }
-    }
-
-    @keyframes buttonShine {
-      0% {
-        left: -75%;
-        opacity: 0;
-      }
-
-      18% {
-        opacity: 0.9;
-      }
-
-      34% {
-        left: 120%;
-        opacity: 0;
-      }
-
-      100% {
-        left: 120%;
-        opacity: 0;
-      }
+    @keyframes musicPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
     }
 
     @keyframes twinkle {
@@ -758,7 +679,7 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v7";
+    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v6";
 
     const resetParams = new URLSearchParams(window.location.search);
     if (resetParams.has("reset")) {
@@ -769,7 +690,70 @@
       localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v3");
       localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v4");
       localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v5");
-      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v6");
     }
 
-    con      
+    const bgMusic = document.getElementById("bgMusic");
+    const musicToggle = document.getElementById("musicToggle");
+    const backBtn = document.getElementById("backBtn");
+
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+    const closeModal = document.getElementById("closeModal");
+    const completeLocationBtn = document.getElementById("completeLocationBtn");
+
+    const progressText = document.getElementById("progressText");
+    const progressPanel = document.getElementById("progressPanel");
+    const progressDots = document.querySelectorAll(".progress-dot");
+
+    const loc1 = document.getElementById("loc1");
+    const loc2 = document.getElementById("loc2");
+    const loc3 = document.getElementById("loc3");
+    const loc4 = document.getElementById("loc4");
+    const loc5 = document.getElementById("loc5");
+
+    const locations = [
+      { id: 1, element: loc1 },
+      { id: 2, element: loc2 },
+      { id: 3, element: loc3 },
+      { id: 4, element: loc4 },
+      { id: 5, element: loc5 }
+    ];
+
+    let currentLocationToComplete = null;
+    let musicStarted = false;
+    let musicMutedByUser = false;
+
+    if (bgMusic) {
+      bgMusic.volume = 0.35;
+    }
+
+    function loadProgress() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        const parsed = saved ? JSON.parse(saved) : [];
+
+        if (Array.isArray(parsed)) {
+          return new Set(parsed.map(String));
+        }
+
+        return new Set();
+      } catch (error) {
+        localStorage.removeItem(STORAGE_KEY);
+        return new Set();
+      }
+    }
+
+    let openedLocations = loadProgress();
+
+    function saveProgress() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...openedLocations]));
+    }
+
+    function isUnlocked(id) {
+      if (id === 1) return true;
+      return openedLocations.has(String(id - 1));
+    }
+
+    function updateProgress() {
+      const count = openedLocations.siz      

@@ -170,7 +170,7 @@
       height: auto;
       user-select: none;
       -webkit-user-drag: none;
-      pointer-events: none;
+      pointer-events: none !important;
     }
 
     .map-header {
@@ -244,9 +244,10 @@
 
     .location {
       position: absolute;
-      z-index: 50;
+      z-index: 100;
+      display: block;
       border: none;
-      background-color: transparent;
+      background-color: rgba(255, 0, 0, 0);
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -255,6 +256,8 @@
       transform-origin: center center;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
+      appearance: none;
+      -webkit-appearance: none;
       transition:
         opacity .35s ease,
         filter .35s ease,
@@ -282,23 +285,21 @@
     }
 
     .location.locked {
-      cursor: pointer !important;
-      pointer-events: auto !important;
-      opacity: 0.68 !important;
+      opacity: 0.68;
       filter:
         grayscale(0.45)
         saturate(0.62)
         brightness(0.96)
         contrast(0.94)
-        drop-shadow(0 5px 7px rgba(70, 35, 90, 0.12)) !important;
-      animation: none !important;
+        drop-shadow(0 5px 7px rgba(70, 35, 90, 0.12));
+      animation: none;
     }
 
     .location1 {
       left: 8.5%;
       top: 21%;
       width: 54%;
-      aspect-ratio: 800 / 433;
+      height: 16.5%;
       background-image: url("location1.png");
       animation: pulse1 2.4s ease-in-out infinite;
     }
@@ -307,7 +308,7 @@
       left: 39.2%;
       top: 36.5%;
       width: 53%;
-      aspect-ratio: 535 / 243;
+      height: 13.6%;
       background-image: url("location2.png");
       animation: pulse2 2.8s ease-in-out infinite;
     }
@@ -316,7 +317,7 @@
       left: 8.3%;
       top: 50.6%;
       width: 50%;
-      aspect-ratio: 535 / 243;
+      height: 12.8%;
       background-image: url("location3.png");
       animation: float3 3.1s ease-in-out infinite;
     }
@@ -325,7 +326,7 @@
       left: 39%;
       top: 63.6%;
       width: 53%;
-      aspect-ratio: 535 / 243;
+      height: 13.6%;
       background-image: url("location4.png");
       animation: cake4 2.7s ease-in-out infinite;
     }
@@ -334,7 +335,7 @@
       left: 7.7%;
       top: 74.2%;
       width: 51%;
-      aspect-ratio: 535 / 243;
+      height: 13.1%;
       background-image: url("location5.png");
       animation: heart5 2.45s ease-in-out infinite;
     }
@@ -350,7 +351,7 @@
       width: 58%;
       max-width: 300px;
       min-height: 55px;
-      z-index: 60;
+      z-index: 120;
       transform: translateX(-50%);
       border: none;
       border-radius: 999px;
@@ -664,8 +665,7 @@
 
   <audio
     id="bgMusic"
-    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3?v=3"
-    autoplay
+    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3"
     loop
     preload="auto">
   </audio>
@@ -676,7 +676,7 @@
         <span class="back-arrow">←</span>
       </a>
 
-      <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику">
+      <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику" onclick="toggleMusic(event)">
         <span class="music-note">♪</span>
       </button>
     </div>
@@ -695,13 +695,13 @@
       <div class="spark s4"></div>
       <div class="spark s5"></div>
 
-      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою"></button>
-      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення"></button>
-      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок"></button>
-      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза"></button>
-      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження"></button>
+      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою" onclick="clickLocation(event, 1)"></button>
+      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення" onclick="clickLocation(event, 2)"></button>
+      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок" onclick="clickLocation(event, 3)"></button>
+      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза" onclick="clickLocation(event, 4)"></button>
+      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження" onclick="clickLocation(event, 5)"></button>
 
-      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій">
+      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій" onclick="showProgress(event)">
         <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
         <div class="progress-dots">
           <span class="progress-dot" data-dot="1"></span>
@@ -716,28 +716,16 @@
 
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
-      <button class="modal-close" id="closeModal" aria-label="Закрити">×</button>
+      <button class="modal-close" id="closeModal" aria-label="Закрити" onclick="closeCurrentModal(event)">×</button>
       <div class="modal-title" id="modalTitle">Знайомство з Софійкою</div>
       <div class="modal-text" id="modalText"></div>
-      <button class="modal-action" id="completeLocationBtn" type="button">Пройти локацію</button>
+      <button class="modal-action" id="completeLocationBtn" type="button" onclick="completeCurrentLocation(event)">Пройти локацію</button>
       <div class="hint">Після проходження відкриється наступна локація</div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_WORKING_MUSIC_FIX_1";
-
-    const resetParams = new URLSearchParams(window.location.search);
-    if (resetParams.has("reset")) {
-      localStorage.removeItem(STORAGE_KEY);
-
-      for (let i = 1; i <= 40; i++) {
-        localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v" + i);
-      }
-
-      localStorage.removeItem("sofiykaOpenedLocations");
-      localStorage.removeItem("sofiykaOpenedLocations_WORKING_RESTORE_1");
-    }
+    const STORAGE_KEY = "sofiyka_final_fixed_click_music_v1";
 
     const locationData = {
       1: {
@@ -769,4 +757,10 @@
         title: "Королівська трапеза",
         html: `
           <p><strong>Час для святкової трапези.</strong></p>
-          <p>Тут ми зберемося разо      
+          <p>Тут ми зберемося разом, щоб відсвяткувати особливий день Софійки.</p>
+          <p>Попереду буде смачно, красиво і дуже по-родинному.</p>
+        `
+      },
+      5: {
+        title: "Підтвердження",
+        html:      

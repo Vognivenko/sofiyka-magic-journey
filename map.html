@@ -214,7 +214,7 @@
     }
 
     .location.locked {
-      cursor: default;
+      cursor: pointer;
       opacity: 0.46;
       filter:
         grayscale(1)
@@ -652,11 +652,12 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v1";
+    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v2";
 
     if (new URLSearchParams(window.location.search).has("reset")) {
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem("sofiykaOpenedLocations");
+      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v1");
     }
 
     const bgMusic = document.getElementById("bgMusic");
@@ -672,12 +673,18 @@
     const progressPanel = document.getElementById("progressPanel");
     const progressDots = document.querySelectorAll(".progress-dot");
 
+    const loc1 = document.getElementById("loc1");
+    const loc2 = document.getElementById("loc2");
+    const loc3 = document.getElementById("loc3");
+    const loc4 = document.getElementById("loc4");
+    const loc5 = document.getElementById("loc5");
+
     const locations = [
-      { id: 1, element: document.getElementById("loc1") },
-      { id: 2, element: document.getElementById("loc2") },
-      { id: 3, element: document.getElementById("loc3") },
-      { id: 4, element: document.getElementById("loc4") },
-      { id: 5, element: document.getElementById("loc5") }
+      { id: 1, element: loc1 },
+      { id: 2, element: loc2 },
+      { id: 3, element: loc3 },
+      { id: 4, element: loc4 },
+      { id: 5, element: loc5 }
     ];
 
     bgMusic.volume = 0.35;
@@ -685,9 +692,23 @@
     let musicStarted = false;
     let musicMutedByUser = false;
 
-    let openedLocations = new Set(
-      JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")
-    );
+    function loadProgress() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        const parsed = saved ? JSON.parse(saved) : [];
+
+        if (Array.isArray(parsed)) {
+          return new Set(parsed.map(String));
+        }
+
+        return new Set();
+      } catch (error) {
+        localStorage.removeItem(STORAGE_KEY);
+        return new Set();
+      }
+    }
+
+    let openedLocations = loadProgress();
 
     function saveProgress() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify([...openedLocations]));
@@ -715,22 +736,15 @@
       locations.forEach(item => {
         const id = item.id;
         const button = item.element;
-        const opened = openedLocations.has(String(id));
-        const unlocked = isUnlocked(id);
 
         button.classList.remove("locked", "opened", "next");
 
-        if (!unlocked) {
-          button.classList.add("locked");
-          button.disabled = true;
+        if (openedLocations.has(String(id))) {
+          button.classList.add("opened");
+        } else if (isUnlocked(id)) {
+          button.classList.add("next");
         } else {
-          button.disabled = false;
-
-          if (opened) {
-            button.classList.add("opened");
-          } else {
-            button.classList.add("next");
-          }
+          button.classList.add("locked");
         }
       });
     }
@@ -741,31 +755,21 @@
       updateProgress();
     }
 
-    async function startMusicImmediately() {
-      if (musicMutedByUser) return;
-
-      try {
-        await bgMusic.play();
-        musicStarted = true;
-        musicToggle.classList.remove("off");
-        musicToggle.classList.add("playing");
-      } catch (error) {
-        musicStarted = false;
-        musicToggle.classList.remove("playing");
-        musicToggle.classList.add("off");
-
-        window.addEventListener("click", firstUserInteraction, { once: true });
-        window.addEventListener("touchstart", firstUserInteraction, { once: true });
-      }
+    function openModal(title, html) {
+      modalTitle.textContent = title;
+      modalText.innerHTML = html;
+      modal.classList.add("active");
     }
 
-    async function firstUserInteraction() {
-      if (musicMutedByUser) return;
+    function showLockedMessage(id) {
+      openModal(
+        "Локація ще закрита",
+        `
+          <p><strong>Ця локація поки недоступна.</strong></p>
+          <p>Спочатку відкрий локацію №${id - 1}, а потім ця частина подорожі стане активною.</p>
+        `
+      );
+    }
 
-      try {
-        await bgMusic.play();
-        musicStarted = true;
-        musicToggle.classList.remove("off");
-        musicToggle.classList.add("playing");
-      } catch (error) {
-        musicStar
+    function handleLocation(id, title, html) {
+      if (!isUnlocked(id)

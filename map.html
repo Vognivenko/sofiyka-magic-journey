@@ -2,7 +2,7 @@
 <html lang="uk" translate="no">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
   <title>Карта чарівної подорожі Софійки</title>
 
@@ -18,13 +18,14 @@
     html,
     body {
       width: 100%;
-      height: 100%;
-      overflow: hidden;
+      min-height: 100%;
+      overflow-x: hidden;
       font-family: 'Cormorant Garamond', serif;
       background: #efd8ff;
     }
 
     body {
+      min-height: 100vh;
       background:
         radial-gradient(circle at 20% 10%, rgba(255,255,255,0.9), transparent 18%),
         linear-gradient(180deg, #ffe3f7 0%, #eadcff 45%, #d8edff 100%);
@@ -32,44 +33,16 @@
 
     .page {
       width: 100%;
-      height: 100dvh;
-      padding: 8px;
+      min-height: 100vh;
+      padding: 10px 8px 28px;
       overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
-
-    .map-wrap {
-      position: relative;
-      width: min(calc(100vw - 16px), calc((100dvh - 16px) * 0.5625), 520px);
-      aspect-ratio: 9 / 16;
-      max-height: calc(100dvh - 16px);
-      border-radius: 28px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.2);
-      box-shadow:
-        0 0 24px rgba(255, 220, 120, 0.5),
-        0 18px 40px rgba(70, 25, 90, 0.26);
-    }
-
-    .map-image {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-      user-select: none;
-      -webkit-user-drag: none;
     }
 
     .topbar {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      right: 12px;
+      position: fixed;
+      top: 14px;
+      left: 14px;
+      right: 14px;
       z-index: 9999;
       display: flex;
       justify-content: space-between;
@@ -78,12 +51,13 @@
 
     .round-btn {
       position: relative;
-      width: 56px;
-      height: 56px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
       border: none;
-      pointer-events: auto;
+      pointer-events: auto !important;
       cursor: pointer;
+      font-size: 27px;
       color: #79328f;
       display: flex;
       align-items: center;
@@ -177,6 +151,28 @@
         inset 0 -7px 12px rgba(85, 34, 115, 0.2);
     }
 
+    .map-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.2);
+      box-shadow:
+        0 0 24px rgba(255, 220, 120, 0.5),
+        0 18px 40px rgba(70, 25, 90, 0.26);
+    }
+
+    .map-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
     .map-header {
       position: absolute;
       top: 5.2%;
@@ -188,7 +184,7 @@
     }
 
     .map-title {
-      font-size: clamp(31px, 7.1vw, 50px);
+      font-size: clamp(32px, 7.2vw, 50px);
       line-height: 0.9;
       font-weight: 700;
       color: #7d3f97;
@@ -200,7 +196,7 @@
 
     .map-subtitle {
       margin-top: 9px;
-      font-size: clamp(13px, 2.9vw, 18px);
+      font-size: clamp(13px, 3vw, 18px);
       font-weight: 700;
       color: #74418a;
       text-shadow: 0 1px 0 rgba(255,255,255,0.9);
@@ -208,7 +204,7 @@
 
     .spark {
       position: absolute;
-      z-index: 25;
+      z-index: 8;
       width: 16px;
       height: 16px;
       border-radius: 50%;
@@ -248,20 +244,17 @@
 
     .location {
       position: absolute;
-      z-index: 5000;
-      display: block;
+      z-index: 50;
       border: none;
-      background-color: rgba(255, 0, 0, 0);
+      background-color: transparent;
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
       cursor: pointer;
-      pointer-events: auto;
+      pointer-events: auto !important;
       transform-origin: center center;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
-      appearance: none;
-      -webkit-appearance: none;
       transition:
         opacity .35s ease,
         filter .35s ease,
@@ -289,21 +282,23 @@
     }
 
     .location.locked {
-      opacity: 0.68;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      opacity: 0.68 !important;
       filter:
         grayscale(0.45)
         saturate(0.62)
         brightness(0.96)
         contrast(0.94)
-        drop-shadow(0 5px 7px rgba(70, 35, 90, 0.12));
-      animation: none;
+        drop-shadow(0 5px 7px rgba(70, 35, 90, 0.12)) !important;
+      animation: none !important;
     }
 
     .location1 {
       left: 8.5%;
       top: 21%;
       width: 54%;
-      height: 16.5%;
+      aspect-ratio: 800 / 433;
       background-image: url("location1.png");
       animation: pulse1 2.4s ease-in-out infinite;
     }
@@ -312,7 +307,7 @@
       left: 39.2%;
       top: 36.5%;
       width: 53%;
-      height: 13.6%;
+      aspect-ratio: 535 / 243;
       background-image: url("location2.png");
       animation: pulse2 2.8s ease-in-out infinite;
     }
@@ -321,7 +316,7 @@
       left: 8.3%;
       top: 50.6%;
       width: 50%;
-      height: 12.8%;
+      aspect-ratio: 535 / 243;
       background-image: url("location3.png");
       animation: float3 3.1s ease-in-out infinite;
     }
@@ -330,7 +325,7 @@
       left: 39%;
       top: 63.6%;
       width: 53%;
-      height: 13.6%;
+      aspect-ratio: 535 / 243;
       background-image: url("location4.png");
       animation: cake4 2.7s ease-in-out infinite;
     }
@@ -339,7 +334,7 @@
       left: 7.7%;
       top: 74.2%;
       width: 51%;
-      height: 13.1%;
+      aspect-ratio: 535 / 243;
       background-image: url("location5.png");
       animation: heart5 2.45s ease-in-out infinite;
     }
@@ -355,12 +350,12 @@
       width: 58%;
       max-width: 300px;
       min-height: 55px;
-      z-index: 6000;
+      z-index: 60;
       transform: translateX(-50%);
       border: none;
       border-radius: 999px;
       cursor: pointer;
-      pointer-events: auto;
+      pointer-events: auto !important;
       padding: 7px 14px 7px 54px;
       background:
         linear-gradient(180deg, rgba(255, 248, 253, 0.96), rgba(246, 223, 255, 0.94));
@@ -411,7 +406,7 @@
       display: block;
       color: #7d3f97;
       font-weight: 700;
-      font-size: clamp(13px, 3.1vw, 18px);
+      font-size: clamp(14px, 3.2vw, 18px);
       line-height: 1;
       white-space: nowrap;
       text-align: center;
@@ -433,8 +428,8 @@
     }
 
     .progress-dot {
-      width: 8px;
-      height: 8px;
+      width: 8.5px;
+      height: 8.5px;
       border-radius: 50%;
       background: rgba(152, 118, 174, 0.35);
       box-shadow:
@@ -453,7 +448,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      z-index: 20000;
+      z-index: 10000;
       background: rgba(76,39,98,0.42);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
@@ -461,7 +456,6 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      overflow: hidden;
     }
 
     .modal-overlay.active {
@@ -472,8 +466,6 @@
       position: relative;
       width: 100%;
       max-width: 420px;
-      max-height: calc(100dvh - 40px);
-      overflow: hidden;
       border-radius: 30px;
       padding: 25px 22px 22px;
       background:
@@ -504,7 +496,7 @@
 
     .modal-title {
       color: #8b53a8;
-      font-size: 25px;
+      font-size: 28px;
       line-height: 1.12;
       text-align: center;
       margin-bottom: 14px;
@@ -513,7 +505,7 @@
 
     .modal-text {
       color: #70407f;
-      font-size: 18px;
+      font-size: 20px;
       line-height: 1.45;
       text-align: center;
     }
@@ -549,15 +541,34 @@
     }
 
     @keyframes buttonBreath {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.025); }
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.025);
+      }
     }
 
     @keyframes buttonShine {
-      0% { left: -75%; opacity: 0; }
-      18% { opacity: 0.9; }
-      34% { left: 120%; opacity: 0; }
-      100% { left: 120%; opacity: 0; }
+      0% {
+        left: -75%;
+        opacity: 0;
+      }
+
+      18% {
+        opacity: 0.9;
+      }
+
+      34% {
+        left: 120%;
+        opacity: 0;
+      }
+
+      100% {
+        left: 120%;
+        opacity: 0;
+      }
     }
 
     @keyframes twinkle {
@@ -594,13 +605,76 @@
     }
 
     @keyframes progressFloat {
-      0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
-      50% { transform: translateX(-50%) translateY(-1px) scale(1.002); }
+      0%, 100% {
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-1px) scale(1.002);
+      }
     }
 
     @keyframes modalIn {
       from { opacity: 0; transform: translateY(12px) scale(.96); }
       to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 430px) {
+      .round-btn {
+        width: 54px;
+        height: 54px;
+      }
+
+      .back-arrow {
+        font-size: 30px;
+      }
+
+      .music-note {
+        font-size: 26px;
+      }
+
+      .topbar {
+        top: 12px;
+        left: 12px;
+        right: 12px;
+      }
+
+      .map-title {
+        font-size: clamp(31px, 7.1vw, 45px);
+      }
+
+      .map-subtitle {
+        font-size: clamp(13px, 2.9vw, 17px);
+      }
+
+      .progress-btn {
+        width: 58%;
+        bottom: 1.35%;
+        min-height: 54px;
+        padding-left: 53px;
+      }
+
+      .progress-btn::before {
+        width: 36px;
+        height: 36px;
+        font-size: 21px;
+      }
+
+      .progress-overlay {
+        font-size: clamp(13px, 3.1vw, 17px);
+      }
+
+      .progress-dot {
+        width: 8px;
+        height: 8px;
+      }
+
+      .modal-title {
+        font-size: 25px;
+      }
+
+      .modal-text {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
@@ -610,23 +684,24 @@
   <audio
     id="bgMusic"
     src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3"
+    autoplay
     loop
     preload="auto">
   </audio>
 
   <main class="page">
+    <div class="topbar">
+      <a id="backBtn" class="round-btn" href="index.html" aria-label="Назад">
+        <span class="back-arrow">←</span>
+      </a>
+
+      <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику">
+        <span class="music-note">♪</span>
+      </button>
+    </div>
+
     <section class="map-wrap">
       <img class="map-image" src="map.png" alt="Карта чарівної подорожі Софійки" />
-
-      <div class="topbar">
-        <a id="backBtn" class="round-btn" href="index.html" aria-label="Назад">
-          <span class="back-arrow">←</span>
-        </a>
-
-        <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику" onclick="toggleMusic(event)">
-          <span class="music-note">♪</span>
-        </button>
-      </div>
 
       <div class="map-header">
         <div class="map-title">Карта чарівної<br>подорожі</div>
@@ -639,13 +714,13 @@
       <div class="spark s4"></div>
       <div class="spark s5"></div>
 
-      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою" onclick="clickLocation(event, 1)"></button>
-      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення" onclick="clickLocation(event, 2)"></button>
-      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок" onclick="clickLocation(event, 3)"></button>
-      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза" onclick="clickLocation(event, 4)"></button>
-      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження" onclick="clickLocation(event, 5)"></button>
+      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою"></button>
+      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення"></button>
+      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок"></button>
+      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза"></button>
+      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження"></button>
 
-      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій" onclick="showProgress(event)">
+      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій">
         <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
         <div class="progress-dots">
           <span class="progress-dot" data-dot="1"></span>
@@ -660,16 +735,27 @@
 
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
-      <button class="modal-close" id="closeModal" aria-label="Закрити" onclick="closeCurrentModal(event)">×</button>
+      <button class="modal-close" id="closeModal" aria-label="Закрити">×</button>
       <div class="modal-title" id="modalTitle">Знайомство з Софійкою</div>
       <div class="modal-text" id="modalText"></div>
-      <button class="modal-action" id="completeLocationBtn" type="button" onclick="completeCurrentLocation(event)">Пройти локацію</button>
+      <button class="modal-action" id="completeLocationBtn" type="button">Пройти локацію</button>
       <div class="hint">Після проходження відкриється наступна локація</div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v12";
+    const STORAGE_KEY = "sofiykaOpenedLocations_WORKING_RESTORE_1";
+
+    const resetParams = new URLSearchParams(window.location.search);
+    if (resetParams.has("reset")) {
+      localStorage.removeItem(STORAGE_KEY);
+
+      for (let i = 1; i <= 30; i++) {
+        localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v" + i);
+      }
+
+      localStorage.removeItem("sofiykaOpenedLocations");
+    }
 
     const locationData = {
       1: {
@@ -701,31 +787,4 @@
         title: "Королівська трапеза",
         html: `
           <p><strong>Час для святкової трапези.</strong></p>
-          <p>Тут ми зберемося разом, щоб відсвяткувати особливий день Софійки.</p>
-          <p>Попереду буде смачно, красиво і дуже по-родинному.</p>
-        `
-      },
-      5: {
-        title: "Підтвердження",
-        html: `
-          <p><strong>Ти майже знайшов чарівне запрошення!</strong></p>
-          <p>Залишився останній крок — підтвердити свою присутність.</p>
-          <p>Натисни кнопку підтвердження, щоб ми знали, що ти будеш з нами.</p>
-        `
-      }
-    };
-
-    const resetParams = new URLSearchParams(window.location.search);
-
-    if (resetParams.has("reset")) {
-      localStorage.removeItem(STORAGE_KEY);
-      for (let i = 1; i <= 20; i++) {
-        localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v" + i);
-      }
-      localStorage.removeItem("sofiykaOpenedLocations");
-    }
-
-    const bgMusic = document.getElementById("bgMusic");
-    const musicToggle = document.getElementById("musicToggle");
-
-    const modal =       
+        

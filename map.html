@@ -63,7 +63,6 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      text-decoration: none;
       background:
         radial-gradient(circle at 32% 25%, #ffffff 0%, #fff8dc 30%, #ffe58f 58%, #f1b94b 100%);
       box-shadow:
@@ -74,7 +73,6 @@
         inset 0 4px 7px rgba(255, 255, 255, 0.98),
         inset 0 -7px 12px rgba(145, 87, 18, 0.16);
       touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
     }
 
     .round-btn::before {
@@ -107,27 +105,10 @@
     .round-btn span {
       position: relative;
       z-index: 2;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
       font-weight: 700;
-      pointer-events: none;
       text-shadow:
         0 1px 0 rgba(255, 255, 255, 0.95),
         0 2px 4px rgba(96, 35, 115, 0.22);
-    }
-
-    .back-arrow {
-      font-size: 31px;
-      transform: translateY(-1px);
-    }
-
-    .music-note {
-      font-size: 27px;
-      transform: translateY(-1px);
     }
 
     .round-btn:active {
@@ -170,7 +151,7 @@
       height: auto;
       user-select: none;
       -webkit-user-drag: none;
-      pointer-events: none !important;
+      pointer-events: none;
     }
 
     .map-header {
@@ -244,10 +225,9 @@
 
     .location {
       position: absolute;
-      z-index: 100;
-      display: block;
+      z-index: 50;
       border: none;
-      background-color: rgba(255, 0, 0, 0);
+      background-color: transparent;
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -256,12 +236,22 @@
       transform-origin: center center;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
-      appearance: none;
-      -webkit-appearance: none;
       transition:
         opacity .35s ease,
         filter .35s ease,
         transform .25s ease;
+    }
+
+    .location::before {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 28% 50%, rgba(255,255,255,0.38), rgba(255,229,124,0.18) 36%, transparent 66%);
+      opacity: 0;
+      animation: locationGlow 2.6s ease-in-out infinite;
+      pointer-events: none;
     }
 
     .location.next {
@@ -285,21 +275,27 @@
     }
 
     .location.locked {
-      opacity: 0.68;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      opacity: 0.68 !important;
       filter:
         grayscale(0.45)
         saturate(0.62)
         brightness(0.96)
         contrast(0.94)
-        drop-shadow(0 5px 7px rgba(70, 35, 90, 0.12));
-      animation: none;
+        drop-shadow(0 5px 7px rgba(70, 35, 90, 0.12)) !important;
+      animation: none !important;
+    }
+
+    .location.locked::before {
+      display: none !important;
     }
 
     .location1 {
       left: 8.5%;
       top: 21%;
       width: 54%;
-      height: 16.5%;
+      aspect-ratio: 800 / 433;
       background-image: url("location1.png");
       animation: pulse1 2.4s ease-in-out infinite;
     }
@@ -308,7 +304,7 @@
       left: 39.2%;
       top: 36.5%;
       width: 53%;
-      height: 13.6%;
+      aspect-ratio: 535 / 243;
       background-image: url("location2.png");
       animation: pulse2 2.8s ease-in-out infinite;
     }
@@ -317,7 +313,7 @@
       left: 8.3%;
       top: 50.6%;
       width: 50%;
-      height: 12.8%;
+      aspect-ratio: 535 / 243;
       background-image: url("location3.png");
       animation: float3 3.1s ease-in-out infinite;
     }
@@ -326,7 +322,7 @@
       left: 39%;
       top: 63.6%;
       width: 53%;
-      height: 13.6%;
+      aspect-ratio: 535 / 243;
       background-image: url("location4.png");
       animation: cake4 2.7s ease-in-out infinite;
     }
@@ -335,7 +331,7 @@
       left: 7.7%;
       top: 74.2%;
       width: 51%;
-      height: 13.1%;
+      aspect-ratio: 535 / 243;
       background-image: url("location5.png");
       animation: heart5 2.45s ease-in-out infinite;
     }
@@ -351,7 +347,7 @@
       width: 58%;
       max-width: 300px;
       min-height: 55px;
-      z-index: 120;
+      z-index: 60;
       transform: translateX(-50%);
       border: none;
       border-radius: 999px;
@@ -542,20 +538,58 @@
     }
 
     @keyframes buttonBreath {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.025); }
+      0%, 100% {
+        transform: scale(1);
+        box-shadow:
+          0 0 0 2px rgba(255, 250, 220, 0.95),
+          0 0 0 5px rgba(255, 218, 95, 0.52),
+          0 0 18px rgba(255, 225, 105, 0.85),
+          0 8px 18px rgba(88, 32, 110, 0.26),
+          inset 0 4px 7px rgba(255, 255, 255, 0.98),
+          inset 0 -7px 12px rgba(145, 87, 18, 0.16);
+      }
+
+      50% {
+        transform: scale(1.025);
+        box-shadow:
+          0 0 0 2px rgba(255, 250, 220, 0.95),
+          0 0 0 6px rgba(255, 224, 115, 0.6),
+          0 0 24px rgba(255, 230, 130, 0.95),
+          0 9px 20px rgba(88, 32, 110, 0.28),
+          inset 0 4px 7px rgba(255, 255, 255, 0.98),
+          inset 0 -7px 12px rgba(145, 87, 18, 0.16);
+      }
     }
 
     @keyframes buttonShine {
-      0% { left: -75%; opacity: 0; }
-      18% { opacity: 0.9; }
-      34% { left: 120%; opacity: 0; }
-      100% { left: 120%; opacity: 0; }
+      0% {
+        left: -75%;
+        opacity: 0;
+      }
+
+      18% {
+        opacity: 0.9;
+      }
+
+      34% {
+        left: 120%;
+        opacity: 0;
+      }
+
+      100% {
+        left: 120%;
+        opacity: 0;
+      }
     }
 
     @keyframes twinkle {
       0%, 100% { transform: scale(0.8); opacity: 0.45; }
       50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    @keyframes locationGlow {
+      0%, 100% { opacity: 0.18; transform: scale(0.96); }
+      50% { opacity: 0.65; transform: scale(1.04); }
     }
 
     @keyframes pulse1 {
@@ -604,14 +638,7 @@
       .round-btn {
         width: 54px;
         height: 54px;
-      }
-
-      .back-arrow {
-        font-size: 30px;
-      }
-
-      .music-note {
-        font-size: 26px;
+        font-size: 25px;
       }
 
       .topbar {
@@ -626,6 +653,11 @@
 
       .map-subtitle {
         font-size: clamp(13px, 2.9vw, 17px);
+      }
+
+      .location5 {
+        top: 74.2%;
+        width: 51%;
       }
 
       .progress-btn {
@@ -665,19 +697,20 @@
 
   <audio
     id="bgMusic"
-    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3"
+    src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3"
+    autoplay
     loop
     preload="auto">
   </audio>
 
   <main class="page">
     <div class="topbar">
-      <a id="backBtn" class="round-btn" href="index.html" aria-label="Назад">
-        <span class="back-arrow">←</span>
-      </a>
+      <button id="backBtn" class="round-btn" type="button" aria-label="Назад">
+        <span>←</span>
+      </button>
 
-      <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику" onclick="toggleMusic(event)">
-        <span class="music-note">♪</span>
+      <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику">
+        <span>♪</span>
       </button>
     </div>
 
@@ -695,13 +728,13 @@
       <div class="spark s4"></div>
       <div class="spark s5"></div>
 
-      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою" onclick="clickLocation(event, 1)"></button>
-      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення" onclick="clickLocation(event, 2)"></button>
-      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок" onclick="clickLocation(event, 3)"></button>
-      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза" onclick="clickLocation(event, 4)"></button>
-      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження" onclick="clickLocation(event, 5)"></button>
+      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою"></button>
+      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення"></button>
+      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок"></button>
+      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза"></button>
+      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження"></button>
 
-      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій" onclick="showProgress(event)">
+      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій">
         <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
         <div class="progress-dots">
           <span class="progress-dot" data-dot="1"></span>
@@ -716,51 +749,27 @@
 
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
-      <button class="modal-close" id="closeModal" aria-label="Закрити" onclick="closeCurrentModal(event)">×</button>
+      <button class="modal-close" id="closeModal" aria-label="Закрити">×</button>
       <div class="modal-title" id="modalTitle">Знайомство з Софійкою</div>
       <div class="modal-text" id="modalText"></div>
-      <button class="modal-action" id="completeLocationBtn" type="button" onclick="completeCurrentLocation(event)">Пройти локацію</button>
+      <button class="modal-action" id="completeLocationBtn" type="button">Пройти локацію</button>
       <div class="hint">Після проходження відкриється наступна локація</div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiyka_final_fixed_click_music_v1";
+    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v7";
 
-    const locationData = {
-      1: {
-        title: "Знайомство з Софійкою",
-        html: `
-          <p><strong>Привіт!</strong></p>
-          <p>Мене звати <strong>Софійка</strong>.</p>
-          <p>Я запрошую тебе у чарівну подорож, де наприкінці ти знайдеш моє особливе запрошення.</p>
-        `
-      },
-      2: {
-        title: "День хрещення",
-        html: `
-          <p><strong>Таїнство Хрещення</strong></p>
-          <p>Дата: <strong>27 червня 2026 року</strong></p>
-          <p>Час і місце ми додамо трохи пізніше.</p>
-          <p>Це буде світлий і особливий день для нашої Софійки.</p>
-        `
-      },
-      3: {
-        title: "Святковий замок",
-        html: `
-          <p><strong>Після хрещення ми вирушимо до святкового замку.</strong></p>
-          <p>Тут буде тепло, красиво і по-сімейному затишно.</p>
-          <p>Саме тут ми продовжимо святкування особливого дня Софійки.</p>
-        `
-      },
-      4: {
-        title: "Королівська трапеза",
-        html: `
-          <p><strong>Час для святкової трапези.</strong></p>
-          <p>Тут ми зберемося разом, щоб відсвяткувати особливий день Софійки.</p>
-          <p>Попереду буде смачно, красиво і дуже по-родинному.</p>
-        `
-      },
-      5: {
-        title: "Підтвердження",
-        html:      
+    const resetParams = new URLSearchParams(window.location.search);
+    if (resetParams.has("reset")) {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem("sofiykaOpenedLocations");
+      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v1");
+      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v2");
+      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v3");
+      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v4");
+      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v5");
+      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v6");
+    }
+
+    con      

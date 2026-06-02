@@ -541,34 +541,15 @@
     }
 
     @keyframes buttonBreath {
-      0%, 100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.025);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.025); }
     }
 
     @keyframes buttonShine {
-      0% {
-        left: -75%;
-        opacity: 0;
-      }
-
-      18% {
-        opacity: 0.9;
-      }
-
-      34% {
-        left: 120%;
-        opacity: 0;
-      }
-
-      100% {
-        left: 120%;
-        opacity: 0;
-      }
+      0% { left: -75%; opacity: 0; }
+      18% { opacity: 0.9; }
+      34% { left: 120%; opacity: 0; }
+      100% { left: 120%; opacity: 0; }
     }
 
     @keyframes twinkle {
@@ -683,7 +664,7 @@
 
   <audio
     id="bgMusic"
-    src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3"
+    src="./solarflex-magic-fantasy-fairy-tale-music-495646.mp3?v=3"
     autoplay
     loop
     preload="auto">
@@ -695,7 +676,7 @@
         <span class="back-arrow">←</span>
       </a>
 
-      <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику">
+      <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику">
         <span class="music-note">♪</span>
       </button>
     </div>
@@ -744,17 +725,18 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_WORKING_RESTORE_1";
+    const STORAGE_KEY = "sofiykaOpenedLocations_WORKING_MUSIC_FIX_1";
 
     const resetParams = new URLSearchParams(window.location.search);
     if (resetParams.has("reset")) {
       localStorage.removeItem(STORAGE_KEY);
 
-      for (let i = 1; i <= 30; i++) {
+      for (let i = 1; i <= 40; i++) {
         localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v" + i);
       }
 
       localStorage.removeItem("sofiykaOpenedLocations");
+      localStorage.removeItem("sofiykaOpenedLocations_WORKING_RESTORE_1");
     }
 
     const locationData = {
@@ -787,4 +769,4 @@
         title: "Королівська трапеза",
         html: `
           <p><strong>Час для святкової трапези.</strong></p>
-        
+          <p>Тут ми зберемося разо      

@@ -189,12 +189,6 @@
       cursor: pointer;
       transform-origin: center center;
       -webkit-tap-highlight-color: transparent;
-      filter:
-        brightness(1.08)
-        contrast(1.08)
-        saturate(1.12)
-        drop-shadow(0 10px 14px rgba(88, 35, 110, 0.25))
-        drop-shadow(0 0 16px rgba(255, 225, 120, 0.78));
       transition:
         opacity .35s ease,
         filter .35s ease,
@@ -213,23 +207,18 @@
       pointer-events: none;
     }
 
-    .location.locked {
-      cursor: pointer;
-      opacity: 0.46;
+    .location.next {
+      opacity: 1;
       filter:
-        grayscale(1)
-        saturate(0.15)
-        brightness(0.92)
-        contrast(0.88)
-        drop-shadow(0 6px 8px rgba(70, 35, 90, 0.12));
-      animation: none !important;
-    }
-
-    .location.locked::before {
-      display: none;
+        brightness(1.13)
+        contrast(1.1)
+        saturate(1.18)
+        drop-shadow(0 11px 15px rgba(88, 35, 110, 0.28))
+        drop-shadow(0 0 22px rgba(255, 225, 120, 0.96));
     }
 
     .location.opened {
+      opacity: 1;
       filter:
         brightness(1.1)
         contrast(1.08)
@@ -238,13 +227,20 @@
         drop-shadow(0 0 18px rgba(255, 225, 120, 0.86));
     }
 
-    .location.next {
+    .location.locked {
+      cursor: pointer;
+      opacity: 0.34 !important;
       filter:
-        brightness(1.13)
-        contrast(1.1)
-        saturate(1.18)
-        drop-shadow(0 11px 15px rgba(88, 35, 110, 0.28))
-        drop-shadow(0 0 22px rgba(255, 225, 120, 0.96));
+        grayscale(1)
+        saturate(0)
+        brightness(0.78)
+        contrast(0.82)
+        drop-shadow(0 4px 6px rgba(70, 35, 90, 0.10)) !important;
+      animation: none !important;
+    }
+
+    .location.locked::before {
+      display: none !important;
     }
 
     .location1 {
@@ -623,11 +619,11 @@
       <div class="spark s4"></div>
       <div class="spark s5"></div>
 
-      <button class="location location1" id="loc1" type="button" aria-label="Знайомство з Софійкою"></button>
-      <button class="location location2" id="loc2" type="button" aria-label="День хрещення"></button>
-      <button class="location location3" id="loc3" type="button" aria-label="Святковий замок"></button>
-      <button class="location location4" id="loc4" type="button" aria-label="Королівська трапеза"></button>
-      <button class="location location5" id="loc5" type="button" aria-label="Підтвердження"></button>
+      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою"></button>
+      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення"></button>
+      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок"></button>
+      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза"></button>
+      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження"></button>
 
       <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій">
         <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
@@ -652,12 +648,13 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v2";
+    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v3";
 
     if (new URLSearchParams(window.location.search).has("reset")) {
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem("sofiykaOpenedLocations");
       localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v1");
+      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v2");
     }
 
     const bgMusic = document.getElementById("bgMusic");
@@ -772,4 +769,5 @@
     }
 
     function handleLocation(id, title, html) {
-      if (!isUnlocked(id)
+      if (!isUnlocked(id)) {
+        showLockedMessa

@@ -19,7 +19,6 @@
     body {
       width: 100%;
       height: 100%;
-      min-height: 100%;
       overflow: hidden;
       overscroll-behavior: none;
       font-family: 'Cormorant Garamond', serif;
@@ -27,7 +26,6 @@
     }
 
     body {
-      min-height: 100dvh;
       background:
         radial-gradient(circle at 20% 10%, rgba(255,255,255,0.9), transparent 18%),
         linear-gradient(180deg, #ffe3f7 0%, #eadcff 45%, #d8edff 100%);
@@ -36,21 +34,50 @@
 
     .page {
       width: 100%;
+      height: 100vh;
+      height: 100svh;
       height: 100dvh;
-      min-height: 100dvh;
-      padding: 10px 8px;
+      padding: 8px;
       overflow: hidden;
       display: flex;
-      justify-content: center;
       align-items: flex-start;
+      justify-content: center;
+    }
+
+    .map-wrap {
+      position: relative;
+      height: calc(100vh - 16px);
+      height: calc(100svh - 16px);
+      height: calc(100dvh - 16px);
+      width: min(100%, calc((100dvh - 16px) * 0.5625));
+      max-width: 520px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.2);
+      box-shadow:
+        0 0 24px rgba(255, 220, 120, 0.5),
+        0 18px 40px rgba(70, 25, 90, 0.26);
+    }
+
+    .map-image {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
     }
 
     .topbar {
-      position: fixed;
-      top: 14px;
-      left: 14px;
-      right: 14px;
-      z-index: 9999;
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 900;
       display: flex;
       justify-content: space-between;
       pointer-events: none;
@@ -58,13 +85,12 @@
 
     .round-btn {
       position: relative;
-      width: 58px;
-      height: 58px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       border: none;
       pointer-events: auto !important;
       cursor: pointer;
-      font-size: 27px;
       color: #79328f;
       display: flex;
       align-items: center;
@@ -80,6 +106,8 @@
         inset 0 4px 7px rgba(255, 255, 255, 0.98),
         inset 0 -7px 12px rgba(145, 87, 18, 0.16);
       touch-action: manipulation;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .round-btn::before {
@@ -155,29 +183,6 @@
         inset 0 -7px 12px rgba(85, 34, 115, 0.2);
     }
 
-    .map-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 520px;
-      max-height: calc(100dvh - 20px);
-      margin: 0 auto;
-      border-radius: 28px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.2);
-      box-shadow:
-        0 0 24px rgba(255, 220, 120, 0.5),
-        0 18px 40px rgba(70, 25, 90, 0.26);
-    }
-
-    .map-image {
-      display: block;
-      width: 100%;
-      height: auto;
-      user-select: none;
-      -webkit-user-drag: none;
-      pointer-events: none;
-    }
-
     .map-header {
       position: absolute;
       top: 5.2%;
@@ -189,7 +194,7 @@
     }
 
     .map-title {
-      font-size: clamp(32px, 7.2vw, 50px);
+      font-size: clamp(31px, 7.1vw, 50px);
       line-height: 0.9;
       font-weight: 700;
       color: #7d3f97;
@@ -201,7 +206,7 @@
 
     .map-subtitle {
       margin-top: 9px;
-      font-size: clamp(13px, 3vw, 18px);
+      font-size: clamp(13px, 2.9vw, 18px);
       font-weight: 700;
       color: #74418a;
       text-shadow: 0 1px 0 rgba(255,255,255,0.9);
@@ -249,7 +254,7 @@
 
     .location {
       position: absolute;
-      z-index: 50;
+      z-index: 100;
       border: none;
       background-color: transparent;
       background-repeat: no-repeat;
@@ -371,7 +376,7 @@
       width: 58%;
       max-width: 300px;
       min-height: 55px;
-      z-index: 60;
+      z-index: 120;
       transform: translateX(-50%);
       border: none;
       border-radius: 999px;
@@ -427,7 +432,7 @@
       display: block;
       color: #7d3f97;
       font-weight: 700;
-      font-size: clamp(14px, 3.2vw, 18px);
+      font-size: clamp(13px, 3.1vw, 18px);
       line-height: 1;
       white-space: nowrap;
       text-align: center;
@@ -449,8 +454,8 @@
     }
 
     .progress-dot {
-      width: 8.5px;
-      height: 8.5px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: rgba(152, 118, 174, 0.35);
       box-shadow:
@@ -520,7 +525,7 @@
 
     .modal-title {
       color: #8b53a8;
-      font-size: 28px;
+      font-size: 25px;
       line-height: 1.12;
       text-align: center;
       margin-bottom: 14px;
@@ -529,7 +534,7 @@
 
     .modal-text {
       color: #70407f;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 1.45;
       text-align: center;
     }
@@ -567,24 +572,10 @@
     @keyframes buttonBreath {
       0%, 100% {
         transform: scale(1);
-        box-shadow:
-          0 0 0 2px rgba(255, 250, 220, 0.95),
-          0 0 0 5px rgba(255, 218, 95, 0.52),
-          0 0 18px rgba(255, 225, 105, 0.85),
-          0 8px 18px rgba(88, 32, 110, 0.26),
-          inset 0 4px 7px rgba(255, 255, 255, 0.98),
-          inset 0 -7px 12px rgba(145, 87, 18, 0.16);
       }
 
       50% {
         transform: scale(1.025);
-        box-shadow:
-          0 0 0 2px rgba(255, 250, 220, 0.95),
-          0 0 0 6px rgba(255, 224, 115, 0.6),
-          0 0 24px rgba(255, 230, 130, 0.95),
-          0 9px 20px rgba(88, 32, 110, 0.28),
-          inset 0 4px 7px rgba(255, 255, 255, 0.98),
-          inset 0 -7px 12px rgba(145, 87, 18, 0.16);
       }
     }
 
@@ -660,72 +651,6 @@
       from { opacity: 0; transform: translateY(12px) scale(.96); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
-
-    @media (max-width: 430px) {
-      .round-btn {
-        width: 54px;
-        height: 54px;
-      }
-
-      .back-arrow {
-        font-size: 30px;
-        transform: translateY(-1px);
-      }
-
-      .music-note {
-        font-size: 26px;
-        transform: translateY(-1px);
-      }
-
-      .topbar {
-        top: 12px;
-        left: 12px;
-        right: 12px;
-      }
-
-      .map-title {
-        font-size: clamp(31px, 7.1vw, 45px);
-      }
-
-      .map-subtitle {
-        font-size: clamp(13px, 2.9vw, 17px);
-      }
-
-      .location5 {
-        top: 74.2%;
-        width: 51%;
-      }
-
-      .progress-btn {
-        width: 58%;
-        bottom: 1.35%;
-        min-height: 54px;
-        padding-left: 53px;
-      }
-
-      .progress-btn::before {
-        width: 36px;
-        height: 36px;
-        font-size: 21px;
-      }
-
-      .progress-overlay {
-        font-size: clamp(13px, 3.1vw, 17px);
-      }
-
-      .progress-dot {
-        width: 8px;
-        height: 8px;
-      }
-
-      .modal-title {
-        font-size: 25px;
-      }
-
-      .modal-text {
-        font-size: 18px;
-      }
-    }
   </style>
 </head>
 
@@ -740,18 +665,18 @@
   </audio>
 
   <main class="page">
-    <div class="topbar">
-      <button id="backBtn" class="round-btn" type="button" aria-label="Назад">
-        <span class="back-arrow">←</span>
-      </button>
-
-      <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику">
-        <span class="music-note">♪</span>
-      </button>
-    </div>
-
     <section class="map-wrap">
       <img class="map-image" src="map.png" alt="Карта чарівної подорожі Софійки" />
+
+      <div class="topbar">
+        <button id="backBtn" class="round-btn" type="button" aria-label="Назад" onclick="goBack(event)">
+          <span class="back-arrow">←</span>
+        </button>
+
+        <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику" onclick="toggleMusic(event)">
+          <span class="music-note">♪</span>
+        </button>
+      </div>
 
       <div class="map-header">
         <div class="map-title">Карта чарівної<br>подорожі</div>
@@ -764,13 +689,13 @@
       <div class="spark s4"></div>
       <div class="spark s5"></div>
 
-      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою"></button>
-      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення"></button>
-      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок"></button>
-      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза"></button>
-      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження"></button>
+      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою" onclick="clickLocation(event, 1)"></button>
+      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення" onclick="clickLocation(event, 2)"></button>
+      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок" onclick="clickLocation(event, 3)"></button>
+      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза" onclick="clickLocation(event, 4)"></button>
+      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження" onclick="clickLocation(event, 5)"></button>
 
-      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій">
+      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій" onclick="showProgress(event)">
         <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
         <div class="progress-dots">
           <span class="progress-dot" data-dot="1"></span>
@@ -785,8 +710,44 @@
 
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
-      <button class="modal-close" id="closeModal" aria-label="Закрити">×</button>
+      <button class="modal-close" id="closeModal" aria-label="Закрити" onclick="closeCurrentModal()">×</button>
       <div class="modal-title" id="modalTitle">Знайомство з Софійкою</div>
       <div class="modal-text" id="modalText"></div>
-      <button class="modal-action" id="completeLocationBtn" type="button">Пройти локацію</button>
-      
+      <button class="modal-action" id="completeLocationBtn" type="button" onclick="completeCurrentLocation(event)">Пройти локацію</button>
+      <div class="hint">Після проходження відкриється наступна локація</div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v9";
+
+    const locationData = {
+      1: {
+        title: "Знайомство з Софійкою",
+        html: `
+          <p><strong>Привіт!</strong></p>
+          <p>Мене звати <strong>Софійка</strong>.</p>
+          <p>Я запрошую тебе у чарівну подорож, де наприкінці ти знайдеш моє особливе запрошення.</p>
+        `
+      },
+      2: {
+        title: "День хрещення",
+        html: `
+          <p><strong>Таїнство Хрещення</strong></p>
+          <p>Дата: <strong>27 червня 2026 року</strong></p>
+          <p>Час і місце ми додамо трохи пізніше.</p>
+          <p>Це буде світлий і особливий день для нашої Софійки.</p>
+        `
+      },
+      3: {
+        title: "Святковий замок",
+        html: `
+          <p><strong>Після хрещення ми вирушимо до святкового замку.</strong></p>
+          <p>Тут буде тепло, красиво і по-сімейному затишно.</p>
+          <p>Саме тут ми продовжимо святкування особливого дня Софійки.</p>
+        `
+      },
+      4: {
+        title: "Королівська трапеза",
+        html: `
+          <p><strong>Час      

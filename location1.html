@@ -286,4 +286,297 @@
 
     .finish-card {
       display: none;
-      margin-top:
+      margin-top: 20px;
+      border-radius: 30px;
+      padding: 24px 18px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(255,252,242,0.96), rgba(255,235,250,0.92));
+      box-shadow:
+        0 0 0 2px rgba(255,229,120,0.88),
+        0 0 26px rgba(255,224,120,0.78),
+        0 14px 30px rgba(86,38,112,0.18);
+    }
+
+    .finish-card.active {
+      display: block;
+      animation: showFinish .35s ease both;
+    }
+
+    .finish-title {
+      font-size: 30px;
+      line-height: 1;
+      color: #7d3f97;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .finish-text {
+      font-size: 19px;
+      line-height: 1.35;
+      margin-bottom: 16px;
+      color: #70407f;
+    }
+
+    .finish-btn {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #7d3f97;
+      background:
+        linear-gradient(180deg, #fff7da 0%, #ffd86f 48%, #f3b84d 100%);
+      box-shadow:
+        0 0 0 2px rgba(255,235,160,0.92),
+        0 9px 18px rgba(90,35,115,0.18),
+        inset 0 2px 5px rgba(255,255,255,0.85);
+    }
+
+    .small-note {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 15px;
+      color: #9869aa;
+    }
+
+    @keyframes musicPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    @keyframes buttonShine {
+      0% { left: -85%; opacity: 0; }
+      18% { opacity: 0.9; }
+      34% { left: 125%; opacity: 0; }
+      100% { left: 125%; opacity: 0; }
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(1.08); }
+    }
+
+    @keyframes showFinish {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body class="notranslate">
+
+  <main class="page">
+    <div class="topbar">
+      <a class="round-btn" href="map.html" aria-label="Назад до карти">
+        <span class="back-icon">←</span>
+      </a>
+
+      <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику">
+        <span class="music-icon">♪</span>
+      </button>
+    </div>
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">Локація 1</div>
+        <h1>Знайомство<br>з Софійкою</h1>
+        <p class="hero-text">
+          Це перша зупинка чарівної подорожі. Тут ми познайомимось із Софійкою —
+          від народження і до перших маленьких перемог у 11 місяців.
+        </p>
+      </div>
+    </section>
+
+    <section class="task-card">
+      <div class="task-title">Обери 5 наймиліших моментів Софійки ❤️</div>
+      <div class="counter" id="counter">Обрано 0 з 5</div>
+    </section>
+
+    <section class="months" id="months">
+      <article class="month-card" data-id="birth">
+        <div class="month-label">Народження</div>
+        <div class="month-text">День, коли в нашому житті з’явилось маленьке диво.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m1">
+        <div class="month-label">1 місяць</div>
+        <div class="month-text">Перші погляди, перші обійми і найніжніші моменти.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m2">
+        <div class="month-label">2 місяці</div>
+        <div class="month-text">Софійка починає уважніше дивитися на світ навколо.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m3">
+        <div class="month-label">3 місяці</div>
+        <div class="month-text">Більше усмішок, більше тепла і більше чарівних моментів.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m4">
+        <div class="month-label">4 місяці</div>
+        <div class="month-text">Маленькі відкриття, нові емоції і дуже милий характер.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m5">
+        <div class="month-label">5 місяців</div>
+        <div class="month-text">Ще більше цікавості, руху і щасливих сімейних спогадів.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m6">
+        <div class="month-label">6 місяців</div>
+        <div class="month-text">Пів року маленького дива, радості і любові.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m7">
+        <div class="month-label">7 місяців</div>
+        <div class="month-text">Софійка стає ще активнішою, уважнішою і веселішою.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m8">
+        <div class="month-label">8 місяців</div>
+        <div class="month-text">Нові звички, нові емоції і ще більше милих моментів.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m9">
+        <div class="month-label">9 місяців</div>
+        <div class="month-text">Маленька принцеса вже має свій настрій, усмішку і характер.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m10">
+        <div class="month-label">10 місяців</div>
+        <div class="month-text">Ще один крок до першого великого свята Софійки.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+
+      <article class="month-card" data-id="m11">
+        <div class="month-label">11 місяців</div>
+        <div class="month-text">Софійка вже майже велика дівчинка — ніжна, весела і особлива.</div>
+        <button class="like-btn" type="button">♡</button>
+      </article>
+    </section>
+
+    <section class="finish-card" id="finishCard">
+      <div class="finish-title">Локацію відкрито!</div>
+      <p class="finish-text">
+        Чудовий вибір. Ти познайомився з Софійкою і відкрив наступну частину чарівної подорожі.
+      </p>
+      <button class="finish-btn" type="button" id="finishBtn">Завершити локацію</button>
+      <div class="small-note">Після натискання ти повернешся на карту</div>
+    </section>
+  </main>
+
+  <audio
+    id="bgMusic"
+    src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3"
+    loop
+    preload="auto">
+  </audio>
+
+  <script>
+    var selected = new Set();
+    var maxSelected = 5;
+
+    var counter = document.getElementById("counter");
+    var finishCard = document.getElementById("finishCard");
+    var finishBtn = document.getElementById("finishBtn");
+    var musicToggle = document.getElementById("musicToggle");
+    var bgMusic = document.getElementById("bgMusic");
+
+    if (bgMusic) {
+      bgMusic.volume = 0.35;
+    }
+
+    function updateCounter() {
+      counter.textContent = "Обрано " + selected.size + " з 5";
+
+      if (selected.size === maxSelected) {
+        counter.classList.add("ready");
+        finishCard.classList.add("active");
+        finishCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        counter.classList.remove("ready");
+        finishCard.classList.remove("active");
+      }
+    }
+
+    function toggleCard(card) {
+      var id = card.getAttribute("data-id");
+      var btn = card.querySelector(".like-btn");
+
+      if (selected.has(id)) {
+        selected.delete(id);
+        card.classList.remove("selected");
+        btn.textContent = "♡";
+        updateCounter();
+        return;
+      }
+
+      if (selected.size >= maxSelected) {
+        alert("Можна обрати тільки 5 моментів ❤️");
+        return;
+      }
+
+      selected.add(id);
+      card.classList.add("selected");
+      btn.textContent = "❤️";
+      updateCounter();
+    }
+
+    var cards = document.querySelectorAll(".month-card");
+
+    cards.forEach(function(card) {
+      card.addEventListener("click", function() {
+        toggleCard(card);
+      });
+    });
+
+    finishBtn.addEventListener("click", function() {
+      localStorage.setItem("sofiyka_location1_done", "true");
+      window.location.href = "map.html";
+    });
+
+    musicToggle.addEventListener("click", async function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!bgMusic) return;
+
+      try {
+        if (bgMusic.paused) {
+          await bgMusic.play();
+          musicToggle.classList.remove("off");
+          musicToggle.classList.add("playing");
+          musicToggle.setAttribute("aria-label", "Вимкнути музику");
+        } else {
+          bgMusic.pause();
+          musicToggle.classList.remove("playing");
+          musicToggle.classList.add("off");
+          musicToggle.setAttribute("aria-label", "Увімкнути музику");
+        }
+      } catch (error) {
+        musicToggle.classList.remove("playing");
+        musicToggle.classList.add("off");
+        alert("Музика не запустилась. Перевір, чи mp3 файл лежить поруч із location1.html.");
+      }
+    });
+
+    updateCounter();
+  </script>
+
+</body>
+</html>

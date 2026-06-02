@@ -64,7 +64,7 @@
       top: 12px;
       left: 12px;
       right: 12px;
-      z-index: 9999;
+      z-index: 500;
       display: flex;
       justify-content: space-between;
       pointer-events: none;
@@ -83,6 +83,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
       background:
         radial-gradient(circle at 30% 25%, #ffffff 0%, #fff8dc 32%, #ffe28a 62%, #f0b84c 100%);
       box-shadow:
@@ -102,6 +103,19 @@
       inset: 6px;
       border-radius: 50%;
       border: 1px solid rgba(255,255,255,0.8);
+      pointer-events: none;
+    }
+
+    .round-btn::after {
+      content: "";
+      position: absolute;
+      top: -35%;
+      left: -85%;
+      width: 58%;
+      height: 175%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.72), transparent);
+      transform: rotate(25deg);
+      animation: buttonShine 5.2s ease-in-out infinite;
       pointer-events: none;
     }
 
@@ -230,6 +244,7 @@
       touch-action: manipulation;
       appearance: none;
       -webkit-appearance: none;
+      padding: 0;
       transition:
         opacity .35s ease,
         filter .35s ease,
@@ -518,6 +533,13 @@
       50% { transform: scale(1.06); }
     }
 
+    @keyframes buttonShine {
+      0% { left: -85%; opacity: 0; }
+      18% { opacity: 0.9; }
+      34% { left: 125%; opacity: 0; }
+      100% { left: 125%; opacity: 0; }
+    }
+
     @keyframes twinkle {
       0%, 100% { transform: scale(0.8); opacity: 0.45; }
       50% { transform: scale(1.15); opacity: 1; }
@@ -552,12 +574,8 @@
     }
 
     @keyframes progressFloat {
-      0%, 100% {
-        transform: translateX(-50%) translateY(0) scale(1);
-      }
-      50% {
-        transform: translateX(-50%) translateY(-1px) scale(1.002);
-      }
+      0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
+      50% { transform: translateX(-50%) translateY(-1px) scale(1.002); }
     }
 
     @keyframes modalIn {
@@ -644,7 +662,7 @@
           <span class="back-icon">←</span>
         </a>
 
-        <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику" onclick="toggleMusic(event)">
+        <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику">
           <span class="music-icon">♪</span>
         </button>
       </div>
@@ -660,13 +678,13 @@
       <div class="spark s4"></div>
       <div class="spark s5"></div>
 
-      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою" onclick="clickLocation(event, 1)"></button>
-      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення" onclick="clickLocation(event, 2)"></button>
-      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок" onclick="clickLocation(event, 3)"></button>
-      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза" onclick="clickLocation(event, 4)"></button>
-      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження" onclick="clickLocation(event, 5)"></button>
+      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою"></button>
+      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення"></button>
+      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок"></button>
+      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза"></button>
+      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження"></button>
 
-      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій" onclick="showProgress(event)">
+      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій">
         <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
         <div class="progress-dots">
           <span class="progress-dot" data-dot="1"></span>
@@ -681,16 +699,16 @@
 
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
-      <button class="modal-close" id="closeModal" aria-label="Закрити" onclick="closeCurrentModal(event)">×</button>
+      <button class="modal-close" id="closeModal" aria-label="Закрити">×</button>
       <div class="modal-title" id="modalTitle">Знайомство з Софійкою</div>
       <div class="modal-text" id="modalText"></div>
-      <button class="modal-action" id="completeLocationBtn" type="button" onclick="completeCurrentLocation(event)">Пройти локацію</button>
+      <button class="modal-action" id="completeLocationBtn" type="button">Пройти локацію</button>
       <div class="hint">Після проходження відкриється наступна локація</div>
     </div>
   </div>
 
   <script>
-    var STORAGE_KEY = "sofiyka_stable_no_break_v1";
+    var STORAGE_KEY = "sofiyka_checked_final_no_conflict_v1";
 
     var locationData = {
       1: {
@@ -736,19 +754,11 @@
     if (resetParams.has("reset")) {
       try {
         localStorage.removeItem(STORAGE_KEY);
-        for (var i = 1; i <= 80; i++) {
-          localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v" + i);
+        for (var r = 1; r <= 200; r++) {
+          localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v" + r);
         }
         localStorage.removeItem("sofiykaOpenedLocations");
         localStorage.removeItem("sofiyka_WORKING_SAFE_RESTORE");
         localStorage.removeItem("sofiyka_final_fixed_click_music_v1");
         localStorage.removeItem("sofiyka_final_fixed_click_music_v2");
-      } catch (error) {}
-    }
-
-    var bgMusic = document.getElementById("bgMusic");
-    var musicToggle = document.getElementById("musicToggle");
-
-    var modal = document.getElementById("modal");
-    var modalTitle = document.getElementById("modalTitle");
-    va
+        loc

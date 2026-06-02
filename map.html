@@ -1,3 +1,4 @@
+        
 <!DOCTYPE html>
 <html lang="uk" translate="no">
 <head>
@@ -760,4 +761,62 @@
           <p><strong>Таїнство Хрещення</strong></p>
           <p>Дата: <strong>27 червня 2026 року</strong></p>
           <p>Час і місце ми додамо трохи пізніше.</p>
-        
+          <p>Це буде світлий і особливий день для нашої Софійки.</p>
+        `
+      );
+    });
+
+    loc3.addEventListener("click", () => {
+      markOpened(3);
+      openModal(
+        "Святковий замок",
+        `
+          <p><strong>Після хрещення ми вирушимо до святкового замку.</strong></p>
+          <p>Тут буде тепло, красиво і по-сімейному затишно.</p>
+          <p>Саме тут ми продовжимо святкування особливого дня Софійки.</p>
+        `
+      );
+    });
+
+    loc4.addEventListener("click", () => {
+      markOpened(4);
+      openModal(
+        "Королівська трапеза",
+        `
+          <p><strong>Час для святкової трапези.</strong></p>
+          <p>Тут ми зберемося разом, щоб відсвяткувати особливий день Софійки.</p>
+          <p>Попереду буде смачно, красиво і дуже по-родинному.</p>
+        `
+      );
+    });
+
+    loc5.addEventListener("click", () => {
+      markOpened(5);
+      openModal(
+        "Підтвердження",
+        `
+          <p><strong>Ти майже знайшов чарівне запрошення!</strong></p>
+          <p>Залишився останній крок — підтвердити свою присутність.</p>
+          <p>Натисни кнопку підтвердження, щоб ми знали, що ти будеш з нами.</p>
+        `
+      );
+    });
+
+    closeModal.addEventListener("click", () => {
+      modal.classList.remove("active");
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.classList.remove("active");
+      }
+    });
+
+    window.addEventListener("load", () => {
+      updateProgress();
+      startMusicImmediately();
+    });
+  </script>
+
+</body>
+</html>

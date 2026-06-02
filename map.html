@@ -43,7 +43,7 @@
       top: 14px;
       left: 14px;
       right: 14px;
-      z-index: 9999;
+      z-index: 100;
       display: flex;
       justify-content: space-between;
       pointer-events: none;
@@ -54,7 +54,7 @@
       height: 58px;
       border-radius: 50%;
       border: none;
-      pointer-events: auto !important;
+      pointer-events: auto;
       cursor: pointer;
       font-size: 28px;
       color: #74318d;
@@ -70,11 +70,6 @@
         0 8px 18px rgba(90, 35, 115, 0.28),
         inset 0 4px 7px rgba(255,255,255,0.95),
         inset 0 -7px 12px rgba(120,70,20,0.18);
-      touch-action: manipulation;
-    }
-
-    .round-btn:active {
-      transform: scale(0.94);
     }
 
     .round-btn span {
@@ -112,7 +107,6 @@
       height: auto;
       user-select: none;
       -webkit-user-drag: none;
-      pointer-events: none;
     }
 
     .map-header {
@@ -186,7 +180,7 @@
 
     .location {
       position: absolute;
-      z-index: 50;
+      z-index: 30;
       border: none;
       background-color: transparent;
       background-repeat: no-repeat;
@@ -196,7 +190,6 @@
       pointer-events: auto !important;
       transform-origin: center center;
       -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
       transition:
         opacity .35s ease,
         filter .35s ease,
@@ -238,12 +231,12 @@
     .location.locked {
       cursor: pointer !important;
       pointer-events: auto !important;
-      opacity: 0.68 !important;
+      opacity: 0.62 !important;
       filter:
-        grayscale(0.45)
-        saturate(0.62)
-        brightness(0.96)
-        contrast(0.94)
+        grayscale(0.55)
+        saturate(0.55)
+        brightness(0.94)
+        contrast(0.93)
         drop-shadow(0 5px 7px rgba(70, 35, 90, 0.12)) !important;
       animation: none !important;
     }
@@ -308,12 +301,11 @@
       width: 58%;
       max-width: 300px;
       min-height: 55px;
-      z-index: 60;
+      z-index: 42;
       transform: translateX(-50%);
       border: none;
       border-radius: 999px;
       cursor: pointer;
-      pointer-events: auto !important;
       padding: 7px 14px 7px 54px;
       background:
         linear-gradient(180deg, rgba(255, 248, 253, 0.96), rgba(246, 223, 255, 0.94));
@@ -325,7 +317,6 @@
         inset 0 -5px 10px rgba(140,80,160,0.08);
       animation: progressFloat 5.2s ease-in-out infinite;
       font-family: 'Cormorant Garamond', serif;
-      touch-action: manipulation;
     }
 
     .progress-btn::before {
@@ -406,7 +397,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      z-index: 10000;
+      z-index: 200;
       background: rgba(76,39,98,0.42);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
@@ -477,25 +468,6 @@
       text-align: center;
       font-size: 15px;
       color: #9b78a8;
-    }
-
-    .modal-action {
-      margin-top: 16px;
-      width: 100%;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 16px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: #7d3f97;
-      background:
-        linear-gradient(180deg, #fff7da 0%, #ffd86f 48%, #f3b84d 100%);
-      box-shadow:
-        0 0 0 2px rgba(255,235,160,0.9),
-        0 8px 16px rgba(90,35,115,0.18),
-        inset 0 2px 5px rgba(255,255,255,0.8);
-      cursor: pointer;
     }
 
     @keyframes musicPulse {
@@ -673,23 +645,20 @@
       <button class="modal-close" id="closeModal" aria-label="Закрити">×</button>
       <div class="modal-title" id="modalTitle">Знайомство з Софійкою</div>
       <div class="modal-text" id="modalText"></div>
-      <button class="modal-action" id="completeLocationBtn" type="button">Пройти локацію</button>
-      <div class="hint">Після проходження відкриється наступна локація</div>
+      <div class="hint">Натисни поза віконцем, щоб закрити</div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v6";
+    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v5";
 
-    const resetParams = new URLSearchParams(window.location.search);
-    if (resetParams.has("reset")) {
+    if (new URLSearchParams(window.location.search).has("reset")) {
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem("sofiykaOpenedLocations");
       localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v1");
       localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v2");
       localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v3");
       localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v4");
-      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v5");
     }
 
     const bgMusic = document.getElementById("bgMusic");
@@ -700,7 +669,6 @@
     const modalTitle = document.getElementById("modalTitle");
     const modalText = document.getElementById("modalText");
     const closeModal = document.getElementById("closeModal");
-    const completeLocationBtn = document.getElementById("completeLocationBtn");
 
     const progressText = document.getElementById("progressText");
     const progressPanel = document.getElementById("progressPanel");
@@ -720,7 +688,6 @@
       { id: 5, element: loc5 }
     ];
 
-    let currentLocationToComplete = null;
     let musicStarted = false;
     let musicMutedByUser = false;
 
@@ -756,4 +723,275 @@
     }
 
     function updateProgress() {
-      const count = openedLocations.siz      
+      const count = openedLocations.size;
+
+      if (progressText) {
+        progressText.textContent = `Відкрито ${count} з 5`;
+      }
+
+      progressDots.forEach(dot => {
+        const id = dot.getAttribute("data-dot");
+
+        if (openedLocations.has(id)) {
+          dot.classList.add("opened");
+        } else {
+          dot.classList.remove("opened");
+        }
+      });
+
+      locations.forEach(item => {
+        const id = item.id;
+        const button = item.element;
+
+        if (!button) return;
+
+        button.classList.remove("locked", "opened", "next");
+        button.disabled = false;
+        button.style.pointerEvents = "auto";
+
+        if (openedLocations.has(String(id))) {
+          button.classList.add("opened");
+        } else if (isUnlocked(id)) {
+          button.classList.add("next");
+        } else {
+          button.classList.add("locked");
+        }
+      });
+    }
+
+    function markOpened(id) {
+      openedLocations.add(String(id));
+      saveProgress();
+      updateProgress();
+    }
+
+    function openModal(title, html) {
+      if (!modal || !modalTitle || !modalText) return;
+
+      modalTitle.textContent = title;
+      modalText.innerHTML = html;
+      modal.classList.add("active");
+    }
+
+    function showLockedMessage(id) {
+      openModal(
+        "Локація ще закрита",
+        `
+          <p><strong>Ця локація поки недоступна.</strong></p>
+          <p>Спочатку відкрий локацію №${id - 1}, а потім ця частина подорожі стане активною.</p>
+        `
+      );
+    }
+
+    function handleLocation(id, title, html) {
+      if (!isUnlocked(id)) {
+        showLockedMessage(id);
+        return;
+      }
+
+      markOpened(id);
+      openModal(title, html);
+    }
+
+    async function startMusicImmediately() {
+      if (!bgMusic || !musicToggle || musicMutedByUser) return;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.remove("off");
+        musicToggle.classList.add("playing");
+      } catch (error) {
+        musicStarted = false;
+        musicToggle.classList.remove("playing");
+        musicToggle.classList.add("off");
+
+        window.addEventListener("click", firstUserInteraction, { once: true });
+        window.addEventListener("touchstart", firstUserInteraction, { once: true });
+      }
+    }
+
+    async function firstUserInteraction() {
+      if (!bgMusic || !musicToggle || musicMutedByUser) return;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.remove("off");
+        musicToggle.classList.add("playing");
+      } catch (error) {
+        musicStarted = false;
+      }
+    }
+
+    function pauseMusic() {
+      if (!bgMusic || !musicToggle) return;
+
+      bgMusic.pause();
+      musicStarted = false;
+      musicMutedByUser = true;
+      musicToggle.classList.remove("playing");
+      musicToggle.classList.add("off");
+    }
+
+    async function resumeMusic() {
+      if (!bgMusic || !musicToggle) return;
+
+      musicMutedByUser = false;
+
+      try {
+        await bgMusic.play();
+        musicStarted = true;
+        musicToggle.classList.remove("off");
+        musicToggle.classList.add("playing");
+      } catch (error) {
+        musicStarted = false;
+      }
+    }
+
+    if (musicToggle) {
+      musicToggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (musicStarted && bgMusic && !bgMusic.paused) {
+          pauseMusic();
+        } else {
+          resumeMusic();
+        }
+      });
+    }
+
+    if (backBtn) {
+      backBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        window.location.href = "index.html";
+      });
+    }
+
+    if (progressPanel) {
+      progressPanel.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        openModal(
+          "Прогрес подорожі",
+          `
+            <p><strong>${progressText ? progressText.textContent : "Відкрито 0 з 5"} локацій</strong></p>
+            <p>Локації відкриваються по черзі. Спочатку пройди першу, потім відкриється друга.</p>
+          `
+        );
+      });
+    }
+
+    if (loc1) {
+      loc1.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        handleLocation(
+          1,
+          "Знайомство з Софійкою",
+          `
+            <p><strong>Привіт!</strong></p>
+            <p>Мене звати <strong>Софійка</strong>.</p>
+            <p>Я запрошую тебе у чарівну подорож, де наприкінці ти знайдеш моє особливе запрошення.</p>
+          `
+        );
+      });
+    }
+
+    if (loc2) {
+      loc2.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        handleLocation(
+          2,
+          "День хрещення",
+          `
+            <p><strong>Таїнство Хрещення</strong></p>
+            <p>Дата: <strong>27 червня 2026 року</strong></p>
+            <p>Час і місце ми додамо трохи пізніше.</p>
+            <p>Це буде світлий і особливий день для нашої Софійки.</p>
+          `
+        );
+      });
+    }
+
+    if (loc3) {
+      loc3.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        handleLocation(
+          3,
+          "Святковий замок",
+          `
+            <p><strong>Після хрещення ми вирушимо до святкового замку.</strong></p>
+            <p>Тут буде тепло, красиво і по-сімейному затишно.</p>
+            <p>Саме тут ми продовжимо святкування особливого дня Софійки.</p>
+          `
+        );
+      });
+    }
+
+    if (loc4) {
+      loc4.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        handleLocation(
+          4,
+          "Королівська трапеза",
+          `
+            <p><strong>Час для святкової трапези.</strong></p>
+            <p>Тут ми зберемося разом, щоб відсвяткувати особливий день Софійки.</p>
+            <p>Попереду буде смачно, красиво і дуже по-родинному.</p>
+          `
+        );
+      });
+    }
+
+    if (loc5) {
+      loc5.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        handleLocation(
+          5,
+          "Підтвердження",
+          `
+            <p><strong>Ти майже знайшов чарівне запрошення!</strong></p>
+            <p>Залишився останній крок — підтвердити свою присутність.</p>
+            <p>Натисни кнопку підтвердження, щоб ми знали, що ти будеш з нами.</p>
+          `
+        );
+      });
+    }
+
+    if (closeModal) {
+      closeModal.addEventListener("click", () => {
+        modal.classList.remove("active");
+      });
+    }
+
+    if (modal) {
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.classList.remove("active");
+        }
+      });
+    }
+
+    window.addEventListener("load", () => {
+      updateProgress();
+      startMusicImmediately();
+    });
+
+    updateProgress();
+  </script>
+
+</body>
+</html>

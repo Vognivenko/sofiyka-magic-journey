@@ -70,22 +70,15 @@
       pointer-events: none !important;
     }
 
-    .click-layer {
-      position: absolute;
-      inset: 0;
-      z-index: 20;
-      pointer-events: none;
-    }
-
     .topbar {
       position: absolute;
       top: 12px;
       left: 12px;
       right: 12px;
-      z-index: 900;
+      z-index: 9999;
       display: flex;
       justify-content: space-between;
-      pointer-events: none;
+      pointer-events: auto;
     }
 
     .round-btn {
@@ -195,7 +188,7 @@
       top: 5.2%;
       left: 13%;
       right: 13%;
-      z-index: 30;
+      z-index: 20;
       text-align: center;
       pointer-events: none;
     }
@@ -261,7 +254,7 @@
 
     .location {
       position: absolute;
-      z-index: 500;
+      z-index: 5000;
       border: none;
       background-color: transparent;
       background-repeat: no-repeat;
@@ -383,7 +376,7 @@
       width: 58%;
       max-width: 300px;
       min-height: 55px;
-      z-index: 600;
+      z-index: 6000;
       transform: translateX(-50%);
       border: none;
       border-radius: 999px;
@@ -481,7 +474,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      z-index: 10000;
+      z-index: 20000;
       background: rgba(76,39,98,0.42);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
@@ -652,6 +645,16 @@
     <section class="map-wrap">
       <img class="map-image" src="map.png" alt="Карта чарівної подорожі Софійки" />
 
+      <div class="topbar">
+        <a id="backBtn" class="round-btn" href="index.html" aria-label="Назад">
+          <span class="back-arrow">←</span>
+        </a>
+
+        <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику">
+          <span class="music-note">♪</span>
+        </button>
+      </div>
+
       <div class="map-header">
         <div class="map-title">Карта чарівної<br>подорожі</div>
         <div class="map-subtitle">Пройди локації та знайди запрошення Софійки</div>
@@ -663,34 +666,22 @@
       <div class="spark s4"></div>
       <div class="spark s5"></div>
 
-      <div class="click-layer">
-        <div class="topbar">
-          <a id="backBtn" class="round-btn" href="index.html" aria-label="Назад">
-            <span class="back-arrow">←</span>
-          </a>
+      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою"></button>
+      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення"></button>
+      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок"></button>
+      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза"></button>
+      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження"></button>
 
-          <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику">
-            <span class="music-note">♪</span>
-          </button>
+      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій">
+        <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
+        <div class="progress-dots">
+          <span class="progress-dot" data-dot="1"></span>
+          <span class="progress-dot" data-dot="2"></span>
+          <span class="progress-dot" data-dot="3"></span>
+          <span class="progress-dot" data-dot="4"></span>
+          <span class="progress-dot" data-dot="5"></span>
         </div>
-
-        <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою"></button>
-        <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення"></button>
-        <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок"></button>
-        <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза"></button>
-        <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження"></button>
-
-        <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій">
-          <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
-          <div class="progress-dots">
-            <span class="progress-dot" data-dot="1"></span>
-            <span class="progress-dot" data-dot="2"></span>
-            <span class="progress-dot" data-dot="3"></span>
-            <span class="progress-dot" data-dot="4"></span>
-            <span class="progress-dot" data-dot="5"></span>
-          </div>
-        </button>
-      </div>
+      </button>
     </section>
   </main>
 
@@ -705,7 +696,7 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v10";
+    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v11";
 
     const locationData = {
       1: {
@@ -742,4 +733,8 @@
         `
       },
       5: {
-        titl      
+        title: "Підтвердження",
+        html: `
+          <p><strong>Ти майже знайшов чарівне запрошення!</strong></p>
+          <p>Залишився останній крок — підтвердити свою присутність.</p>
+          <p>Натисни кн      

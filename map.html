@@ -46,29 +46,34 @@
 
     .map-wrap {
       position: relative;
-      height: calc(100vh - 16px);
-      height: calc(100svh - 16px);
-      height: calc(100dvh - 16px);
-      width: min(100%, calc((100dvh - 16px) * 0.5625));
-      max-width: 520px;
+      width: min(calc(100vw - 16px), calc((100dvh - 16px) * 0.5625), 520px);
+      aspect-ratio: 9 / 16;
+      max-height: calc(100dvh - 16px);
       border-radius: 28px;
       overflow: hidden;
       background: rgba(255,255,255,0.2);
       box-shadow:
         0 0 24px rgba(255, 220, 120, 0.5),
         0 18px 40px rgba(70, 25, 90, 0.26);
+      isolation: isolate;
     }
 
     .map-image {
       position: absolute;
       inset: 0;
       z-index: 1;
-      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
       user-select: none;
       -webkit-user-drag: none;
+      pointer-events: none !important;
+    }
+
+    .click-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
       pointer-events: none;
     }
 
@@ -96,6 +101,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      text-decoration: none;
       background:
         radial-gradient(circle at 32% 25%, #ffffff 0%, #fff8dc 30%, #ffe58f 58%, #f1b94b 100%);
       box-shadow:
@@ -150,6 +156,7 @@
       text-shadow:
         0 1px 0 rgba(255, 255, 255, 0.95),
         0 2px 4px rgba(96, 35, 115, 0.22);
+      pointer-events: none;
     }
 
     .back-arrow {
@@ -188,7 +195,7 @@
       top: 5.2%;
       left: 13%;
       right: 13%;
-      z-index: 20;
+      z-index: 30;
       text-align: center;
       pointer-events: none;
     }
@@ -214,7 +221,7 @@
 
     .spark {
       position: absolute;
-      z-index: 8;
+      z-index: 25;
       width: 16px;
       height: 16px;
       border-radius: 50%;
@@ -254,7 +261,7 @@
 
     .location {
       position: absolute;
-      z-index: 100;
+      z-index: 500;
       border: none;
       background-color: transparent;
       background-repeat: no-repeat;
@@ -376,7 +383,7 @@
       width: 58%;
       max-width: 300px;
       min-height: 55px;
-      z-index: 120;
+      z-index: 600;
       transform: translateX(-50%);
       border: none;
       border-radius: 999px;
@@ -570,34 +577,15 @@
     }
 
     @keyframes buttonBreath {
-      0%, 100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.025);
-      }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.025); }
     }
 
     @keyframes buttonShine {
-      0% {
-        left: -75%;
-        opacity: 0;
-      }
-
-      18% {
-        opacity: 0.9;
-      }
-
-      34% {
-        left: 120%;
-        opacity: 0;
-      }
-
-      100% {
-        left: 120%;
-        opacity: 0;
-      }
+      0% { left: -75%; opacity: 0; }
+      18% { opacity: 0.9; }
+      34% { left: 120%; opacity: 0; }
+      100% { left: 120%; opacity: 0; }
     }
 
     @keyframes twinkle {
@@ -639,12 +627,8 @@
     }
 
     @keyframes progressFloat {
-      0%, 100% {
-        transform: translateX(-50%) translateY(0) scale(1);
-      }
-      50% {
-        transform: translateX(-50%) translateY(-1px) scale(1.002);
-      }
+      0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
+      50% { transform: translateX(-50%) translateY(-1px) scale(1.002); }
     }
 
     @keyframes modalIn {
@@ -668,16 +652,6 @@
     <section class="map-wrap">
       <img class="map-image" src="map.png" alt="Карта чарівної подорожі Софійки" />
 
-      <div class="topbar">
-        <button id="backBtn" class="round-btn" type="button" aria-label="Назад" onclick="goBack(event)">
-          <span class="back-arrow">←</span>
-        </button>
-
-        <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику" onclick="toggleMusic(event)">
-          <span class="music-note">♪</span>
-        </button>
-      </div>
-
       <div class="map-header">
         <div class="map-title">Карта чарівної<br>подорожі</div>
         <div class="map-subtitle">Пройди локації та знайди запрошення Софійки</div>
@@ -689,37 +663,49 @@
       <div class="spark s4"></div>
       <div class="spark s5"></div>
 
-      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою" onclick="clickLocation(event, 1)"></button>
-      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення" onclick="clickLocation(event, 2)"></button>
-      <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок" onclick="clickLocation(event, 3)"></button>
-      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза" onclick="clickLocation(event, 4)"></button>
-      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження" onclick="clickLocation(event, 5)"></button>
+      <div class="click-layer">
+        <div class="topbar">
+          <a id="backBtn" class="round-btn" href="index.html" aria-label="Назад">
+            <span class="back-arrow">←</span>
+          </a>
 
-      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій" onclick="showProgress(event)">
-        <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
-        <div class="progress-dots">
-          <span class="progress-dot" data-dot="1"></span>
-          <span class="progress-dot" data-dot="2"></span>
-          <span class="progress-dot" data-dot="3"></span>
-          <span class="progress-dot" data-dot="4"></span>
-          <span class="progress-dot" data-dot="5"></span>
+          <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику">
+            <span class="music-note">♪</span>
+          </button>
         </div>
-      </button>
+
+        <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою"></button>
+        <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення"></button>
+        <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок"></button>
+        <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза"></button>
+        <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження"></button>
+
+        <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій">
+          <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
+          <div class="progress-dots">
+            <span class="progress-dot" data-dot="1"></span>
+            <span class="progress-dot" data-dot="2"></span>
+            <span class="progress-dot" data-dot="3"></span>
+            <span class="progress-dot" data-dot="4"></span>
+            <span class="progress-dot" data-dot="5"></span>
+          </div>
+        </button>
+      </div>
     </section>
   </main>
 
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
-      <button class="modal-close" id="closeModal" aria-label="Закрити" onclick="closeCurrentModal()">×</button>
+      <button class="modal-close" id="closeModal" aria-label="Закрити">×</button>
       <div class="modal-title" id="modalTitle">Знайомство з Софійкою</div>
       <div class="modal-text" id="modalText"></div>
-      <button class="modal-action" id="completeLocationBtn" type="button" onclick="completeCurrentLocation(event)">Пройти локацію</button>
+      <button class="modal-action" id="completeLocationBtn" type="button">Пройти локацію</button>
       <div class="hint">Після проходження відкриється наступна локація</div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v9";
+    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v10";
 
     const locationData = {
       1: {
@@ -750,4 +736,10 @@
       4: {
         title: "Королівська трапеза",
         html: `
-          <p><strong>Час      
+          <p><strong>Час для святкової трапези.</strong></p>
+          <p>Тут ми зберемося разом, щоб відсвяткувати особливий день Софійки.</p>
+          <p>Попереду буде смачно, красиво і дуже по-родинному.</p>
+        `
+      },
+      5: {
+        titl      

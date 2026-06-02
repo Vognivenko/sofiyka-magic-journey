@@ -187,6 +187,7 @@
       background-position: center;
       background-size: contain;
       cursor: pointer;
+      pointer-events: auto !important;
       transform-origin: center center;
       -webkit-tap-highlight-color: transparent;
       transition:
@@ -228,14 +229,15 @@
     }
 
     .location.locked {
-      cursor: pointer;
-      opacity: 0.34 !important;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      opacity: 0.62 !important;
       filter:
-        grayscale(1)
-        saturate(0)
-        brightness(0.78)
-        contrast(0.82)
-        drop-shadow(0 4px 6px rgba(70, 35, 90, 0.10)) !important;
+        grayscale(0.55)
+        saturate(0.55)
+        brightness(0.94)
+        contrast(0.93)
+        drop-shadow(0 5px 7px rgba(70, 35, 90, 0.12)) !important;
       animation: none !important;
     }
 
@@ -648,13 +650,15 @@
   </div>
 
   <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v3";
+    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v5";
 
     if (new URLSearchParams(window.location.search).has("reset")) {
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem("sofiykaOpenedLocations");
       localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v1");
       localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v2");
+      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v3");
+      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v4");
     }
 
     const bgMusic = document.getElementById("bgMusic");
@@ -684,10 +688,12 @@
       { id: 5, element: loc5 }
     ];
 
-    bgMusic.volume = 0.35;
-
     let musicStarted = false;
     let musicMutedByUser = false;
+
+    if (bgMusic) {
+      bgMusic.volume = 0.35;
+    }
 
     function loadProgress() {
       try {
@@ -718,7 +724,10 @@
 
     function updateProgress() {
       const count = openedLocations.size;
-      progressText.textContent = `Відкрито ${count} з 5`;
+
+      if (progressText) {
+        progressText.textContent = `Відкрито ${count} з 5`;
+      }
 
       progressDots.forEach(dot => {
         const id = dot.getAttribute("data-dot");
@@ -734,7 +743,11 @@
         const id = item.id;
         const button = item.element;
 
+        if (!button) return;
+
         button.classList.remove("locked", "opened", "next");
+        button.disabled = false;
+        button.style.pointerEvents = "auto";
 
         if (openedLocations.has(String(id))) {
           button.classList.add("opened");
@@ -753,21 +766,6 @@
     }
 
     function openModal(title, html) {
-      modalTitle.textContent = title;
-      modalText.innerHTML = html;
-      modal.classList.add("active");
-    }
+      if (!modal || !modalTitle || !modalText) return;
 
-    function showLockedMessage(id) {
-      openModal(
-        "Локація ще закрита",
-        `
-          <p><strong>Ця локація поки недоступна.</strong></p>
-          <p>Спочатку відкрий локацію №${id - 1}, а потім ця частина подорожі стане активною.</p>
-        `
-      );
-    }
-
-    function handleLocation(id, title, html) {
-      if (!isUnlocked(id)) {
-        showLockedMessa
+      modalTitle.textConte

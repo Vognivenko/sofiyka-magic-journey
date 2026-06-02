@@ -258,72 +258,104 @@
       transform: scale(0.98);
     }
 
+    /* НОВА АКУРАТНА КНОПКА-ПЕРЕМИКАЧ ЛОКАЦІЙ */
     .progress-btn {
       position: absolute;
       left: 50%;
-      bottom: 2.1%;
-      width: 66%;
-      max-width: 340px;
-      aspect-ratio: 620 / 160;
-      z-index: 40;
+      bottom: 2.4%;
+      width: 62%;
+      max-width: 318px;
+      min-height: 62px;
+      z-index: 42;
       transform: translateX(-50%);
       border: none;
-      background-color: transparent;
-      background-image: url("location6.png");
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
+      border-radius: 999px;
       cursor: pointer;
-      filter:
-        brightness(1.05)
-        contrast(1.04)
-        drop-shadow(0 9px 16px rgba(80, 30, 100, 0.24))
-        drop-shadow(0 0 14px rgba(255, 225, 120, 0.62));
+      padding: 8px 16px 8px 62px;
+      background:
+        linear-gradient(180deg, rgba(255, 248, 253, 0.96), rgba(246, 223, 255, 0.94));
+      box-shadow:
+        0 0 0 2px rgba(255, 227, 135, 0.88),
+        0 0 18px rgba(255, 225, 120, 0.78),
+        0 10px 20px rgba(80, 30, 100, 0.22),
+        inset 0 3px 7px rgba(255,255,255,0.92),
+        inset 0 -5px 10px rgba(140,80,160,0.08);
       animation: progressFloat 2.8s ease-in-out infinite;
+      font-family: 'Cormorant Garamond', serif;
     }
 
-    .progress-overlay {
+    .progress-btn::before {
+      content: "👑";
       position: absolute;
-      left: 25%;
-      right: 8%;
-      top: 32%;
-      text-align: center;
-      color: #7d3f97;
-      font-weight: 700;
-      font-size: clamp(14px, 3.3vw, 19px);
-      line-height: 1;
-      text-shadow:
-        0 1px 0 rgba(255,255,255,0.9),
-        0 2px 4px rgba(100, 45, 120, 0.18);
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      background:
+        radial-gradient(circle at 35% 25%, #ffffff 0%, #fff2c8 42%, #d9a7ff 100%);
+      box-shadow:
+        0 0 0 2px rgba(255, 224, 120, 0.85),
+        0 0 12px rgba(255, 219, 105, 0.85),
+        inset 0 3px 5px rgba(255,255,255,0.9);
+    }
+
+    .progress-btn::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.65);
       pointer-events: none;
     }
 
+    .progress-overlay {
+      position: relative;
+      z-index: 2;
+      display: block;
+      color: #7d3f97;
+      font-weight: 700;
+      font-size: clamp(15px, 3.4vw, 20px);
+      line-height: 1;
+      white-space: nowrap;
+      text-align: center;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.95),
+        0 2px 4px rgba(100, 45, 120, 0.16);
+      pointer-events: none;
+      margin-top: 1px;
+    }
+
     .progress-dots {
-      position: absolute;
-      left: 32%;
-      right: 17%;
-      top: 60%;
+      position: relative;
+      z-index: 2;
       display: flex;
       justify-content: center;
       gap: 7px;
+      margin-top: 7px;
       pointer-events: none;
     }
 
     .progress-dot {
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      background: rgba(158, 128, 180, 0.32);
+      background: rgba(152, 118, 174, 0.35);
       box-shadow:
         inset 0 1px 2px rgba(80, 30, 100, 0.18),
-        0 0 0 1px rgba(255,255,255,0.58);
+        0 0 0 1px rgba(255,255,255,0.65);
     }
 
     .progress-dot.opened {
       background:
         radial-gradient(circle at 35% 30%, #fff6d8 0%, #d891ff 45%, #7d3f97 100%);
       box-shadow:
-        0 0 0 2px rgba(255,231,136,0.7),
+        0 0 0 2px rgba(255,231,136,0.72),
         0 0 10px rgba(255,218,116,0.9);
     }
 
@@ -478,17 +510,25 @@
       }
 
       .progress-btn {
-        width: 66%;
-        bottom: 2.1%;
+        width: 63%;
+        bottom: 2.6%;
+        min-height: 60px;
+        padding-left: 58px;
+      }
+
+      .progress-btn::before {
+        width: 39px;
+        height: 39px;
+        font-size: 23px;
       }
 
       .progress-overlay {
-        font-size: clamp(14px, 3.2vw, 18px);
+        font-size: clamp(14px, 3.3vw, 18px);
       }
 
       .progress-dot {
-        width: 10px;
-        height: 10px;
+        width: 8.5px;
+        height: 8.5px;
       }
 
       .modal-title {
@@ -544,7 +584,7 @@
       <button class="location location5" id="loc5" type="button" aria-label="Підтвердження"></button>
 
       <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій">
-        <div class="progress-overlay" id="progressText">Відкрито 0 з 5 локацій</div>
+        <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
         <div class="progress-dots">
           <span class="progress-dot" data-dot="1"></span>
           <span class="progress-dot" data-dot="2"></span>
@@ -600,7 +640,7 @@
 
     function updateProgress() {
       const count = openedLocations.size;
-      progressText.textContent = `Відкрито ${count} з 5 локацій`;
+      progressText.textContent = `Відкрито ${count} з 5`;
 
       progressDots.forEach(dot => {
         const id = dot.getAttribute("data-dot");
@@ -694,7 +734,7 @@
       openModal(
         "Прогрес подорожі",
         `
-          <p><strong>${progressText.textContent}</strong></p>
+          <p><strong>${progressText.textContent} локацій</strong></p>
           <p>Натискай на локації, щоб відкривати частини чарівної подорожі Софійки.</p>
         `
       );
@@ -720,40 +760,4 @@
           <p><strong>Таїнство Хрещення</strong></p>
           <p>Дата: <strong>27 червня 2026 року</strong></p>
           <p>Час і місце ми додамо трохи пізніше.</p>
-          <p>Це буде світлий і особливий день для нашої Софійки.</p>
-        `
-      );
-    });
-
-    loc3.addEventListener("click", () => {
-      markOpened(3);
-      openModal(
-        "Святковий замок",
-        `
-          <p><strong>Після хрещення ми вирушимо до святкового замку.</strong></p>
-          <p>Тут буде тепло, красиво і по-сімейному затишно.</p>
-          <p>Саме тут ми продовжимо святкування особливого дня Софійки.</p>
-        `
-      );
-    });
-
-    loc4.addEventListener("click", () => {
-      markOpened(4);
-      openModal(
-        "Королівська трапеза",
-        `
-          <p><strong>Час для святкової трапези.</strong></p>
-          <p>Тут ми зберемося разом, щоб відсвяткувати особливий день Софійки.</p>
-          <p>Попереду буде смачно, красиво і дуже по-родинному.</p>
-        `
-      );
-    });
-
-    loc5.addEventListener("click", () => {
-      markOpened(5);
-      openModal(
-        "Підтвердження",
-        `
-          <p><strong>Ти майже знайшов чарівне запрошення!</strong></p>
-          <p>Залишився останній крок — підтвердити свою присутність.</p>
-          <p>Нат
+        

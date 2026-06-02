@@ -2,7 +2,7 @@
 <html lang="uk" translate="no">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="google" content="notranslate" />
   <title>Карта чарівної подорожі Софійки</title>
 
@@ -18,24 +18,31 @@
     html,
     body {
       width: 100%;
+      height: 100%;
       min-height: 100%;
-      overflow-x: hidden;
+      overflow: hidden;
+      overscroll-behavior: none;
       font-family: 'Cormorant Garamond', serif;
       background: #efd8ff;
     }
 
     body {
-      min-height: 100vh;
+      min-height: 100dvh;
       background:
         radial-gradient(circle at 20% 10%, rgba(255,255,255,0.9), transparent 18%),
         linear-gradient(180deg, #ffe3f7 0%, #eadcff 45%, #d8edff 100%);
+      touch-action: manipulation;
     }
 
     .page {
       width: 100%;
-      min-height: 100vh;
-      padding: 10px 8px 28px;
+      height: 100dvh;
+      min-height: 100dvh;
+      padding: 10px 8px;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
 
     .topbar {
@@ -105,10 +112,26 @@
     .round-btn span {
       position: relative;
       z-index: 2;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
       font-weight: 700;
       text-shadow:
         0 1px 0 rgba(255, 255, 255, 0.95),
         0 2px 4px rgba(96, 35, 115, 0.22);
+    }
+
+    .back-arrow {
+      font-size: 31px;
+      transform: translateY(-1px);
+    }
+
+    .music-note {
+      font-size: 27px;
+      transform: translateY(-1px);
     }
 
     .round-btn:active {
@@ -136,6 +159,7 @@
       position: relative;
       width: 100%;
       max-width: 520px;
+      max-height: calc(100dvh - 20px);
       margin: 0 auto;
       border-radius: 28px;
       overflow: hidden;
@@ -453,6 +477,7 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      overflow: hidden;
     }
 
     .modal-overlay.active {
@@ -463,6 +488,8 @@
       position: relative;
       width: 100%;
       max-width: 420px;
+      max-height: calc(100dvh - 40px);
+      overflow: hidden;
       border-radius: 30px;
       padding: 25px 22px 22px;
       background:
@@ -638,7 +665,16 @@
       .round-btn {
         width: 54px;
         height: 54px;
-        font-size: 25px;
+      }
+
+      .back-arrow {
+        font-size: 30px;
+        transform: translateY(-1px);
+      }
+
+      .music-note {
+        font-size: 26px;
+        transform: translateY(-1px);
       }
 
       .topbar {
@@ -706,11 +742,11 @@
   <main class="page">
     <div class="topbar">
       <button id="backBtn" class="round-btn" type="button" aria-label="Назад">
-        <span>←</span>
+        <span class="back-arrow">←</span>
       </button>
 
       <button id="musicToggle" class="round-btn playing" type="button" aria-label="Вимкнути музику">
-        <span>♪</span>
+        <span class="music-note">♪</span>
       </button>
     </div>
 
@@ -753,23 +789,4 @@
       <div class="modal-title" id="modalTitle">Знайомство з Софійкою</div>
       <div class="modal-text" id="modalText"></div>
       <button class="modal-action" id="completeLocationBtn" type="button">Пройти локацію</button>
-      <div class="hint">Після проходження відкриється наступна локація</div>
-    </div>
-  </div>
-
-  <script>
-    const STORAGE_KEY = "sofiykaOpenedLocations_step_by_step_v7";
-
-    const resetParams = new URLSearchParams(window.location.search);
-    if (resetParams.has("reset")) {
-      localStorage.removeItem(STORAGE_KEY);
-      localStorage.removeItem("sofiykaOpenedLocations");
-      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v1");
-      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v2");
-      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v3");
-      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v4");
-      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v5");
-      localStorage.removeItem("sofiykaOpenedLocations_step_by_step_v6");
-    }
-
-    con
+      

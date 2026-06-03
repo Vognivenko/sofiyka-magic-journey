@@ -1,875 +1,18 @@
 <!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Локація 1 — Знайомство з Софійкою</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Marck+Script&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --violet: #7e459e;<!DOCTYPE html>
 <html lang="uk" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
-  <title>Знайомство з Софійкою</title>
+  <title>Локація 1 — Знайомство з Софійкою</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      font-family: 'Cormorant Garamond', serif;
-      color: #74418a;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      min-height: 100vh;
-      background: #f8e6f8;
-      position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      background-image: url("fon_location1.png");
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background: linear-gradient(
-        180deg,
-        rgba(255, 248, 255, 0.08) 0%,
-        rgba(255, 244, 252, 0.12) 45%,
-        rgba(237, 222, 255, 0.14) 100%
-      );
-    }
-
-    .page {
-      width: 100%;
-      max-width: 520px;
-      min-height: 100vh;
-      margin: 0 auto;
-      padding: 18px 14px 34px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .topbar,
-    .hero,
-    .task-card,
-    .month-section,
-    .finish-card {
-      position: relative;
-      z-index: 2;
-    }
-
-    .topbar {
-      display: grid;
-      grid-template-columns: 64px 1fr 64px;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .round-btn {
-      position: relative;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      border: none;
-      text-decoration: none;
-      cursor: pointer;
-      color: #74318d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 30% 25%, #ffffff 0%, #fff8dc 32%, #ffe28a 62%, #f0b84c 100%);
-      box-shadow:
-        0 0 0 3px rgba(255,245,200,0.92),
-        0 0 0 6px rgba(255,215,90,0.34),
-        0 0 24px rgba(255,220,95,0.8),
-        0 8px 18px rgba(90,35,115,0.24),
-        inset 0 4px 7px rgba(255,255,255,0.95),
-        inset 0 -7px 12px rgba(120,70,20,0.16);
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
-
-    .round-btn::before {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.78);
-      pointer-events: none;
-    }
-
-    .round-btn span {
-      position: relative;
-      z-index: 2;
-      font-size: 32px;
-      line-height: 1;
-      transform: translateY(-1px);
-      pointer-events: none;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
-    }
-
-    .round-btn.playing {
-      animation: musicPulse 1.8s ease-in-out infinite;
-    }
-
-    .round-btn.off {
-      background:
-        radial-gradient(circle at 30% 25%, #ffffff 0%, #f6e9ff 38%, #d6a9ff 72%, #8e55b5 100%);
-      color: #ffffff;
-    }
-
-    .location-badge-image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      pointer-events: none;
-    }
-
-    .location-badge-image img {
-      display: block;
-      width: 178px;
-      max-width: 100%;
-      height: auto;
-      object-fit: contain;
-      filter:
-        drop-shadow(0 7px 15px rgba(90, 35, 115, 0.16))
-        drop-shadow(0 0 12px rgba(255, 225, 125, 0.42));
-    }
-
-    .hero {
-      border-radius: 34px;
-      padding: 30px 20px 26px;
-      margin-bottom: 18px;
-      text-align: center;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,244,253,0.68));
-      box-shadow:
-        0 0 0 2px rgba(255,235,165,0.72),
-        0 20px 38px rgba(86,38,112,0.18),
-        inset 0 3px 8px rgba(255,255,255,0.9);
-      overflow: hidden;
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 6px 15px;
-      border-radius: 999px;
-      margin-bottom: 12px;
-      font-size: 16px;
-      font-weight: 700;
-      color: #8a4ca5;
-      background: rgba(255,246,214,0.86);
-      box-shadow:
-        0 0 0 1px rgba(255,222,120,0.82),
-        0 0 18px rgba(255,226,130,0.45);
-    }
-
-    h1 {
-      font-size: clamp(38px, 9.2vw, 56px);
-      line-height: 0.9;
-      color: #7d3f97;
-      margin-bottom: 14px;
-      text-shadow:
-        0 2px 0 rgba(255,255,255,0.92),
-        0 5px 10px rgba(80,30,100,0.18),
-        0 0 20px rgba(255,230,160,0.7);
-    }
-
-    .hero-text {
-      font-size: 20px;
-      line-height: 1.38;
-      color: #70407f;
-    }
-
-    .task-card {
-      position: sticky;
-      top: 8px;
-      z-index: 50;
-      border-radius: 26px;
-      padding: 15px 16px;
-      margin: 16px 0 20px;
-      background:
-        linear-gradient(180deg, rgba(255,252,255,0.96), rgba(251,234,255,0.90));
-      box-shadow:
-        0 0 0 2px rgba(255,230,145,0.8),
-        0 10px 24px rgba(87,35,110,0.17),
-        inset 0 2px 7px rgba(255,255,255,0.88);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-
-    .task-title {
-      font-size: 21px;
-      line-height: 1.15;
-      font-weight: 700;
-      color: #7d3f97;
-      text-align: center;
-      margin-bottom: 8px;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
-    }
-
-    .counter {
-      width: fit-content;
-      margin: 0 auto;
-      padding: 6px 16px;
-      border-radius: 999px;
-      text-align: center;
-      font-size: 18px;
-      font-weight: 700;
-      color: #9a5ab2;
-      background: rgba(255,255,255,0.58);
-      box-shadow: inset 0 1px 5px rgba(255,255,255,0.8);
-    }
-
-    .counter.ready {
-      color: #7d3f97;
-      background: rgba(255,244,198,0.76);
-      box-shadow:
-        0 0 0 1px rgba(255,225,120,0.8),
-        0 0 16px rgba(255,225,120,0.65);
-    }
-
-    .month-section {
-      margin-bottom: 24px;
-    }
-
-    .month-head {
-      position: relative;
-      margin: 14px 0 12px;
-      padding: 17px 17px 17px 64px;
-      border-radius: 28px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.74), rgba(255,244,253,0.58));
-      box-shadow:
-        0 0 0 2px rgba(255,235,165,0.58),
-        0 9px 20px rgba(86,38,112,0.1),
-        inset 0 3px 8px rgba(255,255,255,0.76);
-      overflow: hidden;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-    }
-
-    .month-head::before {
-      content: "✦";
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      width: 36px;
-      height: 36px;
-      transform: translateY(-50%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #8a4ca5;
-      font-size: 20px;
-      background:
-        radial-gradient(circle at 35% 25%, #ffffff 0%, #fff2c8 45%, #d9a7ff 100%);
-      box-shadow:
-        0 0 0 2px rgba(255,224,120,0.78),
-        0 0 12px rgba(255,224,120,0.5);
-    }
-
-    .month-title {
-      font-size: 30px;
-      line-height: 1;
-      color: #7d3f97;
-      font-weight: 700;
-      margin-bottom: 7px;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
-    }
-
-    .month-desc {
-      font-size: 18px;
-      line-height: 1.35;
-      color: #70407f;
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .photo-card {
-      position: relative;
-      min-height: 150px;
-      border-radius: 23px;
-      cursor: pointer;
-      overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,238,250,0.64));
-      box-shadow:
-        0 0 0 2px rgba(255,235,165,0.64),
-        0 10px 22px rgba(86,38,112,0.13),
-        inset 0 3px 8px rgba(255,255,255,0.78);
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-    }
-
-    .photo-card.selected {
-      box-shadow:
-        0 0 0 2px rgba(255,229,120,0.96),
-        0 0 24px rgba(255,224,120,0.92),
-        0 12px 25px rgba(86,38,112,0.18),
-        inset 0 3px 8px rgba(255,255,255,0.82);
-      transform: translateY(-1px) scale(1.01);
-    }
-
-    .photo-placeholder {
-      position: absolute;
-      inset: 9px;
-      border-radius: 18px;
-      border: 2px dashed rgba(151,83,172,0.34);
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.88), transparent 32%),
-        linear-gradient(180deg, rgba(255,248,253,0.75), rgba(236,214,255,0.52));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8px;
-    }
-
-    .photo-label {
-      font-size: 19px;
-      line-height: 1;
-      font-weight: 700;
-      color: #7d3f97;
-      margin-bottom: 6px;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
-    }
-
-    .photo-hint {
-      font-size: 13px;
-      line-height: 1.2;
-      color: #9a6aad;
-    }
-
-    .like-btn {
-      position: absolute;
-      right: 7px;
-      top: 7px;
-      z-index: 4;
-      width: 37px;
-      height: 37px;
-      border-radius: 50%;
-      border: none;
-      cursor: pointer;
-      font-size: 20px;
-      line-height: 1;
-      background:
-        radial-gradient(circle at 30% 25%, #ffffff 0%, #ffeef8 38%, #f5b4d7 72%, #c765a4 100%);
-      box-shadow:
-        0 0 0 2px rgba(255,255,255,0.75),
-        0 7px 15px rgba(90,35,115,0.18),
-        inset 0 3px 6px rgba(255,255,255,0.88);
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .photo-card.selected .like-btn {
-      background:
-        radial-gradient(circle at 30% 25%, #ffffff 0%, #ffe4f3 28%, #ff7eb7 64%, #d93b7c 100%);
-      animation: heartPulse 1.4s ease-in-out infinite;
-    }
-
-    .finish-card {
-      display: none;
-      margin-top: 22px;
-      border-radius: 32px;
-      padding: 25px 18px;
-      text-align: center;
-      background:
-        linear-gradient(180deg, rgba(255,252,242,0.97), rgba(255,235,250,0.94));
-      box-shadow:
-        0 0 0 2px rgba(255,229,120,0.9),
-        0 0 28px rgba(255,224,120,0.8),
-        0 14px 30px rgba(86,38,112,0.18);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
-
-    .finish-card.active {
-      display: block;
-      animation: showFinish .35s ease both;
-    }
-
-    .finish-title {
-      font-size: 31px;
-      line-height: 1;
-      color: #7d3f97;
-      margin-bottom: 10px;
-      font-weight: 700;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
-    }
-
-    .finish-text {
-      font-size: 19px;
-      line-height: 1.35;
-      margin-bottom: 16px;
-      color: #70407f;
-    }
-
-    .finish-btn {
-      width: 100%;
-      border: none;
-      border-radius: 999px;
-      padding: 14px 18px;
-      cursor: pointer;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: #7d3f97;
-      background:
-        linear-gradient(180deg, #fff7da 0%, #ffd86f 48%, #f3b84d 100%);
-      box-shadow:
-        0 0 0 2px rgba(255,235,160,0.92),
-        0 9px 18px rgba(90,35,115,0.18),
-        inset 0 2px 5px rgba(255,255,255,0.85);
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .small-note {
-      margin-top: 14px;
-      text-align: center;
-      font-size: 15px;
-      color: #9869aa;
-    }
-
-    @keyframes musicPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.06); }
-    }
-
-    @keyframes heartPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-
-    @keyframes showFinish {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 390px) {
-      .topbar {
-        grid-template-columns: 60px 1fr 60px;
-        gap: 6px;
-      }
-
-      .location-badge-image img {
-        width: 160px;
-      }
-
-      .photo-grid {
-        gap: 8px;
-      }
-
-      .photo-card {
-        min-height: 134px;
-        border-radius: 20px;
-      }
-
-      .photo-placeholder {
-        inset: 8px;
-        border-radius: 16px;
-      }
-
-      .photo-label {
-        font-size: 17px;
-      }
-
-      .photo-hint {
-        font-size: 12px;
-      }
-
-      .like-btn {
-        width: 34px;
-        height: 34px;
-        font-size: 18px;
-      }
-
-      .month-head {
-        padding-left: 60px;
-      }
-
-      .month-title {
-        font-size: 28px;
-      }
-    }
-  </style>
-</head>
-
-<body class="notranslate">
-
-  <main class="page">
-    <div class="topbar">
-      <a class="round-btn" href="map.html" aria-label="Назад до карти">
-        <span>←</span>
-      </a>
-
-      <div class="location-badge-image">
-        <img src="loc1.png" alt="Локація 1">
-      </div>
-
-      <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику">
-        <span>♪</span>
-      </button>
-    </div>
-
-    <section class="hero">
-      <div class="eyebrow">Чарівна подорож починається</div>
-      <h1>Знайомство<br>з Софійкою</h1>
-      <p class="hero-text">
-        Це перша зупинка нашої казкової подорожі. Тут ми познайомимось із Софійкою —
-        від народження і до перших маленьких перемог у 11 місяців.
-      </p>
-    </section>
-
-    <section class="task-card">
-      <div class="task-title">Обери 5 наймиліших фото Софійки ❤️</div>
-      <div class="counter" id="counter">Обрано 0 з 5</div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">Народження</div>
-        <div class="month-desc">День, коли в нашому житті з’явилось маленьке диво.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="birth-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="birth-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="birth-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">1 місяць</div>
-        <div class="month-desc">Перші погляди, перші обійми і найніжніші моменти.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m1-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m1-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m1-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">2 місяці</div>
-        <div class="month-desc">Софійка починає уважніше дивитися на світ навколо.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m2-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m2-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m2-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">3 місяці</div>
-        <div class="month-desc">Більше усмішок, більше тепла і більше чарівних моментів.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m3-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m3-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m3-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">4 місяці</div>
-        <div class="month-desc">Маленькі відкриття, нові емоції і дуже милий характер.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m4-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m4-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m4-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">5 місяців</div>
-        <div class="month-desc">Ще більше цікавості, руху і щасливих сімейних спогадів.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m5-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m5-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m5-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">6 місяців</div>
-        <div class="month-desc">Пів року маленького дива, радості і любові.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m6-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m6-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m6-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">7 місяців</div>
-        <div class="month-desc">Софійка стає ще активнішою, уважнішою і веселішою.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m7-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m7-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m7-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">8 місяців</div>
-        <div class="month-desc">Нові звички, нові емоції і ще більше милих моментів.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m8-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m8-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m8-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">9 місяців</div>
-        <div class="month-desc">Маленька принцеса вже має свій настрій, усмішку і характер.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m9-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m9-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m9-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">10 місяців</div>
-        <div class="month-desc">Ще один крок до першого великого свята Софійки.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m10-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m10-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m10-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="month-section">
-      <div class="month-head">
-        <div class="month-title">11 місяців</div>
-        <div class="month-desc">Софійка вже майже велика дівчинка — ніжна, весела і особлива.</div>
-      </div>
-      <div class="photo-grid">
-        <div class="photo-card" data-id="m11-1"><div class="photo-placeholder"><div class="photo-label">Фото 1</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m11-2"><div class="photo-placeholder"><div class="photo-label">Фото 2</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-        <div class="photo-card" data-id="m11-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
-      </div>
-    </section>
-
-    <section class="finish-card" id="finishCard">
-      <div class="finish-title">Локацію відкрито!</div>
-      <p class="finish-text">
-        Чудовий вибір. Ти познайомився з Софійкою і відкрив наступну частину чарівної подорожі.
-      </p>
-      <button class="finish-btn" type="button" id="finishBtn">Завершити локацію</button>
-      <div class="small-note">Після натискання ти повернешся на карту</div>
-    </section>
-  </main>
-
-  <audio
-    id="bgMusic"
-    src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3"
-    loop
-    preload="auto">
-  </audio>
-
-  <script>
-    var selected = new Set();
-    var maxSelected = 5;
-
-    var counter = document.getElementById("counter");
-    var finishCard = document.getElementById("finishCard");
-    var finishBtn = document.getElementById("finishBtn");
-    var musicToggle = document.getElementById("musicToggle");
-    var bgMusic = document.getElementById("bgMusic");
-
-    if (bgMusic) {
-      bgMusic.volume = 0.35;
-    }
-
-    function updateCounter() {
-      if (!counter) return;
-
-      counter.textContent = "Обрано " + selected.size + " з 5";
-
-      if (selected.size === maxSelected) {
-        counter.classList.add("ready");
-
-        if (finishCard) {
-          finishCard.classList.add("active");
-
-          setTimeout(function() {
-            finishCard.scrollIntoView({
-              behavior: "smooth",
-              block: "center"
-            });
-          }, 250);
-        }
-      } else {
-        counter.classList.remove("ready");
-
-        if (finishCard) {
-          finishCard.classList.remove("active");
-        }
-      }
-    }
-
-    function toggleCard(card) {
-      if (!card) return;
-
-      var id = card.getAttribute("data-id");
-      if (!id) return;
-
-      var btn = card.querySelector(".like-btn");
-
-      if (selected.has(id)) {
-        selected.delete(id);
-        card.classList.remove("selected");
-
-        if (btn) {
-          btn.textContent = "♡";
-        }
-
-        updateCounter();
-        return;
-      }
-
-      if (selected.size >= maxSelected) {
-        alert("Можна обрати тільки 5 фото ❤️");
-        return;
-      }
-
-      selected.add(id);
-      card.classList.add("selected");
-
-      if (btn) {
-        btn.textContent = "❤️";
-      }
-
-      updateCounter();
-    }
-
-    document.addEventListener("click", function(event) {
-      var likeButton = event.target.closest(".like-btn");
-      var photoCard = event.target.closest(".photo-card");
-
-      if (likeButton) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        toggleCard(likeButton.closest(".photo-card"));
-        return;
-      }
-
-      if (photoCard) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        toggleCard(photoCard);
-        return;
-      }
-    });
-
-    if (finishBtn) {
-      finishBtn.addEventListener("click", function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        localStorage.setItem("sofiyka_location1_done", "true");
-        window.location.href = "map.html";
-      });
-    }
-
-    if (musicToggle) {
-      musicToggle.addEventListener("click", async function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (!bgMusic) return;
-
-        try {
-          if (bgMusic.paused) {
-            await bgMusic.play();
-            musicToggle.classList.remove("off");
-            musicToggle.classList.add("playing");
-            musicToggle.setAttribute("aria-label", "Вимкнути музику");
-          } else {
-            bgMusic.pause();
-            musicToggle.classList.remove("playing");
-            musicToggle.classList.add("off");
-            musicToggle.setAttribute("aria-label", "Увімкнути музику");
-          }
-        } catch (error) {
-          musicToggle.classList.remove("playing");
-          musicToggle.classList.add("off");
-          alert("Музика не запустилась. Перевір, чи mp3 файл лежить поруч із location1.html.");
-        }
-      });
-    }
-
-    updateCounter();
-  </script>
-
-</body>
-</html>
+    :root {
+      --violet: #7e459e;
       --violet-soft: #9b6bb7;
       --gold: #efd77a;
       --gold-2: #f7e8aa;
@@ -881,7 +24,6 @@
       --radius-xl: 34px;
       --radius-lg: 28px;
       --radius-md: 22px;
-      --radius-sm: 18px;
       --container-width: 1120px;
     }
 
@@ -910,9 +52,9 @@
       inset: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.65), transparent 22%),
-        radial-gradient(circle at 80% 15%, rgba(255, 244, 201, 0.4), transparent 18%),
-        radial-gradient(circle at 85% 85%, rgba(255, 220, 247, 0.25), transparent 22%);
+        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.55), transparent 22%),
+        radial-gradient(circle at 80% 15%, rgba(255, 244, 201, 0.34), transparent 18%),
+        radial-gradient(circle at 85% 85%, rgba(255, 220, 247, 0.22), transparent 22%);
       z-index: 0;
     }
 
@@ -922,100 +64,75 @@
       width: 100%;
       max-width: var(--container-width);
       margin: 0 auto;
-      padding: 28px 20px 42px;
+      padding: 14px 18px 42px;
     }
 
-    /* Верхня панель */
-    .topbar {
-      display: grid;
-      grid-template-columns: 110px 1fr 110px;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 22px;
-    }
+    /* ===== ШАПКА ЧЕРЕЗ КАРТИНКУ heder_loc1.png ===== */
 
-    .top-btn-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .top-btn {
-      width: 92px;
-      height: 92px;
-      border-radius: 50%;
-      border: 3px solid rgba(241, 217, 110, 0.92);
-      background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.95), rgba(255,248,221,0.92) 35%, rgba(248,225,137,0.92) 82%);
-      box-shadow:
-        0 0 0 5px rgba(255, 245, 199, 0.35),
-        0 8px 20px rgba(229, 187, 89, 0.25),
-        inset 0 2px 12px rgba(255,255,255,0.75);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      color: var(--violet);
-      font-size: 40px;
-      font-weight: 700;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    .header-loc1 {
       position: relative;
-      outline: none;
+      width: 100%;
+      margin: 0 auto 14px;
+      z-index: 10;
     }
 
-    .top-btn:hover,
-    .top-btn:focus-visible {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow:
-        0 0 0 6px rgba(255, 245, 199, 0.44),
-        0 12px 28px rgba(229, 187, 89, 0.32),
-        inset 0 2px 12px rgba(255,255,255,0.75);
-      filter: brightness(1.02);
-    }
-
-    .top-btn:active {
-      transform: scale(0.98);
-    }
-
-    .top-btn .icon {
-      position: relative;
-      top: -1px;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .music-btn {
-      background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.96), rgba(239,224,255,0.95) 38%, rgba(203,166,244,0.92) 82%);
-    }
-
-    .music-btn.playing {
-      box-shadow:
-        0 0 0 6px rgba(255, 245, 199, 0.44),
-        0 0 22px rgba(202, 152, 249, 0.45),
-        0 12px 28px rgba(229, 187, 89, 0.28),
-        inset 0 2px 12px rgba(255,255,255,0.75);
-    }
-
-    .location-sign {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .location-sign img {
-      max-width: 100%;
-      width: 280px;
-      height: auto;
+    .header-loc1-img {
       display: block;
-      filter: drop-shadow(0 10px 18px rgba(170, 119, 194, 0.18));
+      width: 100%;
+      height: auto;
       user-select: none;
       -webkit-user-drag: none;
+      pointer-events: none;
+      filter: drop-shadow(0 8px 18px rgba(116, 61, 140, 0.16));
     }
 
-    /* Загальні картки */
+    .header-click {
+      position: absolute;
+      top: 20%;
+      width: 22%;
+      height: 60%;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      z-index: 20;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .header-back {
+      left: 1.5%;
+    }
+
+    .header-music {
+      right: 1.5%;
+    }
+
+    .header-click:active {
+      transform: scale(0.96);
+    }
+
+    .header-music.playing::after {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 50%;
+      box-shadow: 0 0 22px rgba(255, 245, 180, 0.75);
+      animation: musicGlow 1.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes musicGlow {
+      0%, 100% {
+        opacity: 0.45;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.9;
+        transform: scale(1.06);
+      }
+    }
+
+    /* ===== ЗАГАЛЬНІ КАРТКИ ===== */
+
     .card {
       background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(255,248,253,0.88));
       border: var(--border);
@@ -1024,13 +141,15 @@
       overflow: hidden;
     }
 
+    /* ===== ПЕРШИЙ БЛОК ===== */
+
     .hero-card {
       position: relative;
-      margin-bottom: 22px;
-      min-height: 300px;
-      padding: 28px 34px 28px;
+      margin-bottom: 18px;
+      min-height: 250px;
+      padding: 22px 30px;
       background:
-        linear-gradient(rgba(255,255,255,0.50), rgba(255,248,253,0.60)),
+        linear-gradient(rgba(255,255,255,0.44), rgba(255,248,253,0.50)),
         url("fon_block1.png") center center / cover no-repeat;
     }
 
@@ -1038,71 +157,78 @@
       position: relative;
       z-index: 1;
       text-align: center;
-      min-height: 240px;
+      min-height: 205px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 10px 18px;
       border-radius: 28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.30), rgba(255,255,255,0.12));
-      backdrop-filter: blur(1.5px);
+      padding: 12px 18px;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(255,255,255,0.52), rgba(255,255,255,0.20) 62%, rgba(255,255,255,0.04));
+      backdrop-filter: blur(1px);
+      -webkit-backdrop-filter: blur(1px);
     }
 
     .mini-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 58px;
-      padding: 10px 28px;
+      min-height: 42px;
+      padding: 7px 24px;
       border-radius: 999px;
       border: 2px solid rgba(239, 215, 122, 0.95);
-      background: rgba(255,250,246,0.82);
+      background: rgba(255,250,246,0.78);
       box-shadow: 0 4px 14px rgba(235, 211, 107, 0.15);
       color: var(--violet);
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 700;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
       text-align: center;
     }
 
     .hero-title {
       margin: 0 0 8px;
-      font-size: clamp(54px, 7vw, 80px);
-      line-height: 0.95;
+      font-size: clamp(44px, 5.8vw, 70px);
+      line-height: 0.94;
       font-weight: 700;
       color: var(--violet);
-      text-shadow: 0 6px 18px rgba(126, 69, 158, 0.10);
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.86),
+        0 6px 18px rgba(126, 69, 158, 0.10);
     }
 
     .hero-desc {
       margin: 0;
-      max-width: 780px;
-      font-size: clamp(28px, 3.3vw, 40px);
-      line-height: 1.25;
+      max-width: 760px;
+      font-size: clamp(22px, 2.7vw, 34px);
+      line-height: 1.22;
       font-weight: 600;
       color: #6f438f;
       text-shadow: 0 4px 12px rgba(255,255,255,0.45);
     }
 
+    /* ===== ЗАВДАННЯ ===== */
+
     .task-card {
-      margin-bottom: 22px;
-      padding: 24px 22px 26px;
+      margin-bottom: 18px;
+      padding: 20px 20px 22px;
       text-align: center;
     }
 
     .task-title {
       margin: 0;
-      font-size: clamp(34px, 4vw, 50px);
-      line-height: 1.1;
+      font-size: clamp(30px, 3.6vw, 46px);
+      line-height: 1.08;
       font-weight: 700;
     }
 
     .task-heart {
       display: block;
       margin: 6px auto 8px;
-      font-size: 44px;
+      font-size: 40px;
       line-height: 1;
+      color: #d74470;
       filter: drop-shadow(0 6px 10px rgba(255, 104, 163, 0.18));
     }
 
@@ -1110,29 +236,31 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 220px;
-      min-height: 62px;
-      padding: 10px 24px;
+      min-width: 200px;
+      min-height: 52px;
+      padding: 8px 22px;
       border-radius: 999px;
       border: 1.8px solid rgba(255, 240, 243, 0.95);
       background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(250,241,249,0.96));
       box-shadow: inset 0 2px 8px rgba(255,255,255,0.75);
-      font-size: 26px;
+      font-size: 25px;
       font-weight: 700;
       color: var(--violet-soft);
     }
 
+    /* ===== СЕКЦІЇ МІСЯЦІВ ===== */
+
     .sections {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
     .month-card {
       display: grid;
-      grid-template-columns: minmax(260px, 310px) 1fr;
-      gap: 16px;
-      padding: 14px;
+      grid-template-columns: minmax(245px, 300px) 1fr;
+      gap: 14px;
+      padding: 12px;
       border-radius: 30px;
       border: var(--border);
       background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,249,252,0.88));
@@ -1142,20 +270,19 @@
 
     .month-info {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       align-items: center;
       min-width: 0;
-      padding: 10px 10px 10px 8px;
+      padding: 9px 10px 9px 8px;
       border-radius: 24px;
-      background:
-        linear-gradient(135deg, rgba(255, 244, 246, 0.88), rgba(255,255,255,0.80));
+      background: linear-gradient(135deg, rgba(255, 244, 246, 0.88), rgba(255,255,255,0.80));
       box-shadow: inset 0 0 0 1px rgba(247, 230, 170, 0.55);
     }
 
     .month-icon {
-      width: 70px;
-      height: 70px;
-      flex: 0 0 70px;
+      width: 66px;
+      height: 66px;
+      flex: 0 0 66px;
       border-radius: 50%;
       border: 2px solid rgba(239, 215, 122, 0.9);
       background:
@@ -1166,7 +293,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 34px;
+      font-size: 32px;
       line-height: 1;
     }
 
@@ -1176,15 +303,15 @@
 
     .month-title {
       margin: 0 0 4px;
-      font-size: clamp(28px, 2.8vw, 40px);
+      font-size: clamp(26px, 2.6vw, 38px);
       line-height: 1;
       font-weight: 700;
     }
 
     .month-subtitle {
       margin: 0;
-      font-size: clamp(20px, 2vw, 28px);
-      line-height: 1.18;
+      font-size: clamp(18px, 1.8vw, 25px);
+      line-height: 1.15;
       font-weight: 600;
       color: #7f5a98;
     }
@@ -1192,19 +319,18 @@
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
       align-items: stretch;
     }
 
     .photo-card {
       position: relative;
-      min-height: 154px;
+      min-height: 138px;
       border-radius: 22px;
       border: 2px dashed rgba(184, 154, 212, 0.68);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.95), rgba(252,245,251,0.92));
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(252,245,251,0.92));
       box-shadow: inset 0 2px 10px rgba(255,255,255,0.75);
-      padding: 18px 16px 14px;
+      padding: 18px 14px 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1219,7 +345,7 @@
     }
 
     .photo-label {
-      font-size: clamp(24px, 2vw, 30px);
+      font-size: clamp(22px, 1.9vw, 28px);
       line-height: 1.1;
       font-weight: 700;
       color: var(--violet);
@@ -1228,7 +354,7 @@
     .photo-label span {
       display: block;
       margin-top: 6px;
-      font-size: clamp(16px, 1.5vw, 20px);
+      font-size: clamp(15px, 1.4vw, 19px);
       line-height: 1.2;
       font-weight: 600;
       color: #8c73a1;
@@ -1236,10 +362,10 @@
 
     .like-btn {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 44px;
-      height: 44px;
+      top: 9px;
+      right: 9px;
+      width: 40px;
+      height: 40px;
       border: none;
       border-radius: 50%;
       cursor: pointer;
@@ -1249,7 +375,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 22px;
+      font-size: 21px;
       color: #5b435f;
       transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
     }
@@ -1266,8 +392,10 @@
       transform: scale(1.06);
     }
 
+    /* ===== ФІНАЛ ===== */
+
     .unlock-card {
-      margin-top: 22px;
+      margin-top: 20px;
       padding: 22px 20px 24px;
       text-align: center;
       position: relative;
@@ -1275,19 +403,19 @@
 
     .unlock-title {
       margin: 0 0 16px;
-      font-size: clamp(36px, 4vw, 54px);
+      font-size: clamp(34px, 3.7vw, 52px);
       line-height: 1.04;
       font-weight: 700;
     }
 
     .next-btn {
-      min-height: 66px;
-      padding: 14px 34px;
+      min-height: 62px;
+      padding: 13px 32px;
       border-radius: 999px;
       border: 2px solid rgba(230, 216, 185, 0.88);
       background: linear-gradient(180deg, rgba(230,226,224,0.95), rgba(197,190,188,0.95));
       color: rgba(119, 96, 115, 0.88);
-      font-size: clamp(26px, 2.5vw, 34px);
+      font-size: clamp(24px, 2.4vw, 32px);
       font-family: "Cormorant Garamond", serif;
       font-weight: 700;
       cursor: not-allowed;
@@ -1315,7 +443,7 @@
     .hint {
       margin-top: 12px;
       min-height: 28px;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 600;
       color: #8b6e9c;
     }
@@ -1347,97 +475,174 @@
       display: none;
     }
 
-    /* Адаптив */
+    /* ===== АДАПТИВ ===== */
+
     @media (max-width: 980px) {
       .page {
-        padding: 20px 14px 34px;
+        padding: 10px 12px 34px;
       }
 
-      .topbar {
-        grid-template-columns: 86px 1fr 86px;
-        gap: 10px;
-      }
-
-      .top-btn {
-        width: 76px;
-        height: 76px;
-        font-size: 34px;
-      }
-
-      .location-sign img {
-        width: 215px;
+      .header-loc1 {
+        width: calc(100% + 8px);
+        margin-left: -4px;
+        margin-right: -4px;
+        margin-bottom: 10px;
       }
 
       .hero-card {
-        padding: 18px 16px 18px;
-        min-height: 250px;
+        padding: 16px 14px;
+        min-height: 220px;
+        margin-bottom: 16px;
       }
 
       .hero-inner {
-        min-height: 214px;
-        padding: 14px 12px;
+        min-height: 190px;
+        padding: 12px 10px;
       }
 
       .mini-pill {
-        min-height: 50px;
-        padding: 8px 20px;
+        min-height: 42px;
+        padding: 7px 18px;
         font-size: 22px;
+        margin-bottom: 10px;
+      }
+
+      .hero-title {
+        font-size: 48px;
+      }
+
+      .hero-desc {
+        font-size: 23px;
       }
 
       .month-card {
         grid-template-columns: 1fr;
       }
-
-      .month-info {
-        align-items: center;
-      }
     }
 
     @media (max-width: 700px) {
-      .topbar {
-        grid-template-columns: 74px 1fr 74px;
+      .page {
+        padding: 8px 10px 34px;
       }
 
-      .top-btn {
-        width: 68px;
-        height: 68px;
-        font-size: 30px;
+      .header-loc1 {
+        width: calc(100% + 24px);
+        margin-left: -12px;
+        margin-right: -12px;
+        margin-bottom: 8px;
       }
 
-      .location-sign img {
-        width: 180px;
+      .header-click {
+        top: 18%;
+        height: 62%;
+        width: 24%;
+      }
+
+      .header-back {
+        left: 0;
+      }
+
+      .header-music {
+        right: 0;
+      }
+
+      .hero-card {
+        border-radius: 30px;
+        padding: 14px 12px;
+        min-height: 210px;
+      }
+
+      .hero-inner {
+        min-height: 184px;
+        border-radius: 24px;
+      }
+
+      .mini-pill {
+        font-size: 21px;
+        max-width: 86%;
+        line-height: 1.05;
       }
 
       .hero-title {
-        font-size: 50px;
+        font-size: 45px;
       }
 
       .hero-desc {
-        font-size: 24px;
+        font-size: 22px;
       }
 
-      .task-title,
-      .unlock-title,
+      .task-card {
+        padding: 18px 16px 20px;
+      }
+
+      .task-title {
+        font-size: 30px;
+      }
+
+      .task-heart {
+        font-size: 36px;
+      }
+
+      .counter-pill {
+        min-width: 175px;
+        min-height: 50px;
+        font-size: 22px;
+      }
+
+      .month-card {
+        padding: 10px;
+        border-radius: 26px;
+        gap: 10px;
+      }
+
+      .month-info {
+        gap: 10px;
+      }
+
+      .month-icon {
+        width: 58px;
+        height: 58px;
+        flex-basis: 58px;
+        font-size: 28px;
+      }
+
       .month-title {
         font-size: 28px;
       }
 
       .month-subtitle {
-        font-size: 20px;
+        font-size: 19px;
       }
 
       .photo-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
       }
 
       .photo-card {
-        min-height: 122px;
+        min-height: 112px;
+        border-radius: 18px;
+        padding: 22px 6px 8px;
       }
 
-      .counter-pill {
-        min-width: 180px;
-        min-height: 56px;
-        font-size: 22px;
+      .photo-label {
+        font-size: 19px;
+      }
+
+      .photo-label span {
+        font-size: 12px;
+      }
+
+      .like-btn {
+        width: 30px;
+        height: 30px;
+        top: 6px;
+        right: 6px;
+        font-size: 17px;
+      }
+
+      .unlock-title {
+        font-size: 30px;
       }
 
       .next-btn {
@@ -1449,32 +654,58 @@
         font-size: 18px;
       }
     }
+
+    @media (max-width: 420px) {
+      .hero-title {
+        font-size: 41px;
+      }
+
+      .hero-desc {
+        font-size: 20px;
+      }
+
+      .mini-pill {
+        font-size: 19px;
+      }
+
+      .task-title {
+        font-size: 28px;
+      }
+
+      .month-title {
+        font-size: 26px;
+      }
+
+      .month-subtitle {
+        font-size: 18px;
+      }
+
+      .photo-card {
+        min-height: 104px;
+      }
+
+      .photo-label {
+        font-size: 18px;
+      }
+    }
   </style>
 </head>
-<body>
 
-  <audio id="bgMusic" loop>
+<body class="notranslate">
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3" type="audio/mpeg">
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
   <div class="page">
 
-    <header class="topbar">
-      <div class="top-btn-wrap">
-        <button class="top-btn back-btn" id="backBtn" type="button" aria-label="Назад">
-          <span class="icon">←</span>
-        </button>
-      </div>
+    <header class="header-loc1">
+      <img class="header-loc1-img" src="heder_loc1.png" alt="Локація 1">
 
-      <div class="location-sign">
-        <img src="loc1.png" alt="Локація 1">
-      </div>
+      <button class="header-click header-back" id="backBtn" type="button" aria-label="Назад"></button>
 
-      <div class="top-btn-wrap">
-        <button class="top-btn music-btn" id="musicBtn" type="button" aria-label="Музика">
-          <span class="icon">♫</span>
-        </button>
-      </div>
+      <button class="header-click header-music" id="musicBtn" type="button" aria-label="Музика"></button>
     </header>
 
     <section class="card hero-card">
@@ -1584,10 +815,15 @@
     const MAX_LIKES = 5;
     let selectedPhotos = new Set();
 
+    if (bgMusic) {
+      bgMusic.volume = 0.35;
+    }
+
     function renderSections() {
       sectionsContainer.innerHTML = sectionsData.map((section, sectionIndex) => {
         const photoCards = [1, 2, 3].map(photoIndex => {
           const id = `section-${sectionIndex + 1}-photo-${photoIndex}`;
+
           return `
             <div class="photo-card">
               <button class="like-btn" type="button" aria-label="Вподобати фото" data-id="${id}">
@@ -1634,6 +870,7 @@
               showToast("Можна вибрати лише 5 фото 💕");
               return;
             }
+
             selectedPhotos.add(id);
           }
 
@@ -1645,6 +882,7 @@
 
     function updateUI() {
       const total = selectedPhotos.size;
+
       counterText.textContent = `Обрано ${total} з ${MAX_LIKES}`;
 
       document.querySelectorAll(".like-btn").forEach(btn => {
@@ -1673,14 +911,16 @@
 
     function restoreLikes() {
       const saved = localStorage.getItem("sofiyka_location1_likes");
+
       if (!saved) return;
 
       try {
         const parsed = JSON.parse(saved);
+
         if (Array.isArray(parsed)) {
           selectedPhotos = new Set(parsed.slice(0, MAX_LIKES));
         }
-      } catch (e) {
+      } catch (error) {
         selectedPhotos = new Set();
       }
     }
@@ -1688,7 +928,9 @@
     function showToast(message) {
       toast.textContent = message;
       toast.classList.add("show");
+
       clearTimeout(showToast._timer);
+
       showToast._timer = setTimeout(() => {
         toast.classList.remove("show");
       }, 1800);
@@ -1706,14 +948,12 @@
     });
 
     backBtn.addEventListener("click", () => {
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = "map.html";
-      }
+      window.location.href = "map.html";
     });
 
     musicBtn.addEventListener("click", async () => {
+      if (!bgMusic) return;
+
       try {
         if (bgMusic.paused) {
           await bgMusic.play();
@@ -1724,14 +964,15 @@
           musicBtn.classList.remove("playing");
           localStorage.setItem("sofiyka_music", "off");
         }
-      } catch (err) {
-        showToast("Додайте файл music.mp3 у папку проєкту 🎵");
+      } catch (error) {
+        showToast("Музика не запустилась. Перевір mp3 файл 🎵");
       }
     });
 
     function restoreMusicState() {
       const musicState = localStorage.getItem("sofiyka_music");
-      if (musicState === "on") {
+
+      if (musicState === "on" && bgMusic) {
         bgMusic.play().then(() => {
           musicBtn.classList.add("playing");
         }).catch(() => {
@@ -1743,5 +984,6 @@
     renderSections();
     restoreMusicState();
   </script>
+
 </body>
 </html>

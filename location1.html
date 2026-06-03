@@ -88,24 +88,6 @@
       color: #ffffff;
     }
 
-    .progress-pill {
-      min-height: 46px;
-      padding: 8px 18px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.62);
-      box-shadow:
-        0 0 0 2px rgba(255,230,145,0.65),
-        0 8px 18px rgba(90,35,115,0.12),
-        inset 0 2px 6px rgba(255,255,255,0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #7d3f97;
-      font-weight: 700;
-      font-size: 18px;
-      text-align: center;
-    }
-
     .hero {
       position: relative;
       border-radius: 32px;
@@ -213,32 +195,6 @@
       color: #7d3f97;
     }
 
-    .month-nav {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 3px 2px 12px;
-      margin-bottom: 10px;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .month-nav a {
-      flex: 0 0 auto;
-      min-width: 42px;
-      min-height: 38px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      text-decoration: none;
-      color: #7d3f97;
-      font-size: 17px;
-      font-weight: 700;
-      text-align: center;
-      background: rgba(255,255,255,0.65);
-      box-shadow:
-        0 0 0 1px rgba(255,225,135,0.75),
-        0 5px 12px rgba(90,35,115,0.12);
-    }
-
     .month-section {
       margin-bottom: 22px;
     }
@@ -271,15 +227,15 @@
 
     .photo-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
     }
 
     .photo-card {
       position: relative;
-      min-height: 178px;
+      min-height: 148px;
       border: none;
-      border-radius: 24px;
+      border-radius: 22px;
       cursor: pointer;
       overflow: hidden;
       background:
@@ -294,8 +250,8 @@
     .photo-card::before {
       content: "";
       position: absolute;
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
       right: -52px;
       top: -48px;
@@ -314,8 +270,8 @@
 
     .photo-placeholder {
       position: absolute;
-      inset: 10px;
-      border-radius: 19px;
+      inset: 9px;
+      border-radius: 17px;
       border: 2px dashed rgba(151,83,172,0.32);
       background:
         radial-gradient(circle at 30% 20%, rgba(255,255,255,0.82), transparent 32%),
@@ -325,11 +281,11 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 10px;
+      padding: 8px;
     }
 
     .photo-label {
-      font-size: 22px;
+      font-size: 19px;
       line-height: 1;
       font-weight: 700;
       color: #7d3f97;
@@ -337,22 +293,22 @@
     }
 
     .photo-hint {
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.2;
       color: #9a6aad;
     }
 
     .like-btn {
       position: absolute;
-      right: 10px;
-      top: 10px;
+      right: 7px;
+      top: 7px;
       z-index: 4;
-      width: 42px;
-      height: 42px;
+      width: 37px;
+      height: 37px;
       border-radius: 50%;
       border: none;
       cursor: pointer;
-      font-size: 23px;
+      font-size: 20px;
       line-height: 1;
       background:
         radial-gradient(circle at 30% 25%, #ffffff 0%, #ffeef8 38%, #f5b4d7 72%, #c765a4 100%);
@@ -444,12 +400,32 @@
     }
 
     @media (max-width: 390px) {
+      .photo-grid {
+        gap: 8px;
+      }
+
       .photo-card {
-        min-height: 162px;
+        min-height: 132px;
+        border-radius: 19px;
+      }
+
+      .photo-placeholder {
+        inset: 8px;
+        border-radius: 15px;
       }
 
       .photo-label {
-        font-size: 20px;
+        font-size: 17px;
+      }
+
+      .photo-hint {
+        font-size: 12px;
+      }
+
+      .like-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 18px;
       }
 
       .month-title {
@@ -488,8 +464,6 @@
       <div class="counter" id="counter">Обрано 0 з 5</div>
     </section>
 
-    <nav class="month-nav" id="monthNav"></nav>
-
     <section id="gallery"></section>
 
     <section class="finish-card" id="finishCard">
@@ -516,7 +490,6 @@
     var counter = document.getElementById("counter");
     var finishCard = document.getElementById("finishCard");
     var finishBtn = document.getElementById("finishBtn");
-    var monthNav = document.getElementById("monthNav");
     var gallery = document.getElementById("gallery");
     var musicToggle = document.getElementById("musicToggle");
     var bgMusic = document.getElementById("bgMusic");
@@ -528,73 +501,61 @@
     var months = [
       {
         id: "birth",
-        nav: "0",
         title: "Народження",
         desc: "День, коли в нашому житті з’явилось маленьке диво."
       },
       {
         id: "m1",
-        nav: "1",
         title: "1 місяць",
         desc: "Перші погляди, перші обійми і найніжніші моменти."
       },
       {
         id: "m2",
-        nav: "2",
         title: "2 місяці",
         desc: "Софійка починає уважніше дивитися на світ навколо."
       },
       {
         id: "m3",
-        nav: "3",
         title: "3 місяці",
         desc: "Більше усмішок, більше тепла і більше чарівних моментів."
       },
       {
         id: "m4",
-        nav: "4",
         title: "4 місяці",
         desc: "Маленькі відкриття, нові емоції і дуже милий характер."
       },
       {
         id: "m5",
-        nav: "5",
         title: "5 місяців",
         desc: "Ще більше цікавості, руху і щасливих сімейних спогадів."
       },
       {
         id: "m6",
-        nav: "6",
         title: "6 місяців",
         desc: "Пів року маленького дива, радості і любові."
       },
       {
         id: "m7",
-        nav: "7",
         title: "7 місяців",
         desc: "Софійка стає ще активнішою, уважнішою і веселішою."
       },
       {
         id: "m8",
-        nav: "8",
         title: "8 місяців",
         desc: "Нові звички, нові емоції і ще більше милих моментів."
       },
       {
         id: "m9",
-        nav: "9",
         title: "9 місяців",
         desc: "Маленька принцеса вже має свій настрій, усмішку і характер."
       },
       {
         id: "m10",
-        nav: "10",
         title: "10 місяців",
         desc: "Ще один крок до першого великого свята Софійки."
       },
       {
         id: "m11",
-        nav: "11",
         title: "11 місяців",
         desc: "Софійка вже майже велика дівчинка — ніжна, весела і особлива."
       }
@@ -602,11 +563,6 @@
 
     function createGallery() {
       months.forEach(function(month) {
-        var navLink = document.createElement("a");
-        navLink.href = "#" + month.id;
-        navLink.textContent = month.nav;
-        monthNav.appendChild(navLink);
-
         var section = document.createElement("section");
         section.className = "month-section";
         section.id = month.id;
@@ -628,7 +584,7 @@
         var grid = document.createElement("div");
         grid.className = "photo-grid";
 
-        for (var i = 1; i <= 6; i++) {
+        for (var i = 1; i <= 3; i++) {
           var photoId = month.id + "-photo-" + i;
 
           var card = document.createElement("button");

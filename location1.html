@@ -76,9 +76,10 @@
     }
 
     .topbar {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 64px 1fr 64px;
       align-items: center;
+      gap: 8px;
       margin-bottom: 18px;
     }
 
@@ -137,22 +138,25 @@
       color: #ffffff;
     }
 
-    .location-pill {
-      min-height: 46px;
-      padding: 8px 18px;
-      border-radius: 999px;
-      color: #7d3f97;
-      font-size: 18px;
-      font-weight: 700;
-      background: rgba(255,255,255,0.66);
-      box-shadow:
-        0 0 0 2px rgba(255,230,145,0.66),
-        0 8px 18px rgba(90,35,115,0.12),
-        inset 0 2px 6px rgba(255,255,255,0.86);
-      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+    .location-badge-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      pointer-events: none;
     }
+
+    .location-badge-image img {
+      display: block;
+      width: 178px;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 7px 15px rgba(90, 35, 115, 0.16))
+        drop-shadow(0 0 12px rgba(255, 225, 125, 0.42));
+    }
+
     .hero {
       border-radius: 34px;
       padding: 30px 20px 26px;
@@ -302,8 +306,9 @@
       font-size: 18px;
       line-height: 1.35;
       color: #70407f;
-      
-    }.photo-grid {
+    }
+
+    .photo-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
@@ -473,6 +478,15 @@
     }
 
     @media (max-width: 390px) {
+      .topbar {
+        grid-template-columns: 60px 1fr 60px;
+        gap: 6px;
+      }
+
+      .location-badge-image img {
+        width: 160px;
+      }
+
       .photo-grid {
         gap: 8px;
       }
@@ -509,233 +523,6 @@
         font-size: 28px;
       }
     }
-    /* ===== ДОДАТКОВА КАЗКОВА СТИЛІЗАЦІЯ КОНТЕЙНЕРІВ ===== */
-
-.hero,
-.task-card,
-.month-head,
-.photo-card,
-.finish-card {
-  border: 2px solid rgba(255, 232, 150, 0.82);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 240, 252, 0.72));
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.72),
-    0 0 22px rgba(255, 224, 125, 0.42),
-    0 14px 30px rgba(104, 48, 128, 0.16),
-    inset 0 4px 10px rgba(255, 255, 255, 0.9),
-    inset 0 -8px 16px rgba(197, 143, 220, 0.08);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-}
-
-/* великий вступний контейнер */
-.hero {
-  position: relative;
-  border-radius: 36px;
-  padding: 32px 22px 28px;
-  overflow: hidden;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  border-radius: 28px;
-  border: 1px solid rgba(255, 232, 150, 0.68);
-  pointer-events: none;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  top: -45%;
-  left: -80%;
-  width: 70%;
-  height: 190%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.42),
-    transparent
-  );
-  transform: rotate(26deg);
-  animation: softCardShine 8s ease-in-out infinite;
-  pointer-events: none;
-}
-
-/* плашка завдання */
-.task-card {
-  border-radius: 30px;
-  padding: 17px 18px;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255, 247, 198, 0.55), transparent 44%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 238, 252, 0.76));
-}
-
-.task-title {
-  font-size: 22px;
-  line-height: 1.18;
-}
-
-.counter {
-  margin-top: 8px;
-  min-width: 145px;
-  padding: 8px 20px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,241,250,0.8));
-  box-shadow:
-    0 0 0 1px rgba(255, 230, 150, 0.72),
-    0 6px 14px rgba(100, 45, 120, 0.12),
-    inset 0 2px 6px rgba(255,255,255,0.85);
-}
-
-/* заголовки місяців */
-.month-head {
-  border-radius: 30px;
-  padding: 19px 18px 19px 68px;
-  background:
-    radial-gradient(circle at 90% 15%, rgba(255, 232, 150, 0.45), transparent 36%),
-    linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,240,252,0.72));
-}
-
-.month-head::before {
-  width: 42px;
-  height: 42px;
-  left: 15px;
-  font-size: 22px;
-  color: #7d3f97;
-  background:
-    radial-gradient(circle at 35% 25%, #ffffff 0%, #fff6d5 42%, #e0b4ff 100%);
-  box-shadow:
-    0 0 0 2px rgba(255, 229, 135, 0.9),
-    0 0 18px rgba(255, 224, 120, 0.72),
-    inset 0 3px 6px rgba(255,255,255,0.9);
-}
-
-.month-title {
-  font-size: 32px;
-  letter-spacing: 0.2px;
-}
-
-.month-desc {
-  font-size: 19px;
-}
-
-/* контейнери фото */
-.photo-card {
-  min-height: 154px;
-  border-radius: 25px;
-  border: 2px solid rgba(255, 232, 150, 0.72);
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255, 247, 210, 0.42), transparent 42%),
-    linear-gradient(180deg, rgba(255,255,255,0.84), rgba(255,236,250,0.68));
-}
-
-.photo-card::before {
-  content: "";
-  position: absolute;
-  inset: 7px;
-  border-radius: 19px;
-  border: 1px solid rgba(255,255,255,0.65);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.photo-card.selected {
-  border-color: rgba(255, 218, 95, 0.95);
-  box-shadow:
-    0 0 0 2px rgba(255, 245, 200, 0.78),
-    0 0 28px rgba(255, 220, 100, 0.95),
-    0 14px 28px rgba(104, 48, 128, 0.2),
-    inset 0 4px 10px rgba(255,255,255,0.9);
-}
-
-/* внутрішній пустий блок під фото */
-.photo-placeholder {
-  inset: 11px;
-  border-radius: 19px;
-  border: 2px dashed rgba(139, 75, 165, 0.26);
-  background:
-    radial-gradient(circle at 32% 20%, rgba(255,255,255,0.95), transparent 34%),
-    linear-gradient(180deg, rgba(255,250,255,0.78), rgba(238,220,255,0.56));
-}
-
-.photo-label {
-  font-size: 20px;
-  color: #7d3f97;
-}
-
-.photo-hint {
-  margin-top: 2px;
-  color: rgba(118, 63, 145, 0.72);
-}
-
-/* сердечко */
-.like-btn {
-  right: 8px;
-  top: 8px;
-  width: 39px;
-  height: 39px;
-  background:
-    radial-gradient(circle at 35% 25%, #ffffff 0%, #fff3fb 35%, #efb5d9 70%, #c46aa3 100%);
-  box-shadow:
-    0 0 0 2px rgba(255,255,255,0.82),
-    0 0 15px rgba(255, 210, 235, 0.65),
-    0 7px 14px rgba(100,45,120,0.18),
-    inset 0 3px 7px rgba(255,255,255,0.9);
-}
-
-/* фінальний контейнер */
-.finish-card {
-  border-radius: 34px;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255, 237, 155, 0.55), transparent 42%),
-    linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,238,250,0.84));
-}
-
-/* легкий блиск */
-@keyframes softCardShine {
-  0% {
-    left: -85%;
-    opacity: 0;
-  }
-  18% {
-    opacity: 0.55;
-  }
-  34% {
-    left: 120%;
-    opacity: 0;
-  }
-  100% {
-    left: 120%;
-    opacity: 0;
-  }
-}
-
-@media (max-width: 390px) {
-  .photo-card {
-    min-height: 138px;
-    border-radius: 22px;
-  }
-
-  .photo-placeholder {
-    inset: 9px;
-    border-radius: 17px;
-  }
-
-  .month-title {
-    font-size: 29px;
-  }
-
-  .month-desc {
-    font-size: 18px;
-  }
-
-  .task-title {
-    font-size: 21px;
-  }
-}
   </style>
 </head>
 
@@ -747,7 +534,9 @@
         <span>←</span>
       </a>
 
-      <div class="location-pill">Локація 1</div>
+      <div class="location-badge-image">
+        <img src="loc1.png" alt="Локація 1">
+      </div>
 
       <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику">
         <span>♪</span>
@@ -767,6 +556,7 @@
       <div class="task-title">Обери 5 наймиліших фото Софійки ❤️</div>
       <div class="counter" id="counter">Обрано 0 з 5</div>
     </section>
+
     <section class="month-section">
       <div class="month-head">
         <div class="month-title">Народження</div>
@@ -838,6 +628,7 @@
         <div class="photo-card" data-id="m5-3"><div class="photo-placeholder"><div class="photo-label">Фото 3</div><div class="photo-hint">сюди вставимо фото</div></div><button class="like-btn" type="button">♡</button></div>
       </div>
     </section>
+
     <section class="month-section">
       <div class="month-head">
         <div class="month-title">6 місяців</div>
@@ -926,6 +717,7 @@
     loop
     preload="auto">
   </audio>
+
   <script>
     var selected = new Set();
     var maxSelected = 5;

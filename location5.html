@@ -372,46 +372,33 @@
       display: block;
     }
 
-    .opened-note {
+    .return-card {
       display: none;
-      padding: 22px 20px;
+      padding: 24px 20px;
       text-align: center;
     }
 
-    .opened-note.active {
+    .return-card.active {
       display: block;
       animation: showBlock 0.35s ease both;
     }
 
-    .opened-note h2 {
-      margin: 0 0 10px;
-      font-size: clamp(32px, 4vw, 50px);
-      line-height: 1.04;
-      font-weight: 700;
-    }
-
-    .opened-note p {
-      max-width: 760px;
-      margin: 0 auto 16px;
-      font-size: clamp(21px, 2.4vw, 30px);
-      line-height: 1.18;
-      font-weight: 600;
-      color: #6f438f;
-    }
-
-    .map-btn {
+    .return-btn {
       width: 100%;
       max-width: 520px;
-      min-height: 58px;
+      min-height: 62px;
       border-radius: 999px;
-      padding: 12px 22px;
+      padding: 13px 24px;
       border: 2px solid rgba(238,219,127,0.78);
-      background: rgba(255,255,255,0.80);
-      color: var(--violet);
+      background: linear-gradient(180deg, #c78be5, #a96bd1);
+      color: #ffffff;
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(22px, 2.5vw, 30px);
+      font-size: clamp(24px, 2.8vw, 34px);
       font-weight: 700;
       cursor: pointer;
+      box-shadow:
+        0 10px 22px rgba(120,70,150,0.22),
+        inset 0 2px 10px rgba(255,255,255,0.28);
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -519,7 +506,7 @@
 
       .hero-card,
       .open-card,
-      .opened-note {
+      .return-card {
         padding: 24px 16px;
       }
 
@@ -547,8 +534,7 @@
       }
 
       .hero-card p,
-      .open-text,
-      .opened-note p {
+      .open-text {
         font-size: 21px;
       }
 
@@ -620,13 +606,8 @@
       </p>
     </section>
 
-    <section class="card opened-note" id="openedNote">
-      <h2>Запрошення відкрито!</h2>
-      <p>
-        Фінальний лист переглянуто. Чарівну подорож Софійки завершено.
-      </p>
-
-      <button class="map-btn" type="button" id="goMapBtn">
+    <section class="card return-card" id="returnCard">
+      <button class="return-btn" type="button" id="goMapBtn">
         Повернутися на карту
       </button>
     </section>
@@ -636,9 +617,8 @@
   <div class="video-overlay" id="videoOverlay">
     <button class="close-video" type="button" id="closeVideoBtn" aria-label="Закрити відео">×</button>
 
-    <video id="inviteVideo" class="fullscreen-video" preload="metadata" controls>
+    <video id="inviteVideo" class="fullscreen-video" preload="metadata" playsinline controls>
       <source src="invitation_video.mp4" type="video/mp4">
-      <source src="calendar.mp4" type="video/mp4">
     </video>
 
     <div class="video-message" id="videoMessage">
@@ -658,7 +638,7 @@
     const inviteVideo = document.getElementById("inviteVideo");
     const closeVideoBtn = document.getElementById("closeVideoBtn");
     const videoMessage = document.getElementById("videoMessage");
-    const openedNote = document.getElementById("openedNote");
+    const returnCard = document.getElementById("returnCard");
     const goMapBtn = document.getElementById("goMapBtn");
     const toast = document.getElementById("toast");
 
@@ -681,12 +661,12 @@
       localStorage.setItem("sofiyka_location5_done", "true");
     }
 
-    function showOpenedNote() {
+    function showReturnButton() {
       completeLocation5();
-      openedNote.classList.add("active");
+      returnCard.classList.add("active");
 
       setTimeout(function() {
-        openedNote.scrollIntoView({
+        returnCard.scrollIntoView({
           behavior: "smooth",
           block: "center"
         });
@@ -699,6 +679,7 @@
 
       if (!inviteVideo) {
         videoMessage.classList.add("active");
+        showReturnButton();
         return;
       }
 
@@ -730,7 +711,7 @@
       }
 
       videoOverlay.classList.remove("active");
-      showOpenedNote();
+      showReturnButton();
     }
 
     envelopeBtn.addEventListener("click", function() {
@@ -770,8 +751,6 @@
         } else {
           bgMusic.pause();
           musicBtn.classList.remove("playing");
-          localStorage.setItem("off");
-          musicBtn.classList.remove("playing");
           localStorage.setItem("sofiyka_music", "off");
         }
       } catch (error) {
@@ -795,7 +774,7 @@
       const done = localStorage.getItem("sofiyka_location5_done") === "true";
 
       if (done) {
-        openedNote.classList.add("active");
+        returnCard.classList.add("active");
       }
     }
 

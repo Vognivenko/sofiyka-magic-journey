@@ -8,17 +8,21 @@
 
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     html,
     body {
-      margin: 0;
+      width: 100%;
       min-height: 100%;
       font-family: Georgia, "Times New Roman", serif;
-      color: #76418f;
-      background: linear-gradient(180deg, #fff2fb 0%, #f5e4ff 100%);
+      color: #74418a;
       overflow-x: hidden;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 250, 225, 0.9), transparent 38%),
+        linear-gradient(180deg, #fff2fb 0%, #f3e1ff 100%);
     }
 
     body {
@@ -28,6 +32,7 @@
     .page {
       width: 100%;
       max-width: 520px;
+      min-height: 100vh;
       margin: 0 auto;
       padding: 18px 14px 34px;
     }
@@ -37,59 +42,88 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 18px;
+      gap: 12px;
     }
 
     .top-btn {
-      width: 56px;
-      height: 56px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      border: 2px solid rgba(238, 219, 127, 0.9);
-      background: rgba(255, 255, 255, 0.78);
-      color: #76418f;
-      font-size: 28px;
+      border: 2px solid rgba(238, 219, 127, 0.95);
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff 0%, #fff8dc 34%, #ffe28a 66%, #f0b84c 100%);
+      color: #74318d;
+      font-size: 30px;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 8px 18px rgba(120, 70, 150, 0.16);
+      box-shadow:
+        0 0 0 4px rgba(255, 235, 150, 0.25),
+        0 8px 18px rgba(90, 35, 115, 0.18),
+        inset 0 3px 7px rgba(255, 255, 255, 0.9);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .top-btn.music-playing {
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff 0%, #f6e9ff 38%, #d6a9ff 72%, #8e55b5 100%);
+      color: #ffffff;
+      animation: pulseMusic 1.6s ease-in-out infinite;
     }
 
     .location-title {
-      padding: 10px 22px;
+      flex: 1;
+      min-height: 48px;
+      padding: 8px 18px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.78);
-      border: 2px solid rgba(238, 219, 127, 0.9);
-      font-size: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #7d3f97;
+      font-size: 23px;
       font-weight: 700;
-      box-shadow: 0 8px 18px rgba(120, 70, 150, 0.12);
+      background: rgba(255,255,255,0.78);
+      border: 2px solid rgba(238, 219, 127, 0.9);
+      box-shadow:
+        0 8px 18px rgba(90,35,115,0.12),
+        inset 0 2px 6px rgba(255,255,255,0.86);
     }
 
     .card {
       border-radius: 28px;
       border: 2px solid rgba(238, 219, 127, 0.82);
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.84);
       box-shadow: 0 12px 26px rgba(120, 70, 150, 0.14);
       padding: 22px 18px;
       margin-bottom: 18px;
       text-align: center;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     .hero h1 {
-      margin: 0 0 12px;
-      font-size: 42px;
+      margin-bottom: 12px;
+      font-size: 44px;
       line-height: 0.95;
+      color: #7d3f97;
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.9),
+        0 6px 16px rgba(90,35,115,0.12);
     }
 
     .hero p {
-      margin: 0;
       font-size: 22px;
-      line-height: 1.25;
+      line-height: 1.28;
       font-weight: 600;
+      color: #70407f;
     }
 
     .task-title {
-      font-size: 26px;
+      font-size: 27px;
       line-height: 1.15;
       font-weight: 700;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      color: #7d3f97;
     }
 
     .counter {
@@ -99,48 +133,68 @@
       min-width: 150px;
       padding: 8px 18px;
       border-radius: 999px;
-      background: rgba(255, 245, 252, 0.9);
+      background: rgba(255, 245, 252, 0.94);
       font-size: 21px;
       font-weight: 700;
+      color: #9a5ab2;
+      box-shadow:
+        inset 0 1px 5px rgba(255,255,255,0.85),
+        0 0 0 1px rgba(255, 230, 150, 0.6);
+    }
+
+    .counter.ready {
+      color: #7d3f97;
+      background: rgba(255, 244, 198, 0.82);
+      box-shadow:
+        0 0 0 1px rgba(255,225,120,0.8),
+        0 0 16px rgba(255,225,120,0.65);
     }
 
     .moments {
       display: grid;
       grid-template-columns: 1fr;
       gap: 14px;
+      margin-bottom: 18px;
     }
 
     .moment-card {
       position: relative;
-      border-radius: 24px;
-      border: 2px dashed rgba(150, 100, 180, 0.35);
-      background: rgba(255, 255, 255, 0.76);
-      min-height: 130px;
-      padding: 18px 58px 18px 18px;
+      border-radius: 25px;
+      border: 2px dashed rgba(150, 100, 180, 0.38);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,242,252,0.74));
+      min-height: 132px;
+      padding: 18px 60px 18px 18px;
       text-align: left;
       cursor: pointer;
-      box-shadow: 0 8px 18px rgba(120, 70, 150, 0.1);
-      transition: 0.18s ease;
+      box-shadow:
+        0 8px 18px rgba(120, 70, 150, 0.1),
+        inset 0 2px 7px rgba(255,255,255,0.76);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .moment-card.selected {
       border-style: solid;
       border-color: rgba(238, 190, 90, 0.95);
-      background: rgba(255, 248, 230, 0.9);
+      background:
+        radial-gradient(circle at 90% 10%, rgba(255, 231, 150, 0.36), transparent 38%),
+        linear-gradient(180deg, rgba(255, 250, 232, 0.92), rgba(255, 239, 250, 0.86));
       box-shadow:
         0 0 0 2px rgba(255, 238, 160, 0.7),
-        0 10px 22px rgba(120, 70, 150, 0.16);
+        0 12px 24px rgba(120, 70, 150, 0.16),
+        inset 0 3px 8px rgba(255,255,255,0.82);
       transform: translateY(-1px);
     }
 
     .moment-card h3 {
-      margin: 0 0 8px;
-      font-size: 25px;
-      line-height: 1;
+      margin-bottom: 8px;
+      font-size: 26px;
+      line-height: 1.05;
+      color: #7d3f97;
     }
 
     .moment-card p {
-      margin: 0;
       font-size: 18px;
       line-height: 1.25;
       font-weight: 600;
@@ -151,42 +205,52 @@
       position: absolute;
       right: 14px;
       top: 14px;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       border: none;
-      background: rgba(255, 235, 248, 0.95);
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff 0%, #ffeef8 38%, #f5b4d7 72%, #c765a4 100%);
       color: #76418f;
       font-size: 22px;
       cursor: pointer;
-      box-shadow: 0 6px 14px rgba(120, 70, 150, 0.14);
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,0.75),
+        0 7px 15px rgba(90,35,115,0.18),
+        inset 0 3px 6px rgba(255,255,255,0.88);
     }
 
     .moment-card.selected .check {
-      background: #d84d86;
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff 0%, #ffe4f3 28%, #ff7eb7 64%, #d93b7c 100%);
       color: #ffffff;
+      animation: heartPulse 1.4s ease-in-out infinite;
     }
 
     .finish-card {
       display: none;
+      margin-top: 4px;
     }
 
     .finish-card.active {
       display: block;
+      animation: showFinish .35s ease both;
     }
 
     .finish-title {
-      font-size: 30px;
+      font-size: 32px;
       line-height: 1;
       font-weight: 700;
       margin-bottom: 10px;
+      color: #7d3f97;
     }
 
     .finish-text {
       font-size: 20px;
-      line-height: 1.25;
+      line-height: 1.28;
       font-weight: 600;
       margin-bottom: 16px;
+      color: #70407f;
     }
 
     .finish-btn {
@@ -200,13 +264,10 @@
       font-weight: 700;
       font-family: Georgia, "Times New Roman", serif;
       cursor: pointer;
-      box-shadow: 0 10px 22px rgba(120, 70, 150, 0.2);
-    }
-
-    .finish-btn:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-      background: linear-gradient(180deg, #ddd5dd, #bfb6bf);
+      box-shadow:
+        0 10px 22px rgba(120, 70, 150, 0.2),
+        inset 0 2px 8px rgba(255,255,255,0.32);
+      -webkit-tap-highlight-color: transparent;
     }
 
     .small-note {
@@ -214,6 +275,31 @@
       font-size: 16px;
       color: #8b6e9c;
       font-weight: 600;
+    }
+
+    audio {
+      display: none;
+    }
+
+    @keyframes pulseMusic {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    @keyframes showFinish {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -223,9 +309,9 @@
   <main class="page">
 
     <div class="topbar">
-      <button class="top-btn" type="button" id="backBtn">←</button>
+      <button class="top-btn" type="button" id="backBtn" aria-label="Назад">←</button>
       <div class="location-title">Локація 2</div>
-      <button class="top-btn" type="button" id="musicBtn">♪</button>
+      <button class="top-btn" type="button" id="musicBtn" aria-label="Музика">♪</button>
     </div>
 
     <section class="card hero">
@@ -316,6 +402,7 @@
       counter.textContent = "Обрано " + selected.size + " з " + maxSelected;
 
       if (selected.size === maxSelected) {
+        counter.classList.add("ready");
         finishCard.classList.add("active");
 
         setTimeout(function() {
@@ -325,18 +412,27 @@
           });
         }, 250);
       } else {
+        counter.classList.remove("ready");
         finishCard.classList.remove("active");
       }
     }
 
     function toggleMoment(card) {
+      if (!card) return;
+
       const id = card.getAttribute("data-id");
       const btn = card.querySelector(".check");
+
+      if (!id) return;
 
       if (selected.has(id)) {
         selected.delete(id);
         card.classList.remove("selected");
-        btn.textContent = "♡";
+
+        if (btn) {
+          btn.textContent = "♡";
+        }
+
         updateCounter();
         return;
       }
@@ -348,7 +444,11 @@
 
       selected.add(id);
       card.classList.add("selected");
-      btn.textContent = "❤";
+
+      if (btn) {
+        btn.textContent = "❤";
+      }
+
       updateCounter();
     }
 
@@ -363,26 +463,35 @@
       toggleMoment(card);
     });
 
-    finishBtn.addEventListener("click", function() {
+    finishBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
       localStorage.setItem("sofiyka_location2_done", "true");
       window.location.href = "map.html";
     });
 
-    backBtn.addEventListener("click", function() {
+    backBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
       window.location.href = "map.html";
     });
 
-    musicBtn.addEventListener("click", async function() {
+    musicBtn.addEventListener("click", async function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
       if (!bgMusic) return;
 
       try {
         if (bgMusic.paused) {
           await bgMusic.play();
-          musicBtn.classList.add("playing");
+          musicBtn.classList.add("music-playing");
           localStorage.setItem("sofiyka_music", "on");
         } else {
           bgMusic.pause();
-          musicBtn.classList.remove("playing");
+          musicBtn.classList.remove("music-playing");
           localStorage.setItem("sofiyka_music", "off");
         }
       } catch (error) {
@@ -390,7 +499,20 @@
       }
     });
 
+    function restoreMusicState() {
+      const musicState = localStorage.getItem("sofiyka_music");
+
+      if (musicState === "on" && bgMusic) {
+        bgMusic.play().then(function() {
+          musicBtn.classList.add("music-playing");
+        }).catch(function() {
+          musicBtn.classList.remove("music-playing");
+        });
+      }
+    }
+
     updateCounter();
+    restoreMusicState();
   </script>
 
 </body>

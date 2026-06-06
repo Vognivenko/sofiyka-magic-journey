@@ -192,7 +192,7 @@
 
     .open-text {
       max-width: 820px;
-      margin: 0 auto 14px;
+      margin: 0 auto 18px;
       font-size: clamp(21px, 2.5vw, 32px);
       line-height: 1.2;
       font-weight: 600;
@@ -232,6 +232,7 @@
       max-width: 100%;
       max-height: 230px;
       object-fit: contain;
+      transform: translateX(-22px);
       filter:
         drop-shadow(0 18px 28px rgba(116, 61, 140, 0.20))
         drop-shadow(0 0 18px rgba(255, 225, 120, 0.42));
@@ -256,7 +257,7 @@
         inset 0 2px 12px rgba(255,255,255,0.86);
       overflow: hidden;
       display: none;
-      animation: envelopeFloat 2.8s ease-in-out infinite;
+      animation: placeholderFloat 2.8s ease-in-out infinite;
     }
 
     .envelope-placeholder::before {
@@ -424,6 +425,15 @@
     }
 
     @keyframes envelopeFloat {
+      0%, 100% {
+        transform: translateX(-22px) translateY(0) scale(1);
+      }
+      50% {
+        transform: translateX(-22px) translateY(-8px) scale(1.015);
+      }
+    }
+
+    @keyframes placeholderFloat {
       0%, 100% {
         transform: translateY(0) scale(1);
       }
@@ -684,6 +694,10 @@
         }).catch(function() {
           videoMessage.classList.add("active");
           showToast("Відео ще не завантажено ✨");
+
+          setTimeout(function() {
+            closeVideo();
+          }, 1200);
         });
       }
     }
@@ -716,6 +730,10 @@
     inviteVideo.addEventListener("error", function() {
       videoMessage.classList.add("active");
       showToast("Відеофайл ще не знайдено");
+
+      setTimeout(function() {
+        closeVideo();
+      }, 1200);
     });
 
     goMapBtn.addEventListener("click", function() {

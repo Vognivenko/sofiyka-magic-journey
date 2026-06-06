@@ -40,6 +40,10 @@
         url("fon_location1.png") center top / cover no-repeat fixed;
     }
 
+    body.video-open {
+      overflow: hidden;
+    }
+
     body::before {
       content: "";
       position: fixed;
@@ -307,6 +311,9 @@
       display: none;
       background: #000;
       overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
     }
 
     .video-overlay.active {
@@ -319,8 +326,11 @@
     .fullscreen-video {
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
       object-fit: cover;
       background: #000;
+      pointer-events: none;
+      display: block;
     }
 
     .close-video {
@@ -346,7 +356,7 @@
     .video-message {
       position: absolute;
       left: 50%;
-      bottom: 96px;
+      bottom: 28px;
       transform: translateX(-50%);
       z-index: 10000;
       width: calc(100% - 32px);
@@ -363,36 +373,6 @@
 
     .video-message.active {
       display: block;
-    }
-
-    .video-map-btn {
-      position: absolute;
-      left: 50%;
-      bottom: max(28px, env(safe-area-inset-bottom));
-      transform: translateX(-50%);
-      z-index: 10001;
-      width: calc(100% - 48px);
-      max-width: 520px;
-      min-height: 58px;
-      border-radius: 999px;
-      padding: 12px 22px;
-      border: 2px solid rgba(238,219,127,0.9);
-      background: linear-gradient(180deg, #c78be5, #a96bd1);
-      color: #ffffff;
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(24px, 2.8vw, 34px);
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow:
-        0 10px 22px rgba(0,0,0,0.28),
-        inset 0 2px 10px rgba(255,255,255,0.28);
-      display: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .video-map-btn.active {
-      display: block;
-      animation: showBlock 0.35s ease both;
     }
 
     .return-card {
@@ -506,21 +486,6 @@
     @keyframes showBlock {
       from {
         opacity: 0;
-        transform: translateX(-50%) translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-      }
-    }
-
-    .return-card.active {
-      animation: showReturnBlock 0.35s ease both;
-    }
-
-    @keyframes showReturnBlock {
-      from {
-        opacity: 0;
         transform: translateY(14px);
       }
       to {
@@ -568,10 +533,6 @@
       .envelope-placeholder {
         width: 270px;
         height: 190px;
-      }
-
-      .fullscreen-video {
-        object-fit: cover;
       }
     }
 
@@ -659,17 +620,13 @@
   <div class="video-overlay" id="videoOverlay">
     <button class="close-video" type="button" id="closeVideoBtn" aria-label="Закрити відео">×</button>
 
-    <video id="inviteVideo" class="fullscreen-video" preload="metadata" playsinline controls>
+    <video id="inviteVideo" class="fullscreen-video" preload="auto" playsinline webkit-playsinline muted>
       <source src="invitation_video.mp4" type="video/mp4">
     </video>
 
     <div class="video-message" id="videoMessage">
       Відео ще не завантажено. Пізніше тут буде відкриття листа ✨
     </div>
-
-    <button class="video-map-btn" type="button" id="videoMapBtn">
-      Повернутися на карту
-    </button>
   </div>
 
   <div class="toast" id="toast"></div>
@@ -684,14 +641,18 @@
     const inviteVideo = document.getElementById("inviteVideo");
     const closeVideoBtn = document.getElementById("closeVideoBtn");
     const videoMessage = document.getElementById("videoMessage");
-    const videoMapBtn = document.getElementById("videoMapBtn");
-
     const returnCard = document.getElementById("returnCard");
     const goMapBtn = document.getElementById("goMapBtn");
     const toast = document.getElementById("toast");
 
     if (bgMusic) {
       bgMusic.volume = 0.35;
+    }
+
+    if (inviteVideo) {
+      inviteVideo.controls = false;
+      inviteVideo.removeAttribute("controls");
+      inviteVideo.muted = true;
     }
 
     function showToast(message) {
@@ -709,7 +670,7 @@
       localStorage.setItem("sofiyka_location5_done", "true");
     }
 
-    function showReturnButtonOnPage() {
+    function showReturnButton() {
       completeLocation5();
       returnCard.classList.add("active");
 
@@ -722,66 +683,50 @@
     }
 
     function openVideoFullscreen() {
+      document.body.classList.add("video-open");
       videoOverlay.classList.add("active");
       videoMessage.classList.remove("active");
-      videoMapBtn.classList.remove("active");
 
       if (!inviteVideo) {
         videoMessage.classList.add("active");
-        showReturnButtonOnPage();
+        showReturnButton();
         return;
       }
 
+      inviteVideo.controls = false;
+      inviteVideo.removeAttribute("controls");
       inviteVideo.currentTime = 0;
 
       const playPromise = inviteVideo.play();
 
       if (playPromise && typeof playPromise.then === "function") {
-        playPromise.catch(function() {
+        playPromise.then(function() {
+          if (videoOverlay.requestFullscreen) {
+            videoOverlay.requestFullscreen().catch(function() {});
+          } else if (videoOverlay.webkitRequestFullscreen) {
+            videoOverlay.webkitRequestFullscreen();
+          }
+        }).catch(function() {
           videoMessage.classList.add("active");
           showToast("Відео ще не завантажено ✨");
-
-          setTimeout(function() {
-            closeVideoAndShowPageButton();
-          }, 1200);
         });
       }
     }
 
-    function holdLastVideoFrame() {
-      completeLocation5();
-
+    function closeVideo() {
       if (inviteVideo) {
         inviteVideo.pause();
-
-        if (inviteVideo.duration && isFinite(inviteVideo.duration)) {
-          try {
-            inviteVideo.currentTime = Math.max(inviteVideo.duration - 0.12, 0);
-          } catch (error) {}
-        }
+        inviteVideo.controls = false;
+        inviteVideo.removeAttribute("controls");
       }
 
-      videoMapBtn.classList.add("active");
-    }
-
-    function closeVideoAndShowPageButton() {
-      if (inviteVideo) {
-        inviteVideo.pause();
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(function() {});
       }
 
+      document.body.classList.remove("video-open");
       videoOverlay.classList.remove("active");
-      videoMapBtn.classList.remove("active");
-      showReturnButtonOnPage();
-    }
-
-    function goToMap() {
-      completeLocation5();
-
-      if (inviteVideo) {
-        inviteVideo.pause();
-      }
-
-      window.location.href = "map.html";
+      showReturnButton();
     }
 
     envelopeBtn.addEventListener("click", function() {
@@ -789,28 +734,21 @@
     });
 
     closeVideoBtn.addEventListener("click", function() {
-      closeVideoAndShowPageButton();
+      closeVideo();
     });
 
     inviteVideo.addEventListener("ended", function() {
-      holdLastVideoFrame();
+      closeVideo();
     });
 
     inviteVideo.addEventListener("error", function() {
       videoMessage.classList.add("active");
       showToast("Відеофайл ще не знайдено");
-
-      setTimeout(function() {
-        closeVideoAndShowPageButton();
-      }, 1200);
-    });
-
-    videoMapBtn.addEventListener("click", function() {
-      goToMap();
     });
 
     goMapBtn.addEventListener("click", function() {
-      goToMap();
+      completeLocation5();
+      window.location.href = "map.html";
     });
 
     backBtn.addEventListener("click", function() {

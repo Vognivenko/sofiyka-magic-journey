@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
-  <title>Локація 2 — День хрещення</title>
+  <title>Локація 2 — Час і місце хрещення</title>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
+
     * {
       margin: 0;
       padding: 0;
@@ -17,12 +19,13 @@
     body {
       width: 100%;
       min-height: 100%;
-      font-family: Georgia, "Times New Roman", serif;
-      color: #74418a;
       overflow-x: hidden;
+      font-family: 'Cormorant Garamond', serif;
+      color: #74418a;
       background:
-        radial-gradient(circle at 50% 0%, rgba(255, 250, 225, 0.9), transparent 38%),
-        linear-gradient(180deg, #fff2fb 0%, #f3e1ff 100%);
+        radial-gradient(circle at 20% 8%, rgba(255,255,255,0.88), transparent 18%),
+        radial-gradient(circle at 80% 18%, rgba(255,235,160,0.55), transparent 22%),
+        linear-gradient(180deg, #fff0fa 0%, #eadcff 48%, #dff2ff 100%);
     }
 
     body {
@@ -39,241 +42,256 @@
 
     .topbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 18px;
       gap: 12px;
     }
 
-    .top-btn {
-      width: 58px;
-      height: 58px;
+    .round-btn {
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      border: 2px solid rgba(238, 219, 127, 0.95);
-      background:
-        radial-gradient(circle at 30% 25%, #ffffff 0%, #fff8dc 34%, #ffe28a 66%, #f0b84c 100%);
+      border: none;
+      cursor: pointer;
       color: #74318d;
       font-size: 30px;
       font-weight: 700;
-      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff 0%, #fff8dc 32%, #ffe28a 62%, #f0b84c 100%);
       box-shadow:
-        0 0 0 4px rgba(255, 235, 150, 0.25),
-        0 8px 18px rgba(90, 35, 115, 0.18),
-        inset 0 3px 7px rgba(255, 255, 255, 0.9);
+        0 0 0 3px rgba(255,245,200,0.9),
+        0 0 0 6px rgba(255,215,90,0.34),
+        0 0 22px rgba(255,220,95,0.78),
+        0 8px 18px rgba(90,35,115,0.24),
+        inset 0 4px 7px rgba(255,255,255,0.95),
+        inset 0 -7px 12px rgba(120,70,20,0.16);
       -webkit-tap-highlight-color: transparent;
     }
 
-    .top-btn.music-playing {
+    .round-btn.playing {
+      animation: musicPulse 1.8s ease-in-out infinite;
+    }
+
+    .round-btn.off {
       background:
         radial-gradient(circle at 30% 25%, #ffffff 0%, #f6e9ff 38%, #d6a9ff 72%, #8e55b5 100%);
       color: #ffffff;
-      animation: pulseMusic 1.6s ease-in-out infinite;
     }
 
-    .location-title {
+    .location-pill {
       flex: 1;
-      min-height: 48px;
+      min-height: 46px;
       padding: 8px 18px;
       border-radius: 999px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
       color: #7d3f97;
-      font-size: 23px;
+      font-size: 22px;
       font-weight: 700;
-      background: rgba(255,255,255,0.78);
-      border: 2px solid rgba(238, 219, 127, 0.9);
+      background: rgba(255,255,255,0.72);
+      border: 2px solid rgba(255,230,145,0.72);
       box-shadow:
         0 8px 18px rgba(90,35,115,0.12),
         inset 0 2px 6px rgba(255,255,255,0.86);
+      text-align: center;
     }
 
     .card {
-      border-radius: 28px;
-      border: 2px solid rgba(238, 219, 127, 0.82);
-      background: rgba(255, 255, 255, 0.84);
-      box-shadow: 0 12px 26px rgba(120, 70, 150, 0.14);
+      border-radius: 30px;
       padding: 22px 18px;
       margin-bottom: 18px;
       text-align: center;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,244,253,0.74));
+      border: 2px solid rgba(255,235,165,0.76);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.54),
+        0 14px 30px rgba(86,38,112,0.16),
+        inset 0 3px 8px rgba(255,255,255,0.86);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .hero {
+      padding: 28px 20px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #8a4ca5;
+      background: rgba(255,246,214,0.86);
+      box-shadow:
+        0 0 0 1px rgba(255,222,120,0.82),
+        0 0 18px rgba(255,226,130,0.45);
     }
 
     .hero h1 {
-      margin-bottom: 12px;
-      font-size: 44px;
+      font-size: 42px;
       line-height: 0.95;
       color: #7d3f97;
+      margin-bottom: 14px;
       text-shadow:
-        0 2px 0 rgba(255,255,255,0.9),
-        0 6px 16px rgba(90,35,115,0.12);
+        0 2px 0 rgba(255,255,255,0.92),
+        0 5px 10px rgba(80,30,100,0.18);
     }
 
     .hero p {
-      font-size: 22px;
-      line-height: 1.28;
+      font-size: 21px;
+      line-height: 1.3;
       font-weight: 600;
       color: #70407f;
     }
 
-    .task-title {
-      font-size: 27px;
-      line-height: 1.15;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: #7d3f97;
-    }
-
-    .counter {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 150px;
-      padding: 8px 18px;
-      border-radius: 999px;
-      background: rgba(255, 245, 252, 0.94);
-      font-size: 21px;
-      font-weight: 700;
-      color: #9a5ab2;
-      box-shadow:
-        inset 0 1px 5px rgba(255,255,255,0.85),
-        0 0 0 1px rgba(255, 230, 150, 0.6);
-    }
-
-    .counter.ready {
-      color: #7d3f97;
-      background: rgba(255, 244, 198, 0.82);
-      box-shadow:
-        0 0 0 1px rgba(255,225,120,0.8),
-        0 0 16px rgba(255,225,120,0.65);
-    }
-
-    .moments {
+    .info-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 14px;
       margin-bottom: 18px;
     }
 
-    .moment-card {
-      position: relative;
-      border-radius: 25px;
-      border: 2px dashed rgba(150, 100, 180, 0.38);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,242,252,0.74));
-      min-height: 132px;
-      padding: 18px 60px 18px 18px;
+    .info-card {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 12px;
+      align-items: center;
       text-align: left;
-      cursor: pointer;
-      box-shadow:
-        0 8px 18px rgba(120, 70, 150, 0.1),
-        inset 0 2px 7px rgba(255,255,255,0.76);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .moment-card.selected {
-      border-style: solid;
-      border-color: rgba(238, 190, 90, 0.95);
+      border-radius: 26px;
+      padding: 16px;
       background:
-        radial-gradient(circle at 90% 10%, rgba(255, 231, 150, 0.36), transparent 38%),
-        linear-gradient(180deg, rgba(255, 250, 232, 0.92), rgba(255, 239, 250, 0.86));
+        linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,244,253,0.68));
+      border: 2px solid rgba(255,235,165,0.62);
       box-shadow:
-        0 0 0 2px rgba(255, 238, 160, 0.7),
-        0 12px 24px rgba(120, 70, 150, 0.16),
-        inset 0 3px 8px rgba(255,255,255,0.82);
-      transform: translateY(-1px);
+        0 8px 18px rgba(86,38,112,0.11),
+        inset 0 3px 8px rgba(255,255,255,0.75);
     }
 
-    .moment-card h3 {
-      margin-bottom: 8px;
-      font-size: 26px;
-      line-height: 1.05;
+    .info-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      background:
+        radial-gradient(circle at 35% 25%, #ffffff 0%, #fff2c8 45%, #d9a7ff 100%);
+      box-shadow:
+        0 0 0 2px rgba(255,224,120,0.78),
+        0 0 12px rgba(255,224,120,0.5),
+        inset 0 3px 6px rgba(255,255,255,0.9);
+    }
+
+    .info-title {
+      font-size: 19px;
+      line-height: 1;
+      font-weight: 700;
+      color: #9a5ab2;
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      font-size: 25px;
+      line-height: 1.08;
+      font-weight: 700;
       color: #7d3f97;
     }
 
-    .moment-card p {
-      font-size: 18px;
-      line-height: 1.25;
+    .info-small {
+      margin-top: 5px;
+      font-size: 17px;
+      line-height: 1.22;
       font-weight: 600;
       color: #856096;
     }
 
-    .check {
-      position: absolute;
-      right: 14px;
-      top: 14px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      background:
-        radial-gradient(circle at 30% 25%, #ffffff 0%, #ffeef8 38%, #f5b4d7 72%, #c765a4 100%);
-      color: #76418f;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow:
-        0 0 0 2px rgba(255,255,255,0.75),
-        0 7px 15px rgba(90,35,115,0.18),
-        inset 0 3px 6px rgba(255,255,255,0.88);
-    }
-
-    .moment-card.selected .check {
-      background:
-        radial-gradient(circle at 30% 25%, #ffffff 0%, #ffe4f3 28%, #ff7eb7 64%, #d93b7c 100%);
-      color: #ffffff;
-      animation: heartPulse 1.4s ease-in-out infinite;
-    }
-
-    .finish-card {
-      display: none;
-      margin-top: 4px;
-    }
-
-    .finish-card.active {
-      display: block;
-      animation: showFinish .35s ease both;
-    }
-
-    .finish-title {
-      font-size: 32px;
-      line-height: 1;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #7d3f97;
-    }
-
-    .finish-text {
-      font-size: 20px;
-      line-height: 1.28;
-      font-weight: 600;
-      margin-bottom: 16px;
-      color: #70407f;
-    }
-
-    .finish-btn {
+    .map-btn {
       width: 100%;
       border: none;
       border-radius: 999px;
-      padding: 14px 18px;
-      background: linear-gradient(180deg, #c78be5, #a96bd1);
-      color: #ffffff;
-      font-size: 23px;
-      font-weight: 700;
-      font-family: Georgia, "Times New Roman", serif;
+      padding: 15px 18px;
       cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      background:
+        linear-gradient(180deg, #c78be5 0%, #a96bd1 100%);
       box-shadow:
-        0 10px 22px rgba(120, 70, 150, 0.2),
+        0 0 0 2px rgba(233,207,255,0.84),
+        0 10px 22px rgba(120,70,150,0.22),
         inset 0 2px 8px rgba(255,255,255,0.32);
       -webkit-tap-highlight-color: transparent;
     }
 
+    .map-btn:active {
+      transform: scale(0.98);
+    }
+
+    .success-card {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .success-card.active {
+      display: block;
+      animation: showFinish .35s ease both;
+    }
+
+    .success-title {
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 700;
+      color: #7d3f97;
+      margin-bottom: 10px;
+    }
+
+    .success-text {
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: #70407f;
+      margin-bottom: 16px;
+    }
+
+    .next-btn,
+    .map-return-btn {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 23px;
+      font-weight: 700;
+      color: #7d3f97;
+      background:
+        linear-gradient(180deg, #fff7da 0%, #ffd86f 48%, #f3b84d 100%);
+      box-shadow:
+        0 0 0 2px rgba(255,235,160,0.92),
+        0 9px 18px rgba(90,35,115,0.18),
+        inset 0 2px 5px rgba(255,255,255,0.85);
+      margin-bottom: 10px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .map-return-btn {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246,223,255,0.9));
+      color: #7d3f97;
+    }
+
     .small-note {
-      margin-top: 12px;
-      font-size: 16px;
-      color: #8b6e9c;
+      margin-top: 8px;
+      text-align: center;
+      font-size: 15px;
+      color: #9869aa;
       font-weight: 600;
     }
 
@@ -281,25 +299,14 @@
       display: none;
     }
 
-    @keyframes pulseMusic {
+    @keyframes musicPulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.06); }
     }
 
-    @keyframes heartPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
-
     @keyframes showFinish {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -309,161 +316,138 @@
   <main class="page">
 
     <div class="topbar">
-      <button class="top-btn" type="button" id="backBtn" aria-label="Назад">←</button>
-      <div class="location-title">Локація 2</div>
-      <button class="top-btn" type="button" id="musicBtn" aria-label="Музика">♪</button>
+      <button class="round-btn" type="button" id="backBtn" aria-label="Назад">←</button>
+
+      <div class="location-pill">Локація 2</div>
+
+      <button class="round-btn off" type="button" id="musicToggle" aria-label="Увімкнути музику">♪</button>
     </div>
 
     <section class="card hero">
+      <div class="hero-badge">Час і місце хрещення</div>
       <h1>День<br>хрещення</h1>
       <p>
-        Це друга зупинка нашої чарівної подорожі. Тут ми згадаємо особливий день,
-        наповнений теплом, любов’ю та благословенням.
+        Це друга зупинка чарівної подорожі. Тут ти дізнаєшся,
+        коли і де відбудеться особливий день Софійки.
       </p>
     </section>
 
+    <section class="info-grid">
+
+      <div class="info-card">
+        <div class="info-icon">📅</div>
+        <div>
+          <div class="info-title">Дата</div>
+          <div class="info-value">27 червня 2026</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">🕚</div>
+        <div>
+          <div class="info-title">Час</div>
+          <div class="info-value">11:00</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">⛪</div>
+        <div>
+          <div class="info-title">Місце</div>
+          <div class="info-value">Соборний храм Благовіщення Пресвятої Богородиці</div>
+          <div class="info-small">Натисни нижче, щоб відкрити маршрут у Google Maps.</div>
+        </div>
+      </div>
+
+    </section>
+
     <section class="card">
-      <div class="task-title">Обери 3 найважливіші моменти цього дня 💜</div>
-      <div class="counter" id="counter">Обрано 0 з 3</div>
-    </section>
-
-    <section class="moments" id="moments">
-      <div class="moment-card" data-id="moment-1">
-        <button class="check" type="button">♡</button>
-        <h3>Перший світлий момент</h3>
-        <p>Сюди пізніше вставимо фото або опис важливого кадру з хрещення.</p>
-      </div>
-
-      <div class="moment-card" data-id="moment-2">
-        <button class="check" type="button">♡</button>
-        <h3>Родинне тепло</h3>
-        <p>Тут буде місце для фото з рідними, хрещеними або особливими гостями.</p>
-      </div>
-
-      <div class="moment-card" data-id="moment-3">
-        <button class="check" type="button">♡</button>
-        <h3>Ніжний образ Софійки</h3>
-        <p>Пізніше тут можна додати фото Софійки у святковому вбранні.</p>
-      </div>
-
-      <div class="moment-card" data-id="moment-4">
-        <button class="check" type="button">♡</button>
-        <h3>Святкова атмосфера</h3>
-        <p>Місце для кадру храму, декору, свічки, квітів або красивої деталі.</p>
-      </div>
-
-      <div class="moment-card" data-id="moment-5">
-        <button class="check" type="button">♡</button>
-        <h3>Особлива посмішка</h3>
-        <p>Тут буде фото або милий момент, який хочеться запам’ятати.</p>
-      </div>
-
-      <div class="moment-card" data-id="moment-6">
-        <button class="check" type="button">♡</button>
-        <h3>Пам’ятний кадр</h3>
-        <p>Сюди додамо ще один важливий спогад із цього дня.</p>
+      <button class="map-btn" type="button" id="openMapsBtn">
+        Відкрити маршрут у Google Maps
+      </button>
+      <div class="small-note">
+        Після відкриття карти наступна локація стане доступною.
       </div>
     </section>
 
-    <section class="card finish-card" id="finishCard">
-      <div class="finish-title">Локацію 2 пройдено!</div>
-      <div class="finish-text">
-        Ти відкрив наступну частину чарівної подорожі Софійки.
+    <section class="card success-card" id="successCard">
+      <div class="success-title">Локацію 2 відкрито!</div>
+      <div class="success-text">
+        Маршрут до місця хрещення відкрито. Тепер можна перейти до наступної частини подорожі.
       </div>
-      <button class="finish-btn" type="button" id="finishBtn">
+
+      <button class="next-btn" type="button" id="nextLocationBtn">
+        Перейти до 3 локації
+      </button>
+
+      <button class="map-return-btn" type="button" id="returnMapBtn">
         Повернутися на карту
       </button>
-      <div class="small-note">Після цього відкриється 3 локація</div>
+
+      <div class="small-note">3 локація вже буде відкрита на карті.</div>
     </section>
 
   </main>
 
-  <audio id="bgMusic" loop preload="auto">
-    <source src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3" type="audio/mpeg">
-    <source src="music.mp3" type="audio/mpeg">
+  <audio
+    id="bgMusic"
+    src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3"
+    loop
+    preload="auto">
   </audio>
 
   <script>
-    const maxSelected = 3;
-    const selected = new Set();
+    var googleMapsLink = "https://www.google.com.ua/maps/place/%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B8%D0%B9+%D1%85%D1%80%D0%B0%D0%BC+%D0%B1%D0%BB%D0%B0%D0%B3%D0%BE%D0%B2%D1%96%D1%89%D0%B5%D0%BD%D0%BD%D1%8F+%D0%BF%D1%80%D0%B5%D1%81%D0%B2%D1%8F%D1%82%D0%BE%D1%97+%D0%91%D0%BE%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B8%D1%86%D1%96+%D0%A3%D0%9F%D0%A6+%D0%9C%D0%9F/@48.5183777,32.2742754,19z/data=!4m6!3m5!1s0x40d05d529b0215b1:0x533d0359c59b2c62!8m2!3d48.5185158!4d32.2741884!16s%2Fg%2F11b6qc9sry?hl=ru&entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D";
 
-    const counter = document.getElementById("counter");
-    const finishCard = document.getElementById("finishCard");
-    const finishBtn = document.getElementById("finishBtn");
-    const backBtn = document.getElementById("backBtn");
-    const musicBtn = document.getElementById("musicBtn");
-    const bgMusic = document.getElementById("bgMusic");
+    var backBtn = document.getElementById("backBtn");
+    var musicToggle = document.getElementById("musicToggle");
+    var bgMusic = document.getElementById("bgMusic");
+    var openMapsBtn = document.getElementById("openMapsBtn");
+    var successCard = document.getElementById("successCard");
+    var nextLocationBtn = document.getElementById("nextLocationBtn");
+    var returnMapBtn = document.getElementById("returnMapBtn");
 
     if (bgMusic) {
       bgMusic.volume = 0.35;
     }
 
-    function updateCounter() {
-      counter.textContent = "Обрано " + selected.size + " з " + maxSelected;
+    function completeLocation2() {
+      localStorage.setItem("sofiyka_location2_done", "true");
 
-      if (selected.size === maxSelected) {
-        counter.classList.add("ready");
-        finishCard.classList.add("active");
+      if (successCard) {
+        successCard.classList.add("active");
 
         setTimeout(function() {
-          finishCard.scrollIntoView({
+          successCard.scrollIntoView({
             behavior: "smooth",
             block: "center"
           });
         }, 250);
-      } else {
-        counter.classList.remove("ready");
-        finishCard.classList.remove("active");
       }
     }
 
-    function toggleMoment(card) {
-      if (!card) return;
-
-      const id = card.getAttribute("data-id");
-      const btn = card.querySelector(".check");
-
-      if (!id) return;
-
-      if (selected.has(id)) {
-        selected.delete(id);
-        card.classList.remove("selected");
-
-        if (btn) {
-          btn.textContent = "♡";
-        }
-
-        updateCounter();
-        return;
-      }
-
-      if (selected.size >= maxSelected) {
-        alert("Можна обрати тільки 3 моменти 💜");
-        return;
-      }
-
-      selected.add(id);
-      card.classList.add("selected");
-
-      if (btn) {
-        btn.textContent = "❤";
-      }
-
-      updateCounter();
-    }
-
-    document.addEventListener("click", function(event) {
-      const card = event.target.closest(".moment-card");
-
-      if (!card) return;
-
+    openMapsBtn.addEventListener("click", function(event) {
       event.preventDefault();
       event.stopPropagation();
 
-      toggleMoment(card);
+      completeLocation2();
+
+      var opened = window.open(googleMapsLink, "_blank");
+
+      if (!opened) {
+        window.location.href = googleMapsLink;
+      }
     });
 
-    finishBtn.addEventListener("click", function(event) {
+    nextLocationBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      localStorage.setItem("sofiyka_location2_done", "true");
+      window.location.href = "location3.html";
+    });
+
+    returnMapBtn.addEventListener("click", function(event) {
       event.preventDefault();
       event.stopPropagation();
 
@@ -478,7 +462,7 @@
       window.location.href = "map.html";
     });
 
-    musicBtn.addEventListener("click", async function(event) {
+    musicToggle.addEventListener("click", async function(event) {
       event.preventDefault();
       event.stopPropagation();
 
@@ -487,32 +471,25 @@
       try {
         if (bgMusic.paused) {
           await bgMusic.play();
-          musicBtn.classList.add("music-playing");
-          localStorage.setItem("sofiyka_music", "on");
+          musicToggle.classList.remove("off");
+          musicToggle.classList.add("playing");
+          musicToggle.setAttribute("aria-label", "Вимкнути музику");
         } else {
           bgMusic.pause();
-          musicBtn.classList.remove("music-playing");
-          localStorage.setItem("sofiyka_music", "off");
+          musicToggle.classList.remove("playing");
+          musicToggle.classList.add("off");
+          musicToggle.setAttribute("aria-label", "Увімкнути музику");
         }
       } catch (error) {
+        musicToggle.classList.remove("playing");
+        musicToggle.classList.add("off");
         alert("Музика не запустилась. Перевір mp3 файл 🎵");
       }
     });
 
-    function restoreMusicState() {
-      const musicState = localStorage.getItem("sofiyka_music");
-
-      if (musicState === "on" && bgMusic) {
-        bgMusic.play().then(function() {
-          musicBtn.classList.add("music-playing");
-        }).catch(function() {
-          musicBtn.classList.remove("music-playing");
-        });
-      }
+    if (localStorage.getItem("sofiyka_location2_done") === "true") {
+      successCard.classList.add("active");
     }
-
-    updateCounter();
-    restoreMusicState();
   </script>
 
 </body>

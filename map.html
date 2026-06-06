@@ -541,210 +541,232 @@
       </button>
     </section>
   </main>
+<script>
+  var bgMusic = document.getElementById("bgMusic");
+  var musicToggle = document.getElementById("musicToggle");
+  var progressTitle = document.getElementById("progressTitle");
+  var progressText = document.getElementById("progressText");
 
-  <script>
-    var bgMusic = document.getElementById("bgMusic");
-    var musicToggle = document.getElementById("musicToggle");
-    var progressTitle = document.getElementById("progressTitle");
-    var progressText = document.getElementById("progressText");
+  var RESET_AFTER_REFRESHES = 5;
+  var refreshCountKey = "sofiyka_map_refresh_count";
 
-    var locations = [
-      {
-        number: 1,
-        buttonId: "loc1",
-        statusId: "status1",
-        dotId: "dot1",
-        doneKey: "sofiyka_location1_done",
-        url: "location1.html",
-        lockedMessage: "Перша локація вже відкрита ❤️"
-      },
-      {
-        number: 2,
-        buttonId: "loc2",
-        statusId: "status2",
-        dotId: "dot2",
-        doneKey: "sofiyka_location2_done",
-        url: "location2.html",
-        lockedMessage: "Спочатку пройди першу локацію ❤️"
-      },
-      {
-        number: 3,
-        buttonId: "loc3",
-        statusId: "status3",
-        dotId: "dot3",
-        doneKey: "sofiyka_location3_done",
-        url: "location3.html",
-        lockedMessage: "Спочатку відкрий маршрут у 2 локації ❤️"
-      },
-      {
-        number: 4,
-        buttonId: "loc4",
-        statusId: "status4",
-        dotId: "dot4",
-        doneKey: "sofiyka_location4_done",
-        url: "location4.html",
-        lockedMessage: "Спочатку пройди 3 локацію ❤️"
-      },
-      {
-        number: 5,
-        buttonId: "loc5",
-        statusId: "status5",
-        dotId: "dot5",
-        doneKey: "sofiyka_location5_done",
-        url: "location5.html",
-        lockedMessage: "Спочатку заповни анкету у 4 локації ❤️"
+  var locations = [
+    {
+      number: 1,
+      buttonId: "loc1",
+      statusId: "status1",
+      dotId: "dot1",
+      doneKey: "sofiyka_location1_done",
+      url: "location1.html",
+      lockedMessage: "Перша локація вже відкрита ❤️"
+    },
+    {
+      number: 2,
+      buttonId: "loc2",
+      statusId: "status2",
+      dotId: "dot2",
+      doneKey: "sofiyka_location2_done",
+      url: "location2.html",
+      lockedMessage: "Спочатку пройди першу локацію ❤️"
+    },
+    {
+      number: 3,
+      buttonId: "loc3",
+      statusId: "status3",
+      dotId: "dot3",
+      doneKey: "sofiyka_location3_done",
+      url: "location3.html",
+      lockedMessage: "Спочатку відкрий маршрут у 2 локації ❤️"
+    },
+    {
+      number: 4,
+      buttonId: "loc4",
+      statusId: "status4",
+      dotId: "dot4",
+      doneKey: "sofiyka_location4_done",
+      url: "location4.html",
+      lockedMessage: "Спочатку пройди 3 локацію ❤️"
+    },
+    {
+      number: 5,
+      buttonId: "loc5",
+      statusId: "status5",
+      dotId: "dot5",
+      doneKey: "sofiyka_location5_done",
+      url: "location5.html",
+      lockedMessage: "Спочатку заповни анкету у 4 локації ❤️"
+    }
+  ];
+
+  if (bgMusic) {
+    bgMusic.volume = 0.35;
+  }
+
+  function resetJourneyProgress() {
+    for (var i = 0; i < locations.length; i++) {
+      localStorage.removeItem(locations[i].doneKey);
+    }
+
+    localStorage.setItem(refreshCountKey, "0");
+  }
+
+  function countMapRefreshes() {
+    var currentCount = parseInt(localStorage.getItem(refreshCountKey) || "0", 10);
+    currentCount++;
+
+    if (currentCount >= RESET_AFTER_REFRESHES) {
+      resetJourneyProgress();
+    } else {
+      localStorage.setItem(refreshCountKey, String(currentCount));
+    }
+  }
+
+  countMapRefreshes();
+
+  function isDone(number) {
+    var location = locations[number - 1];
+    return localStorage.getItem(location.doneKey) === "true";
+  }
+
+  function isUnlocked(number) {
+    if (number === 1) return true;
+    return isDone(number - 1);
+  }
+
+  function getCompletedCount() {
+    var count = 0;
+
+    for (var i = 0; i < locations.length; i++) {
+      if (isDone(locations[i].number)) {
+        count++;
       }
-    ];
-
-    if (bgMusic) {
-      bgMusic.volume = 0.35;
     }
 
-    function isDone(number) {
-      var location = locations[number - 1];
-      return localStorage.getItem(location.doneKey) === "true";
+    return count;
+  }
+
+  function getActiveLocationNumber() {
+    for (var i = 0; i < locations.length; i++) {
+      var number = locations[i].number;
+
+      if (!isDone(number) && isUnlocked(number)) {
+        return number;
+      }
     }
 
-    function isUnlocked(number) {
-      if (number === 1) return true;
-      return isDone(number - 1);
+    return null;
+  }
+
+  function resetClasses(element) {
+    if (!element) return;
+
+    element.classList.remove("next");
+    element.classList.remove("opened");
+    element.classList.remove("locked");
+  }
+
+  function updateMapProgress() {
+    var completedCount = getCompletedCount();
+
+    if (completedCount >= 5) {
+      progressTitle.textContent = "✨ Подорож завершена ✨";
+      progressText.textContent = "Усі локації пройдено";
+    } else {
+      progressTitle.textContent = "Подорож Софійки";
+      progressText.textContent = "Пройдено " + completedCount + " з 5";
     }
 
-    function getCompletedCount() {
-      var count = 0;
+    for (var i = 0; i < locations.length; i++) {
+      var location = locations[i];
+      var number = location.number;
+      var button = document.getElementById(location.buttonId);
+      var status = document.getElementById(location.statusId);
+      var dot = document.getElementById(location.dotId);
 
-      for (var i = 0; i < locations.length; i++) {
-        if (isDone(locations[i].number)) {
-          count++;
-        }
+      resetClasses(button);
+
+      if (status) {
+        status.className = "status-icon";
       }
 
-      return count;
-    }
-
-    function getActiveLocationNumber() {
-      for (var i = 0; i < locations.length; i++) {
-        var number = locations[i].number;
-
-        if (!isDone(number) && isUnlocked(number)) {
-          return number;
-        }
+      if (dot) {
+        dot.classList.remove("done");
+        dot.classList.remove("active");
       }
 
-      return null;
-    }
-
-    function resetClasses(element) {
-      if (!element) return;
-
-      element.classList.remove("next");
-      element.classList.remove("opened");
-      element.classList.remove("locked");
-    }
-
-    function updateMapProgress() {
-      var completedCount = getCompletedCount();
-      var activeNumber = getActiveLocationNumber();
-
-      if (completedCount >= 5) {
-        progressTitle.textContent = "✨ Подорож завершена ✨";
-        progressText.textContent = "Усі локації пройдено";
+      if (isDone(number)) {
+        if (button) button.classList.add("opened");
+        if (status) status.className = "status-icon check show";
+        if (dot) dot.classList.add("done");
+      } else if (isUnlocked(number)) {
+        if (button) button.classList.add("next");
+        if (dot) dot.classList.add("active");
       } else {
-        progressTitle.textContent = "Подорож Софійки";
-        progressText.textContent = "Пройдено " + completedCount + " з 5";
-      }
-
-      for (var i = 0; i < locations.length; i++) {
-        var location = locations[i];
-        var number = location.number;
-        var button = document.getElementById(location.buttonId);
-        var status = document.getElementById(location.statusId);
-        var dot = document.getElementById(location.dotId);
-
-        resetClasses(button);
-
-        if (status) {
-          status.className = "status-icon";
-        }
-
-        if (dot) {
-          dot.classList.remove("done");
-          dot.classList.remove("active");
-        }
-
-        if (isDone(number)) {
-          if (button) button.classList.add("opened");
-          if (status) status.className = "status-icon check show";
-          if (dot) dot.classList.add("done");
-        } else if (isUnlocked(number)) {
-          if (button) button.classList.add("next");
-          if (dot) dot.classList.add("active");
-        } else {
-          if (button) button.classList.add("locked");
-          if (status) status.className = "status-icon lock show";
-        }
+        if (button) button.classList.add("locked");
+        if (status) status.className = "status-icon lock show";
       }
     }
+  }
 
-    function handleLocationClick(event, number) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
+  function handleLocationClick(event, number) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
-      var location = locations[number - 1];
+    var location = locations[number - 1];
 
-      if (isUnlocked(number)) {
-        window.location.href = location.url;
+    if (isUnlocked(number)) {
+      window.location.href = location.url;
+    } else {
+      alert(location.lockedMessage);
+    }
+  }
+
+  function showProgress(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    var completedCount = getCompletedCount();
+
+    if (completedCount >= 5) {
+      alert("✨ Подорож Софійки завершена! Запрошення знайдено ❤️");
+    } else {
+      alert("Пройдено " + completedCount + " з 5. Продовжуй чарівну подорож Софійки ✨");
+    }
+  }
+
+  async function toggleMusic(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    if (!bgMusic || !musicToggle) return;
+
+    try {
+      if (bgMusic.paused) {
+        await bgMusic.play();
+        musicToggle.classList.remove("music-off");
+        musicToggle.classList.add("music-on");
+        musicToggle.setAttribute("aria-label", "Вимкнути музику");
       } else {
-        alert(location.lockedMessage);
-      }
-    }
-
-    function showProgress(event) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-
-      var completedCount = getCompletedCount();
-
-      if (completedCount >= 5) {
-        alert("✨ Подорож Софійки завершена! Запрошення знайдено ❤️");
-      } else {
-        alert("Пройдено " + completedCount + " з 5. Продовжуй чарівну подорож Софійки ✨");
-      }
-    }
-
-    async function toggleMusic(event) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-
-      if (!bgMusic || !musicToggle) return;
-
-      try {
-        if (bgMusic.paused) {
-          await bgMusic.play();
-          musicToggle.classList.remove("music-off");
-          musicToggle.classList.add("music-on");
-          musicToggle.setAttribute("aria-label", "Вимкнути музику");
-        } else {
-          bgMusic.pause();
-          musicToggle.classList.remove("music-on");
-          musicToggle.classList.add("music-off");
-          musicToggle.setAttribute("aria-label", "Увімкнути музику");
-        }
-      } catch (error) {
+        bgMusic.pause();
         musicToggle.classList.remove("music-on");
         musicToggle.classList.add("music-off");
-        alert("Музика не запустилась. Перевір, чи mp3 файл лежить поруч із map.html.");
+        musicToggle.setAttribute("aria-label", "Увімкнути музику");
       }
+    } catch (error) {
+      musicToggle.classList.remove("music-on");
+      musicToggle.classList.add("music-off");
+      alert("Музика не запустилась. Перевір, чи mp3 файл лежить поруч із map.html.");
     }
+  }
 
-    updateMapProgress();
-  </script>
+  updateMapProgress();
+</script>
 
 </body>
 </html>

@@ -564,9 +564,10 @@
 
 <body class="notranslate">
 
-  <video id="inviteVideo" class="fullscreen-video" preload="auto" playsinline webkit-playsinline>
-  <source src="invitation_video.mp4" type="video/mp4">
-</video>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3" type="audio/mpeg">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
 
   <main class="page">
 
@@ -619,7 +620,7 @@
   <div class="video-overlay" id="videoOverlay">
     <button class="close-video" type="button" id="closeVideoBtn" aria-label="Закрити відео">×</button>
 
-    <video id="inviteVideo" class="fullscreen-video" preload="auto" playsinline webkit-playsinline muted>
+    <video id="inviteVideo" class="fullscreen-video" preload="auto" playsinline webkit-playsinline>
       <source src="invitation_video.mp4" type="video/mp4">
     </video>
 
@@ -630,167 +631,168 @@
 
   <div class="toast" id="toast"></div>
 
-<script>
-  const backBtn = document.getElementById("backBtn");
-  const musicBtn = document.getElementById("musicBtn");
-  const bgMusic = document.getElementById("bgMusic");
+  <script>
+    const backBtn = document.getElementById("backBtn");
+    const musicBtn = document.getElementById("musicBtn");
+    const bgMusic = document.getElementById("bgMusic");
 
-  const envelopeBtn = document.getElementById("envelopeBtn");
-  const videoOverlay = document.getElementById("videoOverlay");
-  const inviteVideo = document.getElementById("inviteVideo");
-  const closeVideoBtn = document.getElementById("closeVideoBtn");
-  const videoMessage = document.getElementById("videoMessage");
-  const returnCard = document.getElementById("returnCard");
-  const goMapBtn = document.getElementById("goMapBtn");
-  const toast = document.getElementById("toast");
+    const envelopeBtn = document.getElementById("envelopeBtn");
+    const videoOverlay = document.getElementById("videoOverlay");
+    const inviteVideo = document.getElementById("inviteVideo");
+    const closeVideoBtn = document.getElementById("closeVideoBtn");
+    const videoMessage = document.getElementById("videoMessage");
+    const returnCard = document.getElementById("returnCard");
+    const goMapBtn = document.getElementById("goMapBtn");
+    const toast = document.getElementById("toast");
 
-  if (bgMusic) {
-    bgMusic.volume = 0.35;
-  }
-
-  if (inviteVideo) {
-    inviteVideo.controls = false;
-    inviteVideo.removeAttribute("controls");
-    inviteVideo.playsInline = true;
-    inviteVideo.setAttribute("playsinline", "");
-    inviteVideo.setAttribute("webkit-playsinline", "");
-    inviteVideo.disablePictureInPicture = true;
-  }
-
-  function showToast(message) {
-    toast.textContent = message;
-    toast.classList.add("show");
-
-    clearTimeout(showToast._timer);
-
-    showToast._timer = setTimeout(function() {
-      toast.classList.remove("show");
-    }, 2200);
-  }
-
-  function completeLocation5() {
-    localStorage.setItem("sofiyka_location5_done", "true");
-  }
-
-  function showReturnButton() {
-    completeLocation5();
-    returnCard.classList.add("active");
-
-    setTimeout(function() {
-      returnCard.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
-    }, 250);
-  }
-
-  function openVideoFullscreen() {
-    document.body.classList.add("video-open");
-    videoOverlay.classList.add("active");
-    videoMessage.classList.remove("active");
-
-    if (!inviteVideo) {
-      videoMessage.classList.add("active");
-      showReturnButton();
-      return;
+    if (bgMusic) {
+      bgMusic.volume = 0.35;
     }
 
-    inviteVideo.controls = false;
-    inviteVideo.removeAttribute("controls");
-    inviteVideo.currentTime = 0;
-
-    const playPromise = inviteVideo.play();
-
-    if (playPromise && typeof playPromise.then === "function") {
-      playPromise.then(function() {
-        showToast("Відкриваємо запрошення ✨");
-      }).catch(function() {
-        videoMessage.classList.add("active");
-        showToast("Відео не запустилось");
-      });
-    }
-  }
-
-  function closeVideo() {
     if (inviteVideo) {
-      inviteVideo.pause();
-      inviteVideo.currentTime = 0;
       inviteVideo.controls = false;
       inviteVideo.removeAttribute("controls");
+      inviteVideo.playsInline = true;
+      inviteVideo.setAttribute("playsinline", "");
+      inviteVideo.setAttribute("webkit-playsinline", "");
+      inviteVideo.disablePictureInPicture = true;
     }
 
-    document.body.classList.remove("video-open");
-    videoOverlay.classList.remove("active");
-    showReturnButton();
-  }
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
 
-  envelopeBtn.addEventListener("click", function() {
-    openVideoFullscreen();
-  });
+      clearTimeout(showToast._timer);
 
-  closeVideoBtn.addEventListener("click", function() {
-    closeVideo();
-  });
-
-  inviteVideo.addEventListener("ended", function() {
-    closeVideo();
-  });
-
-  inviteVideo.addEventListener("error", function() {
-    videoMessage.classList.add("active");
-    showToast("Відеофайл ще не знайдено");
-  });
-
-  goMapBtn.addEventListener("click", function() {
-    completeLocation5();
-    window.location.href = "map.html";
-  });
-
-  backBtn.addEventListener("click", function() {
-    window.location.href = "map.html";
-  });
-
-  musicBtn.addEventListener("click", async function() {
-    if (!bgMusic) return;
-
-    try {
-      if (bgMusic.paused) {
-        await bgMusic.play();
-        musicBtn.classList.add("playing");
-        localStorage.setItem("sofiyka_music", "on");
-      } else {
-        bgMusic.pause();
-        musicBtn.classList.remove("playing");
-        localStorage.setItem("sofiyka_music", "off");
-      }
-    } catch (error) {
-      showToast("Музика не запустилась. Перевір mp3 файл 🎵");
+      showToast._timer = setTimeout(function() {
+        toast.classList.remove("show");
+      }, 2200);
     }
-  });
 
-  function restoreMusicState() {
-    const musicState = localStorage.getItem("sofiyka_music");
-
-    if (musicState === "on" && bgMusic) {
-      bgMusic.play().then(function() {
-        musicBtn.classList.add("playing");
-      }).catch(function() {
-        musicBtn.classList.remove("playing");
-      });
+    function completeLocation5() {
+      localStorage.setItem("sofiyka_location5_done", "true");
     }
-  }
 
-  function restoreLocation5State() {
-    const done = localStorage.getItem("sofiyka_location5_done") === "true";
-
-    if (done) {
+    function showReturnButton() {
+      completeLocation5();
       returnCard.classList.add("active");
-    }
-  }
 
-  restoreMusicState();
-  restoreLocation5State();
-</script>
+      setTimeout(function() {
+        returnCard.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }, 250);
+    }
+
+    function openVideoFullscreen() {
+      document.body.classList.add("video-open");
+      videoOverlay.classList.add("active");
+      videoMessage.classList.remove("active");
+
+      if (!inviteVideo) {
+        videoMessage.classList.add("active");
+        showReturnButton();
+        return;
+      }
+
+      inviteVideo.pause();
+      inviteVideo.controls = false;
+      inviteVideo.removeAttribute("controls");
+      inviteVideo.currentTime = 0;
+
+      const playPromise = inviteVideo.play();
+
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.then(function() {
+          showToast("Відкриваємо запрошення ✨");
+        }).catch(function() {
+          videoMessage.classList.add("active");
+          showToast("Відео не запустилось");
+        });
+      }
+    }
+
+    function closeVideo() {
+      if (inviteVideo) {
+        inviteVideo.pause();
+        inviteVideo.currentTime = 0;
+        inviteVideo.controls = false;
+        inviteVideo.removeAttribute("controls");
+      }
+
+      document.body.classList.remove("video-open");
+      videoOverlay.classList.remove("active");
+      showReturnButton();
+    }
+
+    envelopeBtn.addEventListener("click", function() {
+      openVideoFullscreen();
+    });
+
+    closeVideoBtn.addEventListener("click", function() {
+      closeVideo();
+    });
+
+    inviteVideo.addEventListener("ended", function() {
+      closeVideo();
+    });
+
+    inviteVideo.addEventListener("error", function() {
+      videoMessage.classList.add("active");
+      showToast("Відеофайл ще не знайдено");
+    });
+
+    goMapBtn.addEventListener("click", function() {
+      completeLocation5();
+      window.location.href = "map.html";
+    });
+
+    backBtn.addEventListener("click", function() {
+      window.location.href = "map.html";
+    });
+
+    musicBtn.addEventListener("click", async function() {
+      if (!bgMusic) return;
+
+      try {
+        if (bgMusic.paused) {
+          await bgMusic.play();
+          musicBtn.classList.add("playing");
+          localStorage.setItem("sofiyka_music", "on");
+        } else {
+          bgMusic.pause();
+          musicBtn.classList.remove("playing");
+          localStorage.setItem("sofiyka_music", "off");
+        }
+      } catch (error) {
+        showToast("Музика не запустилась. Перевір mp3 файл 🎵");
+      }
+    });
+
+    function restoreMusicState() {
+      const musicState = localStorage.getItem("sofiyka_music");
+
+      if (musicState === "on" && bgMusic) {
+        bgMusic.play().then(function() {
+          musicBtn.classList.add("playing");
+        }).catch(function() {
+          musicBtn.classList.remove("playing");
+        });
+      }
+    }
+
+    function restoreLocation5State() {
+      const done = localStorage.getItem("sofiyka_location5_done") === "true";
+
+      if (done) {
+        returnCard.classList.add("active");
+      }
+    }
+
+    restoreMusicState();
+    restoreLocation5State();
+  </script>
 
 </body>
 </html>

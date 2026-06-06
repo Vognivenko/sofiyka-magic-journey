@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="uk" translate="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
+  <title>Локація 4 — Королівська трапеза</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --violet: #7e459e;
+      --violet-soft: #9b6bb7;
+      --gold: #efd77a;
+      --shadow: 0 10px 28px rgba(173, 117, 195, 0.18);
+      --border: 2px solid rgba(238, 219, 127, 0.9);
+      --radius-xl: 34px;
+      --container-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--violet);
+      font-family: "Cormorant Garamond", serif;
+      background:
+        linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)),
+        url("fon_location1.png") center top / cover no-repeat fixed;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.55), transparent 24%),
+        radial-gradient(circle at 80% 18%, rgba(255,238,190,0.34), transparent 20%),
+        radial-gradient(circle at 50% 90%, rgba(255,220,247,0.20), transparent 30%);
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 14px 18px 42px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 70px 1fr 70px;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .top-btn {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      border: 2px solid rgba(238, 219, 127, 0.9);
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.96), rgba(255,248,221,0.92) 35%, rgba(248,225,137,0.92) 82%);
+      color: var(--violet);
+      font-size: 32px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow:
+        0 0 0 4px rgba(255,245,199,0.30),
+        0 8px 20px rgba(229,187,89,0.22),
+        inset 0 2px 12px rgba(255,255,255,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .music-btn.playing {
+      box-shadow:
+        0 0 0 4px rgba(255,245,199,0.35),
+        0 0 22px rgba(202,152,249,0.45),
+        0 8px 20px rgba(229,187,89,0.22),
+        inset 0 2px 12px rgba(255,255,255,0.75);
+    }
+
+    .location-title {
+      justify-self: center;
+      min-height: 54px;
+      padding: 10px 28px;
+      border-radius: 999px;
+      border: 2px solid rgba(238, 219, 127, 0.9);
+      background: rgba(255,255,255,0.78);
+      box-shadow: 0 8px 18px rgba(120,70,150,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--violet);
+      text-align: center;
+    }
+
+    .card {
+      border: var(--border);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(255,248,253,0.88));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .hero-card {
+      padding: 28px 22px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255,245,210,0.50), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,246,253,0.86));
+    }
+
+    .hero-card h1 {
+      margin: 0 0 12px;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 0.95;
+      font-weight: 700;
+      color: var(--violet);
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.85),
+        0 6px 18px rgba(126,69,158,0.10);
+    }
+
+    .hero-card p {
+      max-width: 840px;
+      margin: 0 auto;
+      font-size: clamp(22px, 2.8vw, 34px);
+      line-height: 1.22;
+      font-weight: 600;
+      color: #6f438f;
+    }
+
+    .info-card {
+      padding: 22px 20px;
+      text-align: center;
+    }
+
+    .info-title {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.05;
+      font-weight: 700;
+    }
+
+    .info-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .info-item {
+      border-radius: 24px;
+      border: 1.5px solid rgba(238,219,127,0.72);
+      background: rgba(255,255,255,0.72);
+      padding: 14px 12px;
+      box-shadow: inset 0 2px 8px rgba(255,255,255,0.65);
+    }
+
+    .info-label {
+      font-size: 20px;
+      font-weight: 700;
+      color: #9b6bb7;
+      margin-bottom: 4px;
+    }
+
+    .info-value {
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--violet);
+      line-height: 1.1;
+    }
+
+    .task-card {
+      padding: 22px 20px;
+      text-align: center;
+    }
+
+    .task-title {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 3.8vw, 46px);
+      line-height: 1.08;
+      font-weight: 700;
+    }
+
+    .counter-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 190px;
+      min-height: 52px;
+      padding: 8px 22px;
+      border-radius: 999px;
+      border: 1.8px solid rgba(255, 240, 243, 0.95);
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(250,241,249,0.96));
+      box-shadow: inset 0 2px 8px rgba(255,255,255,0.75);
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--violet-soft);
+      margin-top: 8px;
+    }
+
+    .treats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .treat-card {
+      position: relative;
+      border-radius: 28px;
+      border: 2px solid rgba(238, 219, 127, 0.78);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 244, 200, 0.42), transparent 44%),
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,248,253,0.84));
+      box-shadow: 0 8px 22px rgba(173, 117, 195, 0.14);
+      padding: 20px 58px 20px 18px;
+      min-height: 142px;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .treat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(173, 117, 195, 0.18);
+    }
+
+    .treat-card.selected {
+      border-color: rgba(238, 190, 90, 0.98);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 230, 150, 0.56), transparent 44%),
+        linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,244,232,0.90));
+      box-shadow:
+        0 0 0 2px rgba(255,238,160,0.70),
+        0 12px 26px rgba(173,117,195,0.18);
+    }
+
+    .treat-icon {
+      font-size: 42px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .treat-title {
+      margin: 0 0 6px;
+      font-size: clamp(26px, 2.6vw, 36px);
+      line-height: 1;
+      font-weight: 700;
+      color: var(--violet);
+    }
+
+    .treat-text {
+      margin: 0;
+      font-size: clamp(18px, 1.8vw, 24px);
+      line-height: 1.16;
+      font-weight: 600;
+      color: #7f5a98;
+    }
+
+    .choose-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.96), rgba(255,240,246,0.95) 38%, rgba(246, 194, 221, 0.96) 88%);
+      box-shadow: 0 6px 14px rgba(240, 161, 201, 0.22);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 21px;
+      color: #5b435f;
+    }
+
+    .treat-card.selected .choose-btn {
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.98), rgba(255,220,236,0.98) 38%, rgba(255, 141, 186, 0.96) 88%);
+      color: #d43d73;
+      transform: scale(1.06);
+    }
+
+    .finish-card {
+      display: none;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .finish-card.active {
+      display: block;
+      animation: showFinish 0.35s ease both;
+    }
+
+    .finish-title {
+      margin: 0 0 10px;
+      font-size: clamp(34px, 4.2vw, 52px);
+      line-height: 1.05;
+      font-weight: 700;
+    }
+
+    .finish-text {
+      margin: 0 0 18px;
+      font-size: clamp(21px, 2.5vw, 32px);
+      line-height: 1.2;
+      font-weight: 600;
+      color: #6f438f;
+    }
+
+    .finish-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .finish-btn {
+      min-height: 58px;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(21px, 2.5vw, 30px);
+      font-weight: 700;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .finish-btn.primary {
+      background: linear-gradient(180deg, #c78be5, #a96bd1);
+      color: #ffffff;
+      box-shadow: 0 10px 20px rgba(120,70,150,0.20);
+    }
+
+    .finish-btn.secondary {
+      background: rgba(255,255,255,0.80);
+      color: var(--violet);
+      border: 2px solid rgba(238,219,127,0.78);
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%) translateY(20px);
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(117,76,150,0.95);
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(117,76,150,0.28);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      z-index: 50;
+      text-align: center;
+      max-width: calc(100% - 32px);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    audio {
+      display: none;
+    }
+
+    @keyframes showFinish {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        padding: 12px 12px 34px;
+      }
+
+      .topbar {
+        grid-template-columns: 64px 1fr 64px;
+        gap: 8px;
+      }
+
+      .top-btn {
+        width: 58px;
+        height: 58px;
+        font-size: 30px;
+      }
+
+      .location-title {
+        min-height: 48px;
+        padding: 8px 18px;
+        font-size: 24px;
+      }
+
+      .hero-card {
+        padding: 24px 16px;
+      }
+
+      .info-list {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .treats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .finish-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero-card h1 {
+        font-size: 42px;
+      }
+
+      .hero-card p {
+        font-size: 21px;
+      }
+
+      .treat-card {
+        min-height: 132px;
+      }
+    }
+  </style>
+</head>
+
+<body class="notranslate">
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3" type="audio/mpeg">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <main class="page">
+
+    <header class="topbar">
+      <button class="top-btn" type="button" id="backBtn" aria-label="Назад">←</button>
+      <div class="location-title">Локація 4</div>
+      <button class="top-btn music-btn" type="button" id="musicBtn" aria-label="Музика">♪</button>
+    </header>
+
+    <section class="card hero-card">
+      <h1>Королівська<br>трапеза</h1>
+      <p>
+        Після святкової зустрічі у замку гостей чекає королівська трапеза:
+        смачні частування, солодкі моменти та тепла атмосфера родинного свята.
+      </p>
+    </section>
+
+    <section class="card info-card">
+      <h2 class="info-title">Час частування</h2>
+
+      <div class="info-list">
+        <div class="info-item">
+          <div class="info-label">Дата</div>
+          <div class="info-value">27 червня</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Початок</div>
+          <div class="info-value">13:00</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Місце</div>
+          <div class="info-value">Панорама</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card task-card">
+      <h2 class="task-title">Обери 3 святкові частування для Софійкиного балу 👑</h2>
+      <div class="counter-pill" id="counterText">Обрано 0 з 3</div>
+    </section>
+
+    <section class="treats-grid" id="treatsGrid">
+
+      <article class="treat-card" data-id="cake">
+        <button class="choose-btn" type="button">♡</button>
+        <div class="treat-icon">🎂</div>
+        <h3 class="treat-title">Святковий торт</h3>
+        <p class="treat-text">Головна солодка окраса королівської трапези.</p>
+      </article>
+
+      <article class="treat-card" data-id="cupcakes">
+        <button class="choose-btn" type="button">♡</button>
+        <div class="treat-icon">🧁</div>
+        <h3 class="treat-title">Казкові капкейки</h3>
+        <p class="treat-text">Маленькі солодкі частування для гостей.</p>
+      </article>
+
+      <article class="treat-card" data-id="fruits">
+        <button class="choose-btn" type="button">♡</button>
+        <div class="treat-icon">🍓</div>
+        <h3 class="treat-title">Фруктова галявина</h3>
+        <p class="treat-text">Яскраві ягоди та фрукти для святкового настрою.</p>
+      </article>
+
+      <article class="treat-card" data-id="drinks">
+        <button class="choose-btn" type="button">♡</button>
+        <div class="treat-icon">🥤</div>
+        <h3 class="treat-title">Чарівні напої</h3>
+        <p class="treat-text">Смачні напої для маленьких і дорослих гостей.</p>
+      </article>
+
+      <article class="treat-card" data-id="tea">
+        <button class="choose-btn" type="button">♡</button>
+        <div class="treat-icon">☕</div>
+        <h3 class="treat-title">Теплий чай</h3>
+        <p class="treat-text">Затишна частина святкового столу після основної трапези.</p>
+      </article>
+
+      <article class="treat-card" data-id="candies">
+        <button class="choose-btn" type="button">♡</button>
+        <div class="treat-icon">🍬</div>
+        <h3 class="treat-title">Солодкі скарби</h3>
+        <p class="treat-text">Маленькі смаколики, які роблять свято ще милішим.</p>
+      </article>
+
+    </section>
+
+    <section class="card finish-card" id="finishCard">
+      <h2 class="finish-title">Королівську трапезу підготовлено!</h2>
+      <p class="finish-text">
+        Локацію 4 пройдено. Тепер відкрито останній етап чарівної подорожі —
+        підтвердження присутності.
+      </p>
+
+      <div class="finish-actions">
+        <button class="finish-btn primary" type="button" id="goLocation5Btn">
+          Перейти до локації 5
+        </button>
+
+        <button class="finish-btn secondary" type="button" id="goMapBtn">
+          Повернутися на карту
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const maxSelected = 3;
+    const selectedTreats = new Set();
+
+    const counterText = document.getElementById("counterText");
+    const finishCard = document.getElementById("finishCard");
+    const goLocation5Btn = document.getElementById("goLocation5Btn");
+    const goMapBtn = document.getElementById("goMapBtn");
+    const backBtn = document.getElementById("backBtn");
+    const musicBtn = document.getElementById("musicBtn");
+    const bgMusic = document.getElementById("bgMusic");
+    const toast = document.getElementById("toast");
+
+    if (bgMusic) {
+      bgMusic.volume = 0.35;
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(showToast._timer);
+
+      showToast._timer = setTimeout(function() {
+        toast.classList.remove("show");
+      }, 1800);
+    }
+
+    function updateUI() {
+      counterText.textContent = "Обрано " + selectedTreats.size + " з " + maxSelected;
+
+      document.querySelectorAll(".treat-card").forEach(function(card) {
+        const id = card.getAttribute("data-id");
+        const btn = card.querySelector(".choose-btn");
+        const active = selectedTreats.has(id);
+
+        card.classList.toggle("selected", active);
+        btn.textContent = active ? "❤" : "♡";
+      });
+
+      if (selectedTreats.size === maxSelected) {
+        localStorage.setItem("sofiyka_location4_done", "true");
+        finishCard.classList.add("active");
+
+        setTimeout(function() {
+          finishCard.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        }, 250);
+      } else {
+        finishCard.classList.remove("active");
+      }
+    }
+
+    function toggleTreat(card) {
+      const id = card.getAttribute("data-id");
+
+      if (selectedTreats.has(id)) {
+        selectedTreats.delete(id);
+        updateUI();
+        return;
+      }
+
+      if (selectedTreats.size >= maxSelected) {
+        showToast("Можна обрати тільки 3 частування 💜");
+        return;
+      }
+
+      selectedTreats.add(id);
+      updateUI();
+    }
+
+    document.addEventListener("click", function(event) {
+      const card = event.target.closest(".treat-card");
+
+      if (!card) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      toggleTreat(card);
+    });
+
+    goLocation5Btn.addEventListener("click", function() {
+      localStorage.setItem("sofiyka_location4_done", "true");
+      window.location.href = "location5.html";
+    });
+
+    goMapBtn.addEventListener("click", function() {
+      localStorage.setItem("sofiyka_location4_done", "true");
+      window.location.href = "map.html";
+    });
+
+    backBtn.addEventListener("click", function() {
+      window.location.href = "map.html";
+    });
+
+    musicBtn.addEventListener("click", async function() {
+      if (!bgMusic) return;
+
+      try {
+        if (bgMusic.paused) {
+          await bgMusic.play();
+          musicBtn.classList.add("playing");
+          localStorage.setItem("sofiyka_music", "on");
+        } else {
+          bgMusic.pause();
+          musicBtn.classList.remove("playing");
+          localStorage.setItem("sofiyka_music", "off");
+        }
+      } catch (error) {
+        showToast("Музика не запустилась. Перевір mp3 файл 🎵");
+      }
+    });
+
+    function restoreMusicState() {
+      const musicState = localStorage.getItem("sofiyka_music");
+
+      if (musicState === "on" && bgMusic) {
+        bgMusic.play().then(function() {
+          musicBtn.classList.add("playing");
+        }).catch(function() {
+          musicBtn.classList.remove("playing");
+        });
+      }
+    }
+
+    restoreMusicState();
+    updateUI();
+  </script>
+
+</body>
+</html>

@@ -346,7 +346,7 @@
     .video-message {
       position: absolute;
       left: 50%;
-      bottom: 28px;
+      bottom: 96px;
       transform: translateX(-50%);
       z-index: 10000;
       width: calc(100% - 32px);
@@ -363,6 +363,36 @@
 
     .video-message.active {
       display: block;
+    }
+
+    .video-map-btn {
+      position: absolute;
+      left: 50%;
+      bottom: max(28px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      z-index: 10001;
+      width: calc(100% - 48px);
+      max-width: 520px;
+      min-height: 58px;
+      border-radius: 999px;
+      padding: 12px 22px;
+      border: 2px solid rgba(238,219,127,0.9);
+      background: linear-gradient(180deg, #c78be5, #a96bd1);
+      color: #ffffff;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(24px, 2.8vw, 34px);
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow:
+        0 10px 22px rgba(0,0,0,0.28),
+        inset 0 2px 10px rgba(255,255,255,0.28);
+      display: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .video-map-btn.active {
+      display: block;
+      animation: showBlock 0.35s ease both;
     }
 
     .return-card {
@@ -474,6 +504,21 @@
     }
 
     @keyframes showBlock {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    .return-card.active {
+      animation: showReturnBlock 0.35s ease both;
+    }
+
+    @keyframes showReturnBlock {
       from {
         opacity: 0;
         transform: translateY(14px);
@@ -621,6 +666,10 @@
     <div class="video-message" id="videoMessage">
       Відео ще не завантажено. Пізніше тут буде відкриття листа ✨
     </div>
+
+    <button class="video-map-btn" type="button" id="videoMapBtn">
+      Повернутися на карту
+    </button>
   </div>
 
   <div class="toast" id="toast"></div>
@@ -635,6 +684,8 @@
     const inviteVideo = document.getElementById("inviteVideo");
     const closeVideoBtn = document.getElementById("closeVideoBtn");
     const videoMessage = document.getElementById("videoMessage");
+    const videoMapBtn = document.getElementById("videoMapBtn");
+
     const returnCard = document.getElementById("returnCard");
     const goMapBtn = document.getElementById("goMapBtn");
     const toast = document.getElementById("toast");
@@ -658,7 +709,7 @@
       localStorage.setItem("sofiyka_location5_done", "true");
     }
 
-    function showReturnButton() {
+    function showReturnButtonOnPage() {
       completeLocation5();
       returnCard.classList.add("active");
 
@@ -673,10 +724,11 @@
     function openVideoFullscreen() {
       videoOverlay.classList.add("active");
       videoMessage.classList.remove("active");
+      videoMapBtn.classList.remove("active");
 
       if (!inviteVideo) {
         videoMessage.classList.add("active");
-        showReturnButton();
+        showReturnButtonOnPage();
         return;
       }
 
@@ -685,34 +737,51 @@
       const playPromise = inviteVideo.play();
 
       if (playPromise && typeof playPromise.then === "function") {
-        playPromise.then(function() {
-          if (inviteVideo.requestFullscreen) {
-            inviteVideo.requestFullscreen().catch(function() {});
-          } else if (inviteVideo.webkitEnterFullscreen) {
-            inviteVideo.webkitEnterFullscreen();
-          }
-        }).catch(function() {
+        playPromise.catch(function() {
           videoMessage.classList.add("active");
           showToast("Відео ще не завантажено ✨");
 
           setTimeout(function() {
-            closeVideo();
+            closeVideoAndShowPageButton();
           }, 1200);
         });
       }
     }
 
-    function closeVideo() {
+    function holdLastVideoFrame() {
+      completeLocation5();
+
+      if (inviteVideo) {
+        inviteVideo.pause();
+
+        if (inviteVideo.duration && isFinite(inviteVideo.duration)) {
+          try {
+            inviteVideo.currentTime = Math.max(inviteVideo.duration - 0.12, 0);
+          } catch (error) {}
+        }
+      }
+
+      videoMapBtn.classList.add("active");
+    }
+
+    function closeVideoAndShowPageButton() {
       if (inviteVideo) {
         inviteVideo.pause();
       }
 
-      if (document.fullscreenElement && document.exitFullscreen) {
-        document.exitFullscreen().catch(function() {});
+      videoOverlay.classList.remove("active");
+      videoMapBtn.classList.remove("active");
+      showReturnButtonOnPage();
+    }
+
+    function goToMap() {
+      completeLocation5();
+
+      if (inviteVideo) {
+        inviteVideo.pause();
       }
 
-      videoOverlay.classList.remove("active");
-      showReturnButton();
+      window.location.href = "map.html";
     }
 
     envelopeBtn.addEventListener("click", function() {
@@ -720,11 +789,11 @@
     });
 
     closeVideoBtn.addEventListener("click", function() {
-      closeVideo();
+      closeVideoAndShowPageButton();
     });
 
     inviteVideo.addEventListener("ended", function() {
-      closeVideo();
+      holdLastVideoFrame();
     });
 
     inviteVideo.addEventListener("error", function() {
@@ -732,13 +801,16 @@
       showToast("Відеофайл ще не знайдено");
 
       setTimeout(function() {
-        closeVideo();
+        closeVideoAndShowPageButton();
       }, 1200);
     });
 
+    videoMapBtn.addEventListener("click", function() {
+      goToMap();
+    });
+
     goMapBtn.addEventListener("click", function() {
-      completeLocation5();
-      window.location.href = "map.html";
+      goToMap();
     });
 
     backBtn.addEventListener("click", function() {

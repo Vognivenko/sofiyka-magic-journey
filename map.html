@@ -70,93 +70,39 @@
       pointer-events: none;
     }
 
-    .round-btn {
-      position: relative;
+    .image-btn {
       width: 58px;
       height: 58px;
-      border-radius: 50%;
       border: none;
-      pointer-events: auto;
+      background: transparent;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
       cursor: pointer;
+      pointer-events: auto;
       text-decoration: none;
-      color: #74318d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 30% 25%, #ffffff 0%, #fff8dc 32%, #ffe28a 62%, #f0b84c 100%);
-      box-shadow:
-        0 0 0 3px rgba(255, 245, 200, 0.9),
-        0 0 0 6px rgba(255, 215, 90, 0.38),
-        0 0 24px rgba(255, 220, 95, 0.88),
-        0 8px 18px rgba(90, 35, 115, 0.28),
-        inset 0 4px 7px rgba(255,255,255,0.95),
-        inset 0 -7px 12px rgba(120,70,20,0.18);
+      display: block;
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
+      filter: drop-shadow(0 6px 10px rgba(70, 25, 90, 0.25));
+      transition: transform .2s ease, filter .2s ease;
     }
 
-    .round-btn::before {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.8);
-      pointer-events: none;
+    .image-btn:active {
+      transform: scale(0.93);
     }
 
-    .round-btn::after {
-      content: "";
-      position: absolute;
-      top: -35%;
-      left: -85%;
-      width: 58%;
-      height: 175%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.72), transparent);
-      transform: rotate(25deg);
-      animation: buttonShine 5.2s ease-in-out infinite;
-      pointer-events: none;
+    .back-btn {
+      background-image: url("btn_back.png");
     }
 
-    .round-btn span {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-      font-weight: 700;
-      pointer-events: none;
-      text-shadow:
-        0 1px 0 rgba(255,255,255,0.9),
-        0 2px 4px rgba(96,35,115,0.24);
-    }
-
-    .back-icon {
-      font-size: 34px;
-      transform: translateY(-1px);
-    }
-
-    .music-icon {
-      font-size: 30px;
-      transform: translateY(-1px);
-    }
-
-    .round-btn:active {
-      transform: scale(0.94);
-    }
-
-    .round-btn.playing {
+    .music-btn.music-on {
+      background-image: url("btn_music_on.png");
       animation: musicPulse 1.8s ease-in-out infinite;
     }
 
-    .round-btn.off {
-      background:
-        radial-gradient(circle at 30% 25%, #ffffff 0%, #f6e9ff 38%, #d6a9ff 72%, #8e55b5 100%);
-      color: #ffffff;
+    .music-btn.music-off {
+      background-image: url("btn_music_off.png");
     }
 
     .map-header {
@@ -228,10 +174,16 @@
     .s4 { top: 69%; right: 18%; animation-delay: .5s; }
     .s5 { bottom: 14%; left: 57%; animation-delay: 1.5s; }
 
-    .location {
+    .location-wrap {
       position: absolute;
       z-index: 100;
-      display: block;
+    }
+
+    .location {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       border: none;
       background-color: transparent;
       background-repeat: no-repeat;
@@ -251,6 +203,10 @@
         transform .25s ease;
     }
 
+    .location:active {
+      transform: scale(0.98);
+    }
+
     .location.next {
       opacity: 1;
       filter:
@@ -259,156 +215,165 @@
         saturate(1.18)
         drop-shadow(0 11px 15px rgba(88,35,110,0.28))
         drop-shadow(0 0 22px rgba(255,225,120,0.96));
+      animation: activePulse 2.4s ease-in-out infinite;
     }
 
     .location.opened {
       opacity: 1;
       filter:
-        brightness(1.1)
-        contrast(1.08)
-        saturate(1.14)
+        brightness(1.08)
+        contrast(1.05)
+        saturate(1.1)
         drop-shadow(0 10px 14px rgba(88,35,110,0.25))
-        drop-shadow(0 0 18px rgba(255,225,120,0.86));
+        drop-shadow(0 0 14px rgba(255,225,120,0.72));
     }
 
     .location.locked {
-      opacity: 0.45;
+      opacity: 0.42;
       filter:
         grayscale(0.65)
         saturate(0.45)
-        brightness(0.92)
-        contrast(0.9)
+        brightness(0.9)
+        contrast(0.88)
         drop-shadow(0 5px 7px rgba(70,35,90,0.12));
       animation: none;
     }
 
-    .location1 {
+    .location1-wrap {
       left: 8.5%;
       top: 21%;
       width: 54%;
       aspect-ratio: 800 / 433;
-      background-image: url("location1.png");
-      animation: pulse1 2.4s ease-in-out infinite;
       z-index: 5000;
     }
 
-    .location2 {
+    .location2-wrap {
       left: 39.2%;
       top: 36.5%;
       width: 53%;
       aspect-ratio: 535 / 243;
-      background-image: url("location2.png");
     }
 
-    .location3 {
+    .location3-wrap {
       left: 8.3%;
       top: 50.6%;
       width: 50%;
       aspect-ratio: 535 / 243;
-      background-image: url("location3.png");
     }
 
-    .location4 {
+    .location4-wrap {
       left: 39%;
       top: 63.6%;
       width: 53%;
       aspect-ratio: 535 / 243;
-      background-image: url("location4.png");
     }
 
-    .location5 {
+    .location5-wrap {
       left: 7.7%;
       top: 74.2%;
       width: 51%;
       aspect-ratio: 535 / 243;
-      background-image: url("location5.png");
     }
 
-    .location:active {
-      transform: scale(0.98);
+    .location1 { background-image: url("location1.png"); }
+    .location2 { background-image: url("location2.png"); }
+    .location3 { background-image: url("location3.png"); }
+    .location4 { background-image: url("location4.png"); }
+    .location5 { background-image: url("location5.png"); }
+
+    .status-icon {
+      position: absolute;
+      right: -4%;
+      top: -7%;
+      width: 22%;
+      aspect-ratio: 1 / 1;
+      z-index: 20;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity .3s ease, transform .3s ease;
+      filter: drop-shadow(0 4px 7px rgba(70, 25, 90, 0.25));
     }
 
-    .progress-btn {
+    .status-icon.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .status-icon.check {
+      background-image: url("icon_check.png");
+    }
+
+    .status-icon.lock {
+      background-image: url("icon_lock.png");
+      right: 2%;
+      top: 8%;
+      width: 21%;
+      opacity: 0.88;
+      transform: scale(1);
+    }
+
+    .progress-panel {
       position: absolute;
       left: 50%;
-      bottom: 1.25%;
-      width: 58%;
-      max-width: 300px;
-      min-height: 55px;
+      bottom: 0.2%;
+      width: 78%;
+      max-width: 420px;
+      aspect-ratio: 3 / 1;
       z-index: 120;
       transform: translateX(-50%);
       border: none;
-      border-radius: 999px;
+      background: transparent url("progress_panel.png") center / contain no-repeat;
       cursor: pointer;
       pointer-events: auto;
-      padding: 7px 14px 7px 54px;
-      background:
-        linear-gradient(180deg, rgba(255,248,253,0.96), rgba(246,223,255,0.94));
-      box-shadow:
-        0 0 0 2px rgba(255,227,135,0.88),
-        0 0 12px rgba(255,225,120,0.50),
-        0 8px 16px rgba(80,30,100,0.17),
-        inset 0 3px 7px rgba(255,255,255,0.92),
-        inset 0 -5px 10px rgba(140,80,160,0.08);
-      animation: progressFloat 5.2s ease-in-out infinite;
+      padding: 0;
       font-family: 'Cormorant Garamond', serif;
       touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      filter: drop-shadow(0 8px 14px rgba(70, 25, 90, 0.23));
+      animation: progressFloat 5.2s ease-in-out infinite;
     }
 
-    .progress-btn::before {
-      content: "👑";
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 37px;
-      height: 37px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      background:
-        radial-gradient(circle at 35% 25%, #ffffff 0%, #fff2c8 42%, #d9a7ff 100%);
-      box-shadow:
-        0 0 0 2px rgba(255,224,120,0.85),
-        0 0 8px rgba(255,219,105,0.50),
-        inset 0 3px 5px rgba(255,255,255,0.9);
+    .progress-panel:active {
+      transform: translateX(-50%) scale(0.98);
     }
 
-    .progress-btn::after {
-      content: "";
+    .progress-content {
       position: absolute;
-      inset: 5px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.65);
+      left: 12%;
+      right: 12%;
+      top: 32%;
+      text-align: center;
       pointer-events: none;
     }
 
-    .progress-overlay {
-      position: relative;
-      z-index: 2;
-      display: block;
+    .progress-title {
       color: #7d3f97;
       font-weight: 700;
-      font-size: clamp(14px, 3.2vw, 18px);
+      font-size: clamp(14px, 3.4vw, 21px);
       line-height: 1;
-      white-space: nowrap;
-      text-align: center;
       text-shadow:
         0 1px 0 rgba(255,255,255,0.95),
         0 2px 4px rgba(100,45,120,0.16);
-      pointer-events: none;
-      margin-top: 1px;
+    }
+
+    .progress-text {
+      margin-top: 4px;
+      color: #9b5aa8;
+      font-weight: 700;
+      font-size: clamp(12px, 2.9vw, 17px);
+      line-height: 1;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
     }
 
     .progress-dots {
-      position: relative;
-      z-index: 2;
       display: flex;
       justify-content: center;
       gap: 6px;
-      margin-top: 6px;
+      margin-top: 7px;
       pointer-events: none;
     }
 
@@ -422,7 +387,7 @@
         0 0 0 1px rgba(255,255,255,0.65);
     }
 
-    .progress-dot.opened {
+    .progress-dot.done {
       background:
         radial-gradient(circle at 35% 30%, #fff6d8 0%, #d891ff 45%, #7d3f97 100%);
       box-shadow:
@@ -430,16 +395,18 @@
         0 0 10px rgba(255,218,116,0.9);
     }
 
+    .progress-dot.active {
+      background:
+        radial-gradient(circle at 35% 30%, #ffffff 0%, #ffe28a 42%, #d38aff 100%);
+      box-shadow:
+        0 0 0 2px rgba(255,231,136,0.88),
+        0 0 13px rgba(255,218,116,1);
+      animation: dotPulse 1.5s ease-in-out infinite;
+    }
+
     @keyframes musicPulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.06); }
-    }
-
-    @keyframes buttonShine {
-      0% { left: -85%; opacity: 0; }
-      18% { opacity: 0.9; }
-      34% { left: 125%; opacity: 0; }
-      100% { left: 125%; opacity: 0; }
     }
 
     @keyframes twinkle {
@@ -447,7 +414,7 @@
       50% { transform: scale(1.15); opacity: 1; }
     }
 
-    @keyframes pulse1 {
+    @keyframes activePulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.035); }
     }
@@ -457,18 +424,15 @@
       50% { transform: translateX(-50%) translateY(-1px) scale(1.002); }
     }
 
+    @keyframes dotPulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.18); opacity: 1; }
+    }
+
     @media (max-width: 430px) {
-      .round-btn {
+      .image-btn {
         width: 54px;
         height: 54px;
-      }
-
-      .back-icon {
-        font-size: 32px;
-      }
-
-      .music-icon {
-        font-size: 28px;
       }
 
       .topbar {
@@ -483,6 +447,19 @@
 
       .map-subtitle {
         font-size: clamp(13px, 2.9vw, 17px);
+      }
+
+      .progress-panel {
+        width: 82%;
+        bottom: 0.1%;
+      }
+
+      .progress-content {
+        top: 33%;
+      }
+
+      .progress-dots {
+        margin-top: 6px;
       }
     }
   </style>
@@ -502,12 +479,14 @@
       <img class="map-image" src="map.png" alt="Карта чарівної подорожі Софійки" />
 
       <div class="topbar">
-        <a id="backBtn" class="round-btn" href="index.html" aria-label="Назад">
-          <span class="back-icon">←</span>
-        </a>
+        <a id="backBtn" class="image-btn back-btn" href="index.html" aria-label="Назад"></a>
 
-        <button id="musicToggle" class="round-btn off" type="button" aria-label="Увімкнути музику" onclick="toggleMusic(event)">
-          <span class="music-icon">♪</span>
+        <button
+          id="musicToggle"
+          class="image-btn music-btn music-off"
+          type="button"
+          aria-label="Увімкнути музику"
+          onclick="toggleMusic(event)">
         </button>
       </div>
 
@@ -522,169 +501,204 @@
       <div class="spark s4"></div>
       <div class="spark s5"></div>
 
-      <button class="location location1 next" id="loc1" type="button" aria-label="Знайомство з Софійкою" onclick="goToLocation1(event)"></button>
-      <button class="location location2 locked" id="loc2" type="button" aria-label="День хрещення" onclick="showSecondLocked(event)"></button>
-     <button class="location location3 locked" id="loc3" type="button" aria-label="Святковий замок" onclick="showThirdLocked(event)"></button>
-      <button class="location location4 locked" id="loc4" type="button" aria-label="Королівська трапеза" onclick="showLocked(event)"></button>
-      <button class="location location5 locked" id="loc5" type="button" aria-label="Підтвердження" onclick="showLocked(event)"></button>
+      <div class="location-wrap location1-wrap">
+        <button class="location location1" id="loc1" type="button" aria-label="Знайомство з Софійкою" onclick="handleLocationClick(event, 1)"></button>
+        <span class="status-icon" id="status1"></span>
+      </div>
 
-      <button class="progress-btn" id="progressPanel" type="button" aria-label="Прогрес відкритих локацій" onclick="showProgress(event)">
-        <div class="progress-overlay" id="progressText">Відкрито 0 з 5</div>
-        <div class="progress-dots">
-          <span class="progress-dot" id="dot1"></span>
-          <span class="progress-dot" id="dot2"></span>
-          <span class="progress-dot" id="dot3"></span>
-          <span class="progress-dot" id="dot4"></span>
-          <span class="progress-dot" id="dot5"></span>
+      <div class="location-wrap location2-wrap">
+        <button class="location location2" id="loc2" type="button" aria-label="Храм" onclick="handleLocationClick(event, 2)"></button>
+        <span class="status-icon" id="status2"></span>
+      </div>
+
+      <div class="location-wrap location3-wrap">
+        <button class="location location3" id="loc3" type="button" aria-label="Панорама" onclick="handleLocationClick(event, 3)"></button>
+        <span class="status-icon" id="status3"></span>
+      </div>
+
+      <div class="location-wrap location4-wrap">
+        <button class="location location4" id="loc4" type="button" aria-label="Королівська трапеза" onclick="handleLocationClick(event, 4)"></button>
+        <span class="status-icon" id="status4"></span>
+      </div>
+
+      <div class="location-wrap location5-wrap">
+        <button class="location location5" id="loc5" type="button" aria-label="Фінальне запрошення" onclick="handleLocationClick(event, 5)"></button>
+        <span class="status-icon" id="status5"></span>
+      </div>
+
+      <button class="progress-panel" id="progressPanel" type="button" aria-label="Прогрес подорожі" onclick="showProgress(event)">
+        <div class="progress-content">
+          <div class="progress-title" id="progressTitle">Подорож Софійки</div>
+          <div class="progress-text" id="progressText">Пройдено 0 з 5</div>
+          <div class="progress-dots">
+            <span class="progress-dot" id="dot1"></span>
+            <span class="progress-dot" id="dot2"></span>
+            <span class="progress-dot" id="dot3"></span>
+            <span class="progress-dot" id="dot4"></span>
+            <span class="progress-dot" id="dot5"></span>
+          </div>
         </div>
       </button>
     </section>
   </main>
 
   <script>
-   var progressText = document.getElementById("progressText");
-var dot1 = document.getElementById("dot1");
-var dot2 = document.getElementById("dot2");
-var loc1 = document.getElementById("loc1");
-var loc2 = document.getElementById("loc2");
-var loc3 = document.getElementById("loc3");
+    var bgMusic = document.getElementById("bgMusic");
+    var musicToggle = document.getElementById("musicToggle");
+    var progressTitle = document.getElementById("progressTitle");
+    var progressText = document.getElementById("progressText");
+
+    var locations = [
+      {
+        number: 1,
+        buttonId: "loc1",
+        statusId: "status1",
+        dotId: "dot1",
+        doneKey: "sofiyka_location1_done",
+        url: "location1.html",
+        lockedMessage: "Перша локація вже відкрита ❤️"
+      },
+      {
+        number: 2,
+        buttonId: "loc2",
+        statusId: "status2",
+        dotId: "dot2",
+        doneKey: "sofiyka_location2_done",
+        url: "location2.html",
+        lockedMessage: "Спочатку пройди першу локацію ❤️"
+      },
+      {
+        number: 3,
+        buttonId: "loc3",
+        statusId: "status3",
+        dotId: "dot3",
+        doneKey: "sofiyka_location3_done",
+        url: "location3.html",
+        lockedMessage: "Спочатку відкрий маршрут у 2 локації ❤️"
+      },
+      {
+        number: 4,
+        buttonId: "loc4",
+        statusId: "status4",
+        dotId: "dot4",
+        doneKey: "sofiyka_location4_done",
+        url: "location4.html",
+        lockedMessage: "Спочатку пройди 3 локацію ❤️"
+      },
+      {
+        number: 5,
+        buttonId: "loc5",
+        statusId: "status5",
+        dotId: "dot5",
+        doneKey: "sofiyka_location5_done",
+        url: "location5.html",
+        lockedMessage: "Спочатку заповни анкету у 4 локації ❤️"
+      }
+    ];
+
     if (bgMusic) {
       bgMusic.volume = 0.35;
     }
 
-    function goToLocation1(event) {
+    function isDone(number) {
+      var location = locations[number - 1];
+      return localStorage.getItem(location.doneKey) === "true";
+    }
+
+    function isUnlocked(number) {
+      if (number === 1) return true;
+      return isDone(number - 1);
+    }
+
+    function getCompletedCount() {
+      var count = 0;
+
+      for (var i = 0; i < locations.length; i++) {
+        if (isDone(locations[i].number)) {
+          count++;
+        }
+      }
+
+      return count;
+    }
+
+    function getActiveLocationNumber() {
+      for (var i = 0; i < locations.length; i++) {
+        var number = locations[i].number;
+
+        if (!isDone(number) && isUnlocked(number)) {
+          return number;
+        }
+      }
+
+      return null;
+    }
+
+    function resetClasses(element) {
+      if (!element) return;
+
+      element.classList.remove("next");
+      element.classList.remove("opened");
+      element.classList.remove("locked");
+    }
+
+    function updateMapProgress() {
+      var completedCount = getCompletedCount();
+      var activeNumber = getActiveLocationNumber();
+
+      if (completedCount >= 5) {
+        progressTitle.textContent = "✨ Подорож завершена ✨";
+        progressText.textContent = "Усі локації пройдено";
+      } else {
+        progressTitle.textContent = "Подорож Софійки";
+        progressText.textContent = "Пройдено " + completedCount + " з 5";
+      }
+
+      for (var i = 0; i < locations.length; i++) {
+        var location = locations[i];
+        var number = location.number;
+        var button = document.getElementById(location.buttonId);
+        var status = document.getElementById(location.statusId);
+        var dot = document.getElementById(location.dotId);
+
+        resetClasses(button);
+
+        if (status) {
+          status.className = "status-icon";
+        }
+
+        if (dot) {
+          dot.classList.remove("done");
+          dot.classList.remove("active");
+        }
+
+        if (isDone(number)) {
+          if (button) button.classList.add("opened");
+          if (status) status.className = "status-icon check show";
+          if (dot) dot.classList.add("done");
+        } else if (isUnlocked(number)) {
+          if (button) button.classList.add("next");
+          if (dot) dot.classList.add("active");
+        } else {
+          if (button) button.classList.add("locked");
+          if (status) status.className = "status-icon lock show";
+        }
+      }
+    }
+
+    function handleLocationClick(event, number) {
       if (event) {
         event.preventDefault();
         event.stopPropagation();
       }
 
-      window.location.href = "location1.html";
-    }
+      var location = locations[number - 1];
 
-  function updateMapProgress() {
-  var location1Done = localStorage.getItem("sofiyka_location1_done");
-  var location2Done = localStorage.getItem("sofiyka_location2_done");
-
-  if (location2Done === "true") {
-    progressText.textContent = "Відкрито 2 з 5";
-
-    if (dot1) dot1.classList.add("opened");
-    if (dot2) dot2.classList.add("opened");
-
-    if (loc1) {
-      loc1.classList.remove("next");
-      loc1.classList.add("opened");
-    }
-
-    if (loc2) {
-      loc2.classList.remove("next");
-      loc2.classList.remove("locked");
-      loc2.classList.add("opened");
-    }
-
-    if (loc3) {
-      loc3.classList.remove("locked");
-      loc3.classList.add("next");
-    }
-
-  } else if (location1Done === "true") {
-    progressText.textContent = "Відкрито 1 з 5";
-
-    if (dot1) dot1.classList.add("opened");
-    if (dot2) dot2.classList.remove("opened");
-
-    if (loc1) {
-      loc1.classList.remove("next");
-      loc1.classList.add("opened");
-    }
-
-    if (loc2) {
-      loc2.classList.remove("locked");
-      loc2.classList.add("next");
-    }
-
-    if (loc3) {
-      loc3.classList.remove("next");
-      loc3.classList.add("locked");
-    }
-
-  } else {
-    progressText.textContent = "Відкрито 0 з 5";
-
-    if (dot1) dot1.classList.remove("opened");
-    if (dot2) dot2.classList.remove("opened");
-
-    if (loc1) {
-      loc1.classList.remove("opened");
-      loc1.classList.add("next");
-    }
-
-    if (loc2) {
-      loc2.classList.remove("next");
-      loc2.classList.remove("opened");
-      loc2.classList.add("locked");
-    }
-
-    if (loc3) {
-      loc3.classList.remove("next");
-      loc3.classList.remove("opened");
-      loc3.classList.add("locked");
-    }
-  }
-}
-
-function showSecondLocked(event) {
-  if (event) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
-
-  var location1Done = localStorage.getItem("sofiyka_location1_done");
-
-  if (location1Done === "true") {
-    window.location.href = "location2.html";
-  } else {
-    alert("Спочатку пройди першу локацію ❤️");
-  }
-}
-
-function showThirdLocked(event) {
-  if (event) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
-
-  var location2Done = localStorage.getItem("sofiyka_location2_done");
-
-  if (location2Done === "true") {
-    window.location.href = "location3.html";
-  } else {
-    alert("Спочатку відкрий маршрут у 2 локації ❤️");
-  }
-}
-
-function showSecondLocked(event) {
-  if (event) {
-    event.preventDefault();
-    event.stopPropagation();
-  }
-
-  var location1Done = localStorage.getItem("sofiyka_location1_done");
-
-  if (location1Done === "true") {
-    window.location.href = "location2.html";
-  } else {
-    alert("Спочатку пройди першу локацію ❤️");
-  }
-}
-
-    function showLocked(event) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
+      if (isUnlocked(number)) {
+        window.location.href = location.url;
+      } else {
+        alert(location.lockedMessage);
       }
-
-      alert("Ця локація поки закрита. Спочатку проходь подорож по черзі ❤️");
     }
 
     function showProgress(event) {
@@ -693,7 +707,13 @@ function showSecondLocked(event) {
         event.stopPropagation();
       }
 
-      alert(progressText.textContent);
+      var completedCount = getCompletedCount();
+
+      if (completedCount >= 5) {
+        alert("✨ Подорож Софійки завершена! Запрошення знайдено ❤️");
+      } else {
+        alert("Пройдено " + completedCount + " з 5. Продовжуй чарівну подорож Софійки ✨");
+      }
     }
 
     async function toggleMusic(event) {
@@ -707,18 +727,18 @@ function showSecondLocked(event) {
       try {
         if (bgMusic.paused) {
           await bgMusic.play();
-          musicToggle.classList.remove("off");
-          musicToggle.classList.add("playing");
+          musicToggle.classList.remove("music-off");
+          musicToggle.classList.add("music-on");
           musicToggle.setAttribute("aria-label", "Вимкнути музику");
         } else {
           bgMusic.pause();
-          musicToggle.classList.remove("playing");
-          musicToggle.classList.add("off");
+          musicToggle.classList.remove("music-on");
+          musicToggle.classList.add("music-off");
           musicToggle.setAttribute("aria-label", "Увімкнути музику");
         }
       } catch (error) {
-        musicToggle.classList.remove("playing");
-        musicToggle.classList.add("off");
+        musicToggle.classList.remove("music-on");
+        musicToggle.classList.add("music-off");
         alert("Музика не запустилась. Перевір, чи mp3 файл лежить поруч із map.html.");
       }
     }

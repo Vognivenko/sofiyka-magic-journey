@@ -561,43 +561,107 @@ var loc3 = document.getElementById("loc3");
       window.location.href = "location1.html";
     }
 
-    function updateMapProgress() {
-      var location1Done = localStorage.getItem("sofiyka_location1_done");
+  function updateMapProgress() {
+  var location1Done = localStorage.getItem("sofiyka_location1_done");
+  var location2Done = localStorage.getItem("sofiyka_location2_done");
 
-      if (location1Done === "true") {
-        progressText.textContent = "Відкрито 1 з 5";
+  if (location2Done === "true") {
+    progressText.textContent = "Відкрито 2 з 5";
 
-        if (dot1) {
-          dot1.classList.add("opened");
-        }
+    if (dot1) dot1.classList.add("opened");
+    if (dot2) dot2.classList.add("opened");
 
-        if (loc1) {
-          loc1.classList.remove("next");
-          loc1.classList.add("opened");
-        }
-
-        if (loc2) {
-          loc2.classList.remove("locked");
-          loc2.classList.add("next");
-        }
-      } else {
-        progressText.textContent = "Відкрито 0 з 5";
-
-        if (dot1) {
-          dot1.classList.remove("opened");
-        }
-
-        if (loc1) {
-          loc1.classList.remove("opened");
-          loc1.classList.add("next");
-        }
-
-        if (loc2) {
-          loc2.classList.remove("next");
-          loc2.classList.add("locked");
-        }
-      }
+    if (loc1) {
+      loc1.classList.remove("next");
+      loc1.classList.add("opened");
     }
+
+    if (loc2) {
+      loc2.classList.remove("next");
+      loc2.classList.remove("locked");
+      loc2.classList.add("opened");
+    }
+
+    if (loc3) {
+      loc3.classList.remove("locked");
+      loc3.classList.add("next");
+    }
+
+  } else if (location1Done === "true") {
+    progressText.textContent = "Відкрито 1 з 5";
+
+    if (dot1) dot1.classList.add("opened");
+    if (dot2) dot2.classList.remove("opened");
+
+    if (loc1) {
+      loc1.classList.remove("next");
+      loc1.classList.add("opened");
+    }
+
+    if (loc2) {
+      loc2.classList.remove("locked");
+      loc2.classList.add("next");
+    }
+
+    if (loc3) {
+      loc3.classList.remove("next");
+      loc3.classList.add("locked");
+    }
+
+  } else {
+    progressText.textContent = "Відкрито 0 з 5";
+
+    if (dot1) dot1.classList.remove("opened");
+    if (dot2) dot2.classList.remove("opened");
+
+    if (loc1) {
+      loc1.classList.remove("opened");
+      loc1.classList.add("next");
+    }
+
+    if (loc2) {
+      loc2.classList.remove("next");
+      loc2.classList.remove("opened");
+      loc2.classList.add("locked");
+    }
+
+    if (loc3) {
+      loc3.classList.remove("next");
+      loc3.classList.remove("opened");
+      loc3.classList.add("locked");
+    }
+  }
+}
+
+function showSecondLocked(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  var location1Done = localStorage.getItem("sofiyka_location1_done");
+
+  if (location1Done === "true") {
+    window.location.href = "location2.html";
+  } else {
+    alert("Спочатку пройди першу локацію ❤️");
+  }
+}
+
+function showThirdLocked(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  var location2Done = localStorage.getItem("sofiyka_location2_done");
+
+  if (location2Done === "true") {
+    window.location.href = "location3.html";
+  } else {
+    alert("Спочатку відкрий маршрут у 2 локації ❤️");
+  }
+}
 
 function showSecondLocked(event) {
   if (event) {

@@ -324,6 +324,11 @@
       background: linear-gradient(180deg, #f0c76e, #d99c43);
     }
 
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+
     .finish-card {
       display: none;
       padding: 24px 20px;
@@ -678,6 +683,8 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz8XTV3PX5ZOXzv_SrxJl5Kt-xUaobN0CN0DqrXPEHBhKimhtgZPMYLtU4W6sIYyug_/exec";
+
     const royalForm = document.getElementById("royalForm");
     const submitBtn = document.getElementById("submitBtn");
     const finishCard = document.getElementById("finishCard");
@@ -708,7 +715,7 @@
 
       showToast._timer = setTimeout(function() {
         toast.classList.remove("show");
-      }, 2000);
+      }, 2200);
     }
 
     function updateChildrenFields() {
@@ -781,11 +788,30 @@
       localStorage.setItem("sofiyka_location4_last_answer", JSON.stringify(answer));
     }
 
+    async function sendAnswerToGoogleSheet(answer) {
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(answer)
+        });
+
+        return true;
+      } catch (error) {
+        console.warn("Не вдалося відправити відповідь у Google Таблицю", error);
+        return false;
+      }
+    }
+
     function completeLocation4() {
       localStorage.setItem("sofiyka_location4_done", "true");
 
       submitBtn.classList.add("done");
       submitBtn.textContent = "Відповідь збережено ✓";
+      submitBtn.disabled = false;
 
       finishCard.classList.add("active");
 
@@ -799,7 +825,7 @@
       }, 250);
     }
 
-    royalForm.addEventListener("submit", function(event) {
+    royalForm.addEventListener("submit", async function(event) {
       event.preventDefault();
 
       const guestName = document.getElementById("guestName").value.trim();
@@ -856,7 +882,11 @@
         comment: comment
       };
 
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Надсилаємо відповідь...";
+
       saveAnswer(answer);
+      await sendAnswerToGoogleSheet(answer);
       completeLocation4();
     });
 

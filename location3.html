@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="uk" translate="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google" content="notranslate" />
+  <title>Локація 3 — Програма свята</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      font-family: 'Cormorant Garamond', serif;
+      color: #74418a;
+      background:
+        radial-gradient(circle at 18% 8%, rgba(255,255,255,0.88), transparent 18%),
+        radial-gradient(circle at 82% 18%, rgba(255,235,160,0.55), transparent 22%),
+        linear-gradient(180deg, #fff0fa 0%, #eadcff 48%, #dff2ff 100%);
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 520px;
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 18px 14px 34px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .round-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      color: #74318d;
+      font-size: 30px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff 0%, #fff8dc 32%, #ffe28a 62%, #f0b84c 100%);
+      box-shadow:
+        0 0 0 3px rgba(255,245,200,0.9),
+        0 0 0 6px rgba(255,215,90,0.34),
+        0 0 22px rgba(255,220,95,0.78),
+        0 8px 18px rgba(90,35,115,0.24),
+        inset 0 4px 7px rgba(255,255,255,0.95),
+        inset 0 -7px 12px rgba(120,70,20,0.16);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .round-btn.playing {
+      animation: musicPulse 1.8s ease-in-out infinite;
+    }
+
+    .round-btn.off {
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff 0%, #f6e9ff 38%, #d6a9ff 72%, #8e55b5 100%);
+      color: #ffffff;
+    }
+
+    .location-pill {
+      flex: 1;
+      min-height: 46px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      color: #7d3f97;
+      font-size: 22px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.72);
+      border: 2px solid rgba(255,230,145,0.72);
+      box-shadow:
+        0 8px 18px rgba(90,35,115,0.12),
+        inset 0 2px 6px rgba(255,255,255,0.86);
+      text-align: center;
+    }
+
+    .card {
+      border-radius: 30px;
+      padding: 22px 18px;
+      margin-bottom: 18px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,244,253,0.74));
+      border: 2px solid rgba(255,235,165,0.76);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.54),
+        0 14px 30px rgba(86,38,112,0.16),
+        inset 0 3px 8px rgba(255,255,255,0.86);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #8a4ca5;
+      background: rgba(255,246,214,0.86);
+      box-shadow:
+        0 0 0 1px rgba(255,222,120,0.82),
+        0 0 18px rgba(255,226,130,0.45);
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      line-height: 0.95;
+      color: #7d3f97;
+      margin-bottom: 14px;
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.92),
+        0 5px 10px rgba(80,30,100,0.18);
+    }
+
+    .hero p {
+      font-size: 21px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: #70407f;
+    }
+
+    .task-title {
+      font-size: 25px;
+      line-height: 1.15;
+      font-weight: 700;
+      color: #7d3f97;
+      margin-bottom: 10px;
+    }
+
+    .counter {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 150px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(255, 245, 252, 0.94);
+      font-size: 21px;
+      font-weight: 700;
+      color: #9a5ab2;
+      box-shadow:
+        inset 0 1px 5px rgba(255,255,255,0.85),
+        0 0 0 1px rgba(255, 230, 150, 0.6);
+    }
+
+    .counter.ready {
+      color: #7d3f97;
+      background: rgba(255, 244, 198, 0.82);
+      box-shadow:
+        0 0 0 1px rgba(255,225,120,0.8),
+        0 0 16px rgba(255,225,120,0.65);
+    }
+
+    .program-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .program-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 58px 1fr 42px;
+      gap: 12px;
+      align-items: center;
+      text-align: left;
+      border-radius: 26px;
+      padding: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.84), rgba(255,244,253,0.68));
+      border: 2px dashed rgba(150, 100, 180, 0.36);
+      box-shadow:
+        0 8px 18px rgba(86,38,112,0.11),
+        inset 0 3px 8px rgba(255,255,255,0.75);
+      cursor: pointer;
+      transition: 0.18s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .program-card.selected {
+      border-style: solid;
+      border-color: rgba(238, 190, 90, 0.95);
+      background:
+        radial-gradient(circle at 90% 10%, rgba(255, 231, 150, 0.36), transparent 38%),
+        linear-gradient(180deg, rgba(255,250,232,0.92), rgba(255,239,250,0.86));
+      box-shadow:
+        0 0 0 2px rgba(255,238,160,0.7),
+        0 12px 24px rgba(120,70,150,0.16),
+        inset 0 3px 8px rgba(255,255,255,0.82);
+      transform: translateY(-1px);
+    }
+
+    .program-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      background:
+        radial-gradient(circle at 35% 25%, #ffffff 0%, #fff2c8 45%, #d9a7ff 100%);
+      box-shadow:
+        0 0 0 2px rgba(255,224,120,0.78),
+        0 0 12px rgba(255,224,120,0.5),
+        inset 0 3px 6px rgba(255,255,255,0.9);
+    }
+
+    .program-time {
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 700;
+      color: #9a5ab2;
+      margin-bottom: 5px;
+    }
+
+    .program-name {
+      font-size: 25px;
+      line-height: 1.05;
+      font-weight: 700;
+      color: #7d3f97;
+    }
+
+    .program-desc {
+      margin-top: 5px;
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 600;
+      color: #856096;
+    }
+
+    .check {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff 0%, #ffeef8 38%, #f5b4d7 72%, #c765a4 100%);
+      color: #76418f;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow:
+        0 0 0 2px rgba(255,255,255,0.75),
+        0 7px 15px rgba(90,35,115,0.18),
+        inset 0 3px 6px rgba(255,255,255,0.88);
+    }
+
+    .program-card.selected .check {
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff 0%, #ffe4f3 28%, #ff7eb7 64%, #d93b7c 100%);
+      color: #ffffff;
+      animation: heartPulse 1.4s ease-in-out infinite;
+    }
+
+    .success-card {
+      display: none;
+    }
+
+    .success-card.active {
+      display: block;
+      animation: showFinish .35s ease both;
+    }
+
+    .success-title {
+      font-size: 32px;
+      line-height: 1;
+      font-weight: 700;
+      color: #7d3f97;
+      margin-bottom: 10px;
+    }
+
+    .success-text {
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: #70407f;
+      margin-bottom: 16px;
+    }
+
+    .finish-btn {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 23px;
+      font-weight: 700;
+      color: #7d3f97;
+      background:
+        linear-gradient(180deg, #fff7da 0%, #ffd86f 48%, #f3b84d 100%);
+      box-shadow:
+        0 0 0 2px rgba(255,235,160,0.92),
+        0 9px 18px rgba(90,35,115,0.18),
+        inset 0 2px 5px rgba(255,255,255,0.85);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .small-note {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #9869aa;
+      font-weight: 600;
+    }
+
+    audio {
+      display: none;
+    }
+
+    @keyframes musicPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    @keyframes showFinish {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body class="notranslate">
+
+  <main class="page">
+
+    <div class="topbar">
+      <button class="round-btn" type="button" id="backBtn" aria-label="Назад">←</button>
+
+      <div class="location-pill">Локація 3</div>
+
+      <button class="round-btn off" type="button" id="musicToggle" aria-label="Увімкнути музику">♪</button>
+    </div>
+
+    <section class="card hero">
+      <div class="hero-badge">Святковий маршрут</div>
+      <h1>Програма<br>свята</h1>
+      <p>
+        Це третя зупинка подорожі. Тут ти можеш побачити, як пройде особливий день Софійки.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="task-title">Натисни на всі етапи програми, щоб відкрити наступну локацію ✨</div>
+      <div class="counter" id="counter">Відкрито 0 з 4</div>
+    </section>
+
+    <section class="program-list">
+
+      <div class="program-card" data-id="program-1">
+        <div class="program-icon">⛪</div>
+        <div>
+          <div class="program-time">11:00</div>
+          <div class="program-name">Хрещення Софійки</div>
+          <div class="program-desc">Світлий і важливий момент у храмі.</div>
+        </div>
+        <button class="check" type="button">♡</button>
+      </div>
+
+      <div class="program-card" data-id="program-2">
+        <div class="program-icon">📸</div>
+        <div>
+          <div class="program-time">Після хрещення</div>
+          <div class="program-name">Пам’ятні фото</div>
+          <div class="program-desc">Теплі кадри з рідними та хрещеними.</div>
+        </div>
+        <button class="check" type="button">♡</button>
+      </div>
+
+      <div class="program-card" data-id="program-3">
+        <div class="program-icon">🎉</div>
+        <div>
+          <div class="program-time">Далі</div>
+          <div class="program-name">Святкова зустріч</div>
+          <div class="program-desc">Час для привітань, усмішок і родинного тепла.</div>
+        </div>
+        <button class="check" type="button">♡</button>
+      </div>
+
+      <div class="program-card" data-id="program-4">
+        <div class="program-icon">🎂</div>
+        <div>
+          <div class="program-time">Фінал</div>
+          <div class="program-name">Солодкий момент</div>
+          <div class="program-desc">Святковий торт і наймиліші спогади цього дня.</div>
+        </div>
+        <button class="check" type="button">♡</button>
+      </div>
+
+    </section>
+
+    <section class="card success-card" id="successCard">
+      <div class="success-title">Локацію 3 пройдено!</div>
+      <div class="success-text">
+        Ти відкрив програму свята. Тепер наступна частина подорожі стала доступною.
+      </div>
+
+      <button class="finish-btn" type="button" id="finishBtn">
+        Повернутися на карту
+      </button>
+
+      <div class="small-note">Після цього відкриється 4 локація.</div>
+    </section>
+
+  </main>
+
+  <audio
+    id="bgMusic"
+    src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3"
+    loop
+    preload="auto">
+  </audio>
+
+  <script>
+    var maxSelected = 4;
+    var selected = new Set();
+
+    var counter = document.getElementById("counter");
+    var successCard = document.getElementById("successCard");
+    var finishBtn = document.getElementById("finishBtn");
+    var backBtn = document.getElementById("backBtn");
+    var musicToggle = document.getElementById("musicToggle");
+    var bgMusic = document.getElementById("bgMusic");
+
+    if (bgMusic) {
+      bgMusic.volume = 0.35;
+    }
+
+    function updateCounter() {
+      counter.textContent = "Відкрито " + selected.size + " з " + maxSelected;
+
+      if (selected.size === maxSelected) {
+        counter.classList.add("ready");
+        successCard.classList.add("active");
+
+        setTimeout(function() {
+          successCard.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+        }, 250);
+      } else {
+        counter.classList.remove("ready");
+        successCard.classList.remove("active");
+      }
+    }
+
+    function toggleProgram(card) {
+      if (!card) return;
+
+      var id = card.getAttribute("data-id");
+      var btn = card.querySelector(".check");
+
+      if (!id) return;
+
+      if (selected.has(id)) {
+        selected.delete(id);
+        card.classList.remove("selected");
+
+        if (btn) {
+          btn.textContent = "♡";
+        }
+
+        updateCounter();
+        return;
+      }
+
+      selected.add(id);
+      card.classList.add("selected");
+
+      if (btn) {
+        btn.textContent = "❤";
+      }
+
+      updateCounter();
+    }
+
+    document.addEventListener("click", function(event) {
+      var card = event.target.closest(".program-card");
+
+      if (!card) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      toggleProgram(card);
+    });
+
+    finishBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      localStorage.setItem("sofiyka_location3_done", "true");
+      window.location.href = "map.html";
+    });
+
+    backBtn.addEventListener("click", function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      window.location.href = "map.html";
+    });
+
+    musicToggle.addEventListener("click", async function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!bgMusic) return;
+
+      try {
+        if (bgMusic.paused) {
+          await bgMusic.play();
+          musicToggle.classList.remove("off");
+          musicToggle.classList.add("playing");
+          musicToggle.setAttribute("aria-label", "Вимкнути музику");
+        } else {
+          bgMusic.pause();
+          musicToggle.classList.remove("playing");
+          musicToggle.classList.add("off");
+          musicToggle.setAttribute("aria-label", "Увімкнути музику");
+        }
+      } catch (error) {
+        musicToggle.classList.remove("playing");
+        musicToggle.classList.add("off");
+        alert("Музика не запустилась. Перевір mp3 файл 🎵");
+      }
+    });
+
+    if (localStorage.getItem("sofiyka_location3_done") === "true") {
+      document.querySelectorAll(".program-card").forEach(function(card) {
+        selected.add(card.getAttribute("data-id"));
+        card.classList.add("selected");
+
+        var btn = card.querySelector(".check");
+        if (btn) {
+          btn.textContent = "❤";
+        }
+      });
+    }
+
+    updateCounter();
+  </script>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
-  <title>Локація 5 — Запрошення</title>
+  <title>Локація 5 — Фінальне запрошення</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,24 +133,24 @@
         linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,246,253,0.88));
     }
 
-    .hero-card::before {
-      content: "✦";
-      position: absolute;
-      left: 22px;
-      top: 20px;
-      font-size: 34px;
-      color: rgba(238, 204, 95, 0.85);
-      text-shadow: 0 0 14px rgba(255, 232, 130, 0.8);
-    }
-
+    .hero-card::before,
     .hero-card::after {
       content: "✦";
       position: absolute;
+      color: rgba(238, 204, 95, 0.82);
+      text-shadow: 0 0 14px rgba(255, 232, 130, 0.8);
+    }
+
+    .hero-card::before {
+      left: 22px;
+      top: 20px;
+      font-size: 34px;
+    }
+
+    .hero-card::after {
       right: 24px;
       bottom: 22px;
       font-size: 30px;
-      color: rgba(238, 204, 95, 0.75);
-      text-shadow: 0 0 14px rgba(255, 232, 130, 0.8);
     }
 
     .hero-card h1 {
@@ -174,53 +174,12 @@
     }
 
     .open-card {
-      padding: 26px 20px;
-      text-align: center;
-    }
-
-    .invitation-icon {
-      width: 170px;
-      height: 130px;
-      margin: 0 auto 16px;
       position: relative;
-      border-radius: 26px;
+      padding: 30px 20px 34px;
+      text-align: center;
       background:
-        linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,235,248,0.90));
-      border: 2px solid rgba(238,219,127,0.9);
-      box-shadow:
-        0 12px 28px rgba(173,117,195,0.18),
-        inset 0 2px 12px rgba(255,255,255,0.86);
-      overflow: hidden;
-    }
-
-    .invitation-icon::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(32deg, transparent 49%, rgba(238,219,127,0.70) 50%, transparent 51%),
-        linear-gradient(148deg, transparent 49%, rgba(238,219,127,0.70) 50%, transparent 51%);
-      opacity: 0.8;
-    }
-
-    .invitation-icon::after {
-      content: "❤";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -42%);
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 28%, #fff, #ffd7ea 42%, #d84d86 88%);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 27px;
-      box-shadow:
-        0 0 0 4px rgba(255,255,255,0.55),
-        0 6px 16px rgba(216,77,134,0.24);
+        radial-gradient(circle at 50% 10%, rgba(255,242,190,0.45), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,246,253,0.88));
     }
 
     .open-title {
@@ -228,43 +187,224 @@
       font-size: clamp(34px, 4.2vw, 54px);
       line-height: 1.04;
       font-weight: 700;
+      color: var(--violet);
     }
 
     .open-text {
       max-width: 820px;
-      margin: 0 auto 20px;
+      margin: 0 auto 18px;
       font-size: clamp(21px, 2.5vw, 32px);
       line-height: 1.2;
       font-weight: 600;
       color: #6f438f;
     }
 
-    .main-btn {
-      width: 100%;
-      max-width: 560px;
-      min-height: 66px;
+    .envelope-zone {
+      position: relative;
+      width: min(92vw, 520px);
+      min-height: 300px;
+      margin: 18px auto 8px;
       border: none;
-      border-radius: 999px;
-      padding: 14px 24px;
-      background: linear-gradient(180deg, #c78be5, #a96bd1);
-      color: #ffffff;
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(26px, 3vw, 36px);
-      font-weight: 700;
+      background: transparent;
       cursor: pointer;
-      box-shadow:
-        0 10px 22px rgba(120,70,150,0.22),
-        inset 0 2px 10px rgba(255,255,255,0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       -webkit-tap-highlight-color: transparent;
     }
 
-    .secondary-btn {
+    .envelope-glow {
+      position: absolute;
+      inset: 18px;
+      border-radius: 40px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 232, 130, 0.38), transparent 58%),
+        radial-gradient(circle at 50% 48%, rgba(206, 158, 242, 0.20), transparent 64%);
+      filter: blur(2px);
+      animation: glowPulse 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .envelope-img {
+      position: relative;
+      z-index: 2;
+      display: block;
+      max-width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 18px 28px rgba(116, 61, 140, 0.20))
+        drop-shadow(0 0 18px rgba(255, 225, 120, 0.42));
+      animation: envelopeFloat 2.8s ease-in-out infinite;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    .envelope-placeholder {
+      position: relative;
+      z-index: 1;
+      width: 300px;
+      height: 210px;
+      border-radius: 34px;
+      border: 2px solid rgba(238, 219, 127, 0.92);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.96), rgba(255,235,248,0.92));
+      box-shadow:
+        0 18px 32px rgba(173,117,195,0.20),
+        0 0 24px rgba(255,225,120,0.36),
+        inset 0 2px 12px rgba(255,255,255,0.86);
+      overflow: hidden;
+      display: none;
+      animation: envelopeFloat 2.8s ease-in-out infinite;
+    }
+
+    .envelope-placeholder::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(32deg, transparent 49%, rgba(238,219,127,0.70) 50%, transparent 51%),
+        linear-gradient(148deg, transparent 49%, rgba(238,219,127,0.70) 50%, transparent 51%);
+    }
+
+    .envelope-placeholder::after {
+      content: "❤";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -42%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 28%, #fff, #ffd7ea 42%, #d84d86 88%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      box-shadow:
+        0 0 0 4px rgba(255,255,255,0.55),
+        0 6px 16px rgba(216,77,134,0.24);
+    }
+
+    .tap-hint {
+      margin-top: 4px;
+      font-size: clamp(22px, 2.6vw, 34px);
+      line-height: 1.08;
+      font-weight: 700;
+      color: var(--violet);
+      text-shadow: 0 2px 0 rgba(255,255,255,0.82);
+      animation: hintPulse 1.8s ease-in-out infinite;
+    }
+
+    .small-hint {
+      max-width: 760px;
+      margin: 8px auto 0;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.15;
+      font-weight: 600;
+      color: #8b6e9c;
+    }
+
+    .video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .video-overlay.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: overlayIn 0.25s ease both;
+    }
+
+    .fullscreen-video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .close-video {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 10001;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.72);
+      background: rgba(0,0,0,0.35);
+      color: #ffffff;
+      font-size: 34px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .video-message {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      z-index: 10000;
+      width: calc(100% - 32px);
+      max-width: 620px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(126, 69, 158, 0.78);
+      color: #ffffff;
+      text-align: center;
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 700;
+      display: none;
+    }
+
+    .video-message.active {
+      display: block;
+    }
+
+    .opened-note {
+      display: none;
+      padding: 22px 20px;
+      text-align: center;
+    }
+
+    .opened-note.active {
+      display: block;
+      animation: showBlock 0.35s ease both;
+    }
+
+    .opened-note h2 {
+      margin: 0 0 10px;
+      font-size: clamp(32px, 4vw, 50px);
+      line-height: 1.04;
+      font-weight: 700;
+    }
+
+    .opened-note p {
+      max-width: 760px;
+      margin: 0 auto 16px;
+      font-size: clamp(21px, 2.4vw, 30px);
+      line-height: 1.18;
+      font-weight: 600;
+      color: #6f438f;
+    }
+
+    .map-btn {
       width: 100%;
-      max-width: 560px;
+      max-width: 520px;
       min-height: 58px;
       border-radius: 999px;
       padding: 12px 22px;
-      margin-top: 12px;
       border: 2px solid rgba(238,219,127,0.78);
       background: rgba(255,255,255,0.80);
       color: var(--violet);
@@ -273,185 +413,6 @@
       font-weight: 700;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
-    }
-
-    .video-card {
-      display: none;
-      padding: 16px;
-      text-align: center;
-    }
-
-    .video-card.active {
-      display: block;
-      animation: showBlock 0.35s ease both;
-    }
-
-    .video-title {
-      margin: 0 0 14px;
-      font-size: clamp(30px, 3.8vw, 48px);
-      line-height: 1.05;
-      font-weight: 700;
-    }
-
-    .video-frame {
-      width: 100%;
-      max-width: 520px;
-      margin: 0 auto;
-      border-radius: 32px;
-      overflow: hidden;
-      border: 2px solid rgba(238,219,127,0.9);
-      box-shadow:
-        0 14px 32px rgba(120,70,150,0.20),
-        0 0 26px rgba(255,225,120,0.30);
-      background: rgba(255,255,255,0.70);
-    }
-
-    .video-frame video {
-      display: block;
-      width: 100%;
-      height: auto;
-      background: #000;
-    }
-
-    .letter-card {
-      display: none;
-      position: relative;
-      padding: 28px 22px;
-      text-align: center;
-      background:
-        radial-gradient(circle at 50% 10%, rgba(255,242,190,0.52), transparent 42%),
-        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,246,253,0.91));
-    }
-
-    .letter-card.active {
-      display: block;
-      animation: showLetter 0.55s ease both;
-    }
-
-    .letter-card::before {
-      content: "";
-      position: absolute;
-      inset: 14px;
-      border-radius: 26px;
-      border: 1.6px solid rgba(238,219,127,0.72);
-      pointer-events: none;
-      box-shadow:
-        inset 0 0 22px rgba(255,255,255,0.70),
-        0 0 14px rgba(255,225,120,0.30);
-    }
-
-    .letter-badge {
-      position: relative;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 8px 24px;
-      margin-bottom: 16px;
-      border-radius: 999px;
-      border: 2px solid rgba(238,219,127,0.9);
-      background: rgba(255,255,255,0.75);
-      font-size: clamp(22px, 2.4vw, 30px);
-      font-weight: 700;
-      color: var(--violet);
-    }
-
-    .letter-title {
-      position: relative;
-      z-index: 1;
-      margin: 0 0 14px;
-      font-size: clamp(42px, 5.5vw, 68px);
-      line-height: 0.95;
-      font-weight: 700;
-      color: var(--violet);
-      text-shadow:
-        0 2px 0 rgba(255,255,255,0.86),
-        0 6px 18px rgba(126,69,158,0.12);
-    }
-
-    .letter-text {
-      position: relative;
-      z-index: 1;
-      max-width: 830px;
-      margin: 0 auto;
-      font-size: clamp(22px, 2.75vw, 34px);
-      line-height: 1.26;
-      font-weight: 600;
-      color: #6f438f;
-    }
-
-    .letter-text strong {
-      color: var(--violet);
-      font-weight: 700;
-    }
-
-    .details {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin: 22px auto 8px;
-      max-width: 850px;
-    }
-
-    .detail-item {
-      border-radius: 24px;
-      border: 1.5px solid rgba(238,219,127,0.72);
-      background: rgba(255,255,255,0.70);
-      padding: 14px 10px;
-      box-shadow: inset 0 2px 8px rgba(255,255,255,0.65);
-    }
-
-    .detail-label {
-      font-size: 19px;
-      font-weight: 700;
-      color: #9b6bb7;
-      margin-bottom: 4px;
-    }
-
-    .detail-value {
-      font-size: 24px;
-      line-height: 1.08;
-      font-weight: 700;
-      color: var(--violet);
-    }
-
-    .final-actions {
-      display: none;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .final-actions.active {
-      display: grid;
-      animation: showBlock 0.35s ease both;
-    }
-
-    .action-btn {
-      min-height: 58px;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 18px;
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(21px, 2.5vw, 30px);
-      font-weight: 700;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .action-btn.primary {
-      background: linear-gradient(180deg, #c78be5, #a96bd1);
-      color: #ffffff;
-      box-shadow: 0 10px 20px rgba(120,70,150,0.20);
-    }
-
-    .action-btn.secondary {
-      background: rgba(255,255,255,0.80);
-      color: var(--violet);
-      border: 2px solid rgba(238,219,127,0.78);
     }
 
     .toast {
@@ -469,7 +430,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.22s ease, transform 0.22s ease;
-      z-index: 50;
+      z-index: 10002;
       text-align: center;
       max-width: calc(100% - 32px);
     }
@@ -483,6 +444,46 @@
       display: none;
     }
 
+    @keyframes envelopeFloat {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-8px) scale(1.015);
+      }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        opacity: 0.62;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes hintPulse {
+      0%, 100% {
+        opacity: 0.82;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.025);
+      }
+    }
+
+    @keyframes overlayIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
     @keyframes showBlock {
       from {
         opacity: 0;
@@ -491,17 +492,6 @@
       to {
         opacity: 1;
         transform: translateY(0);
-      }
-    }
-
-    @keyframes showLetter {
-      from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
       }
     }
 
@@ -527,44 +517,52 @@
         font-size: 24px;
       }
 
-      .hero-card {
-        padding: 24px 16px;
-      }
-
+      .hero-card,
       .open-card,
-      .letter-card {
+      .opened-note {
         padding: 24px 16px;
       }
 
-      .details {
-        grid-template-columns: 1fr;
-        gap: 10px;
+      .envelope-zone {
+        min-height: 260px;
       }
 
-      .final-actions {
-        grid-template-columns: 1fr;
+      .envelope-img {
+        max-height: 260px;
       }
 
-      .video-frame {
-        border-radius: 26px;
+      .envelope-placeholder {
+        width: 270px;
+        height: 190px;
+      }
+
+      .fullscreen-video {
+        object-fit: cover;
       }
     }
 
     @media (max-width: 420px) {
-      .hero-card h1,
-      .letter-title {
+      .hero-card h1 {
         font-size: 42px;
       }
 
       .hero-card p,
       .open-text,
-      .letter-text {
+      .opened-note p {
         font-size: 21px;
       }
 
-      .invitation-icon {
-        width: 150px;
-        height: 116px;
+      .envelope-zone {
+        min-height: 230px;
+      }
+
+      .envelope-img {
+        max-height: 230px;
+      }
+
+      .envelope-placeholder {
+        width: 240px;
+        height: 170px;
       }
     }
   </style>
@@ -594,87 +592,59 @@
     </section>
 
     <section class="card open-card" id="openCard">
-      <div class="invitation-icon"></div>
-
       <h2 class="open-title">Отримати запрошення</h2>
 
       <p class="open-text">
-        Натисни кнопку нижче, щоб запустити чарівне відкриття листа.
-        Після анімації з’явиться фінальне запрошення.
+        Перед тобою чарівний конвертик. Усередині нього захований головний лист
+        із запрошенням на свято Софійки.
       </p>
 
-      <button class="main-btn" type="button" id="openInvitationBtn">
-        Відкрити лист
+      <button class="envelope-zone" type="button" id="envelopeBtn" aria-label="Відкрити запрошення">
+        <span class="envelope-glow"></span>
+
+        <img
+          class="envelope-img"
+          id="envelopeImage"
+          src="envelope_invite.png"
+          alt="Чарівний конверт"
+          onerror="this.style.display='none'; document.getElementById('envelopePlaceholder').style.display='block';">
+
+        <span class="envelope-placeholder" id="envelopePlaceholder"></span>
       </button>
 
-      <button class="secondary-btn" type="button" id="showLetterBtn">
-        Показати запрошення без відео
-      </button>
-    </section>
+      <div class="tap-hint">Натисни на конвертик ✨</div>
 
-    <section class="card video-card" id="videoCard">
-      <h2 class="video-title">Чарівний лист відкривається ✨</h2>
-
-      <div class="video-frame">
-        <video id="invitationVideo" playsinline preload="metadata">
-          <source src="calendar.mp4" type="video/mp4">
-          <source src="invitation_video.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <button class="secondary-btn" type="button" id="skipVideoBtn">
-        Пропустити відео і відкрити лист
-      </button>
-    </section>
-
-    <section class="card letter-card" id="letterCard">
-      <div class="letter-badge">Запрошення</div>
-
-      <h2 class="letter-title">Запрошуємо<br>на свято Софійки</h2>
-
-      <p class="letter-text">
-        З великою радістю запрошуємо вас розділити з нами особливий день —
-        <strong>День народження та хрещення нашої Софійки.</strong>
-        <br><br>
-        Нехай цей день буде наповнений світлом, теплом, дитячою усмішкою,
-        родинною любов’ю та найніжнішими спогадами.
-      </p>
-
-      <div class="details">
-        <div class="detail-item">
-          <div class="detail-label">Дата</div>
-          <div class="detail-value">27 червня<br>2026</div>
-        </div>
-
-        <div class="detail-item">
-          <div class="detail-label">Хрещення</div>
-          <div class="detail-value">11:00<br>Храм</div>
-        </div>
-
-        <div class="detail-item">
-          <div class="detail-label">Святкування</div>
-          <div class="detail-value">13:00<br>Панорама</div>
-        </div>
-      </div>
-
-      <p class="letter-text">
-        <br>
-        З любов’ю та теплом,<br>
-        <strong>родина Софійки</strong>
+      <p class="small-hint">
+        Після натискання відкриється відео на весь екран:
+        печатка розпадеться, а з конверта з’явиться папірус із запрошенням.
       </p>
     </section>
 
-    <section class="final-actions" id="finalActions">
-      <button class="action-btn primary" type="button" id="replayBtn">
-        Переглянути ще раз
-      </button>
+    <section class="card opened-note" id="openedNote">
+      <h2>Запрошення відкрито!</h2>
+      <p>
+        Фінальний лист переглянуто. Чарівну подорож Софійки завершено.
+      </p>
 
-      <button class="action-btn secondary" type="button" id="goMapBtn">
+      <button class="map-btn" type="button" id="goMapBtn">
         Повернутися на карту
       </button>
     </section>
 
   </main>
+
+  <div class="video-overlay" id="videoOverlay">
+    <button class="close-video" type="button" id="closeVideoBtn" aria-label="Закрити відео">×</button>
+
+    <video id="inviteVideo" class="fullscreen-video" preload="metadata" controls>
+      <source src="invitation_video.mp4" type="video/mp4">
+      <source src="calendar.mp4" type="video/mp4">
+    </video>
+
+    <div class="video-message" id="videoMessage">
+      Відео ще не завантажено. Пізніше тут буде відкриття листа ✨
+    </div>
+  </div>
 
   <div class="toast" id="toast"></div>
 
@@ -683,17 +653,12 @@
     const musicBtn = document.getElementById("musicBtn");
     const bgMusic = document.getElementById("bgMusic");
 
-    const openInvitationBtn = document.getElementById("openInvitationBtn");
-    const showLetterBtn = document.getElementById("showLetterBtn");
-    const skipVideoBtn = document.getElementById("skipVideoBtn");
-
-    const openCard = document.getElementById("openCard");
-    const videoCard = document.getElementById("videoCard");
-    const letterCard = document.getElementById("letterCard");
-    const finalActions = document.getElementById("finalActions");
-    const invitationVideo = document.getElementById("invitationVideo");
-
-    const replayBtn = document.getElementById("replayBtn");
+    const envelopeBtn = document.getElementById("envelopeBtn");
+    const videoOverlay = document.getElementById("videoOverlay");
+    const inviteVideo = document.getElementById("inviteVideo");
+    const closeVideoBtn = document.getElementById("closeVideoBtn");
+    const videoMessage = document.getElementById("videoMessage");
+    const openedNote = document.getElementById("openedNote");
     const goMapBtn = document.getElementById("goMapBtn");
     const toast = document.getElementById("toast");
 
@@ -716,81 +681,73 @@
       localStorage.setItem("sofiyka_location5_done", "true");
     }
 
-    function showLetter() {
+    function showOpenedNote() {
       completeLocation5();
-
-      if (invitationVideo) {
-        invitationVideo.pause();
-      }
-
-      letterCard.classList.add("active");
-      finalActions.classList.add("active");
+      openedNote.classList.add("active");
 
       setTimeout(function() {
-        letterCard.scrollIntoView({
+        openedNote.scrollIntoView({
           behavior: "smooth",
           block: "center"
         });
       }, 250);
-
-      showToast("Фінальне запрошення відкрито ✨");
     }
 
-    function startInvitationVideo() {
-      videoCard.classList.add("active");
+    function openVideoFullscreen() {
+      videoOverlay.classList.add("active");
+      videoMessage.classList.remove("active");
 
-      setTimeout(function() {
-        videoCard.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-      }, 120);
-
-      if (!invitationVideo) {
-        showLetter();
+      if (!inviteVideo) {
+        videoMessage.classList.add("active");
         return;
       }
 
-      invitationVideo.currentTime = 0;
+      inviteVideo.currentTime = 0;
 
-      invitationVideo.play().then(function() {
-        showToast("Відкриваємо чарівний лист ✨");
-      }).catch(function() {
-        showToast("Відео не запустилось. Показуємо лист ✨");
+      const playPromise = inviteVideo.play();
 
-        setTimeout(function() {
-          showLetter();
-        }, 800);
-      });
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.then(function() {
+          if (inviteVideo.requestFullscreen) {
+            inviteVideo.requestFullscreen().catch(function() {});
+          } else if (inviteVideo.webkitEnterFullscreen) {
+            inviteVideo.webkitEnterFullscreen();
+          }
+        }).catch(function() {
+          videoMessage.classList.add("active");
+          showToast("Відео ще не завантажено ✨");
+        });
+      }
     }
 
-    openInvitationBtn.addEventListener("click", function() {
-      startInvitationVideo();
+    function closeVideo() {
+      if (inviteVideo) {
+        inviteVideo.pause();
+      }
+
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(function() {});
+      }
+
+      videoOverlay.classList.remove("active");
+      showOpenedNote();
+    }
+
+    envelopeBtn.addEventListener("click", function() {
+      openVideoFullscreen();
     });
 
-    showLetterBtn.addEventListener("click", function() {
-      showLetter();
+    closeVideoBtn.addEventListener("click", function() {
+      closeVideo();
     });
 
-    skipVideoBtn.addEventListener("click", function() {
-      showLetter();
+    inviteVideo.addEventListener("ended", function() {
+      closeVideo();
     });
 
-    invitationVideo.addEventListener("ended", function() {
-      showLetter();
-    });
-
-    invitationVideo.addEventListener("error", function() {
-      showToast("Відеофайл не знайдено. Перевір назву calendar.mp4");
-    });
-
-    replayBtn.addEventListener("click", function() {
-      letterCard.classList.remove("active");
-      finalActions.classList.remove("active");
-
-      setTimeout(function() {
-        startInvitationVideo();
-      }, 150);
+    inviteVideo.addEventListener("error", function() {
+      videoMessage.classList.add("active");
+      showToast("Відеофайл ще не знайдено");
     });
 
     goMapBtn.addEventListener("click", function() {
@@ -812,6 +769,8 @@
           localStorage.setItem("sofiyka_music", "on");
         } else {
           bgMusic.pause();
+          musicBtn.classList.remove("playing");
+          localStorage.setItem("off");
           musicBtn.classList.remove("playing");
           localStorage.setItem("sofiyka_music", "off");
         }
@@ -836,8 +795,7 @@
       const done = localStorage.getItem("sofiyka_location5_done") === "true";
 
       if (done) {
-        letterCard.classList.add("active");
-        finalActions.classList.add("active");
+        openedNote.classList.add("active");
       }
     }
 

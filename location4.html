@@ -152,159 +152,176 @@
       color: #6f438f;
     }
 
-    .info-card {
-      padding: 22px 20px;
+    .form-card {
+      padding: 24px 20px;
+    }
+
+    .section-title {
+      margin: 0 0 14px;
       text-align: center;
-    }
-
-    .info-title {
-      margin: 0 0 12px;
-      font-size: clamp(32px, 4vw, 48px);
-      line-height: 1.05;
-      font-weight: 700;
-    }
-
-    .info-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 16px;
-    }
-
-    .info-item {
-      border-radius: 24px;
-      border: 1.5px solid rgba(238,219,127,0.72);
-      background: rgba(255,255,255,0.72);
-      padding: 14px 12px;
-      box-shadow: inset 0 2px 8px rgba(255,255,255,0.65);
-    }
-
-    .info-label {
-      font-size: 20px;
-      font-weight: 700;
-      color: #9b6bb7;
-      margin-bottom: 4px;
-    }
-
-    .info-value {
-      font-size: 25px;
+      font-size: clamp(32px, 4vw, 50px);
+      line-height: 1.04;
       font-weight: 700;
       color: var(--violet);
-      line-height: 1.1;
     }
 
-    .task-card {
-      padding: 22px 20px;
+    .section-text {
+      max-width: 820px;
+      margin: 0 auto 18px;
       text-align: center;
+      font-size: clamp(20px, 2.3vw, 30px);
+      line-height: 1.2;
+      font-weight: 600;
+      color: #6f438f;
     }
 
-    .task-title {
-      margin: 0 0 10px;
-      font-size: clamp(30px, 3.8vw, 46px);
-      line-height: 1.08;
-      font-weight: 700;
-    }
-
-    .counter-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 190px;
-      min-height: 52px;
-      padding: 8px 22px;
-      border-radius: 999px;
-      border: 1.8px solid rgba(255, 240, 243, 0.95);
-      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(250,241,249,0.96));
-      box-shadow: inset 0 2px 8px rgba(255,255,255,0.75);
-      font-size: 25px;
-      font-weight: 700;
-      color: var(--violet-soft);
-      margin-top: 8px;
-    }
-
-    .treats-grid {
+    .form-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 14px;
-      margin-bottom: 18px;
     }
 
-    .treat-card {
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label,
+    .field-label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 24px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: var(--violet);
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 2px solid rgba(238, 219, 127, 0.75);
+      border-radius: 22px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.82);
+      color: #674079;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 23px;
+      font-weight: 600;
+      outline: none;
+      box-shadow:
+        inset 0 2px 8px rgba(255,255,255,0.75),
+        0 6px 16px rgba(173,117,195,0.08);
+    }
+
+    textarea {
+      min-height: 112px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(199, 139, 229, 0.9);
+      box-shadow:
+        0 0 0 3px rgba(199, 139, 229, 0.18),
+        inset 0 2px 8px rgba(255,255,255,0.75);
+    }
+
+    .radio-row,
+    .checkbox-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .radio-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .checkbox-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .option {
       position: relative;
-      border-radius: 28px;
-      border: 2px solid rgba(238, 219, 127, 0.78);
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 244, 200, 0.42), transparent 44%),
-        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,248,253,0.84));
-      box-shadow: 0 8px 22px rgba(173, 117, 195, 0.14);
-      padding: 20px 58px 20px 18px;
-      min-height: 142px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 58px;
+      border: 2px solid rgba(238, 219, 127, 0.72);
+      border-radius: 22px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.78);
+      box-shadow: 0 6px 16px rgba(173,117,195,0.08);
       cursor: pointer;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
       -webkit-tap-highlight-color: transparent;
     }
 
-    .treat-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 26px rgba(173, 117, 195, 0.18);
+    .option input {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      accent-color: #a96bd1;
+      box-shadow: none;
+      padding: 0;
     }
 
-    .treat-card.selected {
-      border-color: rgba(238, 190, 90, 0.98);
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 230, 150, 0.56), transparent 44%),
-        linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,244,232,0.90));
-      box-shadow:
-        0 0 0 2px rgba(255,238,160,0.70),
-        0 12px 26px rgba(173,117,195,0.18);
-    }
-
-    .treat-icon {
-      font-size: 42px;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .treat-title {
-      margin: 0 0 6px;
-      font-size: clamp(26px, 2.6vw, 36px);
-      line-height: 1;
+    .option span {
+      font-size: 23px;
+      line-height: 1.05;
       font-weight: 700;
-      color: var(--violet);
+      color: #76418f;
     }
 
-    .treat-text {
-      margin: 0;
-      font-size: clamp(18px, 1.8vw, 24px);
-      line-height: 1.16;
-      font-weight: 600;
-      color: #7f5a98;
+    .option:has(input:checked) {
+      border-color: rgba(199, 139, 229, 0.95);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 230, 250, 0.5), transparent 44%),
+        rgba(255,255,255,0.90);
+      box-shadow:
+        0 0 0 2px rgba(230, 199, 255, 0.42),
+        0 8px 18px rgba(173,117,195,0.14);
     }
 
-    .choose-btn {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      width: 40px;
-      height: 40px;
+    .children-fields,
+    .other-alcohol-field {
+      display: none;
+    }
+
+    .children-fields.active,
+    .other-alcohol-field.active {
+      display: block;
+    }
+
+    .divider {
+      height: 1px;
+      margin: 22px 0;
+      background: linear-gradient(90deg, transparent, rgba(238, 219, 127, 0.95), transparent);
+    }
+
+    .submit-btn {
+      width: 100%;
+      min-height: 66px;
       border: none;
-      border-radius: 50%;
+      border-radius: 999px;
+      padding: 14px 24px;
+      background: linear-gradient(180deg, #c78be5, #a96bd1);
+      color: #ffffff;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 700;
       cursor: pointer;
-      background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.96), rgba(255,240,246,0.95) 38%, rgba(246, 194, 221, 0.96) 88%);
-      box-shadow: 0 6px 14px rgba(240, 161, 201, 0.22);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 21px;
-      color: #5b435f;
+      box-shadow:
+        0 10px 22px rgba(120,70,150,0.22),
+        inset 0 2px 10px rgba(255,255,255,0.28);
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .treat-card.selected .choose-btn {
-      background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.98), rgba(255,220,236,0.98) 38%, rgba(255, 141, 186, 0.96) 88%);
-      color: #d43d73;
-      transform: scale(1.06);
+    .submit-btn.done {
+      background: linear-gradient(180deg, #f0c76e, #d99c43);
     }
 
     .finish-card {
@@ -429,14 +446,31 @@
         padding: 24px 16px;
       }
 
-      .info-list {
+      .form-grid {
         grid-template-columns: 1fr;
-        gap: 10px;
       }
 
-      .treats-grid {
+      .checkbox-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+      }
+
+      .radio-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      label,
+      .field-label {
+        font-size: 22px;
+      }
+
+      input,
+      textarea,
+      select {
+        font-size: 21px;
+      }
+
+      .option span {
+        font-size: 21px;
       }
 
       .finish-actions {
@@ -453,8 +487,8 @@
         font-size: 21px;
       }
 
-      .treat-card {
-        min-height: 132px;
+      .radio-row {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -478,87 +512,153 @@
     <section class="card hero-card">
       <h1>Королівська<br>трапеза</h1>
       <p>
-        Після святкової зустрічі у замку гостей чекає королівська трапеза:
-        смачні частування, солодкі моменти та тепла атмосфера родинного свята.
+        Допоможи нам підготувати святковий стіл для гостей Софійки.
+        Заповни коротку анкету щодо дитячого меню та напоїв для дорослих.
       </p>
     </section>
 
-    <section class="card info-card">
-      <h2 class="info-title">Час частування</h2>
+    <form class="card form-card" id="royalForm">
 
-      <div class="info-list">
-        <div class="info-item">
-          <div class="info-label">Дата</div>
-          <div class="info-value">27 червня</div>
+      <h2 class="section-title">Хто заповнює анкету?</h2>
+      <p class="section-text">
+        Вкажи ім’я гостя або сім’ї, щоб ми розуміли, від кого відповідь.
+      </p>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="guestName">Ім’я гостя / сім’ї *</label>
+          <input id="guestName" name="guestName" type="text" placeholder="Наприклад: сім’я Іваненків" required>
         </div>
 
-        <div class="info-item">
-          <div class="info-label">Початок</div>
-          <div class="info-value">13:00</div>
+        <div class="field">
+          <label for="adultsCount">Кількість дорослих *</label>
+          <select id="adultsCount" name="adultsCount" required>
+            <option value="">Оберіть</option>
+            <option value="1">1 дорослий</option>
+            <option value="2">2 дорослих</option>
+            <option value="3">3 дорослих</option>
+            <option value="4">4 дорослих</option>
+            <option value="5+">5 або більше</option>
+          </select>
         </div>
 
-        <div class="info-item">
-          <div class="info-label">Місце</div>
-          <div class="info-value">Панорама</div>
+        <div class="field full">
+          <div class="field-label">Чи будуть діти?</div>
+          <div class="radio-row">
+            <label class="option">
+              <input type="radio" name="hasChildren" value="Так">
+              <span>Так, будуть діти</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="hasChildren" value="Ні" checked>
+              <span>Ні, без дітей</span>
+            </label>
+          </div>
         </div>
       </div>
-    </section>
 
-    <section class="card task-card">
-      <h2 class="task-title">Обери 3 святкові частування для Софійкиного балу 👑</h2>
-      <div class="counter-pill" id="counterText">Обрано 0 з 3</div>
-    </section>
+      <div class="children-fields" id="childrenFields">
+        <div class="divider"></div>
 
-    <section class="treats-grid" id="treatsGrid">
+        <h2 class="section-title">Дитяче меню</h2>
+        <p class="section-text">
+          Тут гості самі пишуть, що люблять діти, щоб ми краще підготували дитячий стіл.
+        </p>
 
-      <article class="treat-card" data-id="cake">
-        <button class="choose-btn" type="button">♡</button>
-        <div class="treat-icon">🎂</div>
-        <h3 class="treat-title">Святковий торт</h3>
-        <p class="treat-text">Головна солодка окраса королівської трапези.</p>
-      </article>
+        <div class="form-grid">
+          <div class="field">
+            <label for="childrenNames">Імена дітей</label>
+            <input id="childrenNames" name="childrenNames" type="text" placeholder="Наприклад: Марко, Аня">
+          </div>
 
-      <article class="treat-card" data-id="cupcakes">
-        <button class="choose-btn" type="button">♡</button>
-        <div class="treat-icon">🧁</div>
-        <h3 class="treat-title">Казкові капкейки</h3>
-        <p class="treat-text">Маленькі солодкі частування для гостей.</p>
-      </article>
+          <div class="field">
+            <label for="childrenAge">Вік дітей</label>
+            <input id="childrenAge" name="childrenAge" type="text" placeholder="Наприклад: 3 роки, 7 років">
+          </div>
 
-      <article class="treat-card" data-id="fruits">
-        <button class="choose-btn" type="button">♡</button>
-        <div class="treat-icon">🍓</div>
-        <h3 class="treat-title">Фруктова галявина</h3>
-        <p class="treat-text">Яскраві ягоди та фрукти для святкового настрою.</p>
-      </article>
+          <div class="field full">
+            <label for="childrenMenu">Що люблять діти?</label>
+            <textarea id="childrenMenu" name="childrenMenu" placeholder="Наприклад: картопляне пюре, курочка, макарони, фрукти, сік..."></textarea>
+          </div>
 
-      <article class="treat-card" data-id="drinks">
-        <button class="choose-btn" type="button">♡</button>
-        <div class="treat-icon">🥤</div>
-        <h3 class="treat-title">Чарівні напої</h3>
-        <p class="treat-text">Смачні напої для маленьких і дорослих гостей.</p>
-      </article>
+          <div class="field full">
+            <label for="childrenAllergy">Алергії або особливі побажання</label>
+            <textarea id="childrenAllergy" name="childrenAllergy" placeholder="Наприклад: без горіхів, без молочного, не гостре, інше..."></textarea>
+          </div>
+        </div>
+      </div>
 
-      <article class="treat-card" data-id="tea">
-        <button class="choose-btn" type="button">♡</button>
-        <div class="treat-icon">☕</div>
-        <h3 class="treat-title">Теплий чай</h3>
-        <p class="treat-text">Затишна частина святкового столу після основної трапези.</p>
-      </article>
+      <div class="divider"></div>
 
-      <article class="treat-card" data-id="candies">
-        <button class="choose-btn" type="button">♡</button>
-        <div class="treat-icon">🍬</div>
-        <h3 class="treat-title">Солодкі скарби</h3>
-        <p class="treat-text">Маленькі смаколики, які роблять свято ще милішим.</p>
-      </article>
+      <h2 class="section-title">Напої для дорослих</h2>
+      <p class="section-text">
+        Можна обрати один або декілька варіантів.
+      </p>
 
-    </section>
+      <div class="field full">
+        <div class="checkbox-grid" id="alcoholGrid">
+          <label class="option">
+            <input type="checkbox" name="alcohol" value="Горілка">
+            <span>Горілка</span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" name="alcohol" value="Віскі">
+            <span>Віскі</span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" name="alcohol" value="Коньяк">
+            <span>Коньяк</span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" name="alcohol" value="Вино">
+            <span>Вино</span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" name="alcohol" value="Шампанське">
+            <span>Шампанське</span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" name="alcohol" value="Ром">
+            <span>Ром</span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" name="alcohol" value="Без алкоголю" id="noAlcohol">
+            <span>Без алкоголю</span>
+          </label>
+
+          <label class="option">
+            <input type="checkbox" name="alcohol" value="Інше" id="otherAlcoholCheck">
+            <span>Інше</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field full other-alcohol-field" id="otherAlcoholField">
+        <label for="otherAlcohol">Що саме?</label>
+        <input id="otherAlcohol" name="otherAlcohol" type="text" placeholder="Напишіть інший варіант напою">
+      </div>
+
+      <div class="field full">
+        <label for="comment">Додатковий коментар</label>
+        <textarea id="comment" name="comment" placeholder="Можна написати будь-які побажання щодо столу або напоїв"></textarea>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" type="submit">
+        Надіслати відповідь
+      </button>
+    </form>
 
     <section class="card finish-card" id="finishCard">
       <h2 class="finish-title">Королівську трапезу підготовлено!</h2>
       <p class="finish-text">
-        Локацію 4 пройдено. Тепер відкрито останній етап чарівної подорожі —
+        Дякуємо за відповідь. Локацію 4 пройдено, тепер відкрито останній етап —
         підтвердження присутності.
       </p>
 
@@ -578,10 +678,8 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    const maxSelected = 3;
-    const selectedTreats = new Set();
-
-    const counterText = document.getElementById("counterText");
+    const royalForm = document.getElementById("royalForm");
+    const submitBtn = document.getElementById("submitBtn");
     const finishCard = document.getElementById("finishCard");
     const goLocation5Btn = document.getElementById("goLocation5Btn");
     const goMapBtn = document.getElementById("goMapBtn");
@@ -589,6 +687,14 @@
     const musicBtn = document.getElementById("musicBtn");
     const bgMusic = document.getElementById("bgMusic");
     const toast = document.getElementById("toast");
+
+    const childrenFields = document.getElementById("childrenFields");
+    const otherAlcoholCheck = document.getElementById("otherAlcoholCheck");
+    const otherAlcoholField = document.getElementById("otherAlcoholField");
+    const noAlcohol = document.getElementById("noAlcohol");
+
+    const childrenRadios = document.querySelectorAll('input[name="hasChildren"]');
+    const alcoholChecks = document.querySelectorAll('input[name="alcohol"]');
 
     if (bgMusic) {
       bgMusic.volume = 0.35;
@@ -602,64 +708,167 @@
 
       showToast._timer = setTimeout(function() {
         toast.classList.remove("show");
-      }, 1800);
+      }, 2000);
     }
 
-    function updateUI() {
-      counterText.textContent = "Обрано " + selectedTreats.size + " з " + maxSelected;
+    function updateChildrenFields() {
+      const hasChildren = document.querySelector('input[name="hasChildren"]:checked')?.value === "Так";
 
-      document.querySelectorAll(".treat-card").forEach(function(card) {
-        const id = card.getAttribute("data-id");
-        const btn = card.querySelector(".choose-btn");
-        const active = selectedTreats.has(id);
-
-        card.classList.toggle("selected", active);
-        btn.textContent = active ? "❤" : "♡";
-      });
-
-      if (selectedTreats.size === maxSelected) {
-        localStorage.setItem("sofiyka_location4_done", "true");
-        finishCard.classList.add("active");
-
-        setTimeout(function() {
-          finishCard.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });
-        }, 250);
+      if (hasChildren) {
+        childrenFields.classList.add("active");
       } else {
-        finishCard.classList.remove("active");
+        childrenFields.classList.remove("active");
       }
     }
 
-    function toggleTreat(card) {
-      const id = card.getAttribute("data-id");
-
-      if (selectedTreats.has(id)) {
-        selectedTreats.delete(id);
-        updateUI();
-        return;
+    function updateOtherAlcoholField() {
+      if (otherAlcoholCheck.checked) {
+        otherAlcoholField.classList.add("active");
+      } else {
+        otherAlcoholField.classList.remove("active");
+        document.getElementById("otherAlcohol").value = "";
       }
-
-      if (selectedTreats.size >= maxSelected) {
-        showToast("Можна обрати тільки 3 частування 💜");
-        return;
-      }
-
-      selectedTreats.add(id);
-      updateUI();
     }
 
-    document.addEventListener("click", function(event) {
-      const card = event.target.closest(".treat-card");
-
-      if (!card) return;
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      toggleTreat(card);
+    childrenRadios.forEach(function(radio) {
+      radio.addEventListener("change", updateChildrenFields);
     });
+
+    alcoholChecks.forEach(function(check) {
+      check.addEventListener("change", function() {
+        if (check === noAlcohol && noAlcohol.checked) {
+          alcoholChecks.forEach(function(item) {
+            if (item !== noAlcohol) {
+              item.checked = false;
+            }
+          });
+        }
+
+        if (check !== noAlcohol && check.checked) {
+          noAlcohol.checked = false;
+        }
+
+        updateOtherAlcoholField();
+      });
+    });
+
+    function getCheckedValues(name) {
+      return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
+        .map(function(input) {
+          return input.value;
+        });
+    }
+
+    function saveAnswer(answer) {
+      const key = "sofiyka_location4_answers";
+      const oldAnswers = localStorage.getItem(key);
+
+      let answers = [];
+
+      if (oldAnswers) {
+        try {
+          answers = JSON.parse(oldAnswers);
+          if (!Array.isArray(answers)) {
+            answers = [];
+          }
+        } catch (error) {
+          answers = [];
+        }
+      }
+
+      answers.push(answer);
+      localStorage.setItem(key, JSON.stringify(answers));
+      localStorage.setItem("sofiyka_location4_last_answer", JSON.stringify(answer));
+    }
+
+    function completeLocation4() {
+      localStorage.setItem("sofiyka_location4_done", "true");
+
+      submitBtn.classList.add("done");
+      submitBtn.textContent = "Відповідь збережено ✓";
+
+      finishCard.classList.add("active");
+
+      showToast("Відповідь збережено ✨");
+
+      setTimeout(function() {
+        finishCard.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }, 250);
+    }
+
+    royalForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const guestName = document.getElementById("guestName").value.trim();
+      const adultsCount = document.getElementById("adultsCount").value;
+      const hasChildren = document.querySelector('input[name="hasChildren"]:checked')?.value || "Ні";
+      const childrenNames = document.getElementById("childrenNames").value.trim();
+      const childrenAge = document.getElementById("childrenAge").value.trim();
+      const childrenMenu = document.getElementById("childrenMenu").value.trim();
+      const childrenAllergy = document.getElementById("childrenAllergy").value.trim();
+      const alcohol = getCheckedValues("alcohol");
+      const otherAlcohol = document.getElementById("otherAlcohol").value.trim();
+      const comment = document.getElementById("comment").value.trim();
+
+      if (!guestName) {
+        showToast("Вкажіть ім’я гостя або сім’ї");
+        document.getElementById("guestName").focus();
+        return;
+      }
+
+      if (!adultsCount) {
+        showToast("Оберіть кількість дорослих");
+        document.getElementById("adultsCount").focus();
+        return;
+      }
+
+      if (hasChildren === "Так" && !childrenNames) {
+        showToast("Вкажіть імена дітей");
+        document.getElementById("childrenNames").focus();
+        return;
+      }
+
+      if (alcohol.length === 0) {
+        showToast("Оберіть напої або варіант «Без алкоголю»");
+        return;
+      }
+
+      if (alcohol.includes("Інше") && !otherAlcohol) {
+        showToast("Напишіть інший варіант напою");
+        document.getElementById("otherAlcohol").focus();
+        return;
+      }
+
+      const answer = {
+        createdAt: new Date().toISOString(),
+        guestName: guestName,
+        adultsCount: adultsCount,
+        hasChildren: hasChildren,
+        childrenNames: hasChildren === "Так" ? childrenNames : "",
+        childrenAge: hasChildren === "Так" ? childrenAge : "",
+        childrenMenu: hasChildren === "Так" ? childrenMenu : "",
+        childrenAllergy: hasChildren === "Так" ? childrenAllergy : "",
+        alcohol: alcohol,
+        otherAlcohol: alcohol.includes("Інше") ? otherAlcohol : "",
+        comment: comment
+      };
+
+      saveAnswer(answer);
+      completeLocation4();
+    });
+
+    function restoreLocation4State() {
+      const done = localStorage.getItem("sofiyka_location4_done") === "true";
+
+      if (done) {
+        submitBtn.classList.add("done");
+        submitBtn.textContent = "Відповідь збережено ✓";
+        finishCard.classList.add("active");
+      }
+    }
 
     goLocation5Btn.addEventListener("click", function() {
       localStorage.setItem("sofiyka_location4_done", "true");
@@ -705,8 +914,10 @@
       }
     }
 
+    updateChildrenFields();
+    updateOtherAlcoholField();
+    restoreLocation4State();
     restoreMusicState();
-    updateUI();
   </script>
 
 </body>

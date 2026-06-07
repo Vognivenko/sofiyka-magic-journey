@@ -15,7 +15,8 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       width: 100%;
       min-height: 100%;
       overflow-x: hidden;
@@ -27,9 +28,10 @@
     body {
       min-height: 100vh;
       background-image: url("fon_loc1.png");
-      background-size: cover;
+      background-size: 94% auto;
       background-position: top center;
-      background-repeat: no-repeat;
+      background-repeat: repeat-y;
+      background-color: #f8d9ef;
     }
 
     .page {
@@ -41,7 +43,8 @@
     .topbar {
       width: 100%;
       max-width: 520px;
-      margin: 0 auto 12px;
+      margin: 0 auto 20px;
+      padding: 4px 6px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -69,7 +72,8 @@
     }
 
     .location-title {
-      width: 46%;
+      position: relative;
+      width: 48%;
       max-width: 250px;
       aspect-ratio: 420 / 145;
       background: url("8.png") center / contain no-repeat;
@@ -77,20 +81,27 @@
       align-items: center;
       justify-content: center;
       color: #69228b;
-      font-size: clamp(24px, 6vw, 38px);
+      font-size: clamp(23px, 5.8vw, 36px);
       font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      padding-top: 8px;
+      padding-left: 2px;
       text-shadow: 0 1px 0 rgba(255,255,255,0.95);
     }
 
     .intro-text-block {
       width: 100%;
       max-width: 520px;
-      margin: 38px auto 26px;
-      padding: 0 18px;
+      margin: 44px auto 28px;
+      padding: 0 22px;
       text-align: center;
     }
 
     .intro-kicker {
+      width: 100%;
+      display: block;
+      text-align: center;
       font-size: clamp(20px, 5vw, 28px);
       font-weight: 700;
       margin-bottom: 8px;
@@ -98,6 +109,9 @@
     }
 
     .intro-title {
+      width: 100%;
+      display: block;
+      text-align: center;
       font-size: clamp(42px, 11vw, 62px);
       font-weight: 700;
       line-height: 0.92;
@@ -109,6 +123,9 @@
     }
 
     .intro-text {
+      width: 100%;
+      display: block;
+      text-align: center;
       font-size: clamp(21px, 5vw, 28px);
       line-height: 1.16;
       font-weight: 700;
@@ -164,6 +181,7 @@
       color: #fff6ff;
       font-size: clamp(22px, 5.3vw, 34px);
       font-weight: 700;
+      text-align: center;
       text-shadow:
         0 2px 4px rgba(80,25,110,0.42),
         0 0 8px rgba(255,255,255,0.65);
@@ -206,10 +224,21 @@
       animation-delay: .9s;
     }
 
-    .month-pink { background-image: url("1.png"); }
-    .month-blue { background-image: url("2.png"); }
-    .month-green { background-image: url("3.png"); }
-    .month-autumn { background-image: url("4.png"); }
+    .month-pink {
+      background-image: url("1.png");
+    }
+
+    .month-blue {
+      background-image: url("2.png");
+    }
+
+    .month-green {
+      background-image: url("3.png");
+    }
+
+    .month-autumn {
+      background-image: url("4.png");
+    }
 
     .month-title {
       height: 31%;
@@ -378,8 +407,13 @@
     }
 
     @keyframes cardBreath {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-2px) scale(1.008); }
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-2px) scale(1.008);
+      }
     }
   </style>
 </head>
@@ -649,4 +683,4 @@
   </script>
 
 </body>
-</html>
+  </html>

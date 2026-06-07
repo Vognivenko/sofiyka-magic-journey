@@ -175,9 +175,9 @@
       max-width: 520px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      padding-bottom: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 0 6px 20px;
     }
 
     .month-card {
@@ -185,16 +185,17 @@
       width: 100%;
       aspect-ratio: 560 / 255;
       background-position: center;
-      background-size: 100% 100%;
+      background-size: contain;
       background-repeat: no-repeat;
-      padding: 17px;
-      filter: drop-shadow(0 9px 13px rgba(87,35,105,0.18));
+      padding: 8px 8px 9px;
+      filter: drop-shadow(0 7px 10px rgba(87,35,105,0.16));
       animation: cardBreath 5.2s ease-in-out infinite;
       transition: transform .25s ease, filter .25s ease;
     }
 
     .month-card:active {
       transform: scale(1.035);
+      filter: drop-shadow(0 10px 15px rgba(87,35,105,0.22));
     }
 
     .month-card:nth-child(2n) {
@@ -212,11 +213,11 @@
 
     .month-title {
       height: 32%;
-      padding-left: 58px;
+      padding-left: 38px;
       display: flex;
       align-items: center;
       color: #612985;
-      font-size: clamp(24px, 6vw, 34px);
+      font-size: clamp(16px, 4.2vw, 24px);
       font-weight: 700;
       line-height: 1;
       text-shadow: 0 1px 0 rgba(255,255,255,0.94);
@@ -226,18 +227,18 @@
       height: 62%;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      padding: 0 7px 6px;
+      gap: 4px;
+      padding: 0 5px 4px;
     }
 
     .photo-item {
       position: relative;
       border: none;
-      border-radius: 14px;
+      border-radius: 8px;
       overflow: hidden;
       background: rgba(255,255,255,0.45);
       box-shadow:
-        0 0 0 2px rgba(255,225,170,0.72),
+        0 0 0 1.5px rgba(255,225,170,0.72),
         inset 0 2px 5px rgba(255,255,255,0.75);
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
@@ -253,21 +254,22 @@
 
     .photo-item.selected {
       box-shadow:
-        0 0 0 3px rgba(255,212,90,0.95),
-        0 0 14px rgba(255,205,85,0.9);
+        0 0 0 2.5px rgba(255,212,90,0.95),
+        0 0 11px rgba(255,205,85,0.9);
     }
 
     .like-badge {
       position: absolute;
-      right: 4px;
-      bottom: 4px;
-      width: 31px;
-      height: 31px;
+      right: 2px;
+      bottom: 2px;
+      width: 20px;
+      height: 20px;
       background: url("10.png") center / contain no-repeat;
       opacity: 0;
       transform: scale(0.55);
       transition: opacity .2s ease, transform .2s ease;
       pointer-events: none;
+      filter: drop-shadow(0 2px 4px rgba(90,35,90,0.25));
     }
 
     .photo-item.selected .like-badge {
@@ -398,8 +400,28 @@
         bottom: 17%;
       }
 
+      .months-grid {
+        gap: 8px;
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+
+      .month-card {
+        padding: 7px 7px 8px;
+      }
+
       .month-title {
-        padding-left: 52px;
+        padding-left: 34px;
+        font-size: clamp(15px, 4vw, 21px);
+      }
+
+      .photo-row {
+        gap: 3px;
+        padding: 0 4px 3px;
+      }
+
+      .photo-item {
+        border-radius: 7px;
       }
     }
   </style>

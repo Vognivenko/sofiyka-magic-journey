@@ -35,7 +35,7 @@
     .page {
       width: 100%;
       min-height: 100vh;
-      padding: 16px 10px 40px;
+      padding: 16px 8px 40px;
     }
 
     .topbar {
@@ -48,8 +48,8 @@
     }
 
     .image-btn {
-      width: 62px;
-      height: 62px;
+      width: 56px;
+      height: 56px;
       border: none;
       background-color: transparent;
       background-repeat: no-repeat;
@@ -85,8 +85,8 @@
     .intro-text-block {
       width: 100%;
       max-width: 520px;
-      margin: 16px auto 18px;
-      padding: 18px 18px 10px;
+      margin: 38px auto 26px;
+      padding: 0 18px;
       text-align: center;
     }
 
@@ -117,22 +117,22 @@
     }
 
     .task-card {
-      width: 100%;
+      width: 94%;
       max-width: 520px;
-      margin: 0 auto 16px;
+      margin: 0 auto 8px;
       position: relative;
       aspect-ratio: 797 / 292;
-      background: url("12.png") center / 100% 100% no-repeat;
-      filter: drop-shadow(0 10px 18px rgba(90,35,120,0.18));
+      background: url("12.png") center / contain no-repeat;
+      filter: drop-shadow(0 8px 14px rgba(90,35,120,0.16));
     }
 
     .task-title {
       position: absolute;
       top: 18%;
-      left: 34%;
-      right: 17%;
+      left: 43%;
+      right: 13%;
       text-align: center;
-      font-size: clamp(23px, 6vw, 37px);
+      font-size: clamp(20px, 5vw, 31px);
       line-height: 0.95;
       font-weight: 700;
       color: #743092;
@@ -141,33 +141,33 @@
 
     .counter-pill {
       position: absolute;
-      left: 38%;
-      right: 23%;
-      bottom: 17%;
+      left: 42%;
+      right: 20%;
+      bottom: 18%;
       text-align: center;
       color: #7a3b94;
-      font-size: clamp(22px, 5.6vw, 33px);
+      font-size: clamp(20px, 5vw, 30px);
       font-weight: 700;
       line-height: 1;
       text-shadow: 0 1px 0 rgba(255,255,255,0.95);
     }
 
     .gallery-ribbon {
-      width: 86%;
-      max-width: 430px;
+      width: 78%;
+      max-width: 390px;
       aspect-ratio: 850 / 145;
-      margin: 10px auto 16px;
+      margin: 0 auto 8px;
       background: url("9.png") center / contain no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff6ff;
-      font-size: clamp(26px, 6vw, 39px);
+      font-size: clamp(22px, 5.3vw, 34px);
       font-weight: 700;
       text-shadow:
         0 2px 4px rgba(80,25,110,0.42),
         0 0 8px rgba(255,255,255,0.65);
-      filter: drop-shadow(0 8px 13px rgba(90,35,120,0.22));
+      filter: drop-shadow(0 7px 11px rgba(90,35,120,0.2));
     }
 
     .months-grid {
@@ -175,9 +175,9 @@
       max-width: 520px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 0 6px 20px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 10px;
+      padding: 0 8px 20px;
     }
 
     .month-card {
@@ -187,7 +187,7 @@
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
-      padding: 8px 8px 9px;
+      padding: 8px 7px 8px;
       filter: drop-shadow(0 7px 10px rgba(87,35,105,0.16));
       animation: cardBreath 5.2s ease-in-out infinite;
       transition: transform .25s ease, filter .25s ease;
@@ -212,14 +212,15 @@
     .month-autumn { background-image: url("4.png"); }
 
     .month-title {
-      height: 32%;
-      padding-left: 38px;
+      height: 31%;
+      padding-left: 34px;
       display: flex;
       align-items: center;
       color: #612985;
-      font-size: clamp(16px, 4.2vw, 24px);
+      font-size: clamp(14px, 3.7vw, 20px);
       font-weight: 700;
       line-height: 1;
+      white-space: nowrap;
       text-shadow: 0 1px 0 rgba(255,255,255,0.94);
     }
 
@@ -227,21 +228,23 @@
       height: 62%;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-      padding: 0 5px 4px;
+      gap: 3px;
+      padding: 0 4px 4px;
     }
 
     .photo-item {
       position: relative;
       border: none;
-      border-radius: 8px;
+      border-radius: 7px;
       overflow: hidden;
-      background: rgba(255,255,255,0.45);
+      background: rgba(255,255,255,0.35);
       box-shadow:
         0 0 0 1.5px rgba(255,225,170,0.72),
         inset 0 2px 5px rgba(255,255,255,0.75);
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      font-size: 0;
+      color: transparent;
     }
 
     .photo-item img {
@@ -250,6 +253,8 @@
       display: block;
       object-fit: cover;
       object-position: center;
+      font-size: 0;
+      color: transparent;
     }
 
     .photo-item.selected {
@@ -376,54 +381,6 @@
       0%, 100% { transform: translateY(0) scale(1); }
       50% { transform: translateY(-2px) scale(1.008); }
     }
-
-    @media (max-width: 420px) {
-      .page {
-        padding-left: 8px;
-        padding-right: 8px;
-      }
-
-      .image-btn {
-        width: 56px;
-        height: 56px;
-      }
-
-      .task-title {
-        left: 34%;
-        right: 17%;
-        top: 17%;
-      }
-
-      .counter-pill {
-        left: 38%;
-        right: 23%;
-        bottom: 17%;
-      }
-
-      .months-grid {
-        gap: 8px;
-        padding-left: 4px;
-        padding-right: 4px;
-      }
-
-      .month-card {
-        padding: 7px 7px 8px;
-      }
-
-      .month-title {
-        padding-left: 34px;
-        font-size: clamp(15px, 4vw, 21px);
-      }
-
-      .photo-row {
-        gap: 3px;
-        padding: 0 4px 3px;
-      }
-
-      .photo-item {
-        border-radius: 7px;
-      }
-    }
   </style>
 </head>
 
@@ -466,7 +423,7 @@
   <div class="photo-overlay" id="photoOverlay" onclick="closeViewerByBg(event)">
     <div class="viewer-card">
       <button class="close-viewer" type="button" onclick="closeViewer()">×</button>
-      <img class="viewer-img" id="viewerImg" src="" alt="Фото Софійки">
+      <img class="viewer-img" id="viewerImg" src="" alt="">
       <div class="viewer-actions">
         <button class="viewer-btn" type="button" id="viewerLikeBtn" onclick="toggleCurrentPhotoLike()">❤️ Обрати</button>
         <button class="viewer-btn" type="button" onclick="closeViewer()">Закрити</button>
@@ -565,7 +522,10 @@
 
           var img = document.createElement("img");
           img.src = photoSrc(i, p);
-          img.alt = "Фото Софійки";
+          img.alt = "";
+          img.onerror = function() {
+            this.style.display = "none";
+          };
 
           var badge = document.createElement("span");
           badge.className = "like-badge";
@@ -618,6 +578,10 @@
     function openViewer(id, src) {
       currentPhotoId = id;
       viewerImg.src = src;
+      viewerImg.onerror = function() {
+        this.style.display = "none";
+      };
+      viewerImg.style.display = "block";
       updateViewerLikeButton();
       photoOverlay.classList.add("show");
     }

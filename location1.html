@@ -15,8 +15,7 @@
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html, body {
       width: 100%;
       min-height: 100%;
       overflow-x: hidden;
@@ -28,7 +27,7 @@
     body {
       min-height: 100vh;
       background-image: url("fon_loc1.png");
-      background-size: 94% auto;
+      background-size: 100% auto;
       background-position: top center;
       background-repeat: repeat-y;
       background-color: #f8d9ef;
@@ -37,7 +36,7 @@
     .page {
       width: 100%;
       min-height: 100vh;
-      padding: 16px 8px 40px;
+      padding: 16px 0 40px;
     }
 
     .topbar {
@@ -54,25 +53,16 @@
       width: 56px;
       height: 56px;
       border: none;
-      background-color: transparent;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
+      background: transparent center / contain no-repeat;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       filter: drop-shadow(0 6px 10px rgba(80, 25, 110, 0.24));
     }
 
-    .back-btn {
-      background-image: url("5.png");
-    }
-
-    .music-btn {
-      background-image: url("6.png");
-    }
+    .back-btn { background-image: url("5.png"); }
+    .music-btn { background-image: url("6.png"); }
 
     .location-title {
-      position: relative;
       width: 48%;
       max-width: 250px;
       aspect-ratio: 420 / 145;
@@ -94,42 +84,36 @@
       width: 100%;
       max-width: 520px;
       margin: 44px auto 28px;
-      padding: 0 22px;
+      padding: 0 18px;
       text-align: center;
     }
 
     .intro-kicker {
-      width: 100%;
-      display: block;
-      text-align: center;
-      font-size: clamp(20px, 5vw, 28px);
+      font-size: clamp(18px, 4.4vw, 24px);
       font-weight: 700;
       margin-bottom: 8px;
       color: #7c359b;
+      text-align: center;
     }
 
     .intro-title {
-      width: 100%;
-      display: block;
-      text-align: center;
-      font-size: clamp(42px, 11vw, 62px);
+      font-size: clamp(34px, 9vw, 50px);
       font-weight: 700;
-      line-height: 0.92;
+      line-height: 0.95;
       color: #783193;
       margin-bottom: 14px;
+      text-align: center;
       text-shadow:
         0 2px 0 rgba(255,255,255,0.9),
         0 5px 10px rgba(120,45,145,0.2);
     }
 
     .intro-text {
-      width: 100%;
-      display: block;
-      text-align: center;
-      font-size: clamp(21px, 5vw, 28px);
-      line-height: 1.16;
+      font-size: clamp(18px, 4.4vw, 24px);
+      line-height: 1.12;
       font-weight: 700;
       color: #6f2f86;
+      text-align: center;
       text-shadow: 0 1px 0 rgba(255,255,255,0.9);
     }
 
@@ -149,7 +133,7 @@
       left: 43%;
       right: 13%;
       text-align: center;
-      font-size: clamp(20px, 5vw, 31px);
+      font-size: clamp(17px, 4.4vw, 27px);
       line-height: 0.95;
       font-weight: 700;
       color: #743092;
@@ -163,7 +147,7 @@
       bottom: 18%;
       text-align: center;
       color: #7a3b94;
-      font-size: clamp(20px, 5vw, 30px);
+      font-size: clamp(18px, 4.6vw, 27px);
       font-weight: 700;
       line-height: 1;
       text-shadow: 0 1px 0 rgba(255,255,255,0.95);
@@ -179,7 +163,7 @@
       align-items: center;
       justify-content: center;
       color: #fff6ff;
-      font-size: clamp(22px, 5.3vw, 34px);
+      font-size: clamp(20px, 4.9vw, 30px);
       font-weight: 700;
       text-align: center;
       text-shadow:
@@ -216,29 +200,13 @@
       filter: drop-shadow(0 10px 15px rgba(87,35,105,0.22));
     }
 
-    .month-card:nth-child(2n) {
-      animation-delay: .45s;
-    }
+    .month-card:nth-child(2n) { animation-delay: .45s; }
+    .month-card:nth-child(3n) { animation-delay: .9s; }
 
-    .month-card:nth-child(3n) {
-      animation-delay: .9s;
-    }
-
-    .month-pink {
-      background-image: url("1.png");
-    }
-
-    .month-blue {
-      background-image: url("2.png");
-    }
-
-    .month-green {
-      background-image: url("3.png");
-    }
-
-    .month-autumn {
-      background-image: url("4.png");
-    }
+    .month-pink { background-image: url("1.png"); }
+    .month-blue { background-image: url("2.png"); }
+    .month-green { background-image: url("3.png"); }
+    .month-autumn { background-image: url("4.png"); }
 
     .month-title {
       height: 31%;
@@ -246,7 +214,7 @@
       display: flex;
       align-items: center;
       color: #612985;
-      font-size: clamp(14px, 3.7vw, 20px);
+      font-size: clamp(13px, 3.4vw, 18px);
       font-weight: 700;
       line-height: 1;
       white-space: nowrap;
@@ -407,13 +375,8 @@
     }
 
     @keyframes cardBreath {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-
-      50% {
-        transform: translateY(-2px) scale(1.008);
-      }
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-2px) scale(1.008); }
     }
   </style>
 </head>
@@ -596,7 +559,6 @@
           alert("Вже обрано 7 фото. Щоб вибрати інше — спочатку зніми сердечко з одного фото ❤️");
           return;
         }
-
         selectedPhotos.push(id);
       }
 
@@ -683,4 +645,4 @@
   </script>
 
 </body>
-  </html>
+</html>

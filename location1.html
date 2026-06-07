@@ -42,7 +42,7 @@
     .topbar {
       width: 100%;
       max-width: 520px;
-      margin: 0 auto 20px;
+      margin: 0 auto 14px;
       padding: 4px 6px 0;
       display: flex;
       align-items: center;
@@ -83,25 +83,26 @@
     .intro-text-block {
       width: 100%;
       max-width: 520px;
-      margin: 44px auto 28px;
-      padding: 0 18px;
+      margin: 22px auto 20px;
+      padding: 0 34px;
       text-align: center;
     }
 
     .intro-kicker {
-      font-size: clamp(18px, 4.4vw, 24px);
+      font-size: clamp(17px, 4.1vw, 23px);
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: #7c359b;
       text-align: center;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
     }
 
     .intro-title {
-      font-size: clamp(34px, 9vw, 50px);
+      font-size: clamp(31px, 8.2vw, 46px);
       font-weight: 700;
-      line-height: 0.95;
+      line-height: 0.94;
       color: #783193;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       text-align: center;
       text-shadow:
         0 2px 0 rgba(255,255,255,0.9),
@@ -109,18 +110,22 @@
     }
 
     .intro-text {
-      font-size: clamp(18px, 4.4vw, 24px);
-      line-height: 1.12;
+      width: 86%;
+      margin: 0 auto;
+      font-size: clamp(16px, 3.9vw, 22px);
+      line-height: 1.08;
       font-weight: 700;
       color: #6f2f86;
       text-align: center;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.95),
+        0 0 8px rgba(255,255,255,0.65);
     }
 
     .task-card {
       width: 94%;
       max-width: 520px;
-      margin: 0 auto 8px;
+      margin: 0 auto 6px;
       position: relative;
       aspect-ratio: 797 / 292;
       background: url("12.png") center / contain no-repeat;
@@ -129,11 +134,11 @@
 
     .task-title {
       position: absolute;
-      top: 18%;
+      top: 17%;
       left: 43%;
       right: 13%;
       text-align: center;
-      font-size: clamp(17px, 4.4vw, 27px);
+      font-size: clamp(16px, 4.1vw, 25px);
       line-height: 0.95;
       font-weight: 700;
       color: #743092;
@@ -144,10 +149,10 @@
       position: absolute;
       left: 42%;
       right: 20%;
-      bottom: 18%;
+      bottom: 24%;
       text-align: center;
       color: #7a3b94;
-      font-size: clamp(18px, 4.6vw, 27px);
+      font-size: clamp(17px, 4.2vw, 26px);
       font-weight: 700;
       line-height: 1;
       text-shadow: 0 1px 0 rgba(255,255,255,0.95);
@@ -559,6 +564,7 @@
           alert("Вже обрано 7 фото. Щоб вибрати інше — спочатку зніми сердечко з одного фото ❤️");
           return;
         }
+
         selectedPhotos.push(id);
       }
 

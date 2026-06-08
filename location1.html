@@ -184,49 +184,52 @@
     .gallery-zone {
       width: 100%;
       position: relative;
-      padding: 2px 0 0;
-      margin-top: 2px;
+      margin-top: -20px;
+      padding: 54px 0 0;
       overflow: hidden;
-      background-image:
-        linear-gradient(
-          180deg,
-          rgba(248, 217, 239, 0.20) 0%,
-          rgba(248, 217, 239, 0.02) 9%,
-          rgba(248, 217, 239, 0.02) 88%,
-          rgba(248, 217, 239, 0.38) 100%
-        ),
-        url("fon_gallery_long.png");
-      background-size:
-        100% 100%,
-        100% 100%;
-      background-position:
-        top center,
-        top center;
-      background-repeat:
-        no-repeat,
-        no-repeat;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.22) 22%, transparent 48%),
+        radial-gradient(circle at 10% 18%, rgba(255,224,250,0.88) 0%, rgba(255,224,250,0.25) 30%, transparent 55%),
+        radial-gradient(circle at 90% 22%, rgba(226,198,255,0.65) 0%, rgba(226,198,255,0.18) 32%, transparent 58%),
+        linear-gradient(180deg, rgba(255,229,247,0.10) 0%, #f9d8f0 13%, #f8d2ec 48%, #f6cdea 100%);
       background-color: #f8d9ef;
     }
 
     .gallery-zone::before {
       content: "";
       position: absolute;
+      left: 0;
+      right: 0;
+      top: -80px;
+      height: 190px;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 50% 35%, rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.18) 42%, transparent 72%),
+        linear-gradient(180deg, rgba(248,217,239,0) 0%, rgba(248,217,239,0.38) 38%, #f8d9ef 100%);
+      filter: blur(0.2px);
+    }
+
+    .gallery-zone::after {
+      content: "";
+      position: absolute;
       inset: 0;
+      z-index: 1;
       pointer-events: none;
       background-image:
-        radial-gradient(circle, rgba(255,255,255,0.95) 0 1.2px, transparent 1.6px),
-        radial-gradient(circle, rgba(255,230,145,0.85) 0 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(255,255,255,0.65) 0 0.9px, transparent 1.4px);
+        radial-gradient(circle, rgba(255,255,255,0.85) 0 1.1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,231,150,0.68) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,0.55) 0 0.9px, transparent 1.4px);
       background-size:
-        72px 96px,
-        110px 130px,
-        54px 74px;
+        78px 104px,
+        128px 142px,
+        58px 86px;
       background-position:
-        12px 18px,
-        40px 66px,
-        24px 42px;
-      opacity: 0.24;
-      animation: sparkleFloat 12s linear infinite;
+        10px 20px,
+        42px 76px,
+        28px 48px;
+      opacity: 0.22;
+      animation: sparkleFloat 14s linear infinite;
     }
 
     .gallery-heading,
@@ -240,7 +243,7 @@
     .gallery-heading {
       width: 84%;
       max-width: 420px;
-      margin: 4px auto 12px;
+      margin: 0 auto 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -285,7 +288,7 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 14px;
+      gap: 6px;
       padding: 0 22px 22px;
     }
 
@@ -298,12 +301,47 @@
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       filter:
-        drop-shadow(0 10px 16px rgba(87,35,105,0.22))
-        drop-shadow(0 0 12px rgba(255,230,170,0.18));
+        drop-shadow(0 10px 16px rgba(87,35,105,0.20))
+        drop-shadow(0 0 12px rgba(255,230,170,0.16));
       animation: frameBreath 5.4s ease-in-out infinite;
       transition:
         transform .25s ease,
         filter .25s ease;
+    }
+
+    .month-card::before {
+      content: "";
+      position: absolute;
+      left: -16px;
+      right: -16px;
+      top: -30px;
+      bottom: -28px;
+      z-index: 0;
+      border-radius: 52px;
+      background:
+        radial-gradient(ellipse at 50% 13%, rgba(255,255,255,0.76) 0%, rgba(255,255,255,0.24) 32%, transparent 66%),
+        radial-gradient(circle at 16% 82%, rgba(255,225,245,0.78) 0%, rgba(255,225,245,0.20) 34%, transparent 62%),
+        radial-gradient(circle at 86% 68%, rgba(255,238,183,0.42) 0%, rgba(255,238,183,0.12) 30%, transparent 58%),
+        linear-gradient(180deg, rgba(255,245,252,0.34) 0%, rgba(255,220,243,0.32) 48%, rgba(245,198,230,0.38) 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.34),
+        0 0 28px rgba(255,255,255,0.24),
+        0 18px 34px rgba(126,45,138,0.08);
+      pointer-events: none;
+    }
+
+    .month-card::after {
+      content: "";
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      top: -18px;
+      height: 58px;
+      z-index: 0;
+      border-radius: 999px;
+      background:
+        radial-gradient(ellipse at center, rgba(255,255,255,0.54) 0%, rgba(255,255,255,0.13) 55%, transparent 76%);
+      pointer-events: none;
     }
 
     .month-card:nth-child(2n) {
@@ -315,20 +353,19 @@
     }
 
     .month-card:active {
-      transform: scale(1.025);
+      transform: scale(1.018);
       filter:
-        drop-shadow(0 14px 22px rgba(87,35,105,0.28))
-        drop-shadow(0 0 18px rgba(255,230,170,0.38));
+        drop-shadow(0 14px 22px rgba(87,35,105,0.25))
+        drop-shadow(0 0 18px rgba(255,230,170,0.30));
     }
 
     .month-card.selected {
       filter:
-        drop-shadow(0 14px 20px rgba(87,35,105,0.28))
-        drop-shadow(0 0 24px rgba(255,115,135,0.75));
+        drop-shadow(0 14px 20px rgba(87,35,105,0.25))
+        drop-shadow(0 0 24px rgba(255,115,135,0.72));
     }
 
-    .month-card.selected::before {
-      content: "";
+    .month-selection-glow {
       position: absolute;
       left: 7.4%;
       top: 22.6%;
@@ -337,22 +374,16 @@
       border-radius: 22px;
       z-index: 2;
       pointer-events: none;
+      opacity: 0;
       box-shadow:
         0 0 0 4px rgba(255,117,142,0.92),
         0 0 22px rgba(255,75,110,0.65),
         inset 0 0 18px rgba(255,230,235,0.45);
+      transition: opacity .22s ease;
     }
 
-    .month-card.selected::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 4;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 82% 82%, rgba(255,110,135,0.30), transparent 16%),
-        radial-gradient(circle at 18% 23%, rgba(255,255,255,0.32), transparent 18%);
-      border-radius: 34px;
+    .month-card.selected .month-selection-glow {
+      opacity: 1;
       animation: selectedGlow 2.2s ease-in-out infinite;
     }
 
@@ -441,7 +472,7 @@
       display: none;
       width: calc(100% - 28px);
       max-width: 430px;
-      margin: 8px auto 0;
+      margin: 10px auto 0;
       border: none;
       border-radius: 999px;
       padding: 14px 18px;
@@ -646,13 +677,13 @@
     }
 
     body.video-playing .month-card,
-    body.video-playing .gallery-zone::before,
-    body.video-playing .month-card.selected::after,
+    body.video-playing .gallery-zone::after,
+    body.video-playing .month-card.selected .month-selection-glow,
     body.video-playing .month-card.selected .month-selected-heart {
       animation: none !important;
     }
 
-    body.video-playing .gallery-zone::before {
+    body.video-playing .gallery-zone::after {
       opacity: 0.08;
     }
 
@@ -667,16 +698,16 @@
     @keyframes sparkleFloat {
       0% {
         background-position:
-          12px 18px,
-          40px 66px,
-          24px 42px;
+          10px 20px,
+          42px 76px,
+          28px 48px;
       }
 
       100% {
         background-position:
-          12px 114px,
-          40px 196px,
-          24px 116px;
+          10px 124px,
+          42px 218px,
+          28px 134px;
       }
     }
 
@@ -686,13 +717,13 @@
       }
 
       50% {
-        transform: translateY(-4px) scale(1.008);
+        transform: translateY(-3px) scale(1.006);
       }
     }
 
     @keyframes selectedGlow {
       0%, 100% {
-        opacity: 0.72;
+        opacity: 0.82;
       }
 
       50% {
@@ -962,6 +993,9 @@
           this.style.display = "none";
         };
 
+        var selectionGlow = document.createElement("div");
+        selectionGlow.className = "month-selection-glow";
+
         var frame = document.createElement("div");
         frame.className = "month-frame";
 
@@ -983,6 +1017,7 @@
         };
 
         card.appendChild(photo);
+        card.appendChild(selectionGlow);
         card.appendChild(frame);
         card.appendChild(title);
         card.appendChild(heart);

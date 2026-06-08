@@ -230,14 +230,14 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 22px;
+      gap: 24px;
       padding: 0 22px 30px;
     }
 
     .month-card {
       position: relative;
       width: 100%;
-      aspect-ratio: 720 / 980;
+      aspect-ratio: 2 / 3;
       border: none;
       background: transparent;
       cursor: pointer;
@@ -269,14 +269,14 @@
     .month-card.selected {
       filter:
         drop-shadow(0 12px 18px rgba(87,35,105,0.25))
-        drop-shadow(0 0 22px rgba(255,215,95,0.85));
+        drop-shadow(0 0 24px rgba(255,215,95,0.9));
     }
 
     .month-card.selected::before {
       content: "";
       position: absolute;
-      inset: 6.5%;
-      border-radius: 28px;
+      inset: 7%;
+      border-radius: 30px;
       box-shadow:
         0 0 0 4px rgba(255,214,86,0.95),
         0 0 24px rgba(255,210,85,0.85);
@@ -286,9 +286,9 @@
 
     .month-photo {
       position: absolute;
-      left: 12.5%;
-      top: 26.5%;
-      width: 75%;
+      left: 11%;
+      top: 25%;
+      width: 78%;
       height: 60%;
       border-radius: 24px;
       object-fit: cover;
@@ -313,7 +313,7 @@
       z-index: 4;
       text-align: center;
       color: #6a2787;
-      font-size: clamp(28px, 7.5vw, 42px);
+      font-size: clamp(27px, 7vw, 42px);
       font-weight: 700;
       line-height: 1;
       text-shadow:
@@ -580,7 +580,7 @@
     var currentPhotoId = null;
 
     var months = [
-      { title: "Народження", src: "photo_0.jpg" },
+      { title: "Народження", src: "IMG-20250705-WA0000.jpg" },
       { title: "1 місяць", src: "photo_1.jpg" },
       { title: "2 місяці", src: "photo_2.jpg" },
       { title: "3 місяці", src: "photo_3.jpg" },

@@ -77,13 +77,8 @@
       filter: drop-shadow(0 6px 10px rgba(80, 25, 110, 0.24));
     }
 
-    .back-btn {
-      background-image: url("5.png");
-    }
-
-    .music-btn {
-      background-image: url("6.png");
-    }
+    .back-btn { background-image: url("5.png"); }
+    .music-btn { background-image: url("6.png"); }
 
     .location-title {
       width: 48%;
@@ -344,13 +339,8 @@
       pointer-events: none;
     }
 
-    .month-card:nth-child(2n) {
-      animation-delay: .45s;
-    }
-
-    .month-card:nth-child(3n) {
-      animation-delay: .9s;
-    }
+    .month-card:nth-child(2n) { animation-delay: .45s; }
+    .month-card:nth-child(3n) { animation-delay: .9s; }
 
     .month-card:active {
       transform: scale(1.018);
@@ -393,7 +383,7 @@
       top: 22.8%;
       width: 85%;
       height: 63%;
-      border-radius: 22px;
+      border-radius: 24px;
       object-fit: cover;
       object-position: center 36%;
       z-index: 1;
@@ -531,7 +521,7 @@
       width: 100%;
       max-width: 430px;
       border-radius: 30px;
-      padding: 12px;
+      padding: 14px;
       background: linear-gradient(180deg, rgba(255,250,252,0.98), rgba(246,220,255,0.96));
       box-shadow:
         0 0 0 3px rgba(255,222,130,0.95),
@@ -540,17 +530,27 @@
       animation: viewerAppear .24s ease both;
     }
 
+    .viewer-media {
+      width: 100%;
+      aspect-ratio: 3 / 4.2;
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.35);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
+    }
+
     .viewer-img {
       width: 100%;
-      max-height: 68vh;
-      border-radius: 22px;
+      height: 100%;
       display: block;
-      object-fit: contain;
-      background: rgba(255,255,255,0.35);
+      object-fit: cover;
+      object-position: center 35%;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.25);
     }
 
     .viewer-title {
-      margin: 8px 0 4px;
+      margin: 10px 0 8px;
       text-align: center;
       color: #6a2787;
       font-size: 28px;
@@ -562,7 +562,7 @@
     .viewer-actions {
       display: flex;
       gap: 10px;
-      margin-top: 12px;
+      margin-top: 8px;
     }
 
     .viewer-btn,
@@ -826,8 +826,13 @@
   <div class="photo-overlay" id="photoOverlay" onclick="closeViewerByBg(event)">
     <div class="viewer-card">
       <button class="close-viewer" type="button" onclick="closeViewer()">×</button>
-      <img class="viewer-img" id="viewerImg" src="" alt="">
+
+      <div class="viewer-media">
+        <img class="viewer-img" id="viewerImg" src="" alt="">
+      </div>
+
       <div class="viewer-title" id="viewerTitle"></div>
+
       <div class="viewer-actions">
         <button class="viewer-btn" type="button" id="viewerLikeBtn" onclick="toggleCurrentPhotoLike()">❤️ Обрати</button>
         <button class="viewer-btn" type="button" onclick="closeViewer()">Закрити</button>
@@ -902,18 +907,18 @@
     var wasMusicPlayingBeforeBonus = false;
 
     var months = [
-      { title: "Народження", src: "IMG-20250705-WA0000.jpg", pos: "center 42%" },
-      { title: "1 місяць", src: "foto1.jpg", pos: "center 36%" },
-      { title: "2 місяці", src: "foto2.jpg", pos: "center 34%" },
-      { title: "3 місяці", src: "foto3.jpg", pos: "center 28%" },
-      { title: "4 місяці", src: "foto4.jpg", pos: "center 34%" },
-      { title: "5 місяців", src: "foto5.jpg", pos: "center 34%" },
-      { title: "6 місяців", src: "foto6.jpg", pos: "center 36%" },
-      { title: "7 місяців", src: "foto7.jpg", pos: "center 38%" },
-      { title: "8 місяців", src: "foto8.jpg", pos: "center 36%" },
-      { title: "9 місяців", src: "foto9.jpg", pos: "center 36%" },
-      { title: "10 місяців", src: "foto10.jpg", pos: "center 36%" },
-      { title: "11 місяців", src: "foto11.jpg", pos: "center 36%" }
+      { title: "Народження", src: "IMG-20250705-WA0000.jpg", pos: "center 42%", viewerPos: "center 42%" },
+      { title: "1 місяць", src: "foto1.jpg", pos: "center 34%", viewerPos: "center 34%" },
+      { title: "2 місяці", src: "foto2.jpg", pos: "center 30%", viewerPos: "center 30%" },
+      { title: "3 місяці", src: "foto3.jpg", pos: "center 22%", viewerPos: "center 22%" },
+      { title: "4 місяці", src: "foto4.jpg", pos: "center 24%", viewerPos: "center 24%" },
+      { title: "5 місяців", src: "foto5.jpg", pos: "center 30%", viewerPos: "center 30%" },
+      { title: "6 місяців", src: "foto6.jpg", pos: "center 26%", viewerPos: "center 26%" },
+      { title: "7 місяців", src: "foto7.jpg", pos: "center 26%", viewerPos: "center 26%" },
+      { title: "8 місяців", src: "foto8.jpg", pos: "center 30%", viewerPos: "center 30%" },
+      { title: "9 місяців", src: "foto9.jpg", pos: "center 28%", viewerPos: "center 28%" },
+      { title: "10 місяців", src: "foto10.jpg", pos: "center 24%", viewerPos: "center 24%" },
+      { title: "11 місяців", src: "foto11.jpg", pos: "center 28%", viewerPos: "center 28%" }
     ];
 
     var selectedPhotos = JSON.parse(localStorage.getItem("sofiyka_location1_selected") || "[]");
@@ -958,6 +963,7 @@
         card.setAttribute("data-photo-id", id);
         card.setAttribute("data-src", month.src);
         card.setAttribute("data-title", month.title);
+        card.setAttribute("data-viewer-pos", month.viewerPos || "center 35%");
 
         if (isSelected(id)) {
           card.classList.add("selected");
@@ -968,7 +974,8 @@
           openViewer(
             this.getAttribute("data-photo-id"),
             this.getAttribute("data-src"),
-            this.getAttribute("data-title")
+            this.getAttribute("data-title"),
+            this.getAttribute("data-viewer-pos")
           );
         };
 
@@ -978,7 +985,8 @@
             openViewer(
               this.getAttribute("data-photo-id"),
               this.getAttribute("data-src"),
-              this.getAttribute("data-title")
+              this.getAttribute("data-title"),
+              this.getAttribute("data-viewer-pos")
             );
           }
         };
@@ -1070,13 +1078,16 @@
       }
     }
 
-    function openViewer(id, src, title) {
+    function openViewer(id, src, title, viewerPos) {
       currentPhotoId = id;
       viewerImg.src = src;
       viewerTitle.textContent = title || "";
+      viewerImg.style.objectPosition = viewerPos || "center 35%";
+
       viewerImg.onerror = function() {
         this.style.display = "none";
       };
+
       viewerImg.style.display = "block";
       updateViewerLikeButton();
       photoOverlay.classList.add("show");

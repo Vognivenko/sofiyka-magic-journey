@@ -164,11 +164,34 @@
       text-shadow: 0 1px 0 rgba(255,255,255,0.95);
     }
 
-    .gallery-ribbon {
+    .gallery-heading {
       width: 84%;
       max-width: 420px;
+      margin: 6px auto 16px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gallery-crown {
+      width: 58px;
+      height: 58px;
+      margin-bottom: -18px;
+      position: relative;
+      z-index: 2;
+      background: url("11.png") center / contain no-repeat;
+      filter:
+        drop-shadow(0 4px 7px rgba(90,35,120,0.22))
+        drop-shadow(0 0 8px rgba(255,240,180,0.65));
+      pointer-events: none;
+    }
+
+    .gallery-ribbon {
+      width: 100%;
       aspect-ratio: 850 / 145;
-      margin: 8px auto 16px;
+      position: relative;
+      z-index: 1;
       background: url("10.png") center / contain no-repeat;
       display: flex;
       align-items: center;
@@ -177,7 +200,7 @@
       font-size: clamp(20px, 4.9vw, 30px);
       font-weight: 700;
       text-align: center;
-      padding-top: 2px;
+      padding-top: 5px;
       text-shadow:
         0 2px 4px rgba(80,25,110,0.45),
         0 0 9px rgba(255,255,255,0.75);
@@ -439,7 +462,10 @@
       <div class="counter-pill" id="counterText">Обрано 0 з 7</div>
     </section>
 
-    <div class="gallery-ribbon">Галерея по місяцях</div>
+    <div class="gallery-heading">
+      <div class="gallery-crown"></div>
+      <div class="gallery-ribbon">Галерея по місяцях</div>
+    </div>
 
     <section class="months-grid" id="monthsGrid"></section>
 

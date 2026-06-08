@@ -59,8 +59,13 @@
       filter: drop-shadow(0 6px 10px rgba(80, 25, 110, 0.24));
     }
 
-    .back-btn { background-image: url("5.png"); }
-    .music-btn { background-image: url("6.png"); }
+    .back-btn {
+      background-image: url("5.png");
+    }
+
+    .music-btn {
+      background-image: url("6.png");
+    }
 
     .location-title {
       width: 48%;
@@ -134,9 +139,9 @@
 
     .task-title {
       position: absolute;
-      top: 19%;
+      top: 20%;
       left: 43%;
-      right: 13%;
+      width: 37%;
       text-align: center;
       font-size: clamp(15px, 3.8vw, 23px);
       line-height: 0.95;
@@ -147,9 +152,9 @@
 
     .counter-pill {
       position: absolute;
-      left: 39%;
-      right: 20%;
-      bottom: 31%;
+      top: 58%;
+      left: 41%;
+      width: 37%;
       text-align: center;
       color: #7a3b94;
       font-size: clamp(17px, 4.1vw, 25px);
@@ -205,13 +210,29 @@
       filter: drop-shadow(0 10px 15px rgba(87,35,105,0.22));
     }
 
-    .month-card:nth-child(2n) { animation-delay: .45s; }
-    .month-card:nth-child(3n) { animation-delay: .9s; }
+    .month-card:nth-child(2n) {
+      animation-delay: .45s;
+    }
 
-    .month-pink { background-image: url("1.png"); }
-    .month-blue { background-image: url("2.png"); }
-    .month-green { background-image: url("3.png"); }
-    .month-autumn { background-image: url("4.png"); }
+    .month-card:nth-child(3n) {
+      animation-delay: .9s;
+    }
+
+    .month-pink {
+      background-image: url("1.png");
+    }
+
+    .month-blue {
+      background-image: url("2.png");
+    }
+
+    .month-green {
+      background-image: url("3.png");
+    }
+
+    .month-autumn {
+      background-image: url("4.png");
+    }
 
     .month-title {
       height: 31%;
@@ -380,8 +401,13 @@
     }
 
     @keyframes cardBreath {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-2px) scale(1.008); }
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-2px) scale(1.008);
+      }
     }
   </style>
 </head>
@@ -651,4 +677,4 @@
   </script>
 
 </body>
-</html>
+  </html>

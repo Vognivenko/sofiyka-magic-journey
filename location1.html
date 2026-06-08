@@ -40,8 +40,9 @@
         linear-gradient(
           180deg,
           rgba(248, 217, 239, 0) 0%,
-          rgba(248, 217, 239, 0) 58%,
-          #f8d9ef 76%,
+          rgba(248, 217, 239, 0) 62%,
+          rgba(248, 217, 239, 0.18) 76%,
+          rgba(248, 217, 239, 0.92) 93%,
           #f8d9ef 100%
         ),
         url("fon_loc1.png");
@@ -77,8 +78,13 @@
       filter: drop-shadow(0 6px 10px rgba(80, 25, 110, 0.24));
     }
 
-    .back-btn { background-image: url("5.png"); }
-    .music-btn { background-image: url("6.png"); }
+    .back-btn {
+      background-image: url("5.png");
+    }
+
+    .music-btn {
+      background-image: url("6.png");
+    }
 
     .location-title {
       width: 48%;
@@ -143,11 +149,12 @@
     .task-card {
       width: 92%;
       max-width: 520px;
-      margin: 54px auto 18px;
+      margin: 54px auto 0;
       position: relative;
       aspect-ratio: 797 / 292;
       background: url("12.png") center / contain no-repeat;
       filter: drop-shadow(0 8px 14px rgba(90,35,120,0.16));
+      z-index: 4;
     }
 
     .task-title {
@@ -179,30 +186,41 @@
     .gallery-zone {
       width: 100%;
       position: relative;
-      margin-top: -20px;
-      padding: 54px 0 0;
+      margin-top: -44px;
+      padding: 92px 0 0;
       overflow: hidden;
       background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.22) 22%, transparent 48%),
-        radial-gradient(circle at 10% 18%, rgba(255,224,250,0.88) 0%, rgba(255,224,250,0.25) 30%, transparent 55%),
-        radial-gradient(circle at 90% 22%, rgba(226,198,255,0.65) 0%, rgba(226,198,255,0.18) 32%, transparent 58%),
-        linear-gradient(180deg, rgba(255,229,247,0.10) 0%, #f9d8f0 13%, #f8d2ec 48%, #f6cdea 100%);
+        linear-gradient(
+          180deg,
+          rgba(248,217,239,0) 0%,
+          rgba(248,217,239,0.36) 6%,
+          rgba(249,218,242,0.92) 16%,
+          #f9d8f0 34%,
+          #f8d2ec 68%,
+          #f6cdea 100%
+        );
       background-color: #f8d9ef;
     }
 
     .gallery-zone::before {
       content: "";
       position: absolute;
-      left: 0;
-      right: 0;
-      top: -80px;
-      height: 190px;
+      left: -8%;
+      right: -8%;
+      top: -128px;
+      height: 260px;
       z-index: 1;
       pointer-events: none;
       background:
-        radial-gradient(ellipse at 50% 35%, rgba(255,255,255,0.62) 0%, rgba(255,255,255,0.18) 42%, transparent 72%),
-        linear-gradient(180deg, rgba(248,217,239,0) 0%, rgba(248,217,239,0.38) 38%, #f8d9ef 100%);
-      filter: blur(0.2px);
+        radial-gradient(ellipse at 50% 28%, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.38) 34%, rgba(255,255,255,0) 72%),
+        linear-gradient(
+          180deg,
+          rgba(248,217,239,0) 0%,
+          rgba(248,217,239,0.30) 34%,
+          rgba(248,217,239,0.82) 68%,
+          #f9d8f0 100%
+        );
+      filter: blur(0.4px);
     }
 
     .gallery-zone::after {
@@ -212,9 +230,9 @@
       z-index: 1;
       pointer-events: none;
       background-image:
-        radial-gradient(circle, rgba(255,255,255,0.85) 0 1.1px, transparent 1.6px),
-        radial-gradient(circle, rgba(255,231,150,0.68) 0 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(255,255,255,0.55) 0 0.9px, transparent 1.4px);
+        radial-gradient(circle, rgba(255,255,255,0.78) 0 1.1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,231,150,0.62) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,0.48) 0 0.9px, transparent 1.4px);
       background-size:
         78px 104px,
         128px 142px,
@@ -223,7 +241,7 @@
         10px 20px,
         42px 76px,
         28px 48px;
-      opacity: 0.22;
+      opacity: 0.20;
       animation: sparkleFloat 14s linear infinite;
     }
 
@@ -238,7 +256,7 @@
     .gallery-heading {
       width: 84%;
       max-width: 420px;
-      margin: 0 auto 16px;
+      margin: -6px auto 10px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -283,7 +301,7 @@
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 6px;
+      gap: 2px;
       padding: 0 22px 22px;
     }
 
@@ -296,8 +314,8 @@
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
       filter:
-        drop-shadow(0 10px 16px rgba(87,35,105,0.20))
-        drop-shadow(0 0 12px rgba(255,230,170,0.16));
+        drop-shadow(0 10px 16px rgba(87,35,105,0.18))
+        drop-shadow(0 0 12px rgba(255,230,170,0.14));
       animation: frameBreath 5.4s ease-in-out infinite;
       transition:
         transform .25s ease,
@@ -307,40 +325,45 @@
     .month-card::before {
       content: "";
       position: absolute;
-      left: -16px;
-      right: -16px;
-      top: -30px;
-      bottom: -28px;
+      left: -10px;
+      right: -10px;
+      top: 18px;
+      bottom: 30px;
       z-index: 0;
-      border-radius: 52px;
+      border-radius: 42px;
       background:
-        radial-gradient(ellipse at 50% 13%, rgba(255,255,255,0.76) 0%, rgba(255,255,255,0.24) 32%, transparent 66%),
-        radial-gradient(circle at 16% 82%, rgba(255,225,245,0.78) 0%, rgba(255,225,245,0.20) 34%, transparent 62%),
-        radial-gradient(circle at 86% 68%, rgba(255,238,183,0.42) 0%, rgba(255,238,183,0.12) 30%, transparent 58%),
-        linear-gradient(180deg, rgba(255,245,252,0.34) 0%, rgba(255,220,243,0.32) 48%, rgba(245,198,230,0.38) 100%);
+        radial-gradient(ellipse at 50% 18%, rgba(255,255,255,0.58) 0%, rgba(255,255,255,0.18) 36%, transparent 70%),
+        radial-gradient(circle at 18% 82%, rgba(255,225,245,0.50) 0%, rgba(255,225,245,0.14) 34%, transparent 62%),
+        radial-gradient(circle at 86% 72%, rgba(255,238,183,0.30) 0%, rgba(255,238,183,0.10) 30%, transparent 58%),
+        linear-gradient(180deg, rgba(255,245,252,0.18) 0%, rgba(255,220,243,0.16) 48%, rgba(245,198,230,0.20) 100%);
       box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.34),
-        0 0 28px rgba(255,255,255,0.24),
-        0 18px 34px rgba(126,45,138,0.08);
+        inset 0 0 0 1px rgba(255,255,255,0.22),
+        0 0 22px rgba(255,255,255,0.16),
+        0 14px 24px rgba(126,45,138,0.05);
       pointer-events: none;
     }
 
     .month-card::after {
       content: "";
       position: absolute;
-      left: -10px;
-      right: -10px;
-      top: -18px;
-      height: 58px;
+      left: 4px;
+      right: 4px;
+      top: 36px;
+      height: 64px;
       z-index: 0;
       border-radius: 999px;
       background:
-        radial-gradient(ellipse at center, rgba(255,255,255,0.54) 0%, rgba(255,255,255,0.13) 55%, transparent 76%);
+        radial-gradient(ellipse at center, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 55%, transparent 78%);
       pointer-events: none;
     }
 
-    .month-card:nth-child(2n) { animation-delay: .45s; }
-    .month-card:nth-child(3n) { animation-delay: .9s; }
+    .month-card:nth-child(2n) {
+      animation-delay: .45s;
+    }
+
+    .month-card:nth-child(3n) {
+      animation-delay: .9s;
+    }
 
     .month-card:active {
       transform: scale(1.018);

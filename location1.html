@@ -36,7 +36,6 @@
       padding: 16px 0 0;
       position: relative;
       overflow: hidden;
-
       background-image:
         linear-gradient(
           180deg,
@@ -46,19 +45,15 @@
           #f8d9ef 100%
         ),
         url("fon_loc1.png");
-
       background-size:
         100% 100%,
         100% auto;
-
       background-position:
         top center,
         top center;
-
       background-repeat:
         no-repeat,
         no-repeat;
-
       background-color: #f8d9ef;
     }
 
@@ -231,30 +226,29 @@
 
     .months-grid {
       width: 100%;
-      max-width: 440px;
+      max-width: 430px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
-      padding: 0 18px 26px;
+      gap: 22px;
+      padding: 0 22px 30px;
     }
 
     .month-card {
       position: relative;
       width: 100%;
-      aspect-ratio: 560 / 255;
-      background-position: center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      padding: 12px 15px 13px;
-      filter: drop-shadow(0 8px 12px rgba(87,35,105,0.18));
-      animation: cardBreath 5.2s ease-in-out infinite;
-      transition: transform .25s ease, filter .25s ease;
-    }
-
-    .month-card:active {
-      transform: scale(1.025);
-      filter: drop-shadow(0 12px 18px rgba(87,35,105,0.24));
+      aspect-ratio: 720 / 980;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      filter:
+        drop-shadow(0 10px 16px rgba(87,35,105,0.22))
+        drop-shadow(0 0 12px rgba(255,230,170,0.18));
+      animation: frameBreath 5.4s ease-in-out infinite;
+      transition:
+        transform .25s ease,
+        filter .25s ease;
     }
 
     .month-card:nth-child(2n) {
@@ -265,92 +259,90 @@
       animation-delay: .9s;
     }
 
-    .month-pink {
-      background-image: url("1.png");
+    .month-card:active {
+      transform: scale(1.025);
+      filter:
+        drop-shadow(0 14px 22px rgba(87,35,105,0.28))
+        drop-shadow(0 0 18px rgba(255,230,170,0.38));
     }
 
-    .month-blue {
-      background-image: url("2.png");
+    .month-card.selected {
+      filter:
+        drop-shadow(0 12px 18px rgba(87,35,105,0.25))
+        drop-shadow(0 0 22px rgba(255,215,95,0.85));
     }
 
-    .month-green {
-      background-image: url("3.png");
-    }
-
-    .month-autumn {
-      background-image: url("4.png");
-    }
-
-    .month-title {
-      height: 32%;
-      padding-left: 58px;
-      display: flex;
-      align-items: center;
-      color: #612985;
-      font-size: clamp(22px, 6vw, 30px);
-      font-weight: 700;
-      line-height: 1;
-      white-space: nowrap;
-      text-shadow:
-        0 1px 0 rgba(255,255,255,0.96),
-        0 0 7px rgba(255,255,255,0.55);
-    }
-
-    .photo-row {
-      height: 58%;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      padding: 2px 18px 8px 54px;
-    }
-
-    .photo-item {
-      position: relative;
-      border: none;
-      border-radius: 12px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.38);
-      box-shadow:
-        0 0 0 2px rgba(255,225,170,0.75),
-        inset 0 2px 5px rgba(255,255,255,0.8);
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      font-size: 0;
-      color: transparent;
-    }
-
-    .photo-item img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      object-position: center;
-      font-size: 0;
-      color: transparent;
-    }
-
-    .photo-item.selected {
-      box-shadow:
-        0 0 0 3px rgba(255,212,90,0.95),
-        0 0 13px rgba(255,205,85,0.9);
-    }
-
-    .like-badge {
+    .month-card.selected::before {
+      content: "";
       position: absolute;
-      right: 3px;
-      bottom: 3px;
-      width: 22px;
-      height: 22px;
-      background: none;
-      opacity: 0;
-      transform: scale(0.55);
-      transition: opacity .2s ease, transform .2s ease;
+      inset: 6.5%;
+      border-radius: 28px;
+      box-shadow:
+        0 0 0 4px rgba(255,214,86,0.95),
+        0 0 24px rgba(255,210,85,0.85);
+      z-index: 5;
       pointer-events: none;
     }
 
-    .photo-item.selected .like-badge {
-      opacity: 1;
-      transform: scale(1);
+    .month-photo {
+      position: absolute;
+      left: 12.5%;
+      top: 26.5%;
+      width: 75%;
+      height: 60%;
+      border-radius: 24px;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+      background: rgba(255,255,255,0.45);
+    }
+
+    .month-frame {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: url("gallery_frame_one.png") center / contain no-repeat;
+      pointer-events: none;
+    }
+
+    .month-title {
+      position: absolute;
+      top: 8.5%;
+      left: 12%;
+      right: 12%;
+      z-index: 4;
+      text-align: center;
+      color: #6a2787;
+      font-size: clamp(28px, 7.5vw, 42px);
+      font-weight: 700;
+      line-height: 1;
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.95),
+        0 0 9px rgba(255,255,255,0.7),
+        0 4px 9px rgba(95,35,115,0.22);
+      pointer-events: none;
+    }
+
+    .month-like {
+      position: absolute;
+      right: 10.5%;
+      bottom: 7.5%;
+      width: 58px;
+      height: 58px;
+      z-index: 6;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      filter:
+        drop-shadow(0 3px 5px rgba(90,35,90,0.35))
+        drop-shadow(0 0 10px rgba(255,230,140,0.8));
+      pointer-events: none;
+    }
+
+    .month-card.selected .month-like {
+      display: flex;
+      animation: heartPop .35s ease both;
     }
 
     .complete-btn {
@@ -396,9 +388,9 @@
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 22px;
-      background: rgba(42, 13, 58, 0.78);
-      backdrop-filter: blur(5px);
+      padding: 20px;
+      background: rgba(42, 13, 58, 0.80);
+      backdrop-filter: blur(6px);
     }
 
     .photo-overlay.show {
@@ -409,21 +401,33 @@
       position: relative;
       width: 100%;
       max-width: 430px;
-      border-radius: 26px;
+      border-radius: 30px;
       padding: 12px;
       background: linear-gradient(180deg, rgba(255,250,252,0.98), rgba(246,220,255,0.96));
       box-shadow:
         0 0 0 3px rgba(255,222,130,0.95),
         0 0 28px rgba(255,226,135,0.65),
         0 20px 50px rgba(20,0,40,0.38);
+      animation: viewerAppear .24s ease both;
     }
 
     .viewer-img {
       width: 100%;
       max-height: 68vh;
-      border-radius: 20px;
+      border-radius: 22px;
       display: block;
       object-fit: contain;
+      background: rgba(255,255,255,0.35);
+    }
+
+    .viewer-title {
+      margin: 8px 0 4px;
+      text-align: center;
+      color: #6a2787;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
     }
 
     .viewer-actions {
@@ -443,6 +447,9 @@
       cursor: pointer;
       color: #743092;
       background: #fff4fb;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,220,140,0.65),
+        0 4px 10px rgba(90,35,120,0.14);
     }
 
     .close-viewer {
@@ -458,15 +465,47 @@
       font-size: 27px;
       font-weight: 700;
       cursor: pointer;
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.9),
+        0 6px 12px rgba(60,20,90,0.22);
     }
 
-    @keyframes cardBreath {
+    @keyframes frameBreath {
       0%, 100% {
         transform: translateY(0) scale(1);
       }
 
       50% {
-        transform: translateY(-2px) scale(1.006);
+        transform: translateY(-4px) scale(1.008);
+      }
+    }
+
+    @keyframes heartPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.45);
+      }
+
+      70% {
+        opacity: 1;
+        transform: scale(1.16);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes viewerAppear {
+      0% {
+        opacity: 0;
+        transform: scale(0.94) translateY(10px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
       }
     }
   </style>
@@ -517,6 +556,7 @@
     <div class="viewer-card">
       <button class="close-viewer" type="button" onclick="closeViewer()">×</button>
       <img class="viewer-img" id="viewerImg" src="" alt="">
+      <div class="viewer-title" id="viewerTitle"></div>
       <div class="viewer-actions">
         <button class="viewer-btn" type="button" id="viewerLikeBtn" onclick="toggleCurrentPhotoLike()">❤️ Обрати</button>
         <button class="viewer-btn" type="button" onclick="closeViewer()">Закрити</button>
@@ -534,23 +574,24 @@
     var completeBtn = document.getElementById("completeBtn");
     var photoOverlay = document.getElementById("photoOverlay");
     var viewerImg = document.getElementById("viewerImg");
+    var viewerTitle = document.getElementById("viewerTitle");
     var viewerLikeBtn = document.getElementById("viewerLikeBtn");
 
     var currentPhotoId = null;
 
     var months = [
-      { title: "Народження", style: "month-pink", prefix: "photo_0" },
-      { title: "1 місяць", style: "month-pink", prefix: "photo_1" },
-      { title: "2 місяці", style: "month-pink", prefix: "photo_2" },
-      { title: "3 місяці", style: "month-autumn", prefix: "photo_3" },
-      { title: "4 місяці", style: "month-autumn", prefix: "photo_4" },
-      { title: "5 місяців", style: "month-autumn", prefix: "photo_5" },
-      { title: "6 місяців", style: "month-blue", prefix: "photo_6" },
-      { title: "7 місяців", style: "month-blue", prefix: "photo_7" },
-      { title: "8 місяців", style: "month-blue", prefix: "photo_8" },
-      { title: "9 місяців", style: "month-green", prefix: "photo_9" },
-      { title: "10 місяців", style: "month-green", prefix: "photo_10" },
-      { title: "11 місяців", style: "month-green", prefix: "photo_11" }
+      { title: "Народження", src: "photo_0.jpg" },
+      { title: "1 місяць", src: "photo_1.jpg" },
+      { title: "2 місяці", src: "photo_2.jpg" },
+      { title: "3 місяці", src: "photo_3.jpg" },
+      { title: "4 місяці", src: "photo_4.jpg" },
+      { title: "5 місяців", src: "photo_5.jpg" },
+      { title: "6 місяців", src: "photo_6.jpg" },
+      { title: "7 місяців", src: "photo_7.jpg" },
+      { title: "8 місяців", src: "photo_8.jpg" },
+      { title: "9 місяців", src: "photo_9.jpg" },
+      { title: "10 місяців", src: "photo_10.jpg" },
+      { title: "11 місяців", src: "photo_11.jpg" }
     ];
 
     var selectedPhotos = JSON.parse(localStorage.getItem("sofiyka_location1_selected") || "[]");
@@ -563,12 +604,8 @@
       window.location.href = "map.html";
     }
 
-    function photoId(monthIndex, photoIndex) {
-      return "m" + monthIndex + "_p" + photoIndex;
-    }
-
-    function photoSrc(monthIndex, photoIndex) {
-      return months[monthIndex].prefix + "_" + photoIndex + ".jpg";
+    function photoId(monthIndex) {
+      return "m" + monthIndex;
     }
 
     function isSelected(id) {
@@ -584,53 +621,53 @@
 
       for (var i = 0; i < months.length; i++) {
         var month = months[i];
+        var id = photoId(i);
 
-        var card = document.createElement("article");
-        card.className = "month-card " + month.style;
+        var card = document.createElement("button");
+        card.className = "month-card";
+        card.type = "button";
+        card.setAttribute("data-photo-id", id);
+        card.setAttribute("data-src", month.src);
+        card.setAttribute("data-title", month.title);
+
+        if (isSelected(id)) {
+          card.classList.add("selected");
+        }
+
+        card.onclick = function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          openViewer(
+            this.getAttribute("data-photo-id"),
+            this.getAttribute("data-src"),
+            this.getAttribute("data-title")
+          );
+        };
+
+        var photo = document.createElement("img");
+        photo.className = "month-photo";
+        photo.src = month.src;
+        photo.alt = month.title;
+        photo.onerror = function() {
+          this.style.display = "none";
+        };
 
         var title = document.createElement("div");
         title.className = "month-title";
         title.textContent = month.title;
 
-        var row = document.createElement("div");
-        row.className = "photo-row";
+        var frame = document.createElement("div");
+        frame.className = "month-frame";
 
-        for (var p = 1; p <= 3; p++) {
-          var id = photoId(i, p);
+        var like = document.createElement("div");
+        like.className = "month-like";
+        like.textContent = "💛";
 
-          var btn = document.createElement("button");
-          btn.className = "photo-item";
-          btn.type = "button";
-          btn.setAttribute("data-photo-id", id);
-          btn.setAttribute("data-src", photoSrc(i, p));
-
-          if (isSelected(id)) {
-            btn.classList.add("selected");
-          }
-
-          btn.onclick = function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            openViewer(this.getAttribute("data-photo-id"), this.getAttribute("data-src"));
-          };
-
-          var img = document.createElement("img");
-          img.src = photoSrc(i, p);
-          img.alt = "";
-          img.onerror = function() {
-            this.style.display = "none";
-          };
-
-          var badge = document.createElement("span");
-          badge.className = "like-badge";
-
-          btn.appendChild(img);
-          btn.appendChild(badge);
-          row.appendChild(btn);
-        }
-
+        card.appendChild(photo);
+        card.appendChild(frame);
         card.appendChild(title);
-        card.appendChild(row);
+        card.appendChild(like);
+
         monthsGrid.appendChild(card);
       }
     }
@@ -669,9 +706,10 @@
       }
     }
 
-    function openViewer(id, src) {
+    function openViewer(id, src, title) {
       currentPhotoId = id;
       viewerImg.src = src;
+      viewerTitle.textContent = title || "";
       viewerImg.onerror = function() {
         this.style.display = "none";
       };
@@ -684,6 +722,7 @@
       photoOverlay.classList.remove("show");
       currentPhotoId = null;
       viewerImg.src = "";
+      viewerTitle.textContent = "";
     }
 
     function closeViewerByBg(event) {

@@ -27,17 +27,20 @@
 
     body {
       min-height: 100vh;
-      background-image: url("fon_loc1.png");
-      background-size: 100% auto;
-      background-position: top center;
-      background-repeat: no-repeat;
       background-color: #f8d9ef;
     }
 
     .page {
       width: 100%;
       min-height: 100vh;
-      padding: 16px 0 40px;
+      padding: 16px 0 0;
+      position: relative;
+      overflow: hidden;
+      background-image: url("fon_loc1_center.png");
+      background-size: 100% 100%;
+      background-position: top center;
+      background-repeat: no-repeat;
+      background-color: #f8d9ef;
     }
 
     .topbar {
@@ -335,7 +338,7 @@
       display: none;
       width: calc(100% - 28px);
       max-width: 430px;
-      margin: 10px auto 0;
+      margin: 12px auto 0;
       border: none;
       border-radius: 999px;
       padding: 14px 18px;
@@ -353,6 +356,18 @@
 
     .complete-btn.show {
       display: block;
+    }
+
+    .bottom-decor {
+      width: 100%;
+      max-width: 520px;
+      height: clamp(78px, 24vw, 130px);
+      margin: 10px auto 0;
+      background-image: url("fon_loc1_buttom.png");
+      background-size: 100% auto;
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      pointer-events: none;
     }
 
     .photo-overlay {
@@ -474,6 +489,8 @@
     <button class="complete-btn" id="completeBtn" type="button" onclick="completeLocation()">
       Відкрити наступну локацію ✨
     </button>
+
+    <div class="bottom-decor"></div>
 
   </main>
 

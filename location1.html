@@ -777,4 +777,49 @@
       if (isSelected(currentPhotoId)) {
         viewerLikeBtn.textContent = "💛 Прибрати";
       } else {
-        viewerLikeBtn.textContent
+        viewerLikeBtn.textContent = "❤️ Обрати";
+      }
+    }
+
+    function toggleCurrentPhotoLike() {
+      if (!currentPhotoId) return;
+      toggleLike(currentPhotoId);
+    }
+
+    function completeLocation() {
+      if (selectedPhotos.length < REQUIRED_LIKES) {
+        alert("Обери 7 наймиліших фото Софійки ❤️");
+        return;
+      }
+
+      localStorage.setItem("sofiyka_location1_done", "true");
+      window.location.href = "map.html";
+    }
+
+    async function toggleMusic(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      if (!bgMusic || !musicToggle) return;
+
+      try {
+        if (bgMusic.paused) {
+          await bgMusic.play();
+          musicToggle.style.transform = "scale(1.06)";
+        } else {
+          bgMusic.pause();
+          musicToggle.style.transform = "scale(1)";
+        }
+      } catch (error) {
+        alert("Музика не запустилась. Перевір mp3 файл.");
+      }
+    }
+
+    renderMonths();
+    updateCounter();
+  </script>
+
+</body>
+</html>

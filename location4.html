@@ -477,7 +477,7 @@
 
     .finish-actions {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
     }
 
@@ -487,10 +487,11 @@
       border-radius: 999px;
       padding: 12px 18px;
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(20px, 2.4vw, 28px);
+      font-size: clamp(19px, 2.2vw, 27px);
       font-weight: 700;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      line-height: 1.05;
     }
 
     .finish-btn.primary {
@@ -501,6 +502,12 @@
 
     .finish-btn.video {
       background: linear-gradient(180deg, #fff6e8, #f0c76e);
+      color: var(--violet);
+      box-shadow: 0 10px 20px rgba(120,70,150,0.16);
+    }
+
+    .finish-btn.video-second {
+      background: linear-gradient(180deg, #fff3fb, #e7c5ff);
       color: var(--violet);
       box-shadow: 0 10px 20px rgba(120,70,150,0.16);
     }
@@ -748,6 +755,12 @@
       to {
         opacity: 1;
         transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .finish-actions {
+        grid-template-columns: 1fr 1fr;
       }
     }
 
@@ -1012,12 +1025,17 @@
     <section class="card finish-card" id="finishCard">
       <h2 class="finish-title">Королівську трапезу підготовлено!</h2>
       <p class="finish-text">
-        Дякуємо за відповідь. Локацію 4 пройдено. Можна переглянути бонусне відео або перейти до фінальної локації.
+        Дякуємо за відповідь. Локацію 4 пройдено.
+        Можна переглянути бонусні відео або перейти до фінальної локації.
       </p>
 
       <div class="finish-actions">
         <button class="finish-btn video" type="button" id="watchBonusBtn">
           Бонусне відео ✨
+        </button>
+
+        <button class="finish-btn video-second" type="button" id="watchBonusSecondBtn">
+          Ще одне відео 🎬
         </button>
 
         <button class="finish-btn primary" type="button" id="goLocation5Btn">
@@ -1039,12 +1057,11 @@
       <video
         class="bonus-video"
         id="bonusVideo"
-        src="bonus_location4.mp4"
         playsinline
         preload="metadata">
       </video>
 
-      <div class="bonus-title">Бонусне відео локації 4 ✨</div>
+      <div class="bonus-title" id="bonusTitle">Бонусне відео локації 4 ✨</div>
 
       <div class="bonus-actions">
         <button class="bonus-btn bonus-next-btn" id="bonusNextBtn" type="button">
@@ -1073,6 +1090,7 @@
     const goLocation5Btn = document.getElementById("goLocation5Btn");
     const goMapBtn = document.getElementById("goMapBtn");
     const watchBonusBtn = document.getElementById("watchBonusBtn");
+    const watchBonusSecondBtn = document.getElementById("watchBonusSecondBtn");
 
     const backBtn = document.getElementById("backBtn");
     const musicBtn = document.getElementById("musicBtn");
@@ -1089,12 +1107,14 @@
 
     const bonusVideoOverlay = document.getElementById("bonusVideoOverlay");
     const bonusVideo = document.getElementById("bonusVideo");
+    const bonusTitle = document.getElementById("bonusTitle");
     const bonusNextBtn = document.getElementById("bonusNextBtn");
     const bonusMapBtn = document.getElementById("bonusMapBtn");
     const closeBonusBtn = document.getElementById("closeBonusBtn");
     const bonusCloseBottomBtn = document.getElementById("bonusCloseBottomBtn");
 
     let wasMusicPlayingBeforeBonus = false;
+    let currentBonusVideoSrc = "";
 
     if (bgMusic) {
       bgMusic.volume = 0.35;
@@ -1224,7 +1244,7 @@
 
       if (shouldOpenBonus) {
         setTimeout(function() {
-          openBonusVideo();
+          openBonusVideo("bonus_location4.mp4", "Бонусне відео локації 4 ✨");
         }, 650);
       }
     }
@@ -1307,7 +1327,7 @@
       }
     }
 
-    async function openBonusVideo() {
+    async function openBonusVideo(videoSrc, titleText) {
       if (!bonusVideo || !bonusVideoOverlay) return;
 
       document.body.classList.add("video-playing");
@@ -1320,16 +1340,25 @@
         musicBtn.classList.remove("playing");
       }
 
+      currentBonusVideoSrc = videoSrc;
+
       bonusNextBtn.classList.remove("show");
       bonusMapBtn.classList.remove("show");
 
+      bonusTitle.textContent = titleText || "Бонусне відео локації 4 ✨";
+
+      bonusVideo.pause();
+      bonusVideo.removeAttribute("src");
+      bonusVideo.load();
+
+      bonusVideo.src = videoSrc;
       bonusVideoOverlay.classList.add("show");
 
       try {
         bonusVideo.currentTime = 0;
         await bonusVideo.play();
       } catch (error) {
-        showToast("Відео не запустилось. Перевір bonus_location4.mp4 🎬");
+        showToast("Відео не запустилось. Перевір " + videoSrc + " 🎬");
       }
     }
 
@@ -1355,15 +1384,25 @@
 
     if (bonusVideo) {
       bonusVideo.addEventListener("ended", function() {
-        localStorage.setItem("sofiyka_location4_bonus_seen", "true");
+        if (currentBonusVideoSrc === "bonus_location4_2.mp4") {
+          localStorage.setItem("sofiyka_location4_bonus_2_seen", "true");
+          showToast("Друге відео переглянуто ✨");
+        } else {
+          localStorage.setItem("sofiyka_location4_bonus_seen", "true");
+          showToast("Бонусне відео переглянуто ✨");
+        }
+
         bonusNextBtn.classList.add("show");
         bonusMapBtn.classList.add("show");
-        showToast("Бонусне відео переглянуто ✨");
       });
     }
 
     watchBonusBtn.addEventListener("click", function() {
-      openBonusVideo();
+      openBonusVideo("bonus_location4.mp4", "Бонусне відео локації 4 ✨");
+    });
+
+    watchBonusSecondBtn.addEventListener("click", function() {
+      openBonusVideo("bonus_location4_2.mp4", "Додаткове відео локації 4 🎬");
     });
 
     goLocation5Btn.addEventListener("click", function() {

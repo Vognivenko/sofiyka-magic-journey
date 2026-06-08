@@ -15,8 +15,8 @@
       --violet: #7e459e;
       --violet-soft: #9b6bb7;
       --gold: #efd77a;
-      --shadow: 0 10px 28px rgba(173, 117, 195, 0.18);
-      --border: 2px solid rgba(238, 219, 127, 0.9);
+      --shadow: 0 10px 28px rgba(173, 117, 195, 0.14);
+      --border: 2px solid rgba(238, 219, 127, 0.72);
       --radius-xl: 34px;
       --container-width: 1120px;
     }
@@ -52,84 +52,179 @@
       z-index: 0;
     }
 
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.80) 0 1.1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,232,150,0.62) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,0.46) 0 0.9px, transparent 1.4px);
+      background-size:
+        84px 112px,
+        132px 154px,
+        58px 88px;
+      background-position:
+        12px 18px,
+        46px 74px,
+        28px 50px;
+      opacity: 0.22;
+      animation: pageSparkles 16s linear infinite;
+    }
+
     .page {
       position: relative;
       z-index: 1;
       width: 100%;
       max-width: var(--container-width);
       margin: 0 auto;
-      padding: 14px 18px 42px;
+      padding: 16px 18px 42px;
     }
 
     .topbar {
-      display: grid;
-      grid-template-columns: 70px 1fr 70px;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .top-btn {
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      border: 2px solid rgba(238, 219, 127, 0.9);
-      background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.96), rgba(255,248,221,0.92) 35%, rgba(248,225,137,0.92) 82%);
-      color: var(--violet);
-      font-size: 32px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow:
-        0 0 0 4px rgba(255,245,199,0.30),
-        0 8px 20px rgba(229,187,89,0.22),
-        inset 0 2px 12px rgba(255,255,255,0.75);
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto 18px;
+      padding: 4px 6px 0;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+    }
+
+    .image-btn {
+      width: 56px;
+      height: 56px;
+      border: none;
+      background: transparent center / contain no-repeat;
+      cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      filter: drop-shadow(0 6px 10px rgba(80, 25, 110, 0.24));
+      transition: transform .2s ease, filter .2s ease;
+      flex: 0 0 auto;
+    }
+
+    .image-btn:active {
+      transform: scale(0.94);
+    }
+
+    .back-btn {
+      background-image: url("5.png");
+    }
+
+    .music-btn {
+      background-image: url("6.png");
     }
 
     .music-btn.playing {
-      box-shadow:
-        0 0 0 4px rgba(255,245,199,0.35),
-        0 0 22px rgba(202,152,249,0.45),
-        0 8px 20px rgba(229,187,89,0.22),
-        inset 0 2px 12px rgba(255,255,255,0.75);
+      transform: scale(1.06);
+      filter:
+        drop-shadow(0 6px 10px rgba(80, 25, 110, 0.24))
+        drop-shadow(0 0 10px rgba(255, 230, 150, 0.75));
     }
 
     .location-title {
-      justify-self: center;
-      min-height: 54px;
-      padding: 10px 28px;
-      border-radius: 999px;
-      border: 2px solid rgba(238, 219, 127, 0.9);
-      background: rgba(255,255,255,0.78);
-      box-shadow: 0 8px 18px rgba(120,70,150,0.14);
+      width: 56%;
+      max-width: 270px;
+      min-width: 178px;
+      aspect-ratio: 420 / 145;
+      background: url("8.png") center / contain no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
+      color: #69228b;
+      font-size: clamp(21px, 5.1vw, 32px);
       font-weight: 700;
-      color: var(--violet);
+      line-height: 1;
       text-align: center;
+      padding-top: 6px;
+      padding-left: 0;
+      white-space: nowrap;
+      letter-spacing: -0.2px;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
+      flex: 0 0 auto;
     }
 
     .card {
+      position: relative;
       border: var(--border);
       border-radius: var(--radius-xl);
-      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(255,248,253,0.88));
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.55), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.66), rgba(255,246,253,0.48));
+      backdrop-filter: blur(6px);
       box-shadow: var(--shadow);
       overflow: hidden;
       margin-bottom: 18px;
+      animation: cardBreath 5.8s ease-in-out infinite;
+    }
+
+    .card:nth-of-type(2) {
+      animation-delay: .35s;
+    }
+
+    .card:nth-of-type(3) {
+      animation-delay: .7s;
+    }
+
+    .card:nth-of-type(4) {
+      animation-delay: 1.05s;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -45%;
+      left: -75%;
+      width: 42%;
+      height: 190%;
+      transform: rotate(18deg);
+      background:
+        linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255,255,255,0.08) 18%,
+          rgba(255,255,255,0.54) 50%,
+          rgba(255,255,255,0.08) 82%,
+          transparent 100%
+        );
+      opacity: 0;
+      pointer-events: none;
+      animation: cardShine 7.2s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.88) 0 1.1px, transparent 1.7px),
+        radial-gradient(circle, rgba(255,235,150,0.70) 0 1px, transparent 1.6px);
+      background-size:
+        92px 120px,
+        136px 164px;
+      background-position:
+        18px 28px,
+        64px 86px;
+      opacity: 0.16;
+      animation: cardSparkles 11s linear infinite;
+      z-index: 1;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 2;
     }
 
     .hero-card {
       padding: 28px 22px;
       text-align: center;
       background:
-        radial-gradient(circle at 50% 20%, rgba(255,245,210,0.50), transparent 42%),
-        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,246,253,0.86));
+        radial-gradient(circle at 50% 20%, rgba(255,245,210,0.42), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.62), rgba(255,246,253,0.46));
     }
 
     .hero-card h1 {
@@ -150,6 +245,7 @@
       line-height: 1.22;
       font-weight: 600;
       color: #6f438f;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.76);
     }
 
     .form-card {
@@ -163,6 +259,9 @@
       line-height: 1.04;
       font-weight: 700;
       color: var(--violet);
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.82),
+        0 6px 18px rgba(126,69,158,0.08);
     }
 
     .section-text {
@@ -173,6 +272,7 @@
       line-height: 1.2;
       font-weight: 600;
       color: #6f438f;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.76);
     }
 
     .form-grid {
@@ -197,6 +297,7 @@
       line-height: 1.1;
       font-weight: 700;
       color: var(--violet);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.74);
     }
 
     input,
@@ -206,15 +307,16 @@
       border: 2px solid rgba(238, 219, 127, 0.75);
       border-radius: 22px;
       padding: 14px 16px;
-      background: rgba(255,255,255,0.82);
+      background: rgba(255,255,255,0.68);
       color: #674079;
       font-family: "Cormorant Garamond", serif;
       font-size: 23px;
       font-weight: 600;
       outline: none;
       box-shadow:
-        inset 0 2px 8px rgba(255,255,255,0.75),
+        inset 0 2px 8px rgba(255,255,255,0.55),
         0 6px 16px rgba(173,117,195,0.08);
+      backdrop-filter: blur(4px);
     }
 
     textarea {
@@ -226,6 +328,7 @@
     textarea:focus,
     select:focus {
       border-color: rgba(199, 139, 229, 0.9);
+      background: rgba(255,255,255,0.82);
       box-shadow:
         0 0 0 3px rgba(199, 139, 229, 0.18),
         inset 0 2px 8px rgba(255,255,255,0.75);
@@ -254,10 +357,22 @@
       border: 2px solid rgba(238, 219, 127, 0.72);
       border-radius: 22px;
       padding: 12px 14px;
-      background: rgba(255,255,255,0.78);
-      box-shadow: 0 6px 16px rgba(173,117,195,0.08);
+      background: rgba(255,255,255,0.58);
+      box-shadow:
+        0 6px 16px rgba(173,117,195,0.08),
+        inset 0 2px 8px rgba(255,255,255,0.45);
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      backdrop-filter: blur(4px);
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .option:active {
+      transform: scale(0.98);
     }
 
     .option input {
@@ -267,6 +382,7 @@
       accent-color: #a96bd1;
       box-shadow: none;
       padding: 0;
+      background: transparent;
     }
 
     .option span {
@@ -280,10 +396,11 @@
       border-color: rgba(199, 139, 229, 0.95);
       background:
         radial-gradient(circle at 50% 0%, rgba(255, 230, 250, 0.5), transparent 44%),
-        rgba(255,255,255,0.90);
+        rgba(255,255,255,0.78);
       box-shadow:
         0 0 0 2px rgba(230, 199, 255, 0.42),
-        0 8px 18px rgba(173,117,195,0.14);
+        0 8px 18px rgba(173,117,195,0.14),
+        0 0 18px rgba(255,230,150,0.18);
     }
 
     .children-fields,
@@ -294,6 +411,7 @@
     .children-fields.active,
     .other-alcohol-field.active {
       display: block;
+      animation: showFinish 0.28s ease both;
     }
 
     .divider {
@@ -318,10 +436,12 @@
         0 10px 22px rgba(120,70,150,0.22),
         inset 0 2px 10px rgba(255,255,255,0.28);
       -webkit-tap-highlight-color: transparent;
+      animation: buttonPulse 2.8s ease-in-out infinite;
     }
 
     .submit-btn.done {
       background: linear-gradient(180deg, #f0c76e, #d99c43);
+      animation: none;
     }
 
     .submit-btn:disabled {
@@ -357,7 +477,7 @@
 
     .finish-actions {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 12px;
     }
 
@@ -367,7 +487,7 @@
       border-radius: 999px;
       padding: 12px 18px;
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(21px, 2.5vw, 30px);
+      font-size: clamp(20px, 2.4vw, 28px);
       font-weight: 700;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
@@ -379,10 +499,126 @@
       box-shadow: 0 10px 20px rgba(120,70,150,0.20);
     }
 
-    .finish-btn.secondary {
-      background: rgba(255,255,255,0.80);
+    .finish-btn.video {
+      background: linear-gradient(180deg, #fff6e8, #f0c76e);
       color: var(--violet);
-      border: 2px solid rgba(238,219,127,0.78);
+      box-shadow: 0 10px 20px rgba(120,70,150,0.16);
+    }
+
+    .finish-btn.secondary {
+      background: rgba(255,255,255,0.70);
+      color: var(--violet);
+      border: 2px solid rgba(238,219,127,0.72);
+    }
+
+    .bonus-video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(42, 13, 58, 0.82);
+      backdrop-filter: blur(6px);
+    }
+
+    .bonus-video-overlay.show {
+      display: flex;
+    }
+
+    .bonus-card {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      border-radius: 30px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(255,250,252,0.98), rgba(246,220,255,0.96));
+      box-shadow:
+        0 0 0 3px rgba(255,222,130,0.95),
+        0 0 28px rgba(255,226,135,0.65),
+        0 20px 50px rgba(20,0,40,0.38);
+      animation: showFinish .24s ease both;
+    }
+
+    .bonus-video {
+      width: 100%;
+      max-height: 70vh;
+      display: block;
+      border-radius: 24px;
+      background: #16061f;
+      object-fit: contain;
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.85),
+        0 0 20px rgba(255,220,120,0.35);
+    }
+
+    .bonus-title {
+      margin: 12px 0 8px;
+      text-align: center;
+      color: #6a2787;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .bonus-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .bonus-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 13px 12px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 23px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #743092;
+      background: #fff4fb;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,220,140,0.65),
+        0 4px 10px rgba(90,35,120,0.14);
+    }
+
+    .bonus-next-btn,
+    .bonus-map-btn {
+      display: none;
+    }
+
+    .bonus-next-btn.show,
+    .bonus-map-btn.show {
+      display: block;
+    }
+
+    .bonus-next-btn {
+      background: linear-gradient(180deg, #fff6fb, #f1cfff);
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.95),
+        0 0 18px rgba(255,220,120,0.55),
+        0 8px 16px rgba(90,35,120,0.18);
+    }
+
+    .close-bonus {
+      position: absolute;
+      top: -14px;
+      right: -10px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: #fff3fb;
+      color: #743092;
+      font-size: 27px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.9),
+        0 6px 12px rgba(60,20,90,0.22);
     }
 
     .toast {
@@ -400,7 +636,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.22s ease, transform 0.22s ease;
-      z-index: 50;
+      z-index: 100000;
       text-align: center;
       max-width: calc(100% - 32px);
     }
@@ -414,14 +650,104 @@
       display: none;
     }
 
+    body.video-playing .card,
+    body.video-playing .card::before,
+    body.video-playing .card::after,
+    body.video-playing::after,
+    body.video-playing .submit-btn {
+      animation: none !important;
+    }
+
+    @keyframes pageSparkles {
+      0% {
+        background-position:
+          12px 18px,
+          46px 74px,
+          28px 50px;
+      }
+
+      100% {
+        background-position:
+          12px 130px,
+          46px 228px,
+          28px 138px;
+      }
+    }
+
+    @keyframes cardBreath {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 10px 28px rgba(173, 117, 195, 0.14);
+      }
+
+      50% {
+        transform: translateY(-3px) scale(1.004);
+        box-shadow: 0 15px 32px rgba(173, 117, 195, 0.18);
+      }
+    }
+
+    @keyframes cardShine {
+      0% {
+        left: -75%;
+        opacity: 0;
+      }
+
+      12% {
+        opacity: 0.45;
+      }
+
+      34% {
+        left: 130%;
+        opacity: 0;
+      }
+
+      100% {
+        left: 130%;
+        opacity: 0;
+      }
+    }
+
+    @keyframes cardSparkles {
+      0% {
+        background-position:
+          18px 28px,
+          64px 86px;
+        opacity: 0.12;
+      }
+
+      50% {
+        opacity: 0.24;
+      }
+
+      100% {
+        background-position:
+          18px 148px,
+          64px 250px;
+        opacity: 0.12;
+      }
+    }
+
+    @keyframes buttonPulse {
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 8px rgba(199,139,229,0.22));
+      }
+
+      50% {
+        transform: scale(1.018);
+        filter: drop-shadow(0 0 16px rgba(199,139,229,0.42));
+      }
+    }
+
     @keyframes showFinish {
       from {
         opacity: 0;
-        transform: translateY(14px);
+        transform: translateY(14px) scale(0.96);
       }
+
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
       }
     }
 
@@ -431,20 +757,22 @@
       }
 
       .topbar {
-        grid-template-columns: 64px 1fr 64px;
-        gap: 8px;
+        max-width: 520px;
+        padding: 4px 6px 0;
       }
 
-      .top-btn {
-        width: 58px;
-        height: 58px;
-        font-size: 30px;
+      .image-btn {
+        width: 56px;
+        height: 56px;
       }
 
       .location-title {
-        min-height: 48px;
-        padding: 8px 18px;
-        font-size: 24px;
+        width: 56%;
+        max-width: 270px;
+        min-width: 178px;
+        font-size: clamp(21px, 5.1vw, 32px);
+        padding-top: 6px;
+        white-space: nowrap;
       }
 
       .hero-card {
@@ -484,6 +812,27 @@
     }
 
     @media (max-width: 420px) {
+      .page {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .topbar {
+        padding-left: 2px;
+        padding-right: 2px;
+      }
+
+      .image-btn {
+        width: 54px;
+        height: 54px;
+      }
+
+      .location-title {
+        width: 57%;
+        min-width: 172px;
+        font-size: clamp(20px, 5vw, 30px);
+      }
+
       .hero-card h1 {
         font-size: 42px;
       }
@@ -509,9 +858,9 @@
   <main class="page">
 
     <header class="topbar">
-      <button class="top-btn" type="button" id="backBtn" aria-label="Назад">←</button>
-      <div class="location-title">Локація 4</div>
-      <button class="top-btn music-btn" type="button" id="musicBtn" aria-label="Музика">♪</button>
+      <button class="image-btn back-btn" type="button" id="backBtn" aria-label="Назад"></button>
+      <div class="location-title">Локація&nbsp;4</div>
+      <button class="image-btn music-btn" type="button" id="musicBtn" aria-label="Музика"></button>
     </header>
 
     <section class="card hero-card">
@@ -663,11 +1012,14 @@
     <section class="card finish-card" id="finishCard">
       <h2 class="finish-title">Королівську трапезу підготовлено!</h2>
       <p class="finish-text">
-        Дякуємо за відповідь. Локацію 4 пройдено, тепер відкрито останній етап —
-        підтвердження присутності.
+        Дякуємо за відповідь. Локацію 4 пройдено. Можна переглянути бонусне відео або перейти до фінальної локації.
       </p>
 
       <div class="finish-actions">
+        <button class="finish-btn video" type="button" id="watchBonusBtn">
+          Бонусне відео ✨
+        </button>
+
         <button class="finish-btn primary" type="button" id="goLocation5Btn">
           Перейти до локації 5
         </button>
@@ -680,15 +1032,48 @@
 
   </main>
 
+  <div class="bonus-video-overlay" id="bonusVideoOverlay">
+    <div class="bonus-card">
+      <button class="close-bonus" type="button" id="closeBonusBtn">×</button>
+
+      <video
+        class="bonus-video"
+        id="bonusVideo"
+        src="bonus_location4.mp4"
+        playsinline
+        preload="metadata">
+      </video>
+
+      <div class="bonus-title">Бонусне відео локації 4 ✨</div>
+
+      <div class="bonus-actions">
+        <button class="bonus-btn bonus-next-btn" id="bonusNextBtn" type="button">
+          Перейти до локації 5 👑
+        </button>
+
+        <button class="bonus-btn bonus-map-btn" id="bonusMapBtn" type="button">
+          Повернутися на карту
+        </button>
+
+        <button class="bonus-btn" type="button" id="bonusCloseBottomBtn">
+          Закрити відео
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <script>
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx80lWSMkaC1rdEj51wrg8IQvTNJoHmYxmFZiJrn2O323nNSco5r429gsZUza2FLLUP-A/exec";
+
     const royalForm = document.getElementById("royalForm");
     const submitBtn = document.getElementById("submitBtn");
     const finishCard = document.getElementById("finishCard");
     const goLocation5Btn = document.getElementById("goLocation5Btn");
     const goMapBtn = document.getElementById("goMapBtn");
+    const watchBonusBtn = document.getElementById("watchBonusBtn");
+
     const backBtn = document.getElementById("backBtn");
     const musicBtn = document.getElementById("musicBtn");
     const bgMusic = document.getElementById("bgMusic");
@@ -701,6 +1086,15 @@
 
     const childrenRadios = document.querySelectorAll('input[name="hasChildren"]');
     const alcoholChecks = document.querySelectorAll('input[name="alcohol"]');
+
+    const bonusVideoOverlay = document.getElementById("bonusVideoOverlay");
+    const bonusVideo = document.getElementById("bonusVideo");
+    const bonusNextBtn = document.getElementById("bonusNextBtn");
+    const bonusMapBtn = document.getElementById("bonusMapBtn");
+    const closeBonusBtn = document.getElementById("closeBonusBtn");
+    const bonusCloseBottomBtn = document.getElementById("bonusCloseBottomBtn");
+
+    let wasMusicPlayingBeforeBonus = false;
 
     if (bgMusic) {
       bgMusic.volume = 0.35;
@@ -774,6 +1168,7 @@
       if (oldAnswers) {
         try {
           answers = JSON.parse(oldAnswers);
+
           if (!Array.isArray(answers)) {
             answers = [];
           }
@@ -805,7 +1200,7 @@
       }
     }
 
-    function completeLocation4() {
+    function markLocation4Done() {
       localStorage.setItem("sofiyka_location4_done", "true");
 
       submitBtn.classList.add("done");
@@ -813,6 +1208,10 @@
       submitBtn.disabled = false;
 
       finishCard.classList.add("active");
+    }
+
+    function completeLocation4(shouldOpenBonus) {
+      markLocation4Done();
 
       showToast("Відповідь збережено ✨");
 
@@ -822,10 +1221,18 @@
           block: "center"
         });
       }, 250);
+
+      if (shouldOpenBonus) {
+        setTimeout(function() {
+          openBonusVideo();
+        }, 650);
+      }
     }
 
     royalForm.addEventListener("submit", async function(event) {
       event.preventDefault();
+
+      const alreadyDone = localStorage.getItem("sofiyka_location4_done") === "true";
 
       const guestName = document.getElementById("guestName").value.trim();
       const adultsCount = document.getElementById("adultsCount").value;
@@ -886,7 +1293,7 @@
 
       saveAnswer(answer);
       await sendAnswerToGoogleSheet(answer);
-      completeLocation4();
+      completeLocation4(!alreadyDone);
     });
 
     function restoreLocation4State() {
@@ -895,9 +1302,69 @@
       if (done) {
         submitBtn.classList.add("done");
         submitBtn.textContent = "Відповідь збережено ✓";
+        submitBtn.disabled = false;
         finishCard.classList.add("active");
       }
     }
+
+    async function openBonusVideo() {
+      if (!bonusVideo || !bonusVideoOverlay) return;
+
+      document.body.classList.add("video-playing");
+
+      wasMusicPlayingBeforeBonus = false;
+
+      if (bgMusic && !bgMusic.paused) {
+        wasMusicPlayingBeforeBonus = true;
+        bgMusic.pause();
+        musicBtn.classList.remove("playing");
+      }
+
+      bonusNextBtn.classList.remove("show");
+      bonusMapBtn.classList.remove("show");
+
+      bonusVideoOverlay.classList.add("show");
+
+      try {
+        bonusVideo.currentTime = 0;
+        await bonusVideo.play();
+      } catch (error) {
+        showToast("Відео не запустилось. Перевір bonus_location4.mp4 🎬");
+      }
+    }
+
+    async function closeBonusVideo() {
+      if (bonusVideo) {
+        bonusVideo.pause();
+      }
+
+      bonusVideoOverlay.classList.remove("show");
+      document.body.classList.remove("video-playing");
+
+      if (wasMusicPlayingBeforeBonus && bgMusic) {
+        try {
+          await bgMusic.play();
+          musicBtn.classList.add("playing");
+        } catch (error) {
+          musicBtn.classList.remove("playing");
+        }
+      }
+
+      wasMusicPlayingBeforeBonus = false;
+    }
+
+    if (bonusVideo) {
+      bonusVideo.addEventListener("ended", function() {
+        localStorage.setItem("sofiyka_location4_bonus_seen", "true");
+        bonusNextBtn.classList.add("show");
+        bonusMapBtn.classList.add("show");
+        showToast("Бонусне відео переглянуто ✨");
+      });
+    }
+
+    watchBonusBtn.addEventListener("click", function() {
+      openBonusVideo();
+    });
 
     goLocation5Btn.addEventListener("click", function() {
       localStorage.setItem("sofiyka_location4_done", "true");
@@ -907,6 +1374,24 @@
     goMapBtn.addEventListener("click", function() {
       localStorage.setItem("sofiyka_location4_done", "true");
       window.location.href = "map.html";
+    });
+
+    bonusNextBtn.addEventListener("click", function() {
+      localStorage.setItem("sofiyka_location4_done", "true");
+      window.location.href = "location5.html";
+    });
+
+    bonusMapBtn.addEventListener("click", function() {
+      localStorage.setItem("sofiyka_location4_done", "true");
+      window.location.href = "map.html";
+    });
+
+    closeBonusBtn.addEventListener("click", function() {
+      closeBonusVideo();
+    });
+
+    bonusCloseBottomBtn.addEventListener("click", function() {
+      closeBonusVideo();
     });
 
     backBtn.addEventListener("click", function() {

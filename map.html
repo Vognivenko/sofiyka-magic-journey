@@ -2,9 +2,9 @@
 <html lang="uk" translate="no">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="google" content="notranslate" />
-  <title>Карта подорожі Софійки</title>
+  <title>Карта чарівної подорожі</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,13 +13,8 @@
   <style>
     :root {
       --violet: #7e459e;
-      --violet-soft: #9b6bb7;
       --gold: #efd77a;
-      --gold-soft: #fff0a8;
-      --cream: rgba(255, 255, 255, 0.86);
-      --border: 2px solid rgba(238, 219, 127, 0.9);
-      --shadow: 0 12px 30px rgba(126, 69, 158, 0.18);
-      --container-width: 1180px;
+      --white-soft: rgba(255,255,255,0.86);
     }
 
     * {
@@ -34,456 +29,266 @@
       margin: 0;
       min-height: 100vh;
       overflow-x: hidden;
-      color: var(--violet);
       font-family: "Cormorant Garamond", serif;
-      background:
-        radial-gradient(circle at 18% 10%, rgba(255,255,255,0.72), transparent 24%),
-        radial-gradient(circle at 82% 18%, rgba(255,238,190,0.42), transparent 22%),
-        radial-gradient(circle at 50% 90%, rgba(255,220,247,0.28), transparent 34%),
-        linear-gradient(180deg, #fff3fb 0%, #f6e5ff 45%, #fff7ea 100%);
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background-image:
-        radial-gradient(circle, rgba(255, 255, 255, 0.95) 0 2px, transparent 3px),
-        radial-gradient(circle, rgba(255, 229, 120, 0.85) 0 1.5px, transparent 3px);
-      background-size: 72px 72px, 118px 118px;
-      background-position: 0 0, 24px 18px;
-      opacity: 0.42;
-      animation: sparkleMove 12s linear infinite;
-    }
-
-    .page {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: var(--container-width);
-      min-height: 100vh;
-      margin: 0 auto;
-      padding: 16px 18px 44px;
-    }
-
-    .topbar {
-      display: grid;
-      grid-template-columns: 70px 1fr 70px;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 20;
-    }
-
-    .top-btn {
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      border: 2px solid rgba(238, 219, 127, 0.9);
-      background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.98), rgba(255,248,221,0.94) 36%, rgba(248,225,137,0.94) 84%);
+      background: #f7e7ff;
       color: var(--violet);
-      font-size: 31px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow:
-        0 0 0 4px rgba(255,245,199,0.30),
-        0 8px 20px rgba(229,187,89,0.22),
-        inset 0 2px 12px rgba(255,255,255,0.75);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      -webkit-tap-highlight-color: transparent;
-      position: relative;
-      z-index: 30;
     }
 
-    .top-btn:active {
-      transform: scale(0.96);
-    }
-
-    .music-btn.playing {
-      box-shadow:
-        0 0 0 4px rgba(255,245,199,0.35),
-        0 0 22px rgba(202,152,249,0.50),
-        0 8px 20px rgba(229,187,89,0.22),
-        inset 0 2px 12px rgba(255,255,255,0.75);
-    }
-
-    .title-pill {
-      justify-self: center;
+    .map-page {
       width: 100%;
-      max-width: 620px;
-      min-height: 60px;
-      padding: 10px 22px;
-      border-radius: 999px;
-      border: 2px solid rgba(238, 219, 127, 0.92);
-      background: rgba(255,255,255,0.78);
-      box-shadow: 0 8px 18px rgba(120,70,150,0.14);
+      min-height: 100vh;
       display: flex;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.72), transparent 24%),
+        radial-gradient(circle at 80% 20%, rgba(255,238,190,0.48), transparent 24%),
+        linear-gradient(180deg, #f7e7ff 0%, #ffeef8 55%, #fff3d9 100%);
+    }
+
+    .map-wrap {
+      position: relative;
+      width: min(100vw, 941px);
+      aspect-ratio: 941 / 1672;
+      overflow: hidden;
+      background: #f8e9ff;
+      box-shadow: 0 0 32px rgba(126, 69, 158, 0.18);
+    }
+
+    .map-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    .hotspot {
+      position: absolute;
+      z-index: 10;
+      border: none;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .hotspot:active {
+      transform: scale(0.97);
+    }
+
+    .back-hotspot {
+      left: 3.2%;
+      top: 1.75%;
+      width: 10.5%;
+      height: 6.2%;
+      border-radius: 50%;
+    }
+
+    .music-hotspot {
+      right: 3.2%;
+      top: 1.75%;
+      width: 10.5%;
+      height: 6.2%;
+      border-radius: 50%;
+    }
+
+    .music-hotspot.playing::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 230, 120, 0.85);
+      box-shadow:
+        0 0 18px rgba(255, 230, 120, 0.9),
+        0 0 30px rgba(198, 130, 235, 0.45);
+      animation: musicPulse 1.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .location-hotspot {
+      border-radius: 34px;
+    }
+
+    .loc1 {
+      left: 12.4%;
+      top: 19.7%;
+      width: 55.5%;
+      height: 14.2%;
+    }
+
+    .loc2 {
+      left: 44.6%;
+      top: 36.0%;
+      width: 48.8%;
+      height: 12.6%;
+    }
+
+    .loc3 {
+      left: 9.0%;
+      top: 48.7%;
+      width: 57.5%;
+      height: 12.6%;
+    }
+
+    .loc4 {
+      left: 49.7%;
+      top: 62.6%;
+      width: 45.2%;
+      height: 12.8%;
+    }
+
+    .loc5 {
+      left: 9.7%;
+      top: 74.1%;
+      width: 59.5%;
+      height: 13.6%;
+    }
+
+    .location-hotspot.locked {
+      cursor: not-allowed;
+    }
+
+    .lock-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      display: none;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      font-size: clamp(27px, 3.4vw, 44px);
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.38);
+      backdrop-filter: blur(1px);
+      -webkit-backdrop-filter: blur(1px);
+      pointer-events: none;
+    }
+
+    .location-hotspot.locked .lock-layer {
+      display: flex;
+    }
+
+    .lock-badge {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 2px solid rgba(238, 219, 127, 0.95);
+      background: rgba(255,255,255,0.88);
+      color: var(--violet);
+      font-size: clamp(18px, 3vw, 30px);
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(126,69,158,0.16);
+      white-space: nowrap;
+    }
+
+    .done-mark {
+      position: absolute;
+      right: 7%;
+      top: 9%;
+      z-index: 22;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid rgba(238, 219, 127, 0.95);
+      background:
+        radial-gradient(circle at 30% 25%, #ffffff, #fff0b8 40%, #95db9e 88%);
+      color: #5b8f4b;
+      font-size: 27px;
       line-height: 1;
       font-weight: 700;
-      color: var(--violet);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 0 4px rgba(255,255,255,0.35),
+        0 8px 18px rgba(79, 145, 82, 0.22);
+      pointer-events: none;
     }
 
-    .hero {
-      position: relative;
-      border: var(--border);
-      border-radius: 34px;
-      background:
-        radial-gradient(circle at 50% 12%, rgba(255,245,200,0.58), transparent 42%),
-        linear-gradient(180deg, rgba(255,255,255,0.90), rgba(255,248,253,0.78));
-      box-shadow: var(--shadow);
-      padding: 26px 22px 22px;
-      margin-bottom: 18px;
-      text-align: center;
-      overflow: hidden;
+    .location-hotspot.completed .done-mark {
+      display: flex;
     }
 
-    .hero::before,
-    .hero::after {
-      content: "✦";
+    .location-hotspot.unlocked:not(.completed)::after {
+      content: "";
       position: absolute;
-      color: rgba(238, 204, 95, 0.82);
-      text-shadow: 0 0 14px rgba(255, 232, 130, 0.8);
+      inset: 6%;
+      border-radius: 28px;
+      border: 2px solid rgba(255, 236, 148, 0.78);
+      box-shadow:
+        0 0 14px rgba(255, 236, 148, 0.55),
+        inset 0 0 18px rgba(255, 236, 148, 0.22);
+      animation: activeGlow 1.8s ease-in-out infinite;
+      pointer-events: none;
     }
 
-    .hero::before {
-      left: 24px;
-      top: 20px;
-      font-size: 34px;
-    }
-
-    .hero::after {
-      right: 26px;
-      bottom: 22px;
-      font-size: 30px;
-    }
-
-    .hero h1 {
-      margin: 0 0 10px;
-      font-size: clamp(42px, 6vw, 78px);
-      line-height: 0.95;
-      font-weight: 700;
-      color: var(--violet);
-      text-shadow:
-        0 2px 0 rgba(255,255,255,0.85),
-        0 7px 18px rgba(126,69,158,0.12);
-    }
-
-    .hero p {
-      max-width: 850px;
-      margin: 0 auto;
-      font-size: clamp(22px, 2.7vw, 34px);
-      line-height: 1.2;
-      font-weight: 600;
-      color: #6f438f;
-    }
-
-    .progress-card {
-      border: var(--border);
-      border-radius: 30px;
-      background: rgba(255,255,255,0.78);
-      box-shadow: 0 8px 20px rgba(126, 69, 158, 0.12);
-      padding: 18px 18px 20px;
-      margin-bottom: 18px;
+    .progress-overlay {
+      position: absolute;
+      left: 23%;
+      right: 17%;
+      bottom: 4.3%;
+      z-index: 12;
       text-align: center;
+      pointer-events: none;
     }
 
     .progress-text {
-      margin: 0 0 12px;
-      font-size: clamp(25px, 3vw, 38px);
-      line-height: 1.05;
+      margin: 0 0 10px;
+      font-size: clamp(19px, 3.5vw, 33px);
+      line-height: 1;
       font-weight: 700;
       color: var(--violet);
+      text-shadow: 0 2px 0 rgba(255,255,255,0.75);
     }
 
     .progress-dots {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: clamp(8px, 2vw, 18px);
     }
 
     .progress-dot {
-      width: 42px;
-      height: 42px;
+      width: clamp(18px, 3.6vw, 32px);
+      height: clamp(18px, 3.6vw, 32px);
       border-radius: 50%;
-      border: 2px solid rgba(238, 219, 127, 0.86);
-      background: rgba(255,255,255,0.72);
-      color: #a887b8;
-      font-size: 21px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 2px 8px rgba(255,255,255,0.75);
+      border: 2px solid rgba(188, 158, 204, 0.65);
+      background: rgba(222, 209, 226, 0.72);
+      box-shadow:
+        inset 0 2px 6px rgba(255,255,255,0.65),
+        0 3px 7px rgba(126,69,158,0.16);
     }
 
     .progress-dot.active {
+      border-color: rgba(238, 219, 127, 0.95);
       background:
-        radial-gradient(circle at 30% 28%, #fff, #fff0ba 42%, #e8c155 88%);
-      color: var(--violet);
+        radial-gradient(circle at 30% 28%, #ffffff, #fff1b9 45%, #9e4bb8 92%);
       box-shadow:
-        0 0 0 4px rgba(255,240,168,0.28),
-        0 8px 18px rgba(229,187,89,0.22),
-        inset 0 2px 8px rgba(255,255,255,0.75);
-    }
-
-    .map-shell {
-      position: relative;
-      border-radius: 38px;
-      border: var(--border);
-      background:
-        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.60), transparent 28%),
-        radial-gradient(circle at 80% 24%, rgba(255,232,184,0.40), transparent 26%),
-        linear-gradient(180deg, rgba(255,255,255,0.68), rgba(255,246,253,0.58));
-      box-shadow: var(--shadow);
-      padding: 22px 70px 26px;
-      overflow: hidden;
-    }
-
-    .map-shell::before {
-      content: "";
-      position: absolute;
-      left: 8%;
-      right: 8%;
-      top: 50%;
-      height: 8px;
-      border-radius: 999px;
-      background:
-        linear-gradient(90deg, rgba(238,219,127,0.16), rgba(238,219,127,0.78), rgba(238,219,127,0.16));
-      transform: translateY(-50%);
-      opacity: 0.55;
-      z-index: 0;
-    }
-
-    .map-window {
-      position: relative;
-      z-index: 2;
-      overflow-x: auto;
-      overflow-y: visible;
-      scroll-behavior: smooth;
-      padding: 8px 0 12px;
-      scrollbar-width: none;
-    }
-
-    .map-window::-webkit-scrollbar {
-      display: none;
-    }
-
-    .locations-track {
-      display: flex;
-      gap: 22px;
-      align-items: stretch;
-      min-width: max-content;
-      padding: 8px 4px;
-    }
-
-    .location-card {
-      position: relative;
-      width: 210px;
-      min-height: 290px;
-      border: 2px solid rgba(238,219,127,0.82);
-      border-radius: 32px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,242,190,0.44), transparent 42%),
-        linear-gradient(180deg, rgba(255,255,255,0.90), rgba(255,248,253,0.82));
-      box-shadow:
-        0 10px 24px rgba(126,69,158,0.14),
-        inset 0 2px 10px rgba(255,255,255,0.56);
-      padding: 18px 14px 16px;
-      text-align: center;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
-      overflow: hidden;
-    }
-
-    .location-card:hover {
-      transform: translateY(-4px);
-      box-shadow:
-        0 16px 30px rgba(126,69,158,0.18),
-        0 0 24px rgba(255,225,120,0.25),
-        inset 0 2px 10px rgba(255,255,255,0.56);
-    }
-
-    .location-card.locked {
-      filter: grayscale(1);
-      opacity: 0.58;
-      cursor: not-allowed;
-    }
-
-    .location-card.completed {
-      border-color: rgba(128, 204, 148, 0.88);
-      box-shadow:
-        0 12px 26px rgba(126,69,158,0.14),
-        0 0 22px rgba(147, 224, 164, 0.30),
-        inset 0 2px 10px rgba(255,255,255,0.56);
-    }
-
-    .location-number {
-      position: absolute;
-      left: 12px;
-      top: 12px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 2px solid rgba(238,219,127,0.86);
-      background:
-        radial-gradient(circle at 30% 28%, #fff, #fff0ba 42%, #e8c155 88%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--violet);
-      font-size: 22px;
-      font-weight: 700;
-      z-index: 2;
-    }
-
-    .location-status {
-      position: absolute;
-      right: 12px;
-      top: 12px;
-      min-width: 38px;
-      height: 38px;
-      border-radius: 999px;
-      padding: 0 10px;
-      border: 2px solid rgba(238,219,127,0.72);
-      background: rgba(255,255,255,0.76);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--violet);
-      font-size: 20px;
-      font-weight: 700;
-      z-index: 2;
-    }
-
-    .location-icon {
-      width: 106px;
-      height: 106px;
-      margin: 32px auto 12px;
-      border-radius: 50%;
-      border: 2px solid rgba(238,219,127,0.86);
-      background:
-        radial-gradient(circle at 35% 26%, rgba(255,255,255,0.98), rgba(255,247,229,0.94) 38%, rgba(245,218,255,0.92) 88%);
-      box-shadow:
-        0 10px 22px rgba(126,69,158,0.14),
-        0 0 22px rgba(255,225,120,0.25),
-        inset 0 3px 12px rgba(255,255,255,0.75);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 50px;
-      animation: iconFloat 3.4s ease-in-out infinite;
-    }
-
-    .location-title {
-      margin: 0 0 8px;
-      font-size: 27px;
-      line-height: 1;
-      font-weight: 700;
-      color: var(--violet);
-    }
-
-    .location-desc {
-      margin: 0;
-      font-size: 19px;
-      line-height: 1.12;
-      font-weight: 600;
-      color: #7f5a98;
-    }
-
-    .lock-layer {
-      position: absolute;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      background: rgba(255,255,255,0.46);
-      backdrop-filter: blur(1px);
-      -webkit-backdrop-filter: blur(1px);
-      z-index: 5;
-    }
-
-    .location-card.locked .lock-layer {
-      display: flex;
-    }
-
-    .lock-badge {
-      border-radius: 999px;
-      padding: 10px 16px;
-      border: 2px solid rgba(238,219,127,0.88);
-      background: rgba(255,255,255,0.86);
-      color: var(--violet);
-      font-size: 22px;
-      font-weight: 700;
-      box-shadow: 0 8px 18px rgba(126,69,158,0.14);
-    }
-
-    .map-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      width: 54px;
-      height: 74px;
-      border-radius: 999px;
-      border: 2px solid rgba(238,219,127,0.9);
-      background: rgba(255,255,255,0.82);
-      color: var(--violet);
-      font-size: 38px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow:
-        0 10px 22px rgba(126,69,158,0.16),
-        inset 0 2px 8px rgba(255,255,255,0.70);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .map-arrow:active {
-      transform: translateY(-50%) scale(0.96);
-    }
-
-    .map-arrow.left {
-      left: 12px;
-    }
-
-    .map-arrow.right {
-      right: 12px;
+        0 0 0 3px rgba(255, 232, 120, 0.35),
+        0 0 16px rgba(255, 232, 120, 0.65),
+        inset 0 2px 6px rgba(255,255,255,0.75);
     }
 
     .toast {
       position: fixed;
       left: 50%;
-      bottom: 28px;
-      transform: translateX(-50%) translateY(20px);
+      bottom: 26px;
+      transform: translateX(-50%) translateY(18px);
+      z-index: 1000;
+      max-width: calc(100% - 32px);
       padding: 12px 18px;
       border-radius: 999px;
-      background: rgba(117,76,150,0.95);
+      background: rgba(117, 76, 150, 0.95);
       color: #ffffff;
       font-size: 18px;
       font-weight: 700;
+      text-align: center;
       box-shadow: 0 10px 24px rgba(117,76,150,0.28);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.22s ease, transform 0.22s ease;
-      z-index: 100;
-      text-align: center;
-      max-width: calc(100% - 32px);
     }
 
     .toast.show {
@@ -495,125 +300,41 @@
       display: none;
     }
 
-    @keyframes sparkleMove {
-      from {
-        background-position: 0 0, 24px 18px;
-      }
-      to {
-        background-position: 72px 72px, 142px 136px;
-      }
-    }
-
-    @keyframes iconFloat {
+    @keyframes activeGlow {
       0%, 100% {
-        transform: translateY(0) scale(1);
+        opacity: 0.45;
+        transform: scale(1);
       }
       50% {
-        transform: translateY(-7px) scale(1.02);
+        opacity: 1;
+        transform: scale(1.018);
       }
     }
 
-    @media (max-width: 760px) {
-      .page {
-        padding: 12px 12px 36px;
+    @keyframes musicPulse {
+      0%, 100% {
+        opacity: 0.65;
+        transform: scale(1);
       }
-
-      .topbar {
-        grid-template-columns: 62px 1fr 62px;
-        gap: 8px;
+      50% {
+        opacity: 1;
+        transform: scale(1.06);
       }
+    }
 
-      .top-btn {
-        width: 56px;
-        height: 56px;
-        font-size: 29px;
-      }
-
-      .title-pill {
-        min-height: 52px;
-        padding: 8px 14px;
-        font-size: 27px;
-      }
-
-      .hero {
-        padding: 24px 16px 20px;
-        border-radius: 30px;
-      }
-
-      .hero h1 {
-        font-size: 45px;
-      }
-
-      .hero p {
+    @media (max-width: 480px) {
+      .done-mark {
+        width: 32px;
+        height: 32px;
         font-size: 22px;
       }
 
-      .map-shell {
-        padding: 18px 54px 22px;
-        border-radius: 32px;
+      .lock-badge {
+        padding: 7px 12px;
       }
 
-      .map-arrow {
-        width: 44px;
-        height: 66px;
-        font-size: 34px;
-      }
-
-      .map-arrow.left {
-        left: 6px;
-      }
-
-      .map-arrow.right {
-        right: 6px;
-      }
-
-      .locations-track {
-        gap: 16px;
-      }
-
-      .location-card {
-        width: 190px;
-        min-height: 270px;
-        border-radius: 28px;
-      }
-
-      .location-icon {
-        width: 96px;
-        height: 96px;
-        font-size: 44px;
-      }
-
-      .location-title {
-        font-size: 25px;
-      }
-
-      .location-desc {
-        font-size: 18px;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .hero h1 {
-        font-size: 41px;
-      }
-
-      .hero p {
-        font-size: 21px;
-      }
-
-      .progress-dot {
-        width: 38px;
-        height: 38px;
-        font-size: 20px;
-      }
-
-      .map-shell {
-        padding-left: 48px;
-        padding-right: 48px;
-      }
-
-      .location-card {
-        width: 178px;
+      .toast {
+        font-size: 16px;
       }
     }
   </style>
@@ -626,104 +347,63 @@
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
-  <main class="page">
+  <main class="map-page">
+    <section class="map-wrap" id="mapWrap">
 
-    <header class="topbar">
-      <button class="top-btn" type="button" id="backBtn" aria-label="Назад">←</button>
+      <img class="map-bg" src="map.png" alt="Карта чарівної подорожі Софійки">
 
-      <div class="title-pill">Карта подорожі</div>
+      <button class="hotspot back-hotspot" type="button" id="backBtn" aria-label="Повернутися на головну"></button>
 
-      <button class="top-btn music-btn" type="button" id="musicBtn" aria-label="Музика">♪</button>
-    </header>
+      <button class="hotspot music-hotspot" type="button" id="musicBtn" aria-label="Увімкнути або вимкнути музику"></button>
 
-    <section class="hero">
-      <h1>Подорож<br>Софійки</h1>
-      <p>
-        Обирай відкриті локації та проходь чарівний шлях до фінального запрошення.
-      </p>
-    </section>
+      <button class="hotspot location-hotspot loc1" type="button" data-location="1" aria-label="Локація 1 — Знайомство з Софійкою">
+        <span class="done-mark">✓</span>
+        <span class="lock-layer">
+          <span class="lock-badge">🔒 Закрито</span>
+        </span>
+      </button>
 
-    <section class="progress-card">
-      <p class="progress-text" id="progressText">Відкрито 1 з 5 локацій</p>
+      <button class="hotspot location-hotspot loc2" type="button" data-location="2" aria-label="Локація 2 — День хрещення">
+        <span class="done-mark">✓</span>
+        <span class="lock-layer">
+          <span class="lock-badge">🔒 Закрито</span>
+        </span>
+      </button>
 
-      <div class="progress-dots">
-        <div class="progress-dot" data-progress-dot>1</div>
-        <div class="progress-dot" data-progress-dot>2</div>
-        <div class="progress-dot" data-progress-dot>3</div>
-        <div class="progress-dot" data-progress-dot>4</div>
-        <div class="progress-dot" data-progress-dot>5</div>
-      </div>
-    </section>
+      <button class="hotspot location-hotspot loc3" type="button" data-location="3" aria-label="Локація 3 — Святковий замок">
+        <span class="done-mark">✓</span>
+        <span class="lock-layer">
+          <span class="lock-badge">🔒 Закрито</span>
+        </span>
+      </button>
 
-    <section class="map-shell">
+      <button class="hotspot location-hotspot loc4" type="button" data-location="4" aria-label="Локація 4 — Королівська трапеза">
+        <span class="done-mark">✓</span>
+        <span class="lock-layer">
+          <span class="lock-badge">🔒 Закрито</span>
+        </span>
+      </button>
 
-      <button class="map-arrow left" type="button" id="scrollLeftBtn" aria-label="Прокрутити ліворуч">‹</button>
+      <button class="hotspot location-hotspot loc5" type="button" data-location="5" aria-label="Локація 5 — Фінальне запрошення">
+        <span class="done-mark">✓</span>
+        <span class="lock-layer">
+          <span class="lock-badge">🔒 Закрито</span>
+        </span>
+      </button>
 
-      <div class="map-window" id="mapWindow">
-        <div class="locations-track" id="locationsTrack">
+      <div class="progress-overlay">
+        <p class="progress-text" id="progressText">Відкрито 1 з 5 локацій</p>
 
-          <article class="location-card" data-location="1">
-            <div class="location-number">1</div>
-            <div class="location-status" data-status>✨</div>
-            <div class="location-icon">👶</div>
-            <h2 class="location-title">Знайомство</h2>
-            <p class="location-desc">Перша зупинка — знайомство з Софійкою.</p>
-            <div class="lock-layer">
-              <div class="lock-badge">🔒 Закрито</div>
-            </div>
-          </article>
-
-          <article class="location-card" data-location="2">
-            <div class="location-number">2</div>
-            <div class="location-status" data-status>🔒</div>
-            <div class="location-icon">⛪</div>
-            <h2 class="location-title">Хрещення</h2>
-            <p class="location-desc">Храм, час і місце світлої події.</p>
-            <div class="lock-layer">
-              <div class="lock-badge">🔒 Закрито</div>
-            </div>
-          </article>
-
-          <article class="location-card" data-location="3">
-            <div class="location-number">3</div>
-            <div class="location-status" data-status>🔒</div>
-            <div class="location-icon">🏰</div>
-            <h2 class="location-title">Святковий замок</h2>
-            <p class="location-desc">Місце святкування — Панорама.</p>
-            <div class="lock-layer">
-              <div class="lock-badge">🔒 Закрито</div>
-            </div>
-          </article>
-
-          <article class="location-card" data-location="4">
-            <div class="location-number">4</div>
-            <div class="location-status" data-status>🔒</div>
-            <div class="location-icon">🍽️</div>
-            <h2 class="location-title">Трапеза</h2>
-            <p class="location-desc">Анкета меню для гостей і дітей.</p>
-            <div class="lock-layer">
-              <div class="lock-badge">🔒 Закрито</div>
-            </div>
-          </article>
-
-          <article class="location-card" data-location="5">
-            <div class="location-number">5</div>
-            <div class="location-status" data-status>🔒</div>
-            <div class="location-icon">💌</div>
-            <h2 class="location-title">Запрошення</h2>
-            <p class="location-desc">Фінальний конвертик і відеозапрошення.</p>
-            <div class="lock-layer">
-              <div class="lock-badge">🔒 Закрито</div>
-            </div>
-          </article>
-
+        <div class="progress-dots">
+          <span class="progress-dot" data-progress-dot></span>
+          <span class="progress-dot" data-progress-dot></span>
+          <span class="progress-dot" data-progress-dot></span>
+          <span class="progress-dot" data-progress-dot></span>
+          <span class="progress-dot" data-progress-dot></span>
         </div>
       </div>
 
-      <button class="map-arrow right" type="button" id="scrollRightBtn" aria-label="Прокрутити праворуч">›</button>
-
     </section>
-
   </main>
 
   <div class="toast" id="toast"></div>
@@ -751,11 +431,7 @@
     const musicBtn = document.getElementById("musicBtn");
     const bgMusic = document.getElementById("bgMusic");
     const toast = document.getElementById("toast");
-
     const progressText = document.getElementById("progressText");
-    const mapWindow = document.getElementById("mapWindow");
-    const scrollLeftBtn = document.getElementById("scrollLeftBtn");
-    const scrollRightBtn = document.getElementById("scrollRightBtn");
 
     if (bgMusic) {
       bgMusic.volume = 0.35;
@@ -767,4 +443,142 @@
 
       clearTimeout(showToast._timer);
 
-      showToast._timer = setTimeout(function(
+      showToast._timer = setTimeout(function() {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+    function isLocationDone(number) {
+      return localStorage.getItem("sofiyka_location" + number + "_done") === "true";
+    }
+
+    function isLocationUnlocked(number) {
+      if (number === 1) return true;
+      return isLocationDone(number - 1);
+    }
+
+    function getOpenedCount() {
+      let opened = 0;
+
+      for (let i = 1; i <= TOTAL_LOCATIONS; i++) {
+        if (isLocationUnlocked(i)) {
+          opened++;
+        }
+      }
+
+      return Math.max(1, Math.min(opened, TOTAL_LOCATIONS));
+    }
+
+    function openLocation(number) {
+      number = Number(number);
+
+      if (!locationPages[number]) {
+        showToast("Цю локацію ще не додано.");
+        return;
+      }
+
+      if (!isLocationUnlocked(number)) {
+        const previous = number - 1;
+        showToast("Спочатку потрібно пройти локацію " + previous + " ✨");
+        return;
+      }
+
+      window.location.href = locationPages[number];
+    }
+
+    function updateLocationState() {
+      const cards = document.querySelectorAll("[data-location]");
+
+      cards.forEach(function(card) {
+        const number = Number(card.getAttribute("data-location"));
+        const unlocked = isLocationUnlocked(number);
+        const done = isLocationDone(number);
+
+        card.classList.remove("locked", "unlocked", "completed");
+
+        if (done) {
+          card.classList.add("completed");
+        } else if (unlocked) {
+          card.classList.add("unlocked");
+        } else {
+          card.classList.add("locked");
+        }
+      });
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const opened = getOpenedCount();
+
+      if (progressText) {
+        progressText.textContent = "Відкрито " + opened + " з " + TOTAL_LOCATIONS + " локацій";
+      }
+
+      const dots = document.querySelectorAll("[data-progress-dot]");
+
+      dots.forEach(function(dot, index) {
+        if (index < opened) {
+          dot.classList.add("active");
+        } else {
+          dot.classList.remove("active");
+        }
+      });
+    }
+
+    function bindLocationClicks() {
+      document.querySelectorAll("[data-location]").forEach(function(card) {
+        card.addEventListener("click", function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          const number = Number(card.getAttribute("data-location"));
+          openLocation(number);
+        });
+      });
+    }
+
+    backBtn.addEventListener("click", function() {
+      window.location.href = "index.html";
+    });
+
+    musicBtn.addEventListener("click", async function() {
+      if (!bgMusic) return;
+
+      try {
+        if (bgMusic.paused) {
+          await bgMusic.play();
+          musicBtn.classList.add("playing");
+          localStorage.setItem("sofiyka_music", "on");
+        } else {
+          bgMusic.pause();
+          musicBtn.classList.remove("playing");
+          localStorage.setItem("sofiyka_music", "off");
+        }
+      } catch (error) {
+        showToast("Музика не запустилась. Перевір mp3 файл 🎵");
+      }
+    });
+
+    function restoreMusicState() {
+      const musicState = localStorage.getItem("sofiyka_music");
+
+      if (musicState === "on" && bgMusic) {
+        bgMusic.play().then(function() {
+          musicBtn.classList.add("playing");
+        }).catch(function() {
+          musicBtn.classList.remove("playing");
+        });
+      }
+    }
+
+    window.openLocation = openLocation;
+    window.goToLocation = openLocation;
+
+    bindLocationClicks();
+    updateLocationState();
+    restoreMusicState();
+  </script>
+
+</body>
+</html>

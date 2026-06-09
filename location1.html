@@ -113,12 +113,7 @@
     }
 
     .intro-kicker {
-      font-size: clamp(17px, 4.1vw, 23px);
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #7c359b;
-      text-align: center;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+      display: none;
     }
 
     .intro-title {
@@ -223,29 +218,6 @@
       filter: blur(0.4px);
     }
 
-    .gallery-zone::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.78) 0 1.1px, transparent 1.6px),
-        radial-gradient(circle, rgba(255,231,150,0.62) 0 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(255,255,255,0.48) 0 0.9px, transparent 1.4px);
-      background-size:
-        78px 104px,
-        128px 142px,
-        58px 86px;
-      background-position:
-        10px 20px,
-        42px 76px,
-        28px 48px;
-      opacity: 0.20;
-      animation: sparkleFloat 14s linear infinite;
-    }
-
-    .gallery-heading,
     .months-grid,
     .complete-btn,
     .bottom-decor {
@@ -253,361 +225,87 @@
       z-index: 2;
     }
 
-    .gallery-heading {
-      width: 96%;
-      max-width: 470px;
-      margin: 4px auto 24px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 0 18px;
-    }
-
-    .gallery-heading::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 2px;
-      width: 112%;
-      height: 158px;
-      transform: translateX(-50%);
-      border-radius: 999px;
-      background:
-        radial-gradient(
-          ellipse at center,
-          rgba(255,255,255,0.78) 0%,
-          rgba(255,235,250,0.48) 38%,
-          rgba(255,210,240,0.18) 64%,
-          transparent 78%
-        );
-      filter: blur(2px);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .gallery-heading::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      bottom: -8px;
-      width: 76%;
-      height: 34px;
-      transform: translateX(-50%);
-      background:
-        radial-gradient(
-          ellipse at center,
-          rgba(255,230,150,0.62) 0%,
-          rgba(255,230,150,0.24) 42%,
-          transparent 76%
-        );
-      filter: blur(1px);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .gallery-crown {
-      width: 88px;
-      height: 88px;
-      margin-bottom: -36px;
-      position: relative;
-      z-index: 4;
-      background: url("9.png") center / contain no-repeat;
-      filter:
-        drop-shadow(0 6px 8px rgba(90,35,120,0.25))
-        drop-shadow(0 0 14px rgba(255,235,160,0.85));
-      pointer-events: none;
-    }
-
-    .gallery-ribbon {
-      width: 100%;
-      aspect-ratio: 850 / 145;
-      position: relative;
-      z-index: 3;
-      background: url("10.png") center / contain no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff6ff;
-      font-size: clamp(23px, 5.4vw, 34px);
-      font-weight: 700;
-      text-align: center;
-      padding-top: 7px;
-      text-shadow:
-        0 2px 4px rgba(80,25,110,0.52),
-        0 0 10px rgba(255,255,255,0.85);
-      filter:
-        drop-shadow(0 8px 12px rgba(90,35,120,0.25))
-        drop-shadow(0 0 16px rgba(255,230,170,0.35));
-    }
-
     .months-grid {
       width: 100%;
       max-width: 430px;
-      margin: 8px auto 0;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2px;
+      gap: 24px;
       padding: 0 22px 22px;
     }
 
     .month-card {
       position: relative;
       width: 100%;
-      aspect-ratio: 2 / 3;
       border: none;
       background: transparent;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
-      filter:
-        drop-shadow(0 10px 16px rgba(87,35,105,0.18))
-        drop-shadow(0 0 12px rgba(255,230,170,0.14));
-      animation: frameBreath 5.4s ease-in-out infinite;
-      transition:
-        transform .25s ease,
-        filter .25s ease;
-      will-change: transform;
-    }
-
-    .month-card::before {
-      content: "";
-      position: absolute;
-      left: -10px;
-      right: -10px;
-      top: 18px;
-      bottom: 30px;
-      z-index: 0;
-      border-radius: 42px;
-      background:
-        radial-gradient(ellipse at 50% 18%, rgba(255,255,255,0.58) 0%, rgba(255,255,255,0.18) 36%, transparent 70%),
-        radial-gradient(circle at 18% 82%, rgba(255,225,245,0.50) 0%, rgba(255,225,245,0.14) 34%, transparent 62%),
-        radial-gradient(circle at 86% 72%, rgba(255,238,183,0.30) 0%, rgba(255,238,183,0.10) 30%, transparent 58%),
-        linear-gradient(180deg, rgba(255,245,252,0.18) 0%, rgba(255,220,243,0.16) 48%, rgba(245,198,230,0.20) 100%);
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.22),
-        0 0 22px rgba(255,255,255,0.16),
-        0 14px 24px rgba(126,45,138,0.05);
-      pointer-events: none;
-    }
-
-    .month-card::after {
-      content: "";
-      position: absolute;
-      left: 4px;
-      right: 4px;
-      top: 36px;
-      height: 64px;
-      z-index: 0;
-      border-radius: 999px;
-      background:
-        radial-gradient(ellipse at center, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 55%, transparent 78%);
-      pointer-events: none;
-    }
-
-    .month-card:nth-child(2n) {
-      animation-delay: .45s;
-    }
-
-    .month-card:nth-child(3n) {
-      animation-delay: .9s;
-    }
-
-    .month-card:active {
-      transform: scale(1.018);
-      filter:
-        drop-shadow(0 14px 22px rgba(87,35,105,0.25))
-        drop-shadow(0 0 18px rgba(255,230,170,0.30));
-    }
-
-    .month-card.selected {
-      animation: selectedBreath 2.7s ease-in-out infinite;
-      filter:
-        drop-shadow(0 15px 22px rgba(87,35,105,0.28))
-        drop-shadow(0 0 26px rgba(255,115,135,0.76))
-        drop-shadow(0 0 18px rgba(255,230,170,0.36));
-    }
-
-    .month-card.selected::before {
-      background:
-        radial-gradient(ellipse at 50% 18%, rgba(255,255,255,0.76) 0%, rgba(255,255,255,0.24) 38%, transparent 70%),
-        radial-gradient(circle at 18% 82%, rgba(255,221,239,0.72) 0%, rgba(255,221,239,0.22) 36%, transparent 62%),
-        radial-gradient(circle at 86% 72%, rgba(255,238,183,0.48) 0%, rgba(255,238,183,0.15) 32%, transparent 58%),
-        linear-gradient(180deg, rgba(255,250,253,0.30) 0%, rgba(255,220,243,0.26) 48%, rgba(245,198,230,0.30) 100%);
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.30),
-        0 0 30px rgba(255,255,255,0.24),
-        0 18px 34px rgba(126,45,138,0.08);
-    }
-
-    .month-selection-glow {
-      position: absolute;
-      left: 7.4%;
-      top: 22.6%;
-      width: 85.2%;
-      height: 63.2%;
-      border-radius: 22px;
-      z-index: 2;
-      pointer-events: none;
-      opacity: 0;
-      box-shadow:
-        0 0 0 4px rgba(255,117,142,0.92),
-        0 0 22px rgba(255,75,110,0.65),
-        inset 0 0 18px rgba(255,230,235,0.45);
-      transition: opacity .22s ease;
-    }
-
-    .month-card.selected .month-selection-glow {
-      opacity: 1;
-      animation: selectedGlow 2.2s ease-in-out infinite;
-    }
-
-    .month-photo {
-      position: absolute;
-      left: 7.5%;
-      top: 22.8%;
-      width: 85%;
-      height: 63%;
-      border-radius: 24px;
-      object-fit: cover;
-      object-position: center 36%;
-      z-index: 1;
-      background: rgba(255,255,255,0.45);
-    }
-
-    .month-frame {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      background: url("gallery_frame_one.png") center / contain no-repeat;
-      pointer-events: none;
     }
 
     .month-title {
-      position: absolute;
-      top: 12.4%;
-      left: 16%;
-      width: 68%;
-      height: 10.5%;
-      z-index: 5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%;
+      margin: 0 0 8px;
       text-align: center;
       color: #6a2787;
-      font-size: clamp(22px, 5.8vw, 34px);
+      font-size: clamp(24px, 6vw, 36px);
       font-weight: 700;
       line-height: 1;
       text-shadow:
         0 2px 0 rgba(255,255,255,0.95),
         0 0 9px rgba(255,255,255,0.7),
-        0 4px 9px rgba(95,35,115,0.22);
+        0 4px 9px rgba(95,35,115,0.18);
       pointer-events: none;
     }
 
-    .month-soft-shine {
-      position: absolute;
-      left: 8.5%;
-      top: 23.8%;
-      width: 83%;
-      height: 61%;
-      z-index: 6;
-      border-radius: 24px;
+    .month-photo-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
       overflow: hidden;
-      pointer-events: none;
-      opacity: 0.52;
-      mix-blend-mode: screen;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.22);
     }
 
-    .month-soft-shine::before {
-      content: "";
+    .month-photo {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 36%;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    .month-like {
       position: absolute;
-      top: -30%;
-      left: -70%;
-      width: 42%;
-      height: 160%;
-      transform: rotate(18deg);
-      background:
-        linear-gradient(
-          90deg,
-          transparent 0%,
-          rgba(255,255,255,0.10) 18%,
-          rgba(255,255,255,0.62) 50%,
-          rgba(255,255,255,0.10) 82%,
-          transparent 100%
-        );
-      animation: photoShine 6.8s ease-in-out infinite;
-    }
-
-    .month-card.selected .month-soft-shine {
-      opacity: 0.34;
-    }
-
-    .month-card.selected .month-soft-shine::before {
-      animation-duration: 4.2s;
-    }
-
-    .month-sparkle-dust {
-      position: absolute;
-      inset: 0;
-      z-index: 7;
-      pointer-events: none;
-      opacity: 0.62;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.95) 0 1.2px, transparent 1.8px),
-        radial-gradient(circle, rgba(255,235,150,0.80) 0 1.1px, transparent 1.7px),
-        radial-gradient(circle, rgba(255,255,255,0.65) 0 0.9px, transparent 1.4px);
-      background-size:
-        92px 122px,
-        136px 166px,
-        64px 92px;
-      background-position:
-        15px 42px,
-        72px 118px,
-        30px 76px;
-      animation: cardSparkles 9s linear infinite;
-    }
-
-    .month-card.selected .month-sparkle-dust {
-      opacity: 0.88;
-      animation: selectedSparkles 4.8s linear infinite;
-    }
-
-    .month-selected-heart {
-      position: absolute;
-      right: 7.8%;
-      bottom: 5.8%;
-      width: 70px;
-      height: 70px;
-      z-index: 9;
-      display: none;
+      right: 12px;
+      bottom: 12px;
+      width: 58px;
+      height: 58px;
+      z-index: 3;
+      display: flex;
       align-items: center;
       justify-content: center;
       border: none;
       border-radius: 50%;
       cursor: pointer;
       -webkit-tap-highlight-color: transparent;
-      background:
-        radial-gradient(circle at 35% 28%, #fff8fb 0%, #ffd6e0 32%, #ff6f8f 68%, #c61f45 100%);
-      box-shadow:
-        0 0 0 3px rgba(255,245,248,0.95),
-        0 0 20px rgba(255,60,100,0.75),
-        0 8px 15px rgba(100,20,55,0.28);
-      color: #d81942;
-      font-size: 39px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 6px 14px rgba(80, 25, 110, 0.22);
+      color: #bd4c91;
+      font-size: 34px;
       font-weight: 700;
       line-height: 1;
-      text-shadow:
-        0 2px 3px rgba(95,0,30,0.25),
-        0 0 8px rgba(255,255,255,0.9);
     }
 
-    .month-card.selected .month-selected-heart {
-      display: flex;
-      animation: heartPop .36s ease both, heartPulse 1.8s ease-in-out infinite .36s;
-    }
-
-    .month-selected-heart:active {
-      transform: scale(0.92);
+    .month-card.selected .month-like {
+      background: #d85c9d;
+      color: #ffffff;
+      box-shadow: 0 6px 14px rgba(120, 35, 100, 0.28);
     }
 
     .complete-btn {
@@ -646,7 +344,6 @@
       pointer-events: none;
     }
 
-    .photo-overlay,
     .choice-overlay,
     .bonus-video-overlay {
       position: fixed;
@@ -660,13 +357,11 @@
       backdrop-filter: blur(6px);
     }
 
-    .photo-overlay.show,
     .choice-overlay.show,
     .bonus-video-overlay.show {
       display: flex;
     }
 
-    .viewer-card,
     .choice-card,
     .bonus-card {
       position: relative;
@@ -679,60 +374,6 @@
         0 0 0 3px rgba(255,222,130,0.95),
         0 0 28px rgba(255,226,135,0.65),
         0 20px 50px rgba(20,0,40,0.38);
-      animation: viewerAppear .24s ease both;
-    }
-
-    .viewer-media {
-      width: 100%;
-      aspect-ratio: 3 / 4.2;
-      border-radius: 28px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.35);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
-    }
-
-    .viewer-img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      object-position: center 35%;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.25);
-    }
-
-    .viewer-title {
-      margin: 10px 0 8px;
-      text-align: center;
-      color: #6a2787;
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 1;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
-    }
-
-    .viewer-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .viewer-btn,
-    .choice-btn,
-    .bonus-btn {
-      flex: 1;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 10px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #743092;
-      background: #fff4fb;
-      box-shadow:
-        inset 0 0 0 1px rgba(255,220,140,0.65),
-        0 4px 10px rgba(90,35,120,0.14);
     }
 
     .choice-card {
@@ -765,6 +406,23 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 10px;
+    }
+
+    .choice-btn,
+    .bonus-btn {
+      flex: 1;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #743092;
+      background: #fff4fb;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,220,140,0.65),
+        0 4px 10px rgba(90,35,120,0.14);
     }
 
     .choice-btn.primary,
@@ -808,7 +466,6 @@
       display: block;
     }
 
-    .close-viewer,
     .close-choice,
     .close-bonus {
       position: absolute;
@@ -826,199 +483,6 @@
       box-shadow:
         0 0 0 2px rgba(255,220,120,0.9),
         0 6px 12px rgba(60,20,90,0.22);
-    }
-
-    body.video-playing .month-card,
-    body.video-playing .gallery-zone::after,
-    body.video-playing .month-card.selected .month-selection-glow,
-    body.video-playing .month-card.selected .month-selected-heart,
-    body.video-playing .month-soft-shine::before,
-    body.video-playing .month-sparkle-dust {
-      animation: none !important;
-    }
-
-    body.video-playing .gallery-zone::after {
-      opacity: 0.08;
-    }
-
-    body.video-playing .month-card {
-      filter: none !important;
-    }
-
-    body.video-playing .month-card.selected {
-      filter: none !important;
-    }
-
-    @keyframes sparkleFloat {
-      0% {
-        background-position:
-          10px 20px,
-          42px 76px,
-          28px 48px;
-      }
-
-      100% {
-        background-position:
-          10px 124px,
-          42px 218px,
-          28px 134px;
-      }
-    }
-
-    @keyframes frameBreath {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-
-      50% {
-        transform: translateY(-3px) scale(1.006);
-      }
-    }
-
-    @keyframes selectedBreath {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-        filter:
-          drop-shadow(0 15px 22px rgba(87,35,105,0.28))
-          drop-shadow(0 0 22px rgba(255,115,135,0.66))
-          drop-shadow(0 0 14px rgba(255,230,170,0.30));
-      }
-
-      50% {
-        transform: translateY(-5px) scale(1.018);
-        filter:
-          drop-shadow(0 18px 26px rgba(87,35,105,0.32))
-          drop-shadow(0 0 34px rgba(255,115,135,0.92))
-          drop-shadow(0 0 24px rgba(255,230,170,0.50));
-      }
-    }
-
-    @keyframes selectedGlow {
-      0%, 100% {
-        opacity: 0.72;
-        box-shadow:
-          0 0 0 4px rgba(255,117,142,0.82),
-          0 0 18px rgba(255,75,110,0.52),
-          inset 0 0 15px rgba(255,230,235,0.38);
-      }
-
-      50% {
-        opacity: 1;
-        box-shadow:
-          0 0 0 5px rgba(255,117,142,1),
-          0 0 32px rgba(255,75,110,0.88),
-          inset 0 0 22px rgba(255,230,235,0.60);
-      }
-    }
-
-    @keyframes photoShine {
-      0% {
-        left: -70%;
-        opacity: 0;
-      }
-
-      12% {
-        opacity: 0.55;
-      }
-
-      35% {
-        left: 125%;
-        opacity: 0;
-      }
-
-      100% {
-        left: 125%;
-        opacity: 0;
-      }
-    }
-
-    @keyframes cardSparkles {
-      0% {
-        background-position:
-          15px 42px,
-          72px 118px,
-          30px 76px;
-        opacity: 0.50;
-      }
-
-      50% {
-        opacity: 0.78;
-      }
-
-      100% {
-        background-position:
-          15px 164px,
-          72px 284px,
-          30px 168px;
-        opacity: 0.50;
-      }
-    }
-
-    @keyframes selectedSparkles {
-      0% {
-        background-position:
-          15px 42px,
-          72px 118px,
-          30px 76px;
-        opacity: 0.72;
-      }
-
-      50% {
-        opacity: 1;
-      }
-
-      100% {
-        background-position:
-          15px 164px,
-          72px 284px,
-          30px 168px;
-        opacity: 0.72;
-      }
-    }
-
-    @keyframes heartPop {
-      0% {
-        opacity: 0;
-        transform: scale(0.45) rotate(-8deg);
-      }
-
-      70% {
-        opacity: 1;
-        transform: scale(1.14) rotate(4deg);
-      }
-
-      100% {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-      }
-    }
-
-    @keyframes heartPulse {
-      0%, 100% {
-        box-shadow:
-          0 0 0 3px rgba(255,245,248,0.95),
-          0 0 20px rgba(255,60,100,0.75),
-          0 8px 15px rgba(100,20,55,0.28);
-      }
-
-      50% {
-        box-shadow:
-          0 0 0 3px rgba(255,245,248,1),
-          0 0 30px rgba(255,60,100,0.98),
-          0 8px 15px rgba(100,20,55,0.28);
-      }
-    }
-
-    @keyframes viewerAppear {
-      0% {
-        opacity: 0;
-        transform: scale(0.94) translateY(10px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
     }
   </style>
 </head>
@@ -1050,12 +514,6 @@
     </section>
 
     <section class="gallery-zone">
-
-      <div class="gallery-heading">
-        <div class="gallery-crown"></div>
-        <div class="gallery-ribbon">Галерея по місяцях</div>
-      </div>
-
       <section class="months-grid" id="monthsGrid"></section>
 
       <button class="complete-btn" id="completeBtn" type="button" onclick="showCompletionChoice()">
@@ -1063,27 +521,9 @@
       </button>
 
       <div class="bottom-decor"></div>
-
     </section>
 
   </main>
-
-  <div class="photo-overlay" id="photoOverlay" onclick="closeViewerByBg(event)">
-    <div class="viewer-card">
-      <button class="close-viewer" type="button" onclick="closeViewer()">×</button>
-
-      <div class="viewer-media">
-        <img class="viewer-img" id="viewerImg" src="" alt="">
-      </div>
-
-      <div class="viewer-title" id="viewerTitle"></div>
-
-      <div class="viewer-actions">
-        <button class="viewer-btn" type="button" id="viewerLikeBtn" onclick="toggleCurrentPhotoLike()">❤️ Обрати</button>
-        <button class="viewer-btn" type="button" onclick="closeViewer()">Закрити</button>
-      </div>
-    </div>
-  </div>
 
   <div class="choice-overlay" id="choiceOverlay">
     <div class="choice-card">
@@ -1138,32 +578,26 @@
     var counterText = document.getElementById("counterText");
     var completeBtn = document.getElementById("completeBtn");
 
-    var photoOverlay = document.getElementById("photoOverlay");
-    var viewerImg = document.getElementById("viewerImg");
-    var viewerTitle = document.getElementById("viewerTitle");
-    var viewerLikeBtn = document.getElementById("viewerLikeBtn");
-
     var choiceOverlay = document.getElementById("choiceOverlay");
     var bonusVideoOverlay = document.getElementById("bonusVideoOverlay");
     var bonusVideo = document.getElementById("bonusVideo");
     var bonusNextBtn = document.getElementById("bonusNextBtn");
 
-    var currentPhotoId = null;
     var wasMusicPlayingBeforeBonus = false;
 
     var months = [
-      { title: "Народження", src: "IMG-20250705-WA0000.jpg", pos: "center 42%", viewerPos: "center 42%" },
-      { title: "1 місяць", src: "foto1.jpg", pos: "center 34%", viewerPos: "center 34%" },
-      { title: "2 місяці", src: "foto2.jpg", pos: "center 30%", viewerPos: "center 30%" },
-      { title: "3 місяці", src: "foto3.jpg", pos: "center 22%", viewerPos: "center 22%" },
-      { title: "4 місяці", src: "foto4.jpg", pos: "center 24%", viewerPos: "center 24%" },
-      { title: "5 місяців", src: "foto5.jpg", pos: "center 30%", viewerPos: "center 30%" },
-      { title: "6 місяців", src: "foto6.jpg", pos: "center 26%", viewerPos: "center 26%" },
-      { title: "7 місяців", src: "foto7.jpg", pos: "center 26%", viewerPos: "center 26%" },
-      { title: "8 місяців", src: "foto8.jpg", pos: "center 30%", viewerPos: "center 30%" },
-      { title: "9 місяців", src: "foto9.jpg", pos: "center 28%", viewerPos: "center 28%" },
-      { title: "10 місяців", src: "foto10.jpg", pos: "center 24%", viewerPos: "center 24%" },
-      { title: "11 місяців", src: "foto11.jpg", pos: "center 28%", viewerPos: "center 28%" }
+      { title: "Народження", src: "IMG-20250705-WA0000.jpg", pos: "center 42%" },
+      { title: "1 місяць", src: "foto1.jpg", pos: "center 34%" },
+      { title: "2 місяці", src: "foto2.jpg", pos: "center 30%" },
+      { title: "3 місяці", src: "foto3.jpg", pos: "center 22%" },
+      { title: "4 місяці", src: "foto4.jpg", pos: "center 24%" },
+      { title: "5 місяців", src: "foto5.jpg", pos: "center 30%" },
+      { title: "6 місяців", src: "foto6.jpg", pos: "center 26%" },
+      { title: "7 місяців", src: "foto7.jpg", pos: "center 26%" },
+      { title: "8 місяців", src: "foto8.jpg", pos: "center 30%" },
+      { title: "9 місяців", src: "foto9.jpg", pos: "center 28%" },
+      { title: "10 місяців", src: "foto10.jpg", pos: "center 24%" },
+      { title: "11 місяців", src: "foto11.jpg", pos: "center 28%" }
     ];
 
     var selectedPhotos = JSON.parse(localStorage.getItem("sofiyka_location1_selected") || "[]");
@@ -1206,9 +640,6 @@
         card.setAttribute("role", "button");
         card.setAttribute("tabindex", "0");
         card.setAttribute("data-photo-id", id);
-        card.setAttribute("data-src", month.src);
-        card.setAttribute("data-title", month.title);
-        card.setAttribute("data-viewer-pos", month.viewerPos || "center 35%");
 
         if (isSelected(id)) {
           card.classList.add("selected");
@@ -1216,25 +647,22 @@
 
         card.onclick = function(event) {
           event.preventDefault();
-          openViewer(
-            this.getAttribute("data-photo-id"),
-            this.getAttribute("data-src"),
-            this.getAttribute("data-title"),
-            this.getAttribute("data-viewer-pos")
-          );
+          toggleLike(this.getAttribute("data-photo-id"));
         };
 
         card.onkeydown = function(event) {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            openViewer(
-              this.getAttribute("data-photo-id"),
-              this.getAttribute("data-src"),
-              this.getAttribute("data-title"),
-              this.getAttribute("data-viewer-pos")
-            );
+            toggleLike(this.getAttribute("data-photo-id"));
           }
         };
+
+        var title = document.createElement("div");
+        title.className = "month-title";
+        title.textContent = month.title;
+
+        var photoWrap = document.createElement("div");
+        photoWrap.className = "month-photo-wrap";
 
         var photo = document.createElement("img");
         photo.className = "month-photo";
@@ -1246,27 +674,11 @@
           this.style.display = "none";
         };
 
-        var selectionGlow = document.createElement("div");
-        selectionGlow.className = "month-selection-glow";
-
-        var frame = document.createElement("div");
-        frame.className = "month-frame";
-
-        var title = document.createElement("div");
-        title.className = "month-title";
-        title.textContent = month.title;
-
-        var softShine = document.createElement("div");
-        softShine.className = "month-soft-shine";
-
-        var sparkleDust = document.createElement("div");
-        sparkleDust.className = "month-sparkle-dust";
-
         var heart = document.createElement("button");
-        heart.className = "month-selected-heart";
+        heart.className = "month-like";
         heart.type = "button";
-        heart.innerHTML = "♥";
-        heart.setAttribute("aria-label", "Прибрати фото з вибраних");
+        heart.innerHTML = isSelected(id) ? "♥" : "♡";
+        heart.setAttribute("aria-label", "Обрати фото");
         heart.setAttribute("data-photo-id", id);
 
         heart.onclick = function(event) {
@@ -1275,13 +687,11 @@
           toggleLike(this.getAttribute("data-photo-id"));
         };
 
-        card.appendChild(photo);
-        card.appendChild(selectionGlow);
-        card.appendChild(frame);
+        photoWrap.appendChild(photo);
+        photoWrap.appendChild(heart);
+
         card.appendChild(title);
-        card.appendChild(softShine);
-        card.appendChild(sparkleDust);
-        card.appendChild(heart);
+        card.appendChild(photoWrap);
 
         monthsGrid.appendChild(card);
       }
@@ -1319,59 +729,11 @@
       renderMonths();
       updateCounter();
 
-      if (currentPhotoId === id) {
-        updateViewerLikeButton();
-      }
-
       if (addedNow && !wasCompleted && selectedPhotos.length === REQUIRED_LIKES) {
         setTimeout(function() {
-          closeViewer();
           showCompletionChoice();
-        }, 250);
+        }, 200);
       }
-    }
-
-    function openViewer(id, src, title, viewerPos) {
-      currentPhotoId = id;
-      viewerImg.src = src;
-      viewerTitle.textContent = title || "";
-      viewerImg.style.objectPosition = viewerPos || "center 35%";
-
-      viewerImg.onerror = function() {
-        this.style.display = "none";
-      };
-
-      viewerImg.style.display = "block";
-      updateViewerLikeButton();
-      photoOverlay.classList.add("show");
-    }
-
-    function closeViewer() {
-      photoOverlay.classList.remove("show");
-      currentPhotoId = null;
-      viewerImg.src = "";
-      viewerTitle.textContent = "";
-    }
-
-    function closeViewerByBg(event) {
-      if (event.target === photoOverlay) {
-        closeViewer();
-      }
-    }
-
-    function updateViewerLikeButton() {
-      if (!currentPhotoId) return;
-
-      if (isSelected(currentPhotoId)) {
-        viewerLikeBtn.textContent = "💛 Прибрати";
-      } else {
-        viewerLikeBtn.textContent = "❤️ Обрати";
-      }
-    }
-
-    function toggleCurrentPhotoLike() {
-      if (!currentPhotoId) return;
-      toggleLike(currentPhotoId);
     }
 
     function showCompletionChoice() {
@@ -1391,8 +753,6 @@
       closeCompletionChoice();
 
       if (!bonusVideo || !bonusVideoOverlay) return;
-
-      document.body.classList.add("video-playing");
 
       wasMusicPlayingBeforeBonus = false;
 
@@ -1418,7 +778,6 @@
       }
 
       bonusVideoOverlay.classList.remove("show");
-      document.body.classList.remove("video-playing");
 
       if (wasMusicPlayingBeforeBonus && bgMusic) {
         try {

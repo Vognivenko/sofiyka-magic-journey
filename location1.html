@@ -4,688 +4,1020 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google" content="notranslate" />
-  <title>Локація 1 — Знайомство з Софійкою</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <title>Локація 1 — Знайомство із Софійкою</title>
 
   <style>
-    :root {
-      --violet: #7e459e;
-      --violet-soft: #9b6bb7;
-      --gold: #efd77a;
-      --gold-2: #f7e8aa;
-      --cream: rgba(255, 251, 255, 0.92);
-      --cream-2: rgba(255, 248, 253, 0.90);
-      --shadow: 0 10px 28px rgba(173, 117, 195, 0.18);
-      --shadow-soft: 0 6px 18px rgba(173, 117, 195, 0.14);
-      --border: 2px solid rgba(238, 219, 127, 0.9);
-      --radius-xl: 34px;
-      --radius-lg: 28px;
-      --radius-md: 22px;
-      --container-width: 1120px;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      font-family: 'Cormorant Garamond', serif;
+      background: #f8d9ef;
+      color: #6f2f8b;
     }
 
     body {
-      margin: 0;
-      color: var(--violet);
-      font-family: "Cormorant Garamond", serif;
-      background:
-        linear-gradient(rgba(255,255,255,0.06), rgba(255,255,255,0.06)),
-        url("fon_location1.png") center top / cover no-repeat fixed;
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.55), transparent 22%),
-        radial-gradient(circle at 80% 15%, rgba(255, 244, 201, 0.34), transparent 18%),
-        radial-gradient(circle at 85% 85%, rgba(255, 220, 247, 0.22), transparent 22%);
-      z-index: 0;
+      background-color: #f8d9ef;
     }
 
     .page {
+      width: 100%;
+      min-height: 100vh;
+      padding: 16px 0 0;
       position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: var(--container-width);
-      margin: 0 auto;
-      padding: 14px 18px 42px;
-    }
-
-    /* ===== ШАПКА ЧЕРЕЗ КАРТИНКУ heder_loc1.png ===== */
-
-    .header-loc1 {
-      position: relative;
-      width: 100%;
-      margin: 0 auto 14px;
-      z-index: 10;
-    }
-
-    .header-loc1-img {
-      display: block;
-      width: 100%;
-      height: auto;
-      user-select: none;
-      -webkit-user-drag: none;
-      pointer-events: none;
-      filter: drop-shadow(0 8px 18px rgba(116, 61, 140, 0.16));
-    }
-
-    .header-click {
-      position: absolute;
-      top: 20%;
-      width: 22%;
-      height: 60%;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      z-index: 20;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .header-back {
-      left: 1.5%;
-    }
-
-    .header-music {
-      right: 1.5%;
-    }
-
-    .header-click:active {
-      transform: scale(0.96);
-    }
-
-    .header-music.playing::after {
-      content: "";
-      position: absolute;
-      inset: 18%;
-      border-radius: 50%;
-      box-shadow: 0 0 22px rgba(255, 245, 180, 0.75);
-      animation: musicGlow 1.6s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes musicGlow {
-      0%, 100% {
-        opacity: 0.45;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 0.9;
-        transform: scale(1.06);
-      }
-    }
-
-    /* ===== ЗАГАЛЬНІ КАРТКИ ===== */
-
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.93), rgba(255,248,253,0.88));
-      border: var(--border);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
       overflow: hidden;
+      background-image:
+        linear-gradient(
+          180deg,
+          rgba(248, 217, 239, 0) 0%,
+          rgba(248, 217, 239, 0) 62%,
+          rgba(248, 217, 239, 0.18) 76%,
+          rgba(248, 217, 239, 0.92) 93%,
+          #f8d9ef 100%
+        ),
+        url("fon_loc1.png");
+      background-size:
+        100% 100%,
+        100% auto;
+      background-position:
+        top center,
+        top center;
+      background-repeat:
+        no-repeat,
+        no-repeat;
+      background-color: #f8d9ef;
     }
 
-    /* ===== ПЕРШИЙ БЛОК ===== */
-
-    .hero-card {
-      position: relative;
-      margin-bottom: 18px;
-      min-height: 250px;
-      padding: 22px 30px;
-      background:
-        linear-gradient(rgba(255,255,255,0.44), rgba(255,248,253,0.50)),
-        url("fon_block1.png") center center / cover no-repeat;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      min-height: 205px;
+    .topbar {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto 14px;
+      padding: 4px 6px 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      border-radius: 28px;
-      padding: 12px 18px;
-      background:
-        radial-gradient(circle at 50% 45%, rgba(255,255,255,0.52), rgba(255,255,255,0.20) 62%, rgba(255,255,255,0.04));
-      backdrop-filter: blur(1px);
-      -webkit-backdrop-filter: blur(1px);
+      justify-content: space-between;
     }
 
-    .mini-pill {
-      display: inline-flex;
+    .image-btn {
+      width: 56px;
+      height: 56px;
+      border: none;
+      background: transparent center / contain no-repeat;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      filter: drop-shadow(0 6px 10px rgba(80, 25, 110, 0.24));
+    }
+
+    .back-btn {
+      background-image: url("5.png");
+    }
+
+    .music-btn {
+      background-image: url("6.png");
+    }
+
+    .location-title {
+      width: 48%;
+      max-width: 250px;
+      aspect-ratio: 420 / 145;
+      background: url("8.png") center / contain no-repeat;
+      display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 42px;
-      padding: 7px 24px;
-      border-radius: 999px;
-      border: 2px solid rgba(239, 215, 122, 0.95);
-      background: rgba(255,250,246,0.78);
-      box-shadow: 0 4px 14px rgba(235, 211, 107, 0.15);
-      color: var(--violet);
-      font-size: 24px;
+      color: #69228b;
+      font-size: clamp(23px, 5.8vw, 36px);
       font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      padding-top: 8px;
+      padding-left: 2px;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
+    }
+
+    .intro-text-block {
+      width: 100%;
+      max-width: 520px;
+      margin: 34px auto 30px;
+      padding: 0 34px;
+      text-align: center;
+    }
+
+    .intro-kicker {
+      font-size: clamp(17px, 4.1vw, 23px);
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #7c359b;
+      text-align: center;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .intro-title {
+      font-size: clamp(30px, 7.8vw, 44px);
+      font-weight: 700;
+      line-height: 0.94;
+      color: #783193;
       margin-bottom: 12px;
       text-align: center;
-    }
-
-    .hero-title {
-      margin: 0 0 8px;
-      font-size: clamp(44px, 5.8vw, 70px);
-      line-height: 0.94;
-      font-weight: 700;
-      color: var(--violet);
       text-shadow:
-        0 2px 0 rgba(255,255,255,0.86),
-        0 6px 18px rgba(126, 69, 158, 0.10);
+        0 2px 0 rgba(255,255,255,0.9),
+        0 5px 10px rgba(120,45,145,0.2);
     }
 
-    .hero-desc {
-      margin: 0;
-      max-width: 760px;
-      font-size: clamp(22px, 2.7vw, 34px);
-      line-height: 1.22;
-      font-weight: 600;
-      color: #6f438f;
-      text-shadow: 0 4px 12px rgba(255,255,255,0.45);
+    .intro-text {
+      width: 76%;
+      margin: 0 auto;
+      font-size: clamp(15px, 3.6vw, 20px);
+      line-height: 1.08;
+      font-weight: 700;
+      color: #6f2f86;
+      text-align: center;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.95),
+        0 0 8px rgba(255,255,255,0.65);
     }
-
-    /* ===== ЗАВДАННЯ ===== */
 
     .task-card {
-      margin-bottom: 18px;
-      padding: 20px 20px 22px;
-      text-align: center;
+      width: 92%;
+      max-width: 520px;
+      margin: 54px auto 0;
+      position: relative;
+      aspect-ratio: 797 / 292;
+      background: url("12.png") center / contain no-repeat;
+      filter: drop-shadow(0 8px 14px rgba(90,35,120,0.16));
+      z-index: 4;
     }
 
     .task-title {
-      margin: 0;
-      font-size: clamp(30px, 3.6vw, 46px);
-      line-height: 1.08;
+      position: absolute;
+      top: 19%;
+      left: 38%;
+      width: 43%;
+      text-align: center;
+      font-size: clamp(15px, 3.8vw, 23px);
+      line-height: 0.95;
       font-weight: 700;
-    }
-
-    .task-heart {
-      display: block;
-      margin: 6px auto 8px;
-      font-size: 40px;
-      line-height: 1;
-      color: #d74470;
-      filter: drop-shadow(0 6px 10px rgba(255, 104, 163, 0.18));
+      color: #743092;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
     }
 
     .counter-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 200px;
-      min-height: 52px;
-      padding: 8px 22px;
-      border-radius: 999px;
-      border: 1.8px solid rgba(255, 240, 243, 0.95);
-      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(250,241,249,0.96));
-      box-shadow: inset 0 2px 8px rgba(255,255,255,0.75);
-      font-size: 25px;
+      position: absolute;
+      top: 63%;
+      left: 34%;
+      width: 43%;
+      text-align: center;
+      color: #7a3b94;
+      font-size: clamp(17px, 4.1vw, 25px);
       font-weight: 700;
-      color: var(--violet-soft);
+      line-height: 1;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
     }
 
-    /* ===== СЕКЦІЇ МІСЯЦІВ ===== */
+    .gallery-zone {
+      width: 100%;
+      position: relative;
+      margin-top: -44px;
+      padding: 92px 0 0;
+      overflow: hidden;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(248,217,239,0) 0%,
+          rgba(248,217,239,0.36) 6%,
+          rgba(249,218,242,0.92) 16%,
+          #f9d8f0 34%,
+          #f8d2ec 68%,
+          #f6cdea 100%
+        );
+      background-color: #f8d9ef;
+    }
 
-    .sections {
+    .gallery-zone::before {
+      content: "";
+      position: absolute;
+      left: -8%;
+      right: -8%;
+      top: -128px;
+      height: 260px;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 50% 28%, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.38) 34%, rgba(255,255,255,0) 72%),
+        linear-gradient(
+          180deg,
+          rgba(248,217,239,0) 0%,
+          rgba(248,217,239,0.30) 34%,
+          rgba(248,217,239,0.82) 68%,
+          #f9d8f0 100%
+        );
+      filter: blur(0.4px);
+    }
+
+    .gallery-zone::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.78) 0 1.1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,231,150,0.62) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,0.48) 0 0.9px, transparent 1.4px);
+      background-size:
+        78px 104px,
+        128px 142px,
+        58px 86px;
+      background-position:
+        10px 20px,
+        42px 76px,
+        28px 48px;
+      opacity: 0.20;
+      animation: sparkleFloat 14s linear infinite;
+    }
+
+    .gallery-heading,
+    .months-grid,
+    .complete-btn,
+    .bottom-decor {
+      position: relative;
+      z-index: 2;
+    }
+
+    .gallery-heading {
+      width: 96%;
+      max-width: 470px;
+      margin: 4px auto 24px;
+      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      align-items: center;
+      padding: 20px 0 18px;
+    }
+
+    .gallery-heading::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 2px;
+      width: 112%;
+      height: 158px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(255,255,255,0.78) 0%,
+          rgba(255,235,250,0.48) 38%,
+          rgba(255,210,240,0.18) 64%,
+          transparent 78%
+        );
+      filter: blur(2px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .gallery-heading::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      width: 76%;
+      height: 34px;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(255,230,150,0.62) 0%,
+          rgba(255,230,150,0.24) 42%,
+          transparent 76%
+        );
+      filter: blur(1px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .gallery-crown {
+      width: 88px;
+      height: 88px;
+      margin-bottom: -36px;
+      position: relative;
+      z-index: 4;
+      background: url("9.png") center / contain no-repeat;
+      filter:
+        drop-shadow(0 6px 8px rgba(90,35,120,0.25))
+        drop-shadow(0 0 14px rgba(255,235,160,0.85));
+      pointer-events: none;
+    }
+
+    .gallery-ribbon {
+      width: 100%;
+      aspect-ratio: 850 / 145;
+      position: relative;
+      z-index: 3;
+      background: url("10.png") center / contain no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff6ff;
+      font-size: clamp(23px, 5.4vw, 34px);
+      font-weight: 700;
+      text-align: center;
+      padding-top: 7px;
+      text-shadow:
+        0 2px 4px rgba(80,25,110,0.52),
+        0 0 10px rgba(255,255,255,0.85);
+      filter:
+        drop-shadow(0 8px 12px rgba(90,35,120,0.25))
+        drop-shadow(0 0 16px rgba(255,230,170,0.35));
+    }
+
+    .months-grid {
+      width: 100%;
+      max-width: 430px;
+      margin: 8px auto 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2px;
+      padding: 0 22px 22px;
     }
 
     .month-card {
-      display: grid;
-      grid-template-columns: minmax(245px, 300px) 1fr;
-      gap: 14px;
-      padding: 12px;
-      border-radius: 30px;
-      border: var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,249,252,0.88));
-      box-shadow: var(--shadow-soft);
-      overflow: hidden;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      filter:
+        drop-shadow(0 10px 16px rgba(87,35,105,0.18))
+        drop-shadow(0 0 12px rgba(255,230,170,0.14));
+      animation: frameBreath 5.4s ease-in-out infinite;
+      transition:
+        transform .25s ease,
+        filter .25s ease;
+      will-change: transform;
     }
 
-    .month-info {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      min-width: 0;
-      padding: 9px 10px 9px 8px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(255, 244, 246, 0.88), rgba(255,255,255,0.80));
-      box-shadow: inset 0 0 0 1px rgba(247, 230, 170, 0.55);
-    }
-
-    .month-icon {
-      width: 66px;
-      height: 66px;
-      flex: 0 0 66px;
-      border-radius: 50%;
-      border: 2px solid rgba(239, 215, 122, 0.9);
+    .month-card::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      top: 18px;
+      bottom: 30px;
+      z-index: 0;
+      border-radius: 42px;
       background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.98), rgba(255,249,236,0.95) 35%, rgba(255,235,179,0.95) 82%);
+        radial-gradient(ellipse at 50% 18%, rgba(255,255,255,0.58) 0%, rgba(255,255,255,0.18) 36%, transparent 70%),
+        radial-gradient(circle at 18% 82%, rgba(255,225,245,0.50) 0%, rgba(255,225,245,0.14) 34%, transparent 62%),
+        radial-gradient(circle at 86% 72%, rgba(255,238,183,0.30) 0%, rgba(255,238,183,0.10) 30%, transparent 58%),
+        linear-gradient(180deg, rgba(255,245,252,0.18) 0%, rgba(255,220,243,0.16) 48%, rgba(245,198,230,0.20) 100%);
       box-shadow:
-        0 6px 16px rgba(229, 187, 89, 0.20),
-        inset 0 2px 10px rgba(255,255,255,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 32px;
-      line-height: 1;
+        inset 0 0 0 1px rgba(255,255,255,0.22),
+        0 0 22px rgba(255,255,255,0.16),
+        0 14px 24px rgba(126,45,138,0.05);
+      pointer-events: none;
     }
 
-    .month-text {
-      min-width: 0;
+    .month-card::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      top: 36px;
+      height: 64px;
+      z-index: 0;
+      border-radius: 999px;
+      background:
+        radial-gradient(ellipse at center, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 55%, transparent 78%);
+      pointer-events: none;
+    }
+
+    .month-card:nth-child(2n) {
+      animation-delay: .45s;
+    }
+
+    .month-card:nth-child(3n) {
+      animation-delay: .9s;
+    }
+
+    .month-card:active {
+      transform: scale(1.018);
+      filter:
+        drop-shadow(0 14px 22px rgba(87,35,105,0.25))
+        drop-shadow(0 0 18px rgba(255,230,170,0.30));
+    }
+
+    .month-card.selected {
+      animation: selectedBreath 2.7s ease-in-out infinite;
+      filter:
+        drop-shadow(0 15px 22px rgba(87,35,105,0.28))
+        drop-shadow(0 0 26px rgba(255,115,135,0.76))
+        drop-shadow(0 0 18px rgba(255,230,170,0.36));
+    }
+
+    .month-card.selected::before {
+      background:
+        radial-gradient(ellipse at 50% 18%, rgba(255,255,255,0.76) 0%, rgba(255,255,255,0.24) 38%, transparent 70%),
+        radial-gradient(circle at 18% 82%, rgba(255,221,239,0.72) 0%, rgba(255,221,239,0.22) 36%, transparent 62%),
+        radial-gradient(circle at 86% 72%, rgba(255,238,183,0.48) 0%, rgba(255,238,183,0.15) 32%, transparent 58%),
+        linear-gradient(180deg, rgba(255,250,253,0.30) 0%, rgba(255,220,243,0.26) 48%, rgba(245,198,230,0.30) 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.30),
+        0 0 30px rgba(255,255,255,0.24),
+        0 18px 34px rgba(126,45,138,0.08);
+    }
+
+    .month-selection-glow {
+      position: absolute;
+      left: 7.4%;
+      top: 22.6%;
+      width: 85.2%;
+      height: 63.2%;
+      border-radius: 22px;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      box-shadow:
+        0 0 0 4px rgba(255,117,142,0.92),
+        0 0 22px rgba(255,75,110,0.65),
+        inset 0 0 18px rgba(255,230,235,0.45);
+      transition: opacity .22s ease;
+    }
+
+    .month-card.selected .month-selection-glow {
+      opacity: 1;
+      animation: selectedGlow 2.2s ease-in-out infinite;
+    }
+
+    .month-photo {
+      position: absolute;
+      left: 7.5%;
+      top: 22.8%;
+      width: 85%;
+      height: 63%;
+      border-radius: 24px;
+      object-fit: cover;
+      object-position: center 36%;
+      z-index: 1;
+      background: rgba(255,255,255,0.45);
+    }
+
+    .month-frame {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: url("gallery_frame_one.png") center / contain no-repeat;
+      pointer-events: none;
     }
 
     .month-title {
-      margin: 0 0 4px;
-      font-size: clamp(26px, 2.6vw, 38px);
-      line-height: 1;
-      font-weight: 700;
-    }
-
-    .month-subtitle {
-      margin: 0;
-      font-size: clamp(18px, 1.8vw, 25px);
-      line-height: 1.15;
-      font-weight: 600;
-      color: #7f5a98;
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    .photo-card {
-      position: relative;
-      min-height: 138px;
-      border-radius: 22px;
-      border: 2px dashed rgba(184, 154, 212, 0.68);
-      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(252,245,251,0.92));
-      box-shadow: inset 0 2px 10px rgba(255,255,255,0.75);
-      padding: 18px 14px 12px;
+      position: absolute;
+      top: 12.4%;
+      left: 16%;
+      width: 68%;
+      height: 10.5%;
+      z-index: 5;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
-    }
-
-    .photo-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 18px rgba(185, 145, 210, 0.14);
-      border-color: rgba(173, 131, 204, 0.82);
-    }
-
-    .photo-label {
-      font-size: clamp(22px, 1.9vw, 28px);
-      line-height: 1.1;
+      color: #6a2787;
+      font-size: clamp(22px, 5.8vw, 34px);
       font-weight: 700;
-      color: var(--violet);
+      line-height: 1;
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.95),
+        0 0 9px rgba(255,255,255,0.7),
+        0 4px 9px rgba(95,35,115,0.22);
+      pointer-events: none;
     }
 
-    .photo-label span {
-      display: block;
-      margin-top: 6px;
-      font-size: clamp(15px, 1.4vw, 19px);
-      line-height: 1.2;
-      font-weight: 600;
-      color: #8c73a1;
-    }
-
-    .like-btn {
+    .month-soft-shine {
       position: absolute;
-      top: 9px;
-      right: 9px;
-      width: 40px;
-      height: 40px;
+      left: 8.5%;
+      top: 23.8%;
+      width: 83%;
+      height: 61%;
+      z-index: 6;
+      border-radius: 24px;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0.52;
+      mix-blend-mode: screen;
+    }
+
+    .month-soft-shine::before {
+      content: "";
+      position: absolute;
+      top: -30%;
+      left: -70%;
+      width: 42%;
+      height: 160%;
+      transform: rotate(18deg);
+      background:
+        linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255,255,255,0.10) 18%,
+          rgba(255,255,255,0.62) 50%,
+          rgba(255,255,255,0.10) 82%,
+          transparent 100%
+        );
+      animation: photoShine 6.8s ease-in-out infinite;
+    }
+
+    .month-card.selected .month-soft-shine {
+      opacity: 0.34;
+    }
+
+    .month-card.selected .month-soft-shine::before {
+      animation-duration: 4.2s;
+    }
+
+    .month-sparkle-dust {
+      position: absolute;
+      inset: 0;
+      z-index: 7;
+      pointer-events: none;
+      opacity: 0.62;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.95) 0 1.2px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,235,150,0.80) 0 1.1px, transparent 1.7px),
+        radial-gradient(circle, rgba(255,255,255,0.65) 0 0.9px, transparent 1.4px);
+      background-size:
+        92px 122px,
+        136px 166px,
+        64px 92px;
+      background-position:
+        15px 42px,
+        72px 118px,
+        30px 76px;
+      animation: cardSparkles 9s linear infinite;
+    }
+
+    .month-card.selected .month-sparkle-dust {
+      opacity: 0.88;
+      animation: selectedSparkles 4.8s linear infinite;
+    }
+
+    .month-selected-heart {
+      position: absolute;
+      right: 7.8%;
+      bottom: 5.8%;
+      width: 70px;
+      height: 70px;
+      z-index: 9;
+      display: none;
+      align-items: center;
+      justify-content: center;
       border: none;
       border-radius: 50%;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
       background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.96), rgba(255,240,246,0.95) 38%, rgba(246, 194, 221, 0.96) 88%);
-      box-shadow: 0 6px 14px rgba(240, 161, 201, 0.22);
+        radial-gradient(circle at 35% 28%, #fff8fb 0%, #ffd6e0 32%, #ff6f8f 68%, #c61f45 100%);
+      box-shadow:
+        0 0 0 3px rgba(255,245,248,0.95),
+        0 0 20px rgba(255,60,100,0.75),
+        0 8px 15px rgba(100,20,55,0.28);
+      color: #d81942;
+      font-size: 39px;
+      font-weight: 700;
+      line-height: 1;
+      text-shadow:
+        0 2px 3px rgba(95,0,30,0.25),
+        0 0 8px rgba(255,255,255,0.9);
+    }
+
+    .month-card.selected .month-selected-heart {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 21px;
-      color: #5b435f;
-      transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+      animation: heartPop .36s ease both, heartPulse 1.8s ease-in-out infinite .36s;
     }
 
-    .like-btn:hover {
-      transform: scale(1.06);
-      box-shadow: 0 10px 18px rgba(240, 161, 201, 0.28);
+    .month-selected-heart:active {
+      transform: scale(0.92);
     }
 
-    .like-btn.active {
-      background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.98), rgba(255,220,236,0.98) 38%, rgba(255, 141, 186, 0.96) 88%);
-      color: #d43d73;
-      transform: scale(1.06);
-    }
-
-    /* ===== ФІНАЛ ===== */
-
-    .unlock-card {
-      margin-top: 20px;
-      padding: 22px 20px 24px;
-      text-align: center;
-      position: relative;
-    }
-
-    .unlock-title {
-      margin: 0 0 16px;
-      font-size: clamp(34px, 3.7vw, 52px);
-      line-height: 1.04;
-      font-weight: 700;
-    }
-
-    .next-btn {
-      min-height: 62px;
-      padding: 13px 32px;
+    .complete-btn {
+      display: none;
+      width: calc(100% - 28px);
+      max-width: 430px;
+      margin: 10px auto 0;
+      border: none;
       border-radius: 999px;
-      border: 2px solid rgba(230, 216, 185, 0.88);
-      background: linear-gradient(180deg, rgba(230,226,224,0.95), rgba(197,190,188,0.95));
-      color: rgba(119, 96, 115, 0.88);
-      font-size: clamp(24px, 2.4vw, 32px);
-      font-family: "Cormorant Garamond", serif;
+      padding: 14px 18px;
+      background: linear-gradient(180deg, #fff7fb, #f6d5ff);
+      color: #6f2f8b;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
       font-weight: 700;
-      cursor: not-allowed;
-      box-shadow: inset 0 3px 10px rgba(255,255,255,0.55);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
-    }
-
-    .next-btn.enabled {
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.95),
+        0 0 18px rgba(255,220,120,0.58),
+        0 9px 17px rgba(90,35,120,0.22);
       cursor: pointer;
-      color: white;
-      background: linear-gradient(180deg, #c78be5, #a96bd1);
-      border-color: rgba(233, 207, 255, 0.95);
-      box-shadow:
-        0 8px 20px rgba(164, 97, 204, 0.24),
-        inset 0 2px 10px rgba(255,255,255,0.30);
     }
 
-    .next-btn.enabled:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 12px 24px rgba(164, 97, 204, 0.28),
-        inset 0 2px 10px rgba(255,255,255,0.30);
+    .complete-btn.show {
+      display: block;
     }
 
-    .hint {
-      margin-top: 12px;
-      min-height: 28px;
-      font-size: 21px;
-      font-weight: 600;
-      color: #8b6e9c;
-    }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 28px;
-      transform: translateX(-50%) translateY(20px);
-      padding: 12px 18px;
-      border-radius: 999px;
-      background: rgba(117, 76, 150, 0.95);
-      color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      box-shadow: 0 10px 24px rgba(117, 76, 150, 0.28);
-      opacity: 0;
+    .bottom-decor {
+      width: 100%;
+      max-width: 520px;
+      height: clamp(78px, 24vw, 130px);
+      margin: 10px auto 0;
+      background-image: url("fon_loc1_buttom.png");
+      background-size: 100% auto;
+      background-position: bottom center;
+      background-repeat: no-repeat;
       pointer-events: none;
-      transition: opacity 0.22s ease, transform 0.22s ease;
-      z-index: 50;
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    .photo-overlay,
+    .choice-overlay,
+    .bonus-video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(42, 13, 58, 0.80);
+      backdrop-filter: blur(6px);
     }
 
-    audio {
+    .photo-overlay.show,
+    .choice-overlay.show,
+    .bonus-video-overlay.show {
+      display: flex;
+    }
+
+    .viewer-card,
+    .choice-card,
+    .bonus-card {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      border-radius: 30px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(255,250,252,0.98), rgba(246,220,255,0.96));
+      box-shadow:
+        0 0 0 3px rgba(255,222,130,0.95),
+        0 0 28px rgba(255,226,135,0.65),
+        0 20px 50px rgba(20,0,40,0.38);
+      animation: viewerAppear .24s ease both;
+    }
+
+    .viewer-media {
+      width: 100%;
+      aspect-ratio: 3 / 4.2;
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.35);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
+    }
+
+    .viewer-img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 35%;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.25);
+    }
+
+    .viewer-title {
+      margin: 10px 0 8px;
+      text-align: center;
+      color: #6a2787;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .viewer-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .viewer-btn,
+    .choice-btn,
+    .bonus-btn {
+      flex: 1;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #743092;
+      background: #fff4fb;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,220,140,0.65),
+        0 4px 10px rgba(90,35,120,0.14);
+    }
+
+    .choice-card {
+      padding: 24px 18px 20px;
+      text-align: center;
+    }
+
+    .choice-title {
+      color: #6a2787;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 10px;
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.95),
+        0 0 10px rgba(255,255,255,0.65);
+    }
+
+    .choice-text {
+      width: 88%;
+      margin: 0 auto 18px;
+      color: #743092;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.08;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .choice-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .choice-btn.primary,
+    .bonus-btn.primary {
+      background: linear-gradient(180deg, #fff6fb, #f1cfff);
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.95),
+        0 0 18px rgba(255,220,120,0.55),
+        0 8px 16px rgba(90,35,120,0.18);
+    }
+
+    .choice-btn.video {
+      background: linear-gradient(180deg, #fff9e9, #ffe4a8);
+      color: #7a4386;
+    }
+
+    .bonus-video {
+      width: 100%;
+      max-height: 70vh;
+      display: block;
+      border-radius: 24px;
+      background: #16061f;
+      object-fit: contain;
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.85),
+        0 0 20px rgba(255,220,120,0.35);
+    }
+
+    .bonus-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .bonus-next-btn {
       display: none;
     }
 
-    /* ===== АДАПТИВ ===== */
+    .bonus-next-btn.show {
+      display: block;
+    }
 
-    @media (max-width: 980px) {
-      .page {
-        padding: 10px 12px 34px;
+    .close-viewer,
+    .close-choice,
+    .close-bonus {
+      position: absolute;
+      top: -14px;
+      right: -10px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: #fff3fb;
+      color: #743092;
+      font-size: 27px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.9),
+        0 6px 12px rgba(60,20,90,0.22);
+    }
+
+    body.video-playing .month-card,
+    body.video-playing .gallery-zone::after,
+    body.video-playing .month-card.selected .month-selection-glow,
+    body.video-playing .month-card.selected .month-selected-heart,
+    body.video-playing .month-soft-shine::before,
+    body.video-playing .month-sparkle-dust {
+      animation: none !important;
+    }
+
+    body.video-playing .gallery-zone::after {
+      opacity: 0.08;
+    }
+
+    body.video-playing .month-card {
+      filter: none !important;
+    }
+
+    body.video-playing .month-card.selected {
+      filter: none !important;
+    }
+
+    @keyframes sparkleFloat {
+      0% {
+        background-position:
+          10px 20px,
+          42px 76px,
+          28px 48px;
       }
 
-      .header-loc1 {
-        width: calc(100% + 8px);
-        margin-left: -4px;
-        margin-right: -4px;
-        margin-bottom: 10px;
-      }
-
-      .hero-card {
-        padding: 16px 14px;
-        min-height: 220px;
-        margin-bottom: 16px;
-      }
-
-      .hero-inner {
-        min-height: 190px;
-        padding: 12px 10px;
-      }
-
-      .mini-pill {
-        min-height: 42px;
-        padding: 7px 18px;
-        font-size: 22px;
-        margin-bottom: 10px;
-      }
-
-      .hero-title {
-        font-size: 48px;
-      }
-
-      .hero-desc {
-        font-size: 23px;
-      }
-
-      .month-card {
-        grid-template-columns: 1fr;
+      100% {
+        background-position:
+          10px 124px,
+          42px 218px,
+          28px 134px;
       }
     }
 
-    @media (max-width: 700px) {
-      .page {
-        padding: 8px 10px 34px;
+    @keyframes frameBreath {
+      0%, 100% {
+        transform: translateY(0) scale(1);
       }
 
-      .header-loc1 {
-        width: calc(100% + 24px);
-        margin-left: -12px;
-        margin-right: -12px;
-        margin-bottom: 8px;
-      }
-
-      .header-click {
-        top: 18%;
-        height: 62%;
-        width: 24%;
-      }
-
-      .header-back {
-        left: 0;
-      }
-
-      .header-music {
-        right: 0;
-      }
-
-      .hero-card {
-        border-radius: 30px;
-        padding: 14px 12px;
-        min-height: 210px;
-      }
-
-      .hero-inner {
-        min-height: 184px;
-        border-radius: 24px;
-      }
-
-      .mini-pill {
-        font-size: 21px;
-        max-width: 86%;
-        line-height: 1.05;
-      }
-
-      .hero-title {
-        font-size: 45px;
-      }
-
-      .hero-desc {
-        font-size: 22px;
-      }
-
-      .task-card {
-        padding: 18px 16px 20px;
-      }
-
-      .task-title {
-        font-size: 30px;
-      }
-
-      .task-heart {
-        font-size: 36px;
-      }
-
-      .counter-pill {
-        min-width: 175px;
-        min-height: 50px;
-        font-size: 22px;
-      }
-
-      .month-card {
-        padding: 10px;
-        border-radius: 26px;
-        gap: 10px;
-      }
-
-      .month-info {
-        gap: 10px;
-      }
-
-      .month-icon {
-        width: 58px;
-        height: 58px;
-        flex-basis: 58px;
-        font-size: 28px;
-      }
-
-      .month-title {
-        font-size: 28px;
-      }
-
-      .month-subtitle {
-        font-size: 19px;
-      }
-
-      .photo-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 8px;
-      }
-
-      .photo-card {
-        min-height: 112px;
-        border-radius: 18px;
-        padding: 22px 6px 8px;
-      }
-
-      .photo-label {
-        font-size: 19px;
-      }
-
-      .photo-label span {
-        font-size: 12px;
-      }
-
-      .like-btn {
-        width: 30px;
-        height: 30px;
-        top: 6px;
-        right: 6px;
-        font-size: 17px;
-      }
-
-      .unlock-title {
-        font-size: 30px;
-      }
-
-      .next-btn {
-        width: 100%;
-        font-size: 24px;
-      }
-
-      .hint {
-        font-size: 18px;
+      50% {
+        transform: translateY(-3px) scale(1.006);
       }
     }
 
-    @media (max-width: 420px) {
-      .hero-title {
-        font-size: 41px;
+    @keyframes selectedBreath {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        filter:
+          drop-shadow(0 15px 22px rgba(87,35,105,0.28))
+          drop-shadow(0 0 22px rgba(255,115,135,0.66))
+          drop-shadow(0 0 14px rgba(255,230,170,0.30));
       }
 
-      .hero-desc {
-        font-size: 20px;
+      50% {
+        transform: translateY(-5px) scale(1.018);
+        filter:
+          drop-shadow(0 18px 26px rgba(87,35,105,0.32))
+          drop-shadow(0 0 34px rgba(255,115,135,0.92))
+          drop-shadow(0 0 24px rgba(255,230,170,0.50));
+      }
+    }
+
+    @keyframes selectedGlow {
+      0%, 100% {
+        opacity: 0.72;
+        box-shadow:
+          0 0 0 4px rgba(255,117,142,0.82),
+          0 0 18px rgba(255,75,110,0.52),
+          inset 0 0 15px rgba(255,230,235,0.38);
       }
 
-      .mini-pill {
-        font-size: 19px;
+      50% {
+        opacity: 1;
+        box-shadow:
+          0 0 0 5px rgba(255,117,142,1),
+          0 0 32px rgba(255,75,110,0.88),
+          inset 0 0 22px rgba(255,230,235,0.60);
+      }
+    }
+
+    @keyframes photoShine {
+      0% {
+        left: -70%;
+        opacity: 0;
       }
 
-      .task-title {
-        font-size: 28px;
+      12% {
+        opacity: 0.55;
       }
 
-      .month-title {
-        font-size: 26px;
+      35% {
+        left: 125%;
+        opacity: 0;
       }
 
-      .month-subtitle {
-        font-size: 18px;
+      100% {
+        left: 125%;
+        opacity: 0;
+      }
+    }
+
+    @keyframes cardSparkles {
+      0% {
+        background-position:
+          15px 42px,
+          72px 118px,
+          30px 76px;
+        opacity: 0.50;
       }
 
-      .photo-card {
-        min-height: 104px;
+      50% {
+        opacity: 0.78;
       }
 
-      .photo-label {
-        font-size: 18px;
+      100% {
+        background-position:
+          15px 164px,
+          72px 284px,
+          30px 168px;
+        opacity: 0.50;
+      }
+    }
+
+    @keyframes selectedSparkles {
+      0% {
+        background-position:
+          15px 42px,
+          72px 118px,
+          30px 76px;
+        opacity: 0.72;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        background-position:
+          15px 164px,
+          72px 284px,
+          30px 168px;
+        opacity: 0.72;
+      }
+    }
+
+    @keyframes heartPop {
+      0% {
+        opacity: 0;
+        transform: scale(0.45) rotate(-8deg);
+      }
+
+      70% {
+        opacity: 1;
+        transform: scale(1.14) rotate(4deg);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    @keyframes heartPulse {
+      0%, 100% {
+        box-shadow:
+          0 0 0 3px rgba(255,245,248,0.95),
+          0 0 20px rgba(255,60,100,0.75),
+          0 8px 15px rgba(100,20,55,0.28);
+      }
+
+      50% {
+        box-shadow:
+          0 0 0 3px rgba(255,245,248,1),
+          0 0 30px rgba(255,60,100,0.98),
+          0 8px 15px rgba(100,20,55,0.28);
+      }
+    }
+
+    @keyframes viewerAppear {
+      0% {
+        opacity: 0;
+        transform: scale(0.94) translateY(10px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
       }
     }
   </style>
@@ -693,296 +1025,443 @@
 
 <body class="notranslate">
 
-  <audio id="bgMusic" loop preload="auto">
-    <source src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3" type="audio/mpeg">
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="bgMusic" src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3" loop preload="auto"></audio>
 
-  <div class="page">
+  <main class="page">
 
-    <header class="header-loc1">
-      <img class="header-loc1-img" src="heder_loc1.png" alt="Локація 1">
-
-      <button class="header-click header-back" id="backBtn" type="button" aria-label="Назад"></button>
-
-      <button class="header-click header-music" id="musicBtn" type="button" aria-label="Музика"></button>
+    <header class="topbar">
+      <button class="image-btn back-btn" type="button" aria-label="Назад" onclick="goBack()"></button>
+      <div class="location-title">Локація 1</div>
+      <button id="musicToggle" class="image-btn music-btn" type="button" aria-label="Музика" onclick="toggleMusic(event)"></button>
     </header>
 
-    <section class="card hero-card">
-      <div class="hero-inner">
-        <div class="mini-pill">Чарівна подорож починається</div>
-        <h1 class="hero-title">Знайомство<br>з Софійкою</h1>
-        <p class="hero-desc">
-          Це перша зупинка нашої казкової подорожі у світ чарівної принцеси
-          та її перших посмішок, поглядів і маленьких перемог у її житті.
-        </p>
+    <section class="intro-text-block">
+      <div class="intro-kicker">Чарівна подорож починається</div>
+      <h1 class="intro-title">Знайомство<br>із Софійкою</h1>
+      <p class="intro-text">
+        Це перша зупинка нашої казкової подорожі у світ чарівної принцеси,
+        її перших посмішок, поглядів і маленьких перемог у житті.
+      </p>
+    </section>
+
+    <section class="task-card">
+      <div class="task-title">Обери 7 наймиліших<br>фото Софійки</div>
+      <div class="counter-pill" id="counterText">Обрано 0 з 7</div>
+    </section>
+
+    <section class="gallery-zone">
+
+      <div class="gallery-heading">
+        <div class="gallery-crown"></div>
+        <div class="gallery-ribbon">Галерея по місяцях</div>
       </div>
-    </section>
 
-    <section class="card task-card">
-      <h2 class="task-title">Обери 5 наймиліших фото Софійки</h2>
-      <span class="task-heart">❤</span>
-      <div class="counter-pill" id="counterText">Обрано 0 з 5</div>
-    </section>
+      <section class="months-grid" id="monthsGrid"></section>
 
-    <main class="sections" id="sectionsContainer"></main>
-
-    <section class="card unlock-card">
-      <h2 class="unlock-title">Коли обереш 5 фото —<br>відкриється наступний рівень</h2>
-      <button class="next-btn" id="nextBtn" type="button" disabled>
-        Відкрити наступний рівень
+      <button class="complete-btn" id="completeBtn" type="button" onclick="showCompletionChoice()">
+        Обрати наступний крок ✨
       </button>
-      <div class="hint" id="hintText">Оберіть 5 фото, щоб продовжити подорож ✨</div>
+
+      <div class="bottom-decor"></div>
+
     </section>
 
+  </main>
+
+  <div class="photo-overlay" id="photoOverlay" onclick="closeViewerByBg(event)">
+    <div class="viewer-card">
+      <button class="close-viewer" type="button" onclick="closeViewer()">×</button>
+
+      <div class="viewer-media">
+        <img class="viewer-img" id="viewerImg" src="" alt="">
+      </div>
+
+      <div class="viewer-title" id="viewerTitle"></div>
+
+      <div class="viewer-actions">
+        <button class="viewer-btn" type="button" id="viewerLikeBtn" onclick="toggleCurrentPhotoLike()">❤️ Обрати</button>
+        <button class="viewer-btn" type="button" onclick="closeViewer()">Закрити</button>
+      </div>
+    </div>
   </div>
 
-  <div class="toast" id="toast"></div>
+  <div class="choice-overlay" id="choiceOverlay">
+    <div class="choice-card">
+      <button class="close-choice" type="button" onclick="closeCompletionChoice()">×</button>
+      <div class="choice-title">7 фото обрано ✨</div>
+      <div class="choice-text">
+        Софійчина галерея готова. Можеш перейти далі або спочатку переглянути бонусне відео.
+      </div>
+      <div class="choice-actions">
+        <button class="choice-btn primary" type="button" onclick="completeLocation()">
+          Перейти до наступної локації
+        </button>
+        <button class="choice-btn video" type="button" onclick="openBonusVideo()">
+          Переглянути бонусне відео
+        </button>
+        <button class="choice-btn" type="button" onclick="closeCompletionChoice()">
+          Повернутися до галереї
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bonus-video-overlay" id="bonusVideoOverlay">
+    <div class="bonus-card">
+      <button class="close-bonus" type="button" onclick="closeBonusVideo()">×</button>
+
+      <video
+        class="bonus-video"
+        id="bonusVideo"
+        src="bonus_location1.mp4"
+        playsinline
+        preload="metadata"
+      ></video>
+
+      <div class="bonus-actions">
+        <button class="bonus-btn primary bonus-next-btn" id="bonusNextBtn" type="button" onclick="completeLocation()">
+          Перейти до наступної локації ✨
+        </button>
+        <button class="bonus-btn" type="button" onclick="closeBonusVideo()">
+          Повернутися до галереї
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script>
-    const sectionsData = [
-      {
-        icon: "👑",
-        title: "Народження",
-        subtitle: "День, коли наша принцеса вперше відкрила оченята"
-      },
-      {
-        icon: "☀️",
-        title: "1 місяць",
-        subtitle: "Перший місяць повний любові та ніжності"
-      },
-      {
-        icon: "🧸",
-        title: "2 місяці",
-        subtitle: "Маленькі відкриття та перші емоції"
-      },
-      {
-        icon: "🍁",
-        title: "3 місяці",
-        subtitle: "Перші усмішки та гучний сміх"
-      },
-      {
-        icon: "🍂",
-        title: "4 місяці",
-        subtitle: "Досліджуємо світ руками та очима"
-      },
-      {
-        icon: "🌰",
-        title: "5 місяців",
-        subtitle: "Активні рухи та цікаві відкриття"
-      },
-      {
-        icon: "❄️",
-        title: "6 місяців",
-        subtitle: "Нові вміння кожного дня"
-      },
-      {
-        icon: "🧊",
-        title: "7 місяців",
-        subtitle: "Сміємося, граємось і пізнаємо світ"
-      },
-      {
-        icon: "🧤",
-        title: "8 місяців",
-        subtitle: "Маленькі перемоги щодня"
-      },
-      {
-        icon: "🐣",
-        title: "9 місяців",
-        subtitle: "Готуємось до нових веселих кроків"
-      },
-      {
-        icon: "🌸",
-        title: "10 місяців",
-        subtitle: "Більше самостійності та радості"
-      },
-      {
-        icon: "💗",
-        title: "11 місяців",
-        subtitle: "Любимо, ростемо та мріємо"
-      }
+    var REQUIRED_LIKES = 7;
+
+    var bgMusic = document.getElementById("bgMusic");
+    var musicToggle = document.getElementById("musicToggle");
+    var monthsGrid = document.getElementById("monthsGrid");
+    var counterText = document.getElementById("counterText");
+    var completeBtn = document.getElementById("completeBtn");
+
+    var photoOverlay = document.getElementById("photoOverlay");
+    var viewerImg = document.getElementById("viewerImg");
+    var viewerTitle = document.getElementById("viewerTitle");
+    var viewerLikeBtn = document.getElementById("viewerLikeBtn");
+
+    var choiceOverlay = document.getElementById("choiceOverlay");
+    var bonusVideoOverlay = document.getElementById("bonusVideoOverlay");
+    var bonusVideo = document.getElementById("bonusVideo");
+    var bonusNextBtn = document.getElementById("bonusNextBtn");
+
+    var currentPhotoId = null;
+    var wasMusicPlayingBeforeBonus = false;
+
+    var months = [
+      { title: "Народження", src: "IMG-20250705-WA0000.jpg", pos: "center 42%", viewerPos: "center 42%" },
+      { title: "1 місяць", src: "foto1.jpg", pos: "center 34%", viewerPos: "center 34%" },
+      { title: "2 місяці", src: "foto2.jpg", pos: "center 30%", viewerPos: "center 30%" },
+      { title: "3 місяці", src: "foto3.jpg", pos: "center 22%", viewerPos: "center 22%" },
+      { title: "4 місяці", src: "foto4.jpg", pos: "center 24%", viewerPos: "center 24%" },
+      { title: "5 місяців", src: "foto5.jpg", pos: "center 30%", viewerPos: "center 30%" },
+      { title: "6 місяців", src: "foto6.jpg", pos: "center 26%", viewerPos: "center 26%" },
+      { title: "7 місяців", src: "foto7.jpg", pos: "center 26%", viewerPos: "center 26%" },
+      { title: "8 місяців", src: "foto8.jpg", pos: "center 30%", viewerPos: "center 30%" },
+      { title: "9 місяців", src: "foto9.jpg", pos: "center 28%", viewerPos: "center 28%" },
+      { title: "10 місяців", src: "foto10.jpg", pos: "center 24%", viewerPos: "center 24%" },
+      { title: "11 місяців", src: "foto11.jpg", pos: "center 28%", viewerPos: "center 28%" }
     ];
 
-    const sectionsContainer = document.getElementById("sectionsContainer");
-    const counterText = document.getElementById("counterText");
-    const nextBtn = document.getElementById("nextBtn");
-    const hintText = document.getElementById("hintText");
-    const toast = document.getElementById("toast");
-    const musicBtn = document.getElementById("musicBtn");
-    const backBtn = document.getElementById("backBtn");
-    const bgMusic = document.getElementById("bgMusic");
-
-    const MAX_LIKES = 5;
-    let selectedPhotos = new Set();
+    var selectedPhotos = JSON.parse(localStorage.getItem("sofiyka_location1_selected") || "[]");
 
     if (bgMusic) {
       bgMusic.volume = 0.35;
     }
 
-    function renderSections() {
-      sectionsContainer.innerHTML = sectionsData.map((section, sectionIndex) => {
-        const photoCards = [1, 2, 3].map(photoIndex => {
-          const id = `section-${sectionIndex + 1}-photo-${photoIndex}`;
-
-          return `
-            <div class="photo-card">
-              <button class="like-btn" type="button" aria-label="Вподобати фото" data-id="${id}">
-                ♡
-              </button>
-              <div class="photo-label">
-                Фото ${photoIndex}
-                <span>сюди вставимо фото</span>
-              </div>
-            </div>
-          `;
-        }).join("");
-
-        return `
-          <section class="month-card">
-            <div class="month-info">
-              <div class="month-icon">${section.icon}</div>
-              <div class="month-text">
-                <h3 class="month-title">${section.title}</h3>
-                <p class="month-subtitle">${section.subtitle}</p>
-              </div>
-            </div>
-            <div class="photo-grid">
-              ${photoCards}
-            </div>
-          </section>
-        `;
-      }).join("");
-
-      bindLikeButtons();
-      restoreLikes();
-      updateUI();
+    if (bonusVideo) {
+      bonusVideo.addEventListener("ended", function() {
+        bonusNextBtn.classList.add("show");
+      });
     }
 
-    function bindLikeButtons() {
-      document.querySelectorAll(".like-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const id = btn.dataset.id;
+    function goBack() {
+      window.location.href = "map.html";
+    }
 
-          if (selectedPhotos.has(id)) {
-            selectedPhotos.delete(id);
-          } else {
-            if (selectedPhotos.size >= MAX_LIKES) {
-              showToast("Можна вибрати лише 5 фото 💕");
-              return;
-            }
+    function photoId(monthIndex) {
+      return "m" + monthIndex;
+    }
 
-            selectedPhotos.add(id);
+    function isSelected(id) {
+      return selectedPhotos.indexOf(id) !== -1;
+    }
+
+    function saveSelected() {
+      localStorage.setItem("sofiyka_location1_selected", JSON.stringify(selectedPhotos));
+    }
+
+    function renderMonths() {
+      monthsGrid.innerHTML = "";
+
+      for (var i = 0; i < months.length; i++) {
+        var month = months[i];
+        var id = photoId(i);
+
+        var card = document.createElement("div");
+        card.className = "month-card";
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("data-photo-id", id);
+        card.setAttribute("data-src", month.src);
+        card.setAttribute("data-title", month.title);
+        card.setAttribute("data-viewer-pos", month.viewerPos || "center 35%");
+
+        if (isSelected(id)) {
+          card.classList.add("selected");
+        }
+
+        card.onclick = function(event) {
+          event.preventDefault();
+          openViewer(
+            this.getAttribute("data-photo-id"),
+            this.getAttribute("data-src"),
+            this.getAttribute("data-title"),
+            this.getAttribute("data-viewer-pos")
+          );
+        };
+
+        card.onkeydown = function(event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openViewer(
+              this.getAttribute("data-photo-id"),
+              this.getAttribute("data-src"),
+              this.getAttribute("data-title"),
+              this.getAttribute("data-viewer-pos")
+            );
           }
+        };
 
-          saveLikes();
-          updateUI();
-        });
-      });
-    }
+        var photo = document.createElement("img");
+        photo.className = "month-photo";
+        photo.src = month.src;
+        photo.alt = month.title;
+        photo.style.objectPosition = month.pos || "center 36%";
 
-    function updateUI() {
-      const total = selectedPhotos.size;
+        photo.onerror = function() {
+          this.style.display = "none";
+        };
 
-      counterText.textContent = `Обрано ${total} з ${MAX_LIKES}`;
+        var selectionGlow = document.createElement("div");
+        selectionGlow.className = "month-selection-glow";
 
-      document.querySelectorAll(".like-btn").forEach(btn => {
-        const id = btn.dataset.id;
-        const active = selectedPhotos.has(id);
+        var frame = document.createElement("div");
+        frame.className = "month-frame";
 
-        btn.classList.toggle("active", active);
-        btn.textContent = active ? "❤" : "♡";
-        btn.setAttribute("aria-pressed", active ? "true" : "false");
-      });
+        var title = document.createElement("div");
+        title.className = "month-title";
+        title.textContent = month.title;
 
-      if (total === MAX_LIKES) {
-        nextBtn.disabled = false;
-        nextBtn.classList.add("enabled");
-        hintText.textContent = "Чудово! Тепер можна відкрити наступний рівень ✨";
-      } else {
-        nextBtn.disabled = true;
-        nextBtn.classList.remove("enabled");
-        hintText.textContent = "Оберіть 5 фото, щоб продовжити подорож ✨";
+        var softShine = document.createElement("div");
+        softShine.className = "month-soft-shine";
+
+        var sparkleDust = document.createElement("div");
+        sparkleDust.className = "month-sparkle-dust";
+
+        var heart = document.createElement("button");
+        heart.className = "month-selected-heart";
+        heart.type = "button";
+        heart.innerHTML = "♥";
+        heart.setAttribute("aria-label", "Прибрати фото з вибраних");
+        heart.setAttribute("data-photo-id", id);
+
+        heart.onclick = function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          toggleLike(this.getAttribute("data-photo-id"));
+        };
+
+        card.appendChild(photo);
+        card.appendChild(selectionGlow);
+        card.appendChild(frame);
+        card.appendChild(title);
+        card.appendChild(softShine);
+        card.appendChild(sparkleDust);
+        card.appendChild(heart);
+
+        monthsGrid.appendChild(card);
       }
     }
 
-    function saveLikes() {
-      localStorage.setItem("sofiyka_location1_likes", JSON.stringify([...selectedPhotos]));
+    function updateCounter() {
+      counterText.textContent = "Обрано " + selectedPhotos.length + " з " + REQUIRED_LIKES;
+
+      if (selectedPhotos.length >= REQUIRED_LIKES) {
+        completeBtn.classList.add("show");
+        counterText.textContent = "Обрано 7 з 7 ✨";
+      } else {
+        completeBtn.classList.remove("show");
+      }
     }
 
-    function restoreLikes() {
-      const saved = localStorage.getItem("sofiyka_location1_likes");
+    function toggleLike(id) {
+      var index = selectedPhotos.indexOf(id);
+      var wasCompleted = selectedPhotos.length >= REQUIRED_LIKES;
+      var addedNow = false;
 
-      if (!saved) return;
+      if (index !== -1) {
+        selectedPhotos.splice(index, 1);
+      } else {
+        if (selectedPhotos.length >= REQUIRED_LIKES) {
+          alert("Вже обрано 7 фото. Щоб вибрати інше — спочатку зніми вибір з одного фото ❤️");
+          return;
+        }
+
+        selectedPhotos.push(id);
+        addedNow = true;
+      }
+
+      saveSelected();
+      renderMonths();
+      updateCounter();
+
+      if (currentPhotoId === id) {
+        updateViewerLikeButton();
+      }
+
+      if (addedNow && !wasCompleted && selectedPhotos.length === REQUIRED_LIKES) {
+        setTimeout(function() {
+          closeViewer();
+          showCompletionChoice();
+        }, 250);
+      }
+    }
+
+    function openViewer(id, src, title, viewerPos) {
+      currentPhotoId = id;
+      viewerImg.src = src;
+      viewerTitle.textContent = title || "";
+      viewerImg.style.objectPosition = viewerPos || "center 35%";
+
+      viewerImg.onerror = function() {
+        this.style.display = "none";
+      };
+
+      viewerImg.style.display = "block";
+      updateViewerLikeButton();
+      photoOverlay.classList.add("show");
+    }
+
+    function closeViewer() {
+      photoOverlay.classList.remove("show");
+      currentPhotoId = null;
+      viewerImg.src = "";
+      viewerTitle.textContent = "";
+    }
+
+    function closeViewerByBg(event) {
+      if (event.target === photoOverlay) {
+        closeViewer();
+      }
+    }
+
+    function updateViewerLikeButton() {
+      if (!currentPhotoId) return;
+
+      if (isSelected(currentPhotoId)) {
+        viewerLikeBtn.textContent = "💛 Прибрати";
+      } else {
+        viewerLikeBtn.textContent = "❤️ Обрати";
+      }
+    }
+
+    function toggleCurrentPhotoLike() {
+      if (!currentPhotoId) return;
+      toggleLike(currentPhotoId);
+    }
+
+    function showCompletionChoice() {
+      if (selectedPhotos.length < REQUIRED_LIKES) {
+        alert("Обери 7 наймиліших фото Софійки ❤️");
+        return;
+      }
+
+      choiceOverlay.classList.add("show");
+    }
+
+    function closeCompletionChoice() {
+      choiceOverlay.classList.remove("show");
+    }
+
+    async function openBonusVideo() {
+      closeCompletionChoice();
+
+      if (!bonusVideo || !bonusVideoOverlay) return;
+
+      document.body.classList.add("video-playing");
+
+      wasMusicPlayingBeforeBonus = false;
+
+      if (bgMusic && !bgMusic.paused) {
+        wasMusicPlayingBeforeBonus = true;
+        bgMusic.pause();
+      }
+
+      bonusNextBtn.classList.remove("show");
+      bonusVideoOverlay.classList.add("show");
 
       try {
-        const parsed = JSON.parse(saved);
-
-        if (Array.isArray(parsed)) {
-          selectedPhotos = new Set(parsed.slice(0, MAX_LIKES));
-        }
+        bonusVideo.currentTime = 0;
+        await bonusVideo.play();
       } catch (error) {
-        selectedPhotos = new Set();
+        alert("Відео не запустилось. Перевір файл bonus_location1.mp4");
       }
     }
 
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add("show");
+    async function closeBonusVideo() {
+      if (bonusVideo) {
+        bonusVideo.pause();
+      }
 
-      clearTimeout(showToast._timer);
+      bonusVideoOverlay.classList.remove("show");
+      document.body.classList.remove("video-playing");
 
-      showToast._timer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 1800);
+      if (wasMusicPlayingBeforeBonus && bgMusic) {
+        try {
+          await bgMusic.play();
+        } catch (error) {}
+      }
+
+      wasMusicPlayingBeforeBonus = false;
     }
 
-    nextBtn.addEventListener("click", () => {
-      if (selectedPhotos.size !== MAX_LIKES) return;
+    function completeLocation() {
+      if (selectedPhotos.length < REQUIRED_LIKES) {
+        alert("Обери 7 наймиліших фото Софійки ❤️");
+        return;
+      }
 
       localStorage.setItem("sofiyka_location1_done", "true");
-      showToast("Перша локація пройдена! 🌟");
-
-      setTimeout(() => {
-        window.location.href = "map.html";
-      }, 900);
-    });
-
-    backBtn.addEventListener("click", () => {
       window.location.href = "map.html";
-    });
+    }
 
-    musicBtn.addEventListener("click", async () => {
-      if (!bgMusic) return;
+    async function toggleMusic(event) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      if (!bgMusic || !musicToggle) return;
 
       try {
         if (bgMusic.paused) {
           await bgMusic.play();
-          musicBtn.classList.add("playing");
-          localStorage.setItem("sofiyka_music", "on");
+          musicToggle.style.transform = "scale(1.06)";
         } else {
           bgMusic.pause();
-          musicBtn.classList.remove("playing");
-          localStorage.setItem("sofiyka_music", "off");
+          musicToggle.style.transform = "scale(1)";
         }
       } catch (error) {
-        showToast("Музика не запустилась. Перевір mp3 файл 🎵");
-      }
-    });
-
-    function restoreMusicState() {
-      const musicState = localStorage.getItem("sofiyka_music");
-
-      if (musicState === "on" && bgMusic) {
-        bgMusic.play().then(() => {
-          musicBtn.classList.add("playing");
-        }).catch(() => {
-          musicBtn.classList.remove("playing");
-        });
+        alert("Музика не запустилась. Перевір mp3 файл.");
       }
     }
 
-    renderSections();
-    restoreMusicState();
+    renderMonths();
+    updateCounter();
   </script>
 
 </body>

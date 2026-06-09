@@ -15,15 +15,11 @@
       --violet: #7e459e;
       --violet-soft: #9b6bb7;
       --gold: #efd77a;
-      --gold-2: #f7e8aa;
       --cream: rgba(255, 251, 255, 0.92);
-      --cream-2: rgba(255, 248, 253, 0.90);
       --shadow: 0 8px 20px rgba(173, 117, 195, 0.14);
       --shadow-soft: 0 5px 14px rgba(173, 117, 195, 0.10);
       --border: 2px solid rgba(238, 219, 127, 0.9);
       --radius-xl: 34px;
-      --radius-lg: 28px;
-      --radius-md: 22px;
       --container-width: 1120px;
     }
 
@@ -55,7 +51,7 @@
       padding: 14px 18px 42px;
     }
 
-    /* ===== ШАПКА ЧЕРЕЗ КАРТИНКУ heder_loc1.png ===== */
+    /* ===== ШАПКА ЗАЛИШЕНА ЯК БУЛА ===== */
 
     .header-loc1 {
       position: relative;
@@ -119,8 +115,6 @@
       }
     }
 
-    /* ===== ЗАГАЛЬНІ КАРТКИ ===== */
-
     .card {
       background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,248,253,0.86));
       border: var(--border);
@@ -128,8 +122,6 @@
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-
-    /* ===== ПЕРШИЙ БЛОК ===== */
 
     .hero-card {
       position: relative;
@@ -175,8 +167,6 @@
       color: #6f438f;
       text-shadow: 0 4px 12px rgba(255,255,255,0.45);
     }
-
-    /* ===== ЗАВДАННЯ ===== */
 
     .task-card {
       margin-bottom: 18px;
@@ -254,8 +244,6 @@
       transition: width 0.22s ease;
     }
 
-    /* ===== СЕКЦІЇ МІСЯЦІВ ===== */
-
     .sections {
       display: flex;
       flex-direction: column;
@@ -303,10 +291,6 @@
       line-height: 1;
     }
 
-    .month-text {
-      min-width: 0;
-    }
-
     .month-title {
       margin: 0 0 4px;
       font-size: clamp(26px, 2.6vw, 38px);
@@ -322,23 +306,16 @@
       color: #7f5a98;
     }
 
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      align-items: stretch;
-    }
-
     .photo-card {
       position: relative;
-      min-height: 138px;
-      border-radius: 22px;
+      min-height: 190px;
+      border-radius: 24px;
       border: none;
       background: rgba(255,255,255,0.64);
       box-shadow:
         0 5px 12px rgba(173, 117, 195, 0.08),
         inset 0 2px 8px rgba(255,255,255,0.58);
-      padding: 18px 14px 12px;
+      padding: 22px 18px 16px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -346,7 +323,7 @@
     }
 
     .photo-label {
-      font-size: clamp(22px, 1.9vw, 28px);
+      font-size: clamp(25px, 2.3vw, 34px);
       line-height: 1.1;
       font-weight: 700;
       color: var(--violet);
@@ -354,8 +331,8 @@
 
     .photo-label span {
       display: block;
-      margin-top: 6px;
-      font-size: clamp(15px, 1.4vw, 19px);
+      margin-top: 8px;
+      font-size: clamp(16px, 1.5vw, 22px);
       line-height: 1.2;
       font-weight: 600;
       color: #8c73a1;
@@ -363,10 +340,10 @@
 
     .like-btn {
       position: absolute;
-      top: 9px;
-      right: 9px;
-      width: 40px;
-      height: 40px;
+      top: 10px;
+      right: 10px;
+      width: 44px;
+      height: 44px;
       border: none;
       border-radius: 50%;
       cursor: pointer;
@@ -376,7 +353,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 21px;
+      font-size: 23px;
       color: #5b435f;
       transition: transform 0.12s ease, background 0.12s ease;
       -webkit-tap-highlight-color: transparent;
@@ -392,8 +369,6 @@
       color: #d43d73;
       transform: scale(1.04);
     }
-
-    /* ===== ФІНАЛ ===== */
 
     .unlock-card {
       margin-top: 20px;
@@ -474,8 +449,6 @@
     audio {
       display: none;
     }
-
-    /* ===== АДАПТИВ ===== */
 
     @media (max-width: 980px) {
       .page {
@@ -595,31 +568,26 @@
         font-size: 19px;
       }
 
-      .photo-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 8px;
-      }
-
       .photo-card {
-        min-height: 112px;
-        border-radius: 18px;
-        padding: 22px 6px 8px;
+        min-height: 170px;
+        border-radius: 20px;
+        padding: 24px 10px 12px;
       }
 
       .photo-label {
-        font-size: 19px;
+        font-size: 24px;
       }
 
       .photo-label span {
-        font-size: 12px;
+        font-size: 15px;
       }
 
       .like-btn {
-        width: 30px;
-        height: 30px;
-        top: 6px;
-        right: 6px;
-        font-size: 17px;
+        width: 36px;
+        height: 36px;
+        top: 8px;
+        right: 8px;
+        font-size: 20px;
       }
 
       .unlock-title {
@@ -658,11 +626,7 @@
       }
 
       .photo-card {
-        min-height: 104px;
-      }
-
-      .photo-label {
-        font-size: 18px;
+        min-height: 160px;
       }
     }
   </style>
@@ -810,21 +774,7 @@
 
     function renderSections() {
       sectionsContainer.innerHTML = sectionsData.map((section, sectionIndex) => {
-        const photoCards = [1, 2, 3].map(photoIndex => {
-          const id = `section-${sectionIndex + 1}-photo-${photoIndex}`;
-
-          return `
-            <div class="photo-card">
-              <button class="like-btn" type="button" aria-label="Вподобати фото" data-id="${id}">
-                ♡
-              </button>
-              <div class="photo-label">
-                Фото ${photoIndex}
-                <span>сюди вставимо фото</span>
-              </div>
-            </div>
-          `;
-        }).join("");
+        const id = `section-${sectionIndex + 1}-photo-1`;
 
         return `
           <section class="month-card">
@@ -835,8 +785,15 @@
                 <p class="month-subtitle">${section.subtitle}</p>
               </div>
             </div>
-            <div class="photo-grid">
-              ${photoCards}
+
+            <div class="photo-card">
+              <button class="like-btn" type="button" aria-label="Вподобати фото" data-id="${id}">
+                ♡
+              </button>
+              <div class="photo-label">
+                Фото місяця
+                <span>сюди вставимо фото</span>
+              </div>
             </div>
           </section>
         `;
@@ -883,126 +840,4 @@
 
         btn.classList.toggle("active", active);
         btn.textContent = active ? "❤" : "♡";
-        btn.setAttribute("aria-pressed", active ? "true" : "false");
-      });
-
-      if (total === MAX_LIKES) {
-        nextBtn.disabled = false;
-        nextBtn.classList.add("enabled");
-        hintText.textContent = "Чудово! Тепер можна відкрити наступний рівень ✨";
-      } else {
-        nextBtn.disabled = true;
-        nextBtn.classList.remove("enabled");
-        hintText.textContent = "Оберіть 5 фото, щоб продовжити подорож ✨";
-      }
-    }
-
-    function saveLikes() {
-      localStorage.setItem("sofiyka_location1_likes", JSON.stringify([...selectedPhotos]));
-    }
-
-    function restoreLikes() {
-      const saved = localStorage.getItem("sofiyka_location1_likes");
-
-      if (!saved) return;
-
-      try {
-        const parsed = JSON.parse(saved);
-
-        if (Array.isArray(parsed)) {
-          selectedPhotos = new Set(parsed.slice(0, MAX_LIKES));
-        }
-      } catch (error) {
-        selectedPhotos = new Set();
-      }
-    }
-
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add("show");
-
-      clearTimeout(showToast._timer);
-
-      showToast._timer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 1800);
-    }
-
-    function startAutoScrollToGallery() {
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      if (reduceMotion) return;
-
-      setTimeout(() => {
-        if (userTouchedPage) return;
-
-        sectionsContainer.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }, 1100);
-    }
-
-    window.addEventListener("wheel", () => {
-      userTouchedPage = true;
-    }, { passive: true });
-
-    window.addEventListener("touchmove", () => {
-      userTouchedPage = true;
-    }, { passive: true });
-
-    window.addEventListener("keydown", () => {
-      userTouchedPage = true;
-    });
-
-    nextBtn.addEventListener("click", () => {
-      if (selectedPhotos.size !== MAX_LIKES) return;
-
-      localStorage.setItem("sofiyka_location1_done", "true");
-      showToast("Перша локація пройдена! 🌟");
-
-      setTimeout(() => {
-        window.location.href = "map.html";
-      }, 900);
-    });
-
-    backBtn.addEventListener("click", () => {
-      window.location.href = "map.html";
-    });
-
-    musicBtn.addEventListener("click", async () => {
-      if (!bgMusic) return;
-
-      try {
-        if (bgMusic.paused) {
-          await bgMusic.play();
-          musicBtn.classList.add("playing");
-          localStorage.setItem("sofiyka_music", "on");
-        } else {
-          bgMusic.pause();
-          musicBtn.classList.remove("playing");
-          localStorage.setItem("sofiyka_music", "off");
-        }
-      } catch (error) {
-        showToast("Музика не запустилась. Перевір mp3 файл 🎵");
-      }
-    });
-
-    function restoreMusicState() {
-      const musicState = localStorage.getItem("sofiyka_music");
-
-      if (musicState === "on" && bgMusic) {
-        bgMusic.play().then(() => {
-          musicBtn.classList.add("playing");
-        }).catch(() => {
-          musicBtn.classList.remove("playing");
-        });
-      }
-    }
-
-    renderSections();
-    restoreMusicState();
-  </script>
-
-</body>
-</html>
+        

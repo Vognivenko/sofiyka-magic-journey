@@ -6,29 +6,41 @@
   <meta name="google" content="notranslate" />
   <title>Карта подорожі Софійки</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
+    :root {
+      --violet: #7e459e;
+      --violet-soft: #9b6bb7;
+      --gold: #efd77a;
+      --gold-soft: #fff0a8;
+      --cream: rgba(255, 255, 255, 0.86);
+      --border: 2px solid rgba(238, 219, 127, 0.9);
+      --shadow: 0 12px 30px rgba(126, 69, 158, 0.18);
+      --container-width: 1180px;
+    }
 
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
-    html, body {
-      width: 100%;
-      min-height: 100%;
-      overflow-x: hidden;
-      font-family: 'Cormorant Garamond', serif;
-      background: #f8d9ef;
-      color: #6f2f8b;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
+      margin: 0;
       min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--violet);
+      font-family: "Cormorant Garamond", serif;
       background:
-        linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.08)),
-        url("fon_location1.png") center top / cover no-repeat fixed;
+        radial-gradient(circle at 18% 10%, rgba(255,255,255,0.72), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(255,238,190,0.42), transparent 22%),
+        radial-gradient(circle at 50% 90%, rgba(255,220,247,0.28), transparent 34%),
+        linear-gradient(180deg, #fff3fb 0%, #f6e5ff 45%, #fff7ea 100%);
     }
 
     body::before {
@@ -37,367 +49,441 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      background:
-        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.55), transparent 25%),
-        radial-gradient(circle at 80% 20%, rgba(255,230,180,0.36), transparent 22%),
-        radial-gradient(circle at 50% 90%, rgba(255,210,245,0.24), transparent 32%);
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
       background-image:
-        radial-gradient(circle, rgba(255,255,255,0.88) 0 1px, transparent 1.6px),
-        radial-gradient(circle, rgba(255,232,150,0.65) 0 1px, transparent 1.5px);
-      background-size: 82px 110px, 132px 154px;
-      background-position: 12px 18px, 46px 74px;
-      opacity: 0.25;
-      animation: pageSparkles 18s linear infinite;
+        radial-gradient(circle, rgba(255, 255, 255, 0.95) 0 2px, transparent 3px),
+        radial-gradient(circle, rgba(255, 229, 120, 0.85) 0 1.5px, transparent 3px);
+      background-size: 72px 72px, 118px 118px;
+      background-position: 0 0, 24px 18px;
+      opacity: 0.42;
+      animation: sparkleMove 12s linear infinite;
     }
 
     .page {
       position: relative;
       z-index: 1;
       width: 100%;
+      max-width: var(--container-width);
       min-height: 100vh;
-      padding: 16px 0 40px;
+      margin: 0 auto;
+      padding: 16px 18px 44px;
     }
 
     .topbar {
-      width: 100%;
-      max-width: 520px;
-      margin: 0 auto 16px;
-      padding: 4px 10px 0;
-      display: flex;
+      display: grid;
+      grid-template-columns: 70px 1fr 70px;
       align-items: center;
-      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 20;
     }
 
-    .image-btn {
-      width: 56px;
-      height: 56px;
-      border: none;
-      background: transparent center / contain no-repeat;
+    .top-btn {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      border: 2px solid rgba(238, 219, 127, 0.9);
+      background:
+        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.98), rgba(255,248,221,0.94) 36%, rgba(248,225,137,0.94) 84%);
+      color: var(--violet);
+      font-size: 31px;
+      font-weight: 700;
       cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      filter: drop-shadow(0 6px 10px rgba(80, 25, 110, 0.24));
-      transition: transform .2s ease, filter .2s ease;
-    }
-
-    .image-btn:active {
-      transform: scale(0.94);
-    }
-
-    .back-btn {
-      background-image: url("5.png");
-    }
-
-    .music-btn {
-      background-image: url("6.png");
-    }
-
-    .music-btn.playing {
-      transform: scale(1.06);
-      filter:
-        drop-shadow(0 6px 10px rgba(80, 25, 110, 0.24))
-        drop-shadow(0 0 10px rgba(255, 230, 150, 0.75));
-    }
-
-    .map-title {
-      width: 56%;
-      max-width: 270px;
-      min-width: 178px;
-      aspect-ratio: 420 / 145;
-      background: url("8.png") center / contain no-repeat;
+      box-shadow:
+        0 0 0 4px rgba(255,245,199,0.30),
+        0 8px 20px rgba(229,187,89,0.22),
+        inset 0 2px 12px rgba(255,255,255,0.75);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #69228b;
-      font-size: clamp(22px, 5.2vw, 34px);
-      font-weight: 700;
-      line-height: 1;
-      text-align: center;
-      padding-top: 6px;
-      white-space: nowrap;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      z-index: 30;
     }
 
-    .intro-card {
-      width: calc(100% - 26px);
-      max-width: 520px;
-      margin: 10px auto 14px;
-      padding: 22px 18px;
-      border-radius: 34px;
-      border: 2px solid rgba(238, 219, 127, 0.74);
-      background:
-        radial-gradient(circle at 50% 10%, rgba(255,245,210,0.36), transparent 42%),
-        linear-gradient(180deg, rgba(255,255,255,0.68), rgba(255,246,253,0.50));
+    .top-btn:active {
+      transform: scale(0.96);
+    }
+
+    .music-btn.playing {
       box-shadow:
-        0 10px 28px rgba(173, 117, 195, 0.15),
-        inset 0 2px 12px rgba(255,255,255,0.55);
+        0 0 0 4px rgba(255,245,199,0.35),
+        0 0 22px rgba(202,152,249,0.50),
+        0 8px 20px rgba(229,187,89,0.22),
+        inset 0 2px 12px rgba(255,255,255,0.75);
+    }
+
+    .title-pill {
+      justify-self: center;
+      width: 100%;
+      max-width: 620px;
+      min-height: 60px;
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: 2px solid rgba(238, 219, 127, 0.92);
+      background: rgba(255,255,255,0.78);
+      box-shadow: 0 8px 18px rgba(120,70,150,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      backdrop-filter: blur(4px);
-      animation: softBreath 5.8s ease-in-out infinite;
-    }
-
-    .intro-card h1 {
-      margin-bottom: 8px;
-      font-size: clamp(34px, 8vw, 52px);
-      line-height: 0.95;
-      color: #7e459e;
-      text-shadow:
-        0 2px 0 rgba(255,255,255,0.88),
-        0 6px 16px rgba(126,69,158,0.10);
-    }
-
-    .intro-card p {
-      width: 92%;
-      margin: 0 auto;
-      font-size: clamp(20px, 5vw, 28px);
-      line-height: 1.12;
+      font-size: clamp(27px, 3.4vw, 44px);
+      line-height: 1;
       font-weight: 700;
+      color: var(--violet);
+    }
+
+    .hero {
+      position: relative;
+      border: var(--border);
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 50% 12%, rgba(255,245,200,0.58), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.90), rgba(255,248,253,0.78));
+      box-shadow: var(--shadow);
+      padding: 26px 22px 22px;
+      margin-bottom: 18px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "✦";
+      position: absolute;
+      color: rgba(238, 204, 95, 0.82);
+      text-shadow: 0 0 14px rgba(255, 232, 130, 0.8);
+    }
+
+    .hero::before {
+      left: 24px;
+      top: 20px;
+      font-size: 34px;
+    }
+
+    .hero::after {
+      right: 26px;
+      bottom: 22px;
+      font-size: 30px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 0.95;
+      font-weight: 700;
+      color: var(--violet);
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.85),
+        0 7px 18px rgba(126,69,158,0.12);
+    }
+
+    .hero p {
+      max-width: 850px;
+      margin: 0 auto;
+      font-size: clamp(22px, 2.7vw, 34px);
+      line-height: 1.2;
+      font-weight: 600;
       color: #6f438f;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.8);
     }
 
     .progress-card {
-      width: calc(100% - 34px);
-      max-width: 420px;
-      margin: 0 auto 18px;
-      padding: 12px 16px;
-      border-radius: 999px;
-      border: 2px solid rgba(238, 219, 127, 0.78);
-      background: rgba(255,255,255,0.62);
-      box-shadow:
-        0 8px 18px rgba(120,70,150,0.12),
-        inset 0 2px 8px rgba(255,255,255,0.55);
+      border: var(--border);
+      border-radius: 30px;
+      background: rgba(255,255,255,0.78);
+      box-shadow: 0 8px 20px rgba(126, 69, 158, 0.12);
+      padding: 18px 18px 20px;
+      margin-bottom: 18px;
       text-align: center;
-      font-size: clamp(21px, 5vw, 29px);
+    }
+
+    .progress-text {
+      margin: 0 0 12px;
+      font-size: clamp(25px, 3vw, 38px);
+      line-height: 1.05;
       font-weight: 700;
-      color: #743092;
-      backdrop-filter: blur(4px);
+      color: var(--violet);
     }
 
-    .locations-wrap {
-      width: 100%;
-      max-width: 560px;
-      margin: 0 auto;
-      padding: 0 12px 20px;
+    .progress-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .locations-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
+    .progress-dot {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid rgba(238, 219, 127, 0.86);
+      background: rgba(255,255,255,0.72);
+      color: #a887b8;
+      font-size: 21px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 2px 8px rgba(255,255,255,0.75);
+    }
+
+    .progress-dot.active {
+      background:
+        radial-gradient(circle at 30% 28%, #fff, #fff0ba 42%, #e8c155 88%);
+      color: var(--violet);
+      box-shadow:
+        0 0 0 4px rgba(255,240,168,0.28),
+        0 8px 18px rgba(229,187,89,0.22),
+        inset 0 2px 8px rgba(255,255,255,0.75);
+    }
+
+    .map-shell {
+      position: relative;
+      border-radius: 38px;
+      border: var(--border);
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.60), transparent 28%),
+        radial-gradient(circle at 80% 24%, rgba(255,232,184,0.40), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,0.68), rgba(255,246,253,0.58));
+      box-shadow: var(--shadow);
+      padding: 22px 70px 26px;
+      overflow: hidden;
+    }
+
+    .map-shell::before {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 50%;
+      height: 8px;
+      border-radius: 999px;
+      background:
+        linear-gradient(90deg, rgba(238,219,127,0.16), rgba(238,219,127,0.78), rgba(238,219,127,0.16));
+      transform: translateY(-50%);
+      opacity: 0.55;
+      z-index: 0;
+    }
+
+    .map-window {
+      position: relative;
+      z-index: 2;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-behavior: smooth;
+      padding: 8px 0 12px;
+      scrollbar-width: none;
+    }
+
+    .map-window::-webkit-scrollbar {
+      display: none;
+    }
+
+    .locations-track {
+      display: flex;
+      gap: 22px;
+      align-items: stretch;
+      min-width: max-content;
+      padding: 8px 4px;
     }
 
     .location-card {
       position: relative;
-      min-height: 152px;
-      border: none;
-      border-radius: 34px;
-      padding: 18px 18px 18px 132px;
-      text-align: left;
+      width: 210px;
+      min-height: 290px;
+      border: 2px solid rgba(238,219,127,0.82);
+      border-radius: 32px;
       background:
-        radial-gradient(circle at 16% 50%, rgba(255,240,180,0.42), transparent 28%),
-        linear-gradient(180deg, rgba(255,255,255,0.70), rgba(255,244,253,0.54));
-      border: 2px solid rgba(238,219,127,0.76);
+        radial-gradient(circle at 50% 0%, rgba(255,242,190,0.44), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.90), rgba(255,248,253,0.82));
       box-shadow:
-        0 10px 26px rgba(120,70,150,0.16),
-        inset 0 2px 10px rgba(255,255,255,0.62);
+        0 10px 24px rgba(126,69,158,0.14),
+        inset 0 2px 10px rgba(255,255,255,0.56);
+      padding: 18px 14px 16px;
+      text-align: center;
       cursor: pointer;
-      overflow: hidden;
-      font-family: 'Cormorant Garamond', serif;
-      color: #6f2f8b;
       -webkit-tap-highlight-color: transparent;
-      animation: cardFloat 5.2s ease-in-out infinite;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+      overflow: hidden;
     }
 
-    .location-card:nth-child(2) {
-      animation-delay: .35s;
-    }
-
-    .location-card:nth-child(3) {
-      animation-delay: .7s;
-    }
-
-    .location-card:nth-child(4) {
-      animation-delay: 1.05s;
-    }
-
-    .location-card:nth-child(5) {
-      animation-delay: 1.4s;
-    }
-
-    .location-card::before {
-      content: "";
-      position: absolute;
-      top: -45%;
-      left: -80%;
-      width: 42%;
-      height: 190%;
-      transform: rotate(18deg);
-      background:
-        linear-gradient(
-          90deg,
-          transparent 0%,
-          rgba(255,255,255,0.08) 18%,
-          rgba(255,255,255,0.58) 50%,
-          rgba(255,255,255,0.08) 82%,
-          transparent 100%
-        );
-      opacity: 0;
-      pointer-events: none;
-      animation: cardShine 7s ease-in-out infinite;
-    }
-
-    .location-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.86) 0 1px, transparent 1.6px),
-        radial-gradient(circle, rgba(255,232,150,0.62) 0 1px, transparent 1.5px);
-      background-size: 90px 120px, 138px 164px;
-      background-position: 18px 28px, 64px 86px;
-      opacity: 0.14;
-    }
-
-    .location-card:active {
-      transform: scale(0.985);
+    .location-card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 16px 30px rgba(126,69,158,0.18),
+        0 0 24px rgba(255,225,120,0.25),
+        inset 0 2px 10px rgba(255,255,255,0.56);
     }
 
     .location-card.locked {
-      filter: grayscale(0.55);
-      opacity: 0.72;
-      animation: none;
+      filter: grayscale(1);
+      opacity: 0.58;
+      cursor: not-allowed;
     }
 
-    .location-card.locked::before {
-      display: none;
-    }
-
-    .location-card.done {
-      border-color: rgba(255, 218, 90, 0.95);
+    .location-card.completed {
+      border-color: rgba(128, 204, 148, 0.88);
       box-shadow:
-        0 0 0 2px rgba(255, 225, 120, 0.38),
-        0 12px 28px rgba(120,70,150,0.16),
-        0 0 22px rgba(255, 225, 120, 0.28),
-        inset 0 2px 10px rgba(255,255,255,0.66);
-    }
-
-    .location-icon {
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      width: 92px;
-      height: 92px;
-      transform: translateY(-50%);
-      border-radius: 50%;
-      border: 2px solid rgba(238,219,127,0.9);
-      background:
-        radial-gradient(circle at 30% 28%, rgba(255,255,255,0.98), rgba(255,245,222,0.92) 38%, rgba(236,202,116,0.88) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 43px;
-      box-shadow:
-        0 0 0 5px rgba(255,245,200,0.26),
-        0 8px 18px rgba(120,70,150,0.15),
-        inset 0 2px 12px rgba(255,255,255,0.76);
-      z-index: 2;
+        0 12px 26px rgba(126,69,158,0.14),
+        0 0 22px rgba(147, 224, 164, 0.30),
+        inset 0 2px 10px rgba(255,255,255,0.56);
     }
 
     .location-number {
       position: absolute;
-      left: 78px;
-      top: 22px;
-      min-width: 34px;
-      height: 34px;
-      padding: 0 9px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #fff8e4, #f0c86e);
-      border: 1.5px solid rgba(255,255,255,0.8);
-      color: #743092;
+      left: 12px;
+      top: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid rgba(238,219,127,0.86);
+      background:
+        radial-gradient(circle at 30% 28%, #fff, #fff0ba 42%, #e8c155 88%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--violet);
       font-size: 22px;
       font-weight: 700;
-      line-height: 31px;
-      text-align: center;
-      box-shadow: 0 4px 9px rgba(90,35,120,0.16);
-      z-index: 4;
+      z-index: 2;
     }
 
-    .location-content {
-      position: relative;
-      z-index: 3;
+    .location-status {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      min-width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      padding: 0 10px;
+      border: 2px solid rgba(238,219,127,0.72);
+      background: rgba(255,255,255,0.76);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--violet);
+      font-size: 20px;
+      font-weight: 700;
+      z-index: 2;
     }
 
-    .location-name {
-      margin-bottom: 4px;
-      font-size: clamp(27px, 6vw, 36px);
+    .location-icon {
+      width: 106px;
+      height: 106px;
+      margin: 32px auto 12px;
+      border-radius: 50%;
+      border: 2px solid rgba(238,219,127,0.86);
+      background:
+        radial-gradient(circle at 35% 26%, rgba(255,255,255,0.98), rgba(255,247,229,0.94) 38%, rgba(245,218,255,0.92) 88%);
+      box-shadow:
+        0 10px 22px rgba(126,69,158,0.14),
+        0 0 22px rgba(255,225,120,0.25),
+        inset 0 3px 12px rgba(255,255,255,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      animation: iconFloat 3.4s ease-in-out infinite;
+    }
+
+    .location-title {
+      margin: 0 0 8px;
+      font-size: 27px;
       line-height: 1;
       font-weight: 700;
-      color: #743092;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+      color: var(--violet);
     }
 
     .location-desc {
-      font-size: clamp(18px, 4.4vw, 24px);
-      line-height: 1.05;
-      font-weight: 700;
-      color: #7c4b91;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.72);
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.12;
+      font-weight: 600;
+      color: #7f5a98;
     }
 
-    .status-pill {
-      display: inline-flex;
+    .lock-layer {
+      position: absolute;
+      inset: 0;
+      display: none;
       align-items: center;
       justify-content: center;
-      margin-top: 9px;
-      min-height: 30px;
-      padding: 5px 13px;
+      padding: 18px;
+      background: rgba(255,255,255,0.46);
+      backdrop-filter: blur(1px);
+      -webkit-backdrop-filter: blur(1px);
+      z-index: 5;
+    }
+
+    .location-card.locked .lock-layer {
+      display: flex;
+    }
+
+    .lock-badge {
       border-radius: 999px;
-      background: rgba(255,255,255,0.62);
-      border: 1.5px solid rgba(238,219,127,0.66);
-      font-size: 18px;
+      padding: 10px 16px;
+      border: 2px solid rgba(238,219,127,0.88);
+      background: rgba(255,255,255,0.86);
+      color: var(--violet);
+      font-size: 22px;
       font-weight: 700;
-      color: #743092;
-      box-shadow: inset 0 1px 6px rgba(255,255,255,0.66);
+      box-shadow: 0 8px 18px rgba(126,69,158,0.14);
     }
 
-    .location-card.locked .status-pill {
-      color: #8a7790;
+    .map-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 54px;
+      height: 74px;
+      border-radius: 999px;
+      border: 2px solid rgba(238,219,127,0.9);
+      background: rgba(255,255,255,0.82);
+      color: var(--violet);
+      font-size: 38px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow:
+        0 10px 22px rgba(126,69,158,0.16),
+        inset 0 2px 8px rgba(255,255,255,0.70);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .location-card.done .status-pill {
-      background: linear-gradient(180deg, #fff9e8, #f4d780);
-      color: #743092;
+    .map-arrow:active {
+      transform: translateY(-50%) scale(0.96);
+    }
+
+    .map-arrow.left {
+      left: 12px;
+    }
+
+    .map-arrow.right {
+      right: 12px;
     }
 
     .toast {
       position: fixed;
       left: 50%;
       bottom: 28px;
-      z-index: 99999;
       transform: translateX(-50%) translateY(20px);
-      width: calc(100% - 32px);
-      max-width: 430px;
-      padding: 13px 18px;
+      padding: 12px 18px;
       border-radius: 999px;
       background: rgba(117,76,150,0.95);
       color: #ffffff;
-      font-size: 20px;
-      line-height: 1.05;
+      font-size: 18px;
       font-weight: 700;
-      text-align: center;
       box-shadow: 0 10px 24px rgba(117,76,150,0.28);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.22s ease, transform 0.22s ease;
+      z-index: 100;
+      text-align: center;
+      max-width: calc(100% - 32px);
     }
 
     .toast.show {
@@ -409,98 +495,125 @@
       display: none;
     }
 
-    @keyframes pageSparkles {
-      0% {
-        background-position: 12px 18px, 46px 74px;
+    @keyframes sparkleMove {
+      from {
+        background-position: 0 0, 24px 18px;
       }
-
-      100% {
-        background-position: 12px 130px, 46px 228px;
+      to {
+        background-position: 72px 72px, 142px 136px;
       }
     }
 
-    @keyframes softBreath {
+    @keyframes iconFloat {
       0%, 100% {
         transform: translateY(0) scale(1);
       }
-
       50% {
-        transform: translateY(-3px) scale(1.004);
+        transform: translateY(-7px) scale(1.02);
       }
     }
 
-    @keyframes cardFloat {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-
-      50% {
-        transform: translateY(-3px) scale(1.004);
-      }
-    }
-
-    @keyframes cardShine {
-      0% {
-        left: -80%;
-        opacity: 0;
-      }
-
-      12% {
-        opacity: 0.42;
-      }
-
-      34% {
-        left: 130%;
-        opacity: 0;
-      }
-
-      100% {
-        left: 130%;
-        opacity: 0;
-      }
-    }
-
-    @media (max-width: 420px) {
-      body {
-        background-attachment: scroll;
+    @media (max-width: 760px) {
+      .page {
+        padding: 12px 12px 36px;
       }
 
       .topbar {
-        padding-left: 8px;
-        padding-right: 8px;
+        grid-template-columns: 62px 1fr 62px;
+        gap: 8px;
       }
 
-      .image-btn {
-        width: 54px;
-        height: 54px;
+      .top-btn {
+        width: 56px;
+        height: 56px;
+        font-size: 29px;
       }
 
-      .map-title {
-        width: 57%;
-        min-width: 172px;
-        font-size: clamp(20px, 5vw, 30px);
+      .title-pill {
+        min-height: 52px;
+        padding: 8px 14px;
+        font-size: 27px;
       }
 
-      .intro-card {
-        padding: 20px 14px;
+      .hero {
+        padding: 24px 16px 20px;
+        border-radius: 30px;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+
+      .hero p {
+        font-size: 22px;
+      }
+
+      .map-shell {
+        padding: 18px 54px 22px;
+        border-radius: 32px;
+      }
+
+      .map-arrow {
+        width: 44px;
+        height: 66px;
+        font-size: 34px;
+      }
+
+      .map-arrow.left {
+        left: 6px;
+      }
+
+      .map-arrow.right {
+        right: 6px;
+      }
+
+      .locations-track {
+        gap: 16px;
       }
 
       .location-card {
-        min-height: 146px;
-        padding-left: 122px;
-        padding-right: 14px;
+        width: 190px;
+        min-height: 270px;
+        border-radius: 28px;
       }
 
       .location-icon {
-        width: 84px;
-        height: 84px;
-        left: 16px;
-        font-size: 39px;
+        width: 96px;
+        height: 96px;
+        font-size: 44px;
       }
 
-      .location-number {
-        left: 72px;
-        top: 22px;
+      .location-title {
+        font-size: 25px;
+      }
+
+      .location-desc {
+        font-size: 18px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .hero h1 {
+        font-size: 41px;
+      }
+
+      .hero p {
+        font-size: 21px;
+      }
+
+      .progress-dot {
+        width: 38px;
+        height: 38px;
+        font-size: 20px;
+      }
+
+      .map-shell {
+        padding-left: 48px;
+        padding-right: 48px;
+      }
+
+      .location-card {
+        width: 178px;
       }
     }
   </style>
@@ -516,76 +629,99 @@
   <main class="page">
 
     <header class="topbar">
-      <button class="image-btn back-btn" type="button" id="backBtn" aria-label="Назад"></button>
-      <div class="map-title">Карта</div>
-      <button class="image-btn music-btn" type="button" id="musicBtn" aria-label="Музика"></button>
+      <button class="top-btn" type="button" id="backBtn" aria-label="Назад">←</button>
+
+      <div class="title-pill">Карта подорожі</div>
+
+      <button class="top-btn music-btn" type="button" id="musicBtn" aria-label="Музика">♪</button>
     </header>
 
-    <section class="intro-card">
-      <h1>Подорож Софійки</h1>
+    <section class="hero">
+      <h1>Подорож<br>Софійки</h1>
       <p>
-        Проходь чарівні локації по черзі та відкривай головне запрошення.
+        Обирай відкриті локації та проходь чарівний шлях до фінального запрошення.
       </p>
     </section>
 
-    <div class="progress-card" id="progressText">
-      Відкрито 1 з 5 локацій
-    </div>
+    <section class="progress-card">
+      <p class="progress-text" id="progressText">Відкрито 1 з 5 локацій</p>
 
-    <section class="locations-wrap">
-      <div class="locations-grid" id="locationsGrid">
-
-        <button class="location-card" type="button" data-location="1" data-href="location1.html">
-          <div class="location-icon">👶</div>
-          <div class="location-number">1</div>
-          <div class="location-content">
-            <div class="location-name">Знайомство із Софійкою</div>
-            <div class="location-desc">Обери наймиліші фото маленької принцеси.</div>
-            <div class="status-pill">Відкрита</div>
-          </div>
-        </button>
-
-        <button class="location-card" type="button" data-location="2" data-href="location2.html">
-          <div class="location-icon">⛪</div>
-          <div class="location-number">2</div>
-          <div class="location-content">
-            <div class="location-name">День хрещення</div>
-            <div class="location-desc">Знайди храм і відкрий наступний шлях.</div>
-            <div class="status-pill">Закрито</div>
-          </div>
-        </button>
-
-        <button class="location-card" type="button" data-location="3" data-href="location3.html">
-          <div class="location-icon">🏰</div>
-          <div class="location-number">3</div>
-          <div class="location-content">
-            <div class="location-name">Святковий замок</div>
-            <div class="location-desc">Знайди місце святкування на карті.</div>
-            <div class="status-pill">Закрито</div>
-          </div>
-        </button>
-
-        <button class="location-card" type="button" data-location="4" data-href="location4.html">
-          <div class="location-icon">🍽️</div>
-          <div class="location-number">4</div>
-          <div class="location-content">
-            <div class="location-name">Королівська трапеза</div>
-            <div class="location-desc">Заповни анкету для святкового столу.</div>
-            <div class="status-pill">Закрито</div>
-          </div>
-        </button>
-
-        <button class="location-card" type="button" data-location="5" data-href="location5.html">
-          <div class="location-icon">💌</div>
-          <div class="location-number">5</div>
-          <div class="location-content">
-            <div class="location-name">Фінальне запрошення</div>
-            <div class="location-desc">Відкрий чарівний конвертик Софійки.</div>
-            <div class="status-pill">Закрито</div>
-          </div>
-        </button>
-
+      <div class="progress-dots">
+        <div class="progress-dot" data-progress-dot>1</div>
+        <div class="progress-dot" data-progress-dot>2</div>
+        <div class="progress-dot" data-progress-dot>3</div>
+        <div class="progress-dot" data-progress-dot>4</div>
+        <div class="progress-dot" data-progress-dot>5</div>
       </div>
+    </section>
+
+    <section class="map-shell">
+
+      <button class="map-arrow left" type="button" id="scrollLeftBtn" aria-label="Прокрутити ліворуч">‹</button>
+
+      <div class="map-window" id="mapWindow">
+        <div class="locations-track" id="locationsTrack">
+
+          <article class="location-card" data-location="1">
+            <div class="location-number">1</div>
+            <div class="location-status" data-status>✨</div>
+            <div class="location-icon">👶</div>
+            <h2 class="location-title">Знайомство</h2>
+            <p class="location-desc">Перша зупинка — знайомство з Софійкою.</p>
+            <div class="lock-layer">
+              <div class="lock-badge">🔒 Закрито</div>
+            </div>
+          </article>
+
+          <article class="location-card" data-location="2">
+            <div class="location-number">2</div>
+            <div class="location-status" data-status>🔒</div>
+            <div class="location-icon">⛪</div>
+            <h2 class="location-title">Хрещення</h2>
+            <p class="location-desc">Храм, час і місце світлої події.</p>
+            <div class="lock-layer">
+              <div class="lock-badge">🔒 Закрито</div>
+            </div>
+          </article>
+
+          <article class="location-card" data-location="3">
+            <div class="location-number">3</div>
+            <div class="location-status" data-status>🔒</div>
+            <div class="location-icon">🏰</div>
+            <h2 class="location-title">Святковий замок</h2>
+            <p class="location-desc">Місце святкування — Панорама.</p>
+            <div class="lock-layer">
+              <div class="lock-badge">🔒 Закрито</div>
+            </div>
+          </article>
+
+          <article class="location-card" data-location="4">
+            <div class="location-number">4</div>
+            <div class="location-status" data-status>🔒</div>
+            <div class="location-icon">🍽️</div>
+            <h2 class="location-title">Трапеза</h2>
+            <p class="location-desc">Анкета меню для гостей і дітей.</p>
+            <div class="lock-layer">
+              <div class="lock-badge">🔒 Закрито</div>
+            </div>
+          </article>
+
+          <article class="location-card" data-location="5">
+            <div class="location-number">5</div>
+            <div class="location-status" data-status>🔒</div>
+            <div class="location-icon">💌</div>
+            <h2 class="location-title">Запрошення</h2>
+            <p class="location-desc">Фінальний конвертик і відеозапрошення.</p>
+            <div class="lock-layer">
+              <div class="lock-badge">🔒 Закрито</div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <button class="map-arrow right" type="button" id="scrollRightBtn" aria-label="Прокрутити праворуч">›</button>
+
     </section>
 
   </main>
@@ -593,59 +729,37 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    const TOTAL_LOCATIONS = 5;
+
+    const locationPages = {
+      1: "location1.html",
+      2: "location2.html",
+      3: "location3.html",
+      4: "location4.html",
+      5: "location5.html"
+    };
+
+    const locationNames = {
+      1: "Знайомство з Софійкою",
+      2: "День хрещення",
+      3: "Святковий замок",
+      4: "Королівська трапеза",
+      5: "Фінальне запрошення"
+    };
+
     const backBtn = document.getElementById("backBtn");
     const musicBtn = document.getElementById("musicBtn");
     const bgMusic = document.getElementById("bgMusic");
-    const progressText = document.getElementById("progressText");
     const toast = document.getElementById("toast");
-    const locationCards = document.querySelectorAll(".location-card");
+
+    const progressText = document.getElementById("progressText");
+    const mapWindow = document.getElementById("mapWindow");
+    const scrollLeftBtn = document.getElementById("scrollLeftBtn");
+    const scrollRightBtn = document.getElementById("scrollRightBtn");
 
     if (bgMusic) {
       bgMusic.volume = 0.35;
     }
-
-    const locations = [
-      {
-        number: 1,
-        href: "location1.html",
-        doneKey: "sofiyka_location1_done",
-        unlockCondition: function() {
-          return true;
-        }
-      },
-      {
-        number: 2,
-        href: "location2.html",
-        doneKey: "sofiyka_location2_done",
-        unlockCondition: function() {
-          return localStorage.getItem("sofiyka_location1_done") === "true";
-        }
-      },
-      {
-        number: 3,
-        href: "location3.html",
-        doneKey: "sofiyka_location3_done",
-        unlockCondition: function() {
-          return localStorage.getItem("sofiyka_location2_done") === "true";
-        }
-      },
-      {
-        number: 4,
-        href: "location4.html",
-        doneKey: "sofiyka_location4_done",
-        unlockCondition: function() {
-          return localStorage.getItem("sofiyka_location3_done") === "true";
-        }
-      },
-      {
-        number: 5,
-        href: "location5.html",
-        doneKey: "sofiyka_location5_done",
-        unlockCondition: function() {
-          return localStorage.getItem("sofiyka_location4_done") === "true";
-        }
-      }
-    ];
 
     function showToast(message) {
       toast.textContent = message;
@@ -653,114 +767,4 @@
 
       clearTimeout(showToast._timer);
 
-      showToast._timer = setTimeout(function() {
-        toast.classList.remove("show");
-      }, 2200);
-    }
-
-    function isLocationUnlocked(number) {
-      const location = locations.find(function(item) {
-        return item.number === number;
-      });
-
-      if (!location) return false;
-
-      return location.unlockCondition();
-    }
-
-    function isLocationDone(number) {
-      const location = locations.find(function(item) {
-        return item.number === number;
-      });
-
-      if (!location) return false;
-
-      return localStorage.getItem(location.doneKey) === "true";
-    }
-
-    function getLockedMessage(number) {
-      if (number === 2) {
-        return "Спочатку пройди Локацію 1 ❤️";
-      }
-
-      if (number === 3) {
-        return "Спочатку пройди Локацію 2 ✨";
-      }
-
-      if (number === 4) {
-        return "Спочатку пройди Локацію 3 👑";
-      }
-
-      if (number === 5) {
-        return "Спочатку пройди Локацію 4 🍽️";
-      }
-
-      return "Ця локація ще закрита ✨";
-    }
-
-    function updateMapState() {
-      let openedCount = 0;
-
-      locationCards.forEach(function(card) {
-        const number = Number(card.getAttribute("data-location"));
-        const status = card.querySelector(".status-pill");
-        const unlocked = isLocationUnlocked(number);
-        const done = isLocationDone(number);
-
-        card.classList.remove("locked");
-        card.classList.remove("done");
-
-        if (unlocked) {
-          openedCount++;
-          card.disabled = false;
-
-          if (done) {
-            card.classList.add("done");
-            status.textContent = "Пройдено ✓";
-          } else {
-            status.textContent = "Відкрита";
-          }
-        } else {
-          card.classList.add("locked");
-          card.disabled = false;
-          status.textContent = "Закрито";
-        }
-      });
-
-      progressText.textContent = "Відкрито " + openedCount + " з 5 локацій";
-    }
-
-    function goToLocation(number, href) {
-      if (!isLocationUnlocked(number)) {
-        showToast(getLockedMessage(number));
-        return;
-      }
-
-      window.location.href = href;
-    }
-
-    locationCards.forEach(function(card) {
-      card.addEventListener("click", function() {
-        const number = Number(card.getAttribute("data-location"));
-        const href = card.getAttribute("data-href");
-
-        goToLocation(number, href);
-      });
-    });
-
-    backBtn.addEventListener("click", function() {
-      window.location.href = "index.html";
-    });
-
-    musicBtn.addEventListener("click", async function() {
-      if (!bgMusic) return;
-
-      try {
-        if (bgMusic.paused) {
-          await bgMusic.play();
-          musicBtn.classList.add("playing");
-          localStorage.setItem("sofiyka_music", "on");
-        } else {
-          bgMusic.pause();
-          musicBtn.classList.remove("playing");
-          localStorage.setItem("sofiyka_music", 
+      showToast._timer = setTimeout(function(

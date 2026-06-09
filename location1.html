@@ -13,11 +13,15 @@
   <style>
     :root {
       --violet: #7e459e;
+      --violet-dark: #63327d;
       --violet-soft: #9b6bb7;
       --gold: #efd77a;
       --gold-dark: #d8b94f;
       --pink: #c94fa4;
+      --rose: #dc78bb;
       --text-dark: #6f4d74;
+      --white: rgba(255, 252, 250, 0.94);
+      --white-soft: rgba(255, 252, 250, 0.84);
       --shadow: 0 10px 26px rgba(177, 111, 187, 0.12);
       --border: 2px solid rgba(238, 219, 127, 0.85);
       --container-width: 1120px;
@@ -50,57 +54,139 @@
       padding: 14px 18px 42px;
     }
 
-    /* ===== ШАПКА location1 — НЕ МІНЯЄМО, КАРТИНКА heder_loc1.png ===== */
+    /* ===== ВЕРХНЯ НАВІГАЦІЯ БЕЗ heder_loc1.png ===== */
 
-    .header-loc1 {
+    .top-nav {
       position: relative;
       width: 100%;
-      margin: 0 auto 14px;
+      min-height: 112px;
+      margin: 0 auto 20px;
+      display: grid;
+      grid-template-columns: 94px 1fr 94px;
+      align-items: center;
+      gap: 10px;
       z-index: 10;
     }
 
-    .header-loc1-img {
-      display: block;
-      width: 100%;
-      height: auto;
-      user-select: none;
-      -webkit-user-drag: none;
+    .top-nav::before {
+      content: "";
+      position: absolute;
+      left: 70px;
+      right: 70px;
+      top: 50%;
+      height: 58px;
+      transform: translateY(-50%);
+      border-radius: 999px;
+      background:
+        linear-gradient(90deg,
+          rgba(255,255,255,0.10),
+          rgba(255,245,250,0.58),
+          rgba(255,255,255,0.10)
+        );
+      box-shadow:
+        0 8px 18px rgba(116, 61, 140, 0.10),
+        inset 0 0 0 1px rgba(255,255,255,0.45);
       pointer-events: none;
-      filter: drop-shadow(0 8px 18px rgba(116, 61, 140, 0.16));
+      z-index: 0;
     }
 
-    .header-click {
-      position: absolute;
-      top: 20%;
-      width: 22%;
-      height: 60%;
-      border: none;
-      background: transparent;
+    .nav-btn {
+      position: relative;
+      z-index: 2;
+      width: 82px;
+      height: 82px;
+      border-radius: 50%;
+      border: 3px solid rgba(238, 219, 127, 0.96);
+      background:
+        radial-gradient(circle at 34% 28%, #ffffff 0%, #fff3d9 36%, #eec86a 74%, #bd8d2e 100%);
+      color: var(--violet-dark);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 46px;
+      line-height: 1;
+      font-weight: 700;
       cursor: pointer;
-      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 0 5px rgba(255, 247, 219, 0.45),
+        0 8px 18px rgba(143, 85, 157, 0.18),
+        inset 0 2px 10px rgba(255,255,255,0.72);
       -webkit-tap-highlight-color: transparent;
     }
 
-    .header-back {
-      left: 1.5%;
-    }
-
-    .header-music {
-      right: 1.5%;
-    }
-
-    .header-click:active {
+    .nav-btn:active {
       transform: scale(0.96);
     }
 
-    .header-music.playing::after {
+    .back-btn {
+      justify-self: start;
+    }
+
+    .music-btn {
+      justify-self: end;
+      background:
+        radial-gradient(circle at 34% 28%, #ffffff 0%, #f8e4ff 38%, #c989ee 74%, #8f55c8 100%);
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(82, 38, 111, 0.25);
+    }
+
+    .music-btn.playing::after {
       content: "";
       position: absolute;
-      inset: 18%;
+      inset: -7px;
       border-radius: 50%;
-      box-shadow: 0 0 22px rgba(255, 245, 180, 0.75);
-      animation: musicGlow 1.6s ease-in-out infinite;
+      border: 3px solid rgba(255, 239, 150, 0.82);
+      box-shadow:
+        0 0 18px rgba(255, 239, 150, 0.82),
+        0 0 26px rgba(198, 130, 235, 0.44);
       pointer-events: none;
+      animation: musicGlow 1.6s ease-in-out infinite;
+    }
+
+    .location-label {
+      position: relative;
+      z-index: 1;
+      min-height: 72px;
+      padding: 14px 34px;
+      justify-self: center;
+      border-radius: 22px;
+      border: 3px solid rgba(238, 219, 127, 0.92);
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.96), rgba(255,247,232,0.88) 55%, rgba(255,231,245,0.82) 100%);
+      box-shadow:
+        0 8px 18px rgba(116, 61, 140, 0.12),
+        inset 0 2px 10px rgba(255,255,255,0.72);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--violet-dark);
+      font-size: clamp(30px, 4.2vw, 48px);
+      line-height: 1;
+      font-weight: 700;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .location-label::before,
+    .location-label::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+      transform: translateY(-50%) rotate(45deg);
+      border: 2px solid rgba(238, 219, 127, 0.82);
+      background: rgba(255,255,255,0.66);
+      z-index: -1;
+    }
+
+    .location-label::before {
+      left: -13px;
+    }
+
+    .location-label::after {
+      right: -13px;
     }
 
     @keyframes musicGlow {
@@ -109,7 +195,7 @@
         transform: scale(1);
       }
       50% {
-        opacity: 0.9;
+        opacity: 1;
         transform: scale(1.06);
       }
     }
@@ -147,7 +233,7 @@
       margin: -30px auto 18px;
       padding: 36px 28px 34px;
       border-radius: 28px;
-      background: rgba(255, 252, 250, 0.93);
+      background: rgba(255, 252, 250, 0.94);
       border: 2px solid rgba(233, 210, 134, 0.7);
       box-shadow:
         0 10px 22px rgba(187, 132, 173, 0.12),
@@ -203,7 +289,7 @@
       padding: 26px 22px 28px;
       border-radius: 32px;
       border: 3px solid rgba(226, 193, 93, 0.75);
-      background: rgba(255, 252, 250, 0.88);
+      background: rgba(255, 252, 250, 0.90);
       box-shadow:
         0 10px 26px rgba(177, 111, 187, 0.12),
         inset 0 0 0 1px rgba(255,255,255,0.65);
@@ -224,7 +310,7 @@
       padding: 18px 18px 20px;
       border-radius: 26px;
       border: 2px solid rgba(226, 193, 93, 0.65);
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.84);
       box-shadow:
         0 8px 18px rgba(177, 111, 187, 0.10),
         inset 0 0 0 1px rgba(255,255,255,0.75);
@@ -291,7 +377,7 @@
       padding: 14px;
       border-radius: 30px;
       border: var(--border);
-      background: rgba(255, 252, 250, 0.86);
+      background: rgba(255, 252, 250, 0.88);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
@@ -303,7 +389,7 @@
       min-width: 0;
       padding: 12px;
       border-radius: 24px;
-      background: rgba(255, 255, 255, 0.64);
+      background: rgba(255, 255, 255, 0.66);
       border: 1px solid rgba(226, 193, 93, 0.45);
     }
 
@@ -426,7 +512,7 @@
       text-align: center;
       border-radius: 32px;
       border: 3px solid rgba(226, 193, 93, 0.75);
-      background: rgba(255, 252, 250, 0.88);
+      background: rgba(255, 252, 250, 0.90);
       box-shadow: var(--shadow);
     }
 
@@ -511,11 +597,22 @@
         padding: 10px 12px 34px;
       }
 
-      .header-loc1 {
-        width: calc(100% + 8px);
-        margin-left: -4px;
-        margin-right: -4px;
-        margin-bottom: 10px;
+      .top-nav {
+        min-height: 104px;
+        grid-template-columns: 84px 1fr 84px;
+        margin-bottom: 16px;
+      }
+
+      .nav-btn {
+        width: 74px;
+        height: 74px;
+        font-size: 41px;
+      }
+
+      .location-label {
+        min-height: 66px;
+        font-size: 38px;
+        padding: 12px 28px;
       }
 
       .month-card {
@@ -528,25 +625,45 @@
         padding: 8px 10px 34px;
       }
 
-      .header-loc1 {
-        width: calc(100% + 24px);
-        margin-left: -12px;
-        margin-right: -12px;
-        margin-bottom: 8px;
+      .top-nav {
+        min-height: 92px;
+        grid-template-columns: 72px 1fr 72px;
+        gap: 6px;
+        margin-bottom: 14px;
       }
 
-      .header-click {
-        top: 18%;
-        height: 62%;
-        width: 24%;
+      .top-nav::before {
+        left: 56px;
+        right: 56px;
+        height: 46px;
       }
 
-      .header-back {
-        left: 0;
+      .nav-btn {
+        width: 62px;
+        height: 62px;
+        font-size: 34px;
+        border-width: 2px;
       }
 
-      .header-music {
-        right: 0;
+      .location-label {
+        min-height: 54px;
+        padding: 9px 20px;
+        font-size: 30px;
+        border-radius: 18px;
+      }
+
+      .location-label::before,
+      .location-label::after {
+        width: 18px;
+        height: 18px;
+      }
+
+      .location-label::before {
+        left: -10px;
+      }
+
+      .location-label::after {
+        right: -10px;
       }
 
       .intro-shell {
@@ -684,6 +801,22 @@
     }
 
     @media (max-width: 420px) {
+      .top-nav {
+        grid-template-columns: 66px 1fr 66px;
+      }
+
+      .nav-btn {
+        width: 58px;
+        height: 58px;
+        font-size: 32px;
+      }
+
+      .location-label {
+        font-size: 28px;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
       .intro-card h1 {
         font-size: 37px;
       }
@@ -726,338 +859,13 @@
 
   <div class="page">
 
-    <header class="header-loc1">
-      <img class="header-loc1-img" src="heder_loc1.png" alt="Локація 1">
-
-      <button class="header-click header-back" id="backBtn" type="button" aria-label="Назад"></button>
-
-      <button class="header-click header-music" id="musicBtn" type="button" aria-label="Музика"></button>
-    </header>
-
-    <section class="intro-shell">
-      <div class="intro-hero"></div>
-
-      <div class="intro-card">
-        <h1>Знайомство з Софійкою</h1>
-        <p>
-          Тут зібрані маленькі миті великої казки.
-          Обери 5 наймиліших фото Софійки,
-          щоб пройти першу локацію.
-        </p>
-
-        <button class="intro-scroll-btn" type="button" id="scrollToGalleryBtn">
-          Перейти до фото
-        </button>
-      </div>
-    </section>
-
-    <section class="progress-card" id="taskCard">
-      <h2 class="progress-title">Обери 5 наймиліших фото Софійки</h2>
-
-      <div class="progress-box" aria-live="polite">
-        <div class="progress-top">
-          <span class="progress-icon">📸</span>
-
-          <div class="progress-count">
-            Вибрано: <span id="selectedCount">0</span>/5
-          </div>
-
-          <span class="progress-icon">💛</span>
-        </div>
-
-        <div class="progress-line">
-          <span class="progress-line-fill" id="counterBarFill"></span>
-        </div>
-      </div>
-    </section>
-
-    <main class="gallery-section" id="sectionsContainer"></main>
-
-    <section class="unlock-card">
-      <h2 class="unlock-title">Коли обереш 5 фото —<br>відкриється наступний рівень</h2>
-      <button class="next-btn" id="nextBtn" type="button" disabled>
-        Відкрити наступний рівень
+    <header class="top-nav">
+      <button class="nav-btn back-btn" id="backBtn" type="button" aria-label="Назад">
+        ←
       </button>
-      <div class="hint" id="hintText">Оберіть 5 фото, щоб продовжити подорож ✨</div>
-    </section>
 
-  </div>
+      <div class="location-label">
+        Локація 1
+      </div>
 
-  <div class="toast" id="toast"></div>
-
-  <script>
-    const sectionsData = [
-      {
-        icon: "👑",
-        title: "Народження",
-        subtitle: "День, коли наша принцеса вперше відкрила оченята",
-        photo: "foto1.jpg"
-      },
-      {
-        icon: "☀️",
-        title: "1 місяць",
-        subtitle: "Перший місяць повний любові та ніжності",
-        photo: "foto2.jpg"
-      },
-      {
-        icon: "🧸",
-        title: "2 місяці",
-        subtitle: "Маленькі відкриття та перші емоції",
-        photo: "foto3.jpg"
-      },
-      {
-        icon: "🍁",
-        title: "3 місяці",
-        subtitle: "Перші усмішки та гучний сміх",
-        photo: "foto4.jpg"
-      },
-      {
-        icon: "🍂",
-        title: "4 місяці",
-        subtitle: "Досліджуємо світ руками та очима",
-        photo: "foto5.jpg"
-      },
-      {
-        icon: "🌰",
-        title: "5 місяців",
-        subtitle: "Активні рухи та цікаві відкриття",
-        photo: "foto6.jpg"
-      },
-      {
-        icon: "❄️",
-        title: "6 місяців",
-        subtitle: "Нові вміння кожного дня",
-        photo: "foto7.jpg"
-      },
-      {
-        icon: "🧊",
-        title: "7 місяців",
-        subtitle: "Сміємося, граємось і пізнаємо світ",
-        photo: "foto8.jpg"
-      },
-      {
-        icon: "🧤",
-        title: "8 місяців",
-        subtitle: "Маленькі перемоги щодня",
-        photo: "foto9.jpg"
-      },
-      {
-        icon: "🐣",
-        title: "9 місяців",
-        subtitle: "Готуємось до нових веселих кроків",
-        photo: "foto10.jpg"
-      },
-      {
-        icon: "🌸",
-        title: "10 місяців",
-        subtitle: "Більше самостійності та радості",
-        photo: "foto11.jpg"
-      },
-      {
-        icon: "💗",
-        title: "11 місяців",
-        subtitle: "Любимо, ростемо та мріємо",
-        photo: "foto12.jpg"
-      }
-    ];
-
-    const sectionsContainer = document.getElementById("sectionsContainer");
-    const selectedCount = document.getElementById("selectedCount");
-    const counterBarFill = document.getElementById("counterBarFill");
-    const nextBtn = document.getElementById("nextBtn");
-    const hintText = document.getElementById("hintText");
-    const toast = document.getElementById("toast");
-    const musicBtn = document.getElementById("musicBtn");
-    const backBtn = document.getElementById("backBtn");
-    const bgMusic = document.getElementById("bgMusic");
-    const scrollToGalleryBtn = document.getElementById("scrollToGalleryBtn");
-
-    const MAX_LIKES = 5;
-    let selectedPhotos = new Set();
-
-    if (bgMusic) {
-      bgMusic.volume = 0.35;
-    }
-
-    function renderSections() {
-      sectionsContainer.innerHTML = sectionsData.map((section, sectionIndex) => {
-        const id = `month-${sectionIndex + 1}`;
-
-        return `
-          <section class="month-card">
-            <div class="month-info">
-              <div class="month-icon">${section.icon}</div>
-              <div class="month-text">
-                <h3 class="month-title">${section.title}</h3>
-                <p class="month-subtitle">${section.subtitle}</p>
-              </div>
-            </div>
-
-            <div class="photo-card">
-              <button class="like-btn" type="button" aria-label="Вподобати фото" data-id="${id}">
-                ♡
-              </button>
-
-              <img
-                class="month-photo"
-                src="${section.photo}"
-                alt="${section.title}"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-              >
-
-              <div class="photo-placeholder">
-                <div>
-                  Фото місяця
-                  <span>${section.photo}</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        `;
-      }).join("");
-
-      bindLikeButtons();
-      restoreLikes();
-      updateUI();
-    }
-
-    function bindLikeButtons() {
-      document.querySelectorAll(".like-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const id = btn.dataset.id;
-
-          if (selectedPhotos.has(id)) {
-            selectedPhotos.delete(id);
-          } else {
-            if (selectedPhotos.size >= MAX_LIKES) {
-              showToast("Можна вибрати лише 5 фото 💕");
-              return;
-            }
-
-            selectedPhotos.add(id);
-          }
-
-          saveLikes();
-          updateUI();
-        });
-      });
-    }
-
-    function updateUI() {
-      const total = selectedPhotos.size;
-      const percent = Math.round((total / MAX_LIKES) * 100);
-
-      selectedCount.textContent = total;
-      counterBarFill.style.width = percent + "%";
-
-      document.querySelectorAll(".like-btn").forEach(btn => {
-        const id = btn.dataset.id;
-        const active = selectedPhotos.has(id);
-
-        btn.classList.toggle("active", active);
-        btn.textContent = active ? "❤" : "♡";
-        btn.setAttribute("aria-pressed", active ? "true" : "false");
-      });
-
-      if (total === MAX_LIKES) {
-        nextBtn.disabled = false;
-        nextBtn.classList.add("enabled");
-        hintText.textContent = "Чудово! Тепер можна відкрити наступний рівень ✨";
-      } else {
-        nextBtn.disabled = true;
-        nextBtn.classList.remove("enabled");
-        hintText.textContent = "Оберіть 5 фото, щоб продовжити подорож ✨";
-      }
-    }
-
-    function saveLikes() {
-      localStorage.setItem("sofiyka_location1_likes", JSON.stringify([...selectedPhotos]));
-    }
-
-    function restoreLikes() {
-      const saved = localStorage.getItem("sofiyka_location1_likes");
-
-      if (!saved) return;
-
-      try {
-        const parsed = JSON.parse(saved);
-
-        if (Array.isArray(parsed)) {
-          selectedPhotos = new Set(parsed.slice(0, MAX_LIKES));
-        }
-      } catch (error) {
-        selectedPhotos = new Set();
-      }
-    }
-
-    function showToast(message) {
-      toast.textContent = message;
-      toast.classList.add("show");
-
-      clearTimeout(showToast._timer);
-
-      showToast._timer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 1800);
-    }
-
-    function scrollToGallery() {
-      sectionsContainer.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-
-    scrollToGalleryBtn.addEventListener("click", scrollToGallery);
-
-    nextBtn.addEventListener("click", () => {
-      if (selectedPhotos.size !== MAX_LIKES) return;
-
-      localStorage.setItem("sofiyka_location1_done", "true");
-      showToast("Перша локація пройдена! 🌟");
-
-      setTimeout(() => {
-        window.location.href = "map.html";
-      }, 900);
-    });
-
-    backBtn.addEventListener("click", () => {
-      window.location.href = "map.html";
-    });
-
-    musicBtn.addEventListener("click", async () => {
-      if (!bgMusic) return;
-
-      try {
-        if (bgMusic.paused) {
-          await bgMusic.play();
-          musicBtn.classList.add("playing");
-          localStorage.setItem("sofiyka_music", "on");
-        } else {
-          bgMusic.pause();
-          musicBtn.classList.remove("playing");
-          localStorage.setItem("sofiyka_music", "off");
-        }
-      } catch (error) {
-        showToast("Музика не запустилась. Перевір mp3 файл 🎵");
-      }
-    });
-
-    function restoreMusicState() {
-      const musicState = localStorage.getItem("sofiyka_music");
-
-      if (musicState === "on" && bgMusic) {
-        bgMusic.play().then(() => {
-          musicBtn.classList.add("playing");
-        }).catch(() => {
-          musicBtn.classList.remove("playing");
-        });
-      }
-    }
-
-    renderSections();
-    restoreMusicState();
-  </script>
-
-</body>
-</html>
+      <button class="nav-btn music-btn" id="musicBtn" type="button" aria-l

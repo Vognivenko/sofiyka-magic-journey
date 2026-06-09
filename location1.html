@@ -1,616 +1,799 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" translate="no">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Локація 1 — Знайомство з Софійкою</title>
+  <meta name="google" content="notranslate" />
+  <title>Локація 1 — Знайомство із Софійкою</title>
 
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap');
+
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      overflow-x: hidden;
+      font-family: 'Cormorant Garamond', serif;
+      background: #f8d9ef;
+      color: #6f2f8b;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      font-family: Georgia, "Times New Roman", serif;
-      color: #6b3b5f;
-      background: url("fon_loc1.png?v=2") center top / cover fixed no-repeat;
-      overflow-x: hidden;
-    }
-
-    button {
-      font-family: inherit;
+      background-color: #f8d9ef;
     }
 
     .page {
       width: 100%;
       min-height: 100vh;
-      padding: 18px 0 45px;
-    }
-
-    .top-buttons {
-      position: fixed;
-      top: 12px;
-      left: 12px;
-      right: 12px;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      pointer-events: none;
-    }
-
-    .icon-btn {
-      width: 54px;
-      height: 54px;
-      padding: 0;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      pointer-events: auto;
-    }
-
-    .icon-btn img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      filter: drop-shadow(0 5px 8px rgba(93, 52, 83, 0.25));
-    }
-
-    .location-label {
-      width: min(72%, 360px);
-      margin: 10px auto 10px;
-    }
-
-    .location-label img {
-      width: 100%;
-      display: block;
-    }
-
-    .intro-block {
+      padding: 16px 0 0;
       position: relative;
-      width: min(92%, 820px);
-      min-height: 345px;
-      margin: 0 auto 18px;
-      padding: 30px 18px 26px;
+      overflow: hidden;
+      background-image:
+        linear-gradient(
+          180deg,
+          rgba(248, 217, 239, 0) 0%,
+          rgba(248, 217, 239, 0) 62%,
+          rgba(248, 217, 239, 0.18) 76%,
+          rgba(248, 217, 239, 0.92) 93%,
+          #f8d9ef 100%
+        ),
+        url("fon_loc1.png");
+      background-size:
+        100% 100%,
+        100% auto;
+      background-position:
+        top center,
+        top center;
+      background-repeat:
+        no-repeat,
+        no-repeat;
+      background-color: #f8d9ef;
+    }
+
+    .topbar {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto 14px;
+      padding: 4px 6px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .image-btn {
+      width: 56px;
+      height: 56px;
+      border: none;
+      background: transparent center / contain no-repeat;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      filter: drop-shadow(0 6px 10px rgba(80, 25, 110, 0.24));
+    }
+
+    .back-btn {
+      background-image: url("5.png");
+    }
+
+    .music-btn {
+      background-image: url("6.png");
+    }
+
+    .location-title {
+      width: 48%;
+      max-width: 250px;
+      aspect-ratio: 420 / 145;
+      background: url("8.png") center / contain no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #69228b;
+      font-size: clamp(23px, 5.8vw, 36px);
+      font-weight: 700;
+      line-height: 1;
       text-align: center;
-
-      background: #ffe9f4;
-      border-radius: 30px;
-      box-shadow: 0 10px 28px rgba(111, 67, 99, 0.18);
-      overflow: hidden;
-      isolation: isolate;
+      padding-top: 8px;
+      padding-left: 2px;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
     }
 
-    .intro-block::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background:
-        linear-gradient(rgba(255, 233, 244, 0.18), rgba(255, 233, 244, 0.18)),
-        url("fon_block1.png?v=2") center / cover no-repeat;
+    .intro-text-block {
+      width: 100%;
+      max-width: 520px;
+      margin: 34px auto 30px;
+      padding: 0 34px;
+      text-align: center;
+    }
+
+    .intro-kicker {
+      font-size: clamp(17px, 4.1vw, 23px);
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #7c359b;
+      text-align: center;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .intro-title {
+      font-size: clamp(30px, 7.8vw, 44px);
+      font-weight: 700;
+      line-height: 0.94;
+      color: #783193;
+      margin-bottom: 12px;
+      text-align: center;
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.9),
+        0 5px 10px rgba(120,45,145,0.2);
     }
 
     .intro-text {
-      width: 100%;
-      max-width: 575px;
-      padding: 18px 14px 20px;
-      background: rgba(255, 255, 255, 0.86);
-      border-radius: 24px;
-      box-shadow: 0 8px 20px rgba(110, 55, 95, 0.12);
-    }
-
-    .intro-text h1 {
-      margin: 0 0 12px;
-      font-size: clamp(30px, 8vw, 50px);
-      line-height: 1.05;
-      color: #a84d8a;
-      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.75);
-    }
-
-    .intro-text p {
-      margin: 0 0 18px;
-      font-size: clamp(17px, 4.4vw, 22px);
-      line-height: 1.35;
-    }
-
-    .start-btn {
-      border: none;
-      border-radius: 999px;
-      padding: 13px 26px;
-      font-size: 18px;
+      width: 76%;
+      margin: 0 auto;
+      font-size: clamp(15px, 3.6vw, 20px);
+      line-height: 1.08;
       font-weight: 700;
-      color: #fff;
-      background: linear-gradient(135deg, #de76b1, #b65399);
-      box-shadow: 0 7px 16px rgba(142, 65, 125, 0.28);
-      cursor: pointer;
+      color: #6f2f86;
+      text-align: center;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.95),
+        0 0 8px rgba(255,255,255,0.65);
     }
 
-    .progress-panel {
-      position: sticky;
-      top: 8px;
-      z-index: 50;
-      width: min(88%, 520px);
-      margin: 8px auto 20px;
-    }
-
-    .progress-bg {
+    .task-card {
+      width: 92%;
+      max-width: 520px;
+      margin: 54px auto 0;
       position: relative;
-      width: 100%;
+      aspect-ratio: 797 / 292;
+      background: url("12.png") center / contain no-repeat;
+      filter: drop-shadow(0 8px 14px rgba(90,35,120,0.16));
+      z-index: 4;
     }
 
-    .progress-bg img {
-      width: 100%;
-      display: block;
-      filter: drop-shadow(0 5px 10px rgba(90, 50, 80, 0.18));
+    .task-title {
+      position: absolute;
+      top: 19%;
+      left: 38%;
+      width: 43%;
+      text-align: center;
+      font-size: clamp(15px, 3.8vw, 23px);
+      line-height: 0.95;
+      font-weight: 700;
+      color: #743092;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
     }
 
-    .progress-content {
+    .counter-pill {
+      position: absolute;
+      top: 63%;
+      left: 34%;
+      width: 43%;
+      text-align: center;
+      color: #7a3b94;
+      font-size: clamp(17px, 4.1vw, 25px);
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.95);
+    }
+
+    .gallery-zone {
+      width: 100%;
+      position: relative;
+      margin-top: -44px;
+      padding: 92px 0 0;
+      overflow: hidden;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(248,217,239,0) 0%,
+          rgba(248,217,239,0.36) 6%,
+          rgba(249,218,242,0.92) 16%,
+          #f9d8f0 34%,
+          #f8d2ec 68%,
+          #f6cdea 100%
+        );
+      background-color: #f8d9ef;
+    }
+
+    .gallery-zone::before {
+      content: "";
+      position: absolute;
+      left: -8%;
+      right: -8%;
+      top: -128px;
+      height: 260px;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 50% 28%, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.38) 34%, rgba(255,255,255,0) 72%),
+        linear-gradient(
+          180deg,
+          rgba(248,217,239,0) 0%,
+          rgba(248,217,239,0.30) 34%,
+          rgba(248,217,239,0.82) 68%,
+          #f9d8f0 100%
+        );
+      filter: blur(0.4px);
+    }
+
+    .gallery-zone::after {
+      content: "";
       position: absolute;
       inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.78) 0 1.1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,231,150,0.62) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,0.48) 0 0.9px, transparent 1.4px);
+      background-size:
+        78px 104px,
+        128px 142px,
+        58px 86px;
+      background-position:
+        10px 20px,
+        42px 76px,
+        28px 48px;
+      opacity: 0.20;
+      animation: sparkleFloat 14s linear infinite;
+    }
+
+    .gallery-heading,
+    .months-grid,
+    .complete-btn,
+    .bottom-decor {
+      position: relative;
+      z-index: 2;
+    }
+
+    .gallery-heading {
+      width: 96%;
+      max-width: 470px;
+      margin: 4px auto 24px;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 20px 0 18px;
+    }
+
+    .gallery-heading::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 2px;
+      width: 112%;
+      height: 158px;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(255,255,255,0.78) 0%,
+          rgba(255,235,250,0.48) 38%,
+          rgba(255,210,240,0.18) 64%,
+          transparent 78%
+        );
+      filter: blur(2px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .gallery-heading::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+      width: 76%;
+      height: 34px;
+      transform: translateX(-50%);
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(255,230,150,0.62) 0%,
+          rgba(255,230,150,0.24) 42%,
+          transparent 76%
+        );
+      filter: blur(1px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .gallery-crown {
+      width: 88px;
+      height: 88px;
+      margin-bottom: -36px;
+      position: relative;
+      z-index: 4;
+      background: url("9.png") center / contain no-repeat;
+      filter:
+        drop-shadow(0 6px 8px rgba(90,35,120,0.25))
+        drop-shadow(0 0 14px rgba(255,235,160,0.85));
+      pointer-events: none;
+    }
+
+    .gallery-ribbon {
+      width: 100%;
+      aspect-ratio: 850 / 145;
+      position: relative;
+      z-index: 3;
+      background: url("10.png") center / contain no-repeat;
+      display: flex;
+      align-items: center;
       justify-content: center;
-      padding: 14% 14% 8%;
-    }
-
-    .counter {
-      margin-bottom: 8px;
-      font-size: clamp(18px, 5vw, 27px);
+      color: #fff6ff;
+      font-size: clamp(23px, 5.4vw, 34px);
       font-weight: 700;
-      color: #6d3263;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+      text-align: center;
+      padding-top: 7px;
+      text-shadow:
+        0 2px 4px rgba(80,25,110,0.52),
+        0 0 10px rgba(255,255,255,0.85);
+      filter:
+        drop-shadow(0 8px 12px rgba(90,35,120,0.25))
+        drop-shadow(0 0 16px rgba(255,230,170,0.35));
     }
 
-    .bar {
-      width: 82%;
-      height: 11px;
-      border-radius: 999px;
-      background: rgba(255, 221, 239, 0.95);
-      overflow: hidden;
-      box-shadow: inset 0 1px 4px rgba(100, 45, 85, 0.18);
-    }
-
-    .bar-fill {
-      width: 0%;
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #e97db5, #b45299);
-      transition: width 0.25s ease;
-    }
-
-    .gallery {
-      width: min(92%, 940px);
-      margin: 0 auto;
+    .months-grid {
+      width: 100%;
+      max-width: 430px;
+      margin: 8px auto 0;
       display: grid;
-      gap: 18px;
+      grid-template-columns: 1fr;
+      gap: 2px;
+      padding: 0 22px 22px;
     }
 
     .month-card {
-      padding: 12px;
-      border-radius: 26px;
-      background: rgba(255, 255, 255, 0.58);
-      box-shadow: 0 8px 20px rgba(111, 67, 99, 0.12);
-    }
-
-    .month-card h2 {
-      margin: 0 0 10px;
-      text-align: center;
-      font-size: 23px;
-      color: #974d82;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
-    }
-
-    .photo {
       position: relative;
       width: 100%;
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
+      aspect-ratio: 2 / 3;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      filter:
+        drop-shadow(0 10px 16px rgba(87,35,105,0.18))
+        drop-shadow(0 0 12px rgba(255,230,170,0.14));
+      animation: frameBreath 5.4s ease-in-out infinite;
+      transition:
+        transform .25s ease,
+        filter .25s ease;
+      will-change: transform;
+    }
+
+    .month-card::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      top: 18px;
+      bottom: 30px;
+      z-index: 0;
+      border-radius: 42px;
+      background:
+        radial-gradient(ellipse at 50% 18%, rgba(255,255,255,0.58) 0%, rgba(255,255,255,0.18) 36%, transparent 70%),
+        radial-gradient(circle at 18% 82%, rgba(255,225,245,0.50) 0%, rgba(255,225,245,0.14) 34%, transparent 62%),
+        radial-gradient(circle at 86% 72%, rgba(255,238,183,0.30) 0%, rgba(255,238,183,0.10) 30%, transparent 58%),
+        linear-gradient(180deg, rgba(255,245,252,0.18) 0%, rgba(255,220,243,0.16) 48%, rgba(245,198,230,0.20) 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.22),
+        0 0 22px rgba(255,255,255,0.16),
+        0 14px 24px rgba(126,45,138,0.05);
+      pointer-events: none;
+    }
+
+    .month-card::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      top: 36px;
+      height: 64px;
+      z-index: 0;
+      border-radius: 999px;
+      background:
+        radial-gradient(ellipse at center, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.08) 55%, transparent 78%);
+      pointer-events: none;
+    }
+
+    .month-card:nth-child(2n) {
+      animation-delay: .45s;
+    }
+
+    .month-card:nth-child(3n) {
+      animation-delay: .9s;
+    }
+
+    .month-card:active {
+      transform: scale(1.018);
+      filter:
+        drop-shadow(0 14px 22px rgba(87,35,105,0.25))
+        drop-shadow(0 0 18px rgba(255,230,170,0.30));
+    }
+
+    .month-card.selected {
+      animation: selectedBreath 2.7s ease-in-out infinite;
+      filter:
+        drop-shadow(0 15px 22px rgba(87,35,105,0.28))
+        drop-shadow(0 0 26px rgba(255,115,135,0.76))
+        drop-shadow(0 0 18px rgba(255,230,170,0.36));
+    }
+
+    .month-card.selected::before {
+      background:
+        radial-gradient(ellipse at 50% 18%, rgba(255,255,255,0.76) 0%, rgba(255,255,255,0.24) 38%, transparent 70%),
+        radial-gradient(circle at 18% 82%, rgba(255,221,239,0.72) 0%, rgba(255,221,239,0.22) 36%, transparent 62%),
+        radial-gradient(circle at 86% 72%, rgba(255,238,183,0.48) 0%, rgba(255,238,183,0.15) 32%, transparent 58%),
+        linear-gradient(180deg, rgba(255,250,253,0.30) 0%, rgba(255,220,243,0.26) 48%, rgba(245,198,230,0.30) 100%);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.30),
+        0 0 30px rgba(255,255,255,0.24),
+        0 18px 34px rgba(126,45,138,0.08);
+    }
+
+    .month-selection-glow {
+      position: absolute;
+      left: 7.4%;
+      top: 22.6%;
+      width: 85.2%;
+      height: 63.2%;
       border-radius: 22px;
-      background: #ffeaf6;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      box-shadow:
+        0 0 0 4px rgba(255,117,142,0.92),
+        0 0 22px rgba(255,75,110,0.65),
+        inset 0 0 18px rgba(255,230,235,0.45);
+      transition: opacity .22s ease;
+    }
+
+    .month-card.selected .month-selection-glow {
+      opacity: 1;
+      animation: selectedGlow 2.2s ease-in-out infinite;
+    }
+
+    .month-photo {
+      position: absolute;
+      left: 7.5%;
+      top: 22.8%;
+      width: 85%;
+      height: 63%;
+      border-radius: 24px;
+      object-fit: cover;
+      object-position: center 36%;
+      z-index: 1;
+      background: rgba(255,255,255,0.45);
+    }
+
+    .month-frame {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: url("gallery_frame_one.png") center / contain no-repeat;
+      pointer-events: none;
+    }
+
+    .month-title {
+      position: absolute;
+      top: 12.4%;
+      left: 16%;
+      width: 68%;
+      height: 10.5%;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #6a2787;
+      font-size: clamp(22px, 5.8vw, 34px);
+      font-weight: 700;
+      line-height: 1;
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.95),
+        0 0 9px rgba(255,255,255,0.7),
+        0 4px 9px rgba(95,35,115,0.22);
+      pointer-events: none;
+    }
+
+    .month-soft-shine {
+      position: absolute;
+      left: 8.5%;
+      top: 23.8%;
+      width: 83%;
+      height: 61%;
+      z-index: 6;
+      border-radius: 24px;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0.52;
+      mix-blend-mode: screen;
+    }
+
+    .month-soft-shine::before {
+      content: "";
+      position: absolute;
+      top: -30%;
+      left: -70%;
+      width: 42%;
+      height: 160%;
+      transform: rotate(18deg);
+      background:
+        linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255,255,255,0.10) 18%,
+          rgba(255,255,255,0.62) 50%,
+          rgba(255,255,255,0.10) 82%,
+          transparent 100%
+        );
+      animation: photoShine 6.8s ease-in-out infinite;
+    }
+
+    .month-card.selected .month-soft-shine {
+      opacity: 0.34;
+    }
+
+    .month-card.selected .month-soft-shine::before {
+      animation-duration: 4.2s;
+    }
+
+    .month-sparkle-dust {
+      position: absolute;
+      inset: 0;
+      z-index: 7;
+      pointer-events: none;
+      opacity: 0.62;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.95) 0 1.2px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,235,150,0.80) 0 1.1px, transparent 1.7px),
+        radial-gradient(circle, rgba(255,255,255,0.65) 0 0.9px, transparent 1.4px);
+      background-size:
+        92px 122px,
+        136px 166px,
+        64px 92px;
+      background-position:
+        15px 42px,
+        72px 118px,
+        30px 76px;
+      animation: cardSparkles 9s linear infinite;
+    }
+
+    .month-card.selected .month-sparkle-dust {
+      opacity: 0.88;
+      animation: selectedSparkles 4.8s linear infinite;
+    }
+
+    .month-selected-heart {
+      position: absolute;
+      right: 7.8%;
+      bottom: 5.8%;
+      width: 70px;
+      height: 70px;
+      z-index: 9;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      background:
+        radial-gradient(circle at 35% 28%, #fff8fb 0%, #ffd6e0 32%, #ff6f8f 68%, #c61f45 100%);
+      box-shadow:
+        0 0 0 3px rgba(255,245,248,0.95),
+        0 0 20px rgba(255,60,100,0.75),
+        0 8px 15px rgba(100,20,55,0.28);
+      color: #d81942;
+      font-size: 39px;
+      font-weight: 700;
+      line-height: 1;
+      text-shadow:
+        0 2px 3px rgba(95,0,30,0.25),
+        0 0 8px rgba(255,255,255,0.9);
+    }
+
+    .month-card.selected .month-selected-heart {
+      display: flex;
+      animation: heartPop .36s ease both, heartPulse 1.8s ease-in-out infinite .36s;
+    }
+
+    .month-selected-heart:active {
+      transform: scale(0.92);
+    }
+
+    .complete-btn {
+      display: none;
+      width: calc(100% - 28px);
+      max-width: 430px;
+      margin: 10px auto 0;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      background: linear-gradient(180deg, #fff7fb, #f6d5ff);
+      color: #6f2f8b;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 700;
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.95),
+        0 0 18px rgba(255,220,120,0.58),
+        0 9px 17px rgba(90,35,120,0.22);
       cursor: pointer;
     }
 
-    .photo img {
+    .complete-btn.show {
+      display: block;
+    }
+
+    .bottom-decor {
+      width: 100%;
+      max-width: 520px;
+      height: clamp(78px, 24vw, 130px);
+      margin: 10px auto 0;
+      background-image: url("fon_loc1_buttom.png");
+      background-size: 100% auto;
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+
+    .photo-overlay,
+    .choice-overlay,
+    .bonus-video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(42, 13, 58, 0.80);
+      backdrop-filter: blur(6px);
+    }
+
+    .photo-overlay.show,
+    .choice-overlay.show,
+    .bonus-video-overlay.show {
+      display: flex;
+    }
+
+    .viewer-card,
+    .choice-card,
+    .bonus-card {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      border-radius: 30px;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(255,250,252,0.98), rgba(246,220,255,0.96));
+      box-shadow:
+        0 0 0 3px rgba(255,222,130,0.95),
+        0 0 28px rgba(255,226,135,0.65),
+        0 20px 50px rgba(20,0,40,0.38);
+      animation: viewerAppear .24s ease both;
+    }
+
+    .viewer-media {
+      width: 100%;
+      aspect-ratio: 3 / 4.2;
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.35);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
+    }
+
+    .viewer-img {
       width: 100%;
       height: 100%;
       display: block;
       object-fit: cover;
-      border: none;
+      object-position: center 35%;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.25);
     }
 
-    .heart {
-      position: absolute;
-      right: 12px;
-      bottom: 12px;
-      width: 54px;
-      height: 54px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.9);
-      color: #c04f91;
-      font-size: 30px;
-      line-height: 54px;
+    .viewer-title {
+      margin: 10px 0 8px;
       text-align: center;
-      box-shadow: 0 5px 13px rgba(83, 42, 73, 0.24);
+      color: #6a2787;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .viewer-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .viewer-btn,
+    .choice-btn,
+    .bonus-btn {
+      flex: 1;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 700;
       cursor: pointer;
-      transition: transform 0.16s ease, background 0.16s ease, color 0.16s ease;
+      color: #743092;
+      background: #fff4fb;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,220,140,0.65),
+        0 4px 10px rgba(90,35,120,0.14);
     }
 
-    .photo.selected .heart {
-      background: #d75f9f;
-      color: #fff;
-      transform: scale(1.08);
+    .choice-card {
+      padding: 24px 18px 20px;
+      text-align: center;
     }
 
-    .placeholder {
-      width: 100%;
-      height: 100%;
+    .choice-title {
+      color: #6a2787;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 10px;
+      text-shadow:
+        0 2px 0 rgba(255,255,255,0.95),
+        0 0 10px rgba(255,255,255,0.65);
+    }
+
+    .choice-text {
+      width: 88%;
+      margin: 0 auto 18px;
+      color: #743092;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.08;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+    }
+
+    .choice-actions {
       display: grid;
-      place-items: center;
-      padding: 20px;
-      text-align: center;
-      color: #a4568d;
-      font-size: 18px;
-      line-height: 1.35;
+      grid-template-columns: 1fr;
+      gap: 10px;
     }
 
-    .finish {
-      width: min(92%, 620px);
-      margin: 28px auto 0;
-      text-align: center;
+    .choice-btn.primary,
+    .bonus-btn.primary {
+      background: linear-gradient(180deg, #fff6fb, #f1cfff);
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.95),
+        0 0 18px rgba(255,220,120,0.55),
+        0 8px 16px rgba(90,35,120,0.18);
     }
 
-    .finish p {
-      margin: 0 0 12px;
-      padding: 0 12px;
-      font-size: 18px;
-      color: #7a3d6d;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+    .choice-btn.video {
+      background: linear-gradient(180deg, #fff9e9, #ffe4a8);
+      color: #7a4386;
     }
 
-    .finish-btn {
-      width: min(76%, 320px);
-      padding: 0;
-      border: none;
-      background: transparent;
-      opacity: 0.42;
-      pointer-events: none;
-      cursor: pointer;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-
-    .finish-btn.active {
-      opacity: 1;
-      pointer-events: auto;
-      transform: scale(1.03);
-    }
-
-    .finish-btn img {
+    .bonus-video {
       width: 100%;
+      max-height: 70vh;
       display: block;
-      filter: drop-shadow(0 8px 12px rgba(90, 45, 82, 0.24));
+      border-radius: 24px;
+      background: #16061f;
+      object-fit: contain;
+      box-shadow:
+        0 0 0 2px rgba(255,220,120,0.85),
+        0 0 20px rgba(255,220,120,0.35);
     }
 
-    @media (min-width: 720px) {
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .intro-block {
-        min-height: 440px;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .page {
-        padding-top: 12px;
-      }
-
-      .icon-btn {
-        width: 50px;
-        height: 50px;
-      }
-
-      .location-label {
-        width: 70%;
-        margin-top: 8px;
-      }
-
-      .intro-block {
-        width: 92%;
-        min-height: 345px;
-        padding: 30px 18px 26px;
-        border-radius: 28px;
-      }
-
-      .intro-text {
-        padding: 18px 14px 20px;
-        border-radius: 24px;
-      }
-
-      .start-btn {
-        padding: 12px 23px;
-        font-size: 17px;
-      }
-
-      .progress-panel {
-        width: 88%;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="page">
-
-    <div class="top-buttons">
-      <button class="icon-btn" onclick="goMap()" aria-label="Повернутися на карту">
-        <img src="5.png?v=2" alt="Назад" />
-      </button>
-
-      <button class="icon-btn" id="musicBtn" aria-label="Музика">
-        <img src="6.png?v=2" alt="Музика" />
-      </button>
-    </div>
-
-    <div class="location-label">
-      <img src="loc1.png?v=2" alt="Локація 1" />
-    </div>
-
-    <section class="intro-block" id="introBlock">
-      <div class="intro-text">
-        <h1>Знайомство з Софійкою</h1>
-        <p>
-          Тут зібрані маленькі миті великої казки.
-          Обери 5 наймиліших фото Софійки, щоб пройти першу локацію.
-        </p>
-        <button class="start-btn" onclick="scrollToGallery()">Перейти до фото</button>
-      </div>
-    </section>
-
-    <section class="progress-panel">
-      <div class="progress-bg">
-        <img src="12.png?v=2" alt="Прогрес" />
-        <div class="progress-content">
-          <div class="counter" id="counter">Вибрано: 0/5</div>
-          <div class="bar">
-            <div class="bar-fill" id="barFill"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <main class="gallery" id="gallery">
-
-      <article class="month-card">
-        <h2>Народження</h2>
-        <div class="photo" data-id="foto1">
-          <img src="foto1.jpg?v=2" alt="Софійка — народження" onerror="makePlaceholder(this, 'Фото народження')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>1 місяць</h2>
-        <div class="photo" data-id="foto2">
-          <img src="foto2.jpg?v=2" alt="Софійка — 1 місяць" onerror="makePlaceholder(this, 'Фото 1 місяць')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>2 місяці</h2>
-        <div class="photo" data-id="foto3">
-          <img src="foto3.jpg?v=2" alt="Софійка — 2 місяці" onerror="makePlaceholder(this, 'Фото 2 місяці')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>3 місяці</h2>
-        <div class="photo" data-id="foto4">
-          <img src="foto4.jpg?v=2" alt="Софійка — 3 місяці" onerror="makePlaceholder(this, 'Фото 3 місяці')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>4 місяці</h2>
-        <div class="photo" data-id="foto5">
-          <img src="foto5.jpg?v=2" alt="Софійка — 4 місяці" onerror="makePlaceholder(this, 'Фото 4 місяці')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>5 місяців</h2>
-        <div class="photo" data-id="foto6">
-          <img src="foto6.jpg?v=2" alt="Софійка — 5 місяців" onerror="makePlaceholder(this, 'Фото 5 місяців')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>6 місяців</h2>
-        <div class="photo" data-id="foto7">
-          <img src="foto7.jpg?v=2" alt="Софійка — 6 місяців" onerror="makePlaceholder(this, 'Фото 6 місяців')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>7 місяців</h2>
-        <div class="photo" data-id="foto8">
-          <img src="foto8.jpg?v=2" alt="Софійка — 7 місяців" onerror="makePlaceholder(this, 'Фото 7 місяців')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>8 місяців</h2>
-        <div class="photo" data-id="foto9">
-          <img src="foto9.jpg?v=2" alt="Софійка — 8 місяців" onerror="makePlaceholder(this, 'Фото 8 місяців')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>9 місяців</h2>
-        <div class="photo" data-id="foto10">
-          <img src="foto10.jpg?v=2" alt="Софійка — 9 місяців" onerror="makePlaceholder(this, 'Фото 9 місяців')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>10 місяців</h2>
-        <div class="photo" data-id="foto11">
-          <img src="foto11.jpg?v=2" alt="Софійка — 10 місяців" onerror="makePlaceholder(this, 'Фото 10 місяців')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-      <article class="month-card">
-        <h2>11 місяців</h2>
-        <div class="photo" data-id="foto12">
-          <img src="foto12.jpg?v=2" alt="Софійка — 11 місяців" onerror="makePlaceholder(this, 'Фото 11 місяців')" />
-          <button class="heart" type="button">♡</button>
-        </div>
-      </article>
-
-    </main>
-
-    <section class="finish">
-      <p id="finishText">Обери 5 фото, щоб відкрити наступну частину подорожі.</p>
-      <button class="finish-btn" id="finishBtn" onclick="finishLocation()" type="button">
-        <img src="5.png?v=2" alt="Повернутися на карту" />
-      </button>
-    </section>
-
-    <audio id="bgMusic" src="solarflex-magic-fantasy-fairy-tale-music-495646.mp3" loop></audio>
-  </div>
-
-  <script>
-    const MAX_SELECTED = 5;
-    const selectedPhotos = new Set();
-
-    const counter = document.getElementById("counter");
-    const barFill = document.getElementById("barFill");
-    const finishBtn = document.getElementById("finishBtn");
-    const finishText = document.getElementById("finishText");
-    const bgMusic = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicBtn");
-
-    function makePlaceholder(img, text) {
-      const photo = img.parentElement;
-      img.remove();
-
-      const placeholder = document.createElement("div");
-      placeholder.className = "placeholder";
-      placeholder.innerHTML = text + "<br><small>тут буде фото</small>";
-
-      photo.insertBefore(placeholder, photo.querySelector(".heart"));
-    }
-
-    function updateProgress() {
-      const count = selectedPhotos.size;
-      counter.textContent = "Вибрано: " + count + "/" + MAX_SELECTED;
-      barFill.style.width = (count / MAX_SELECTED * 100) + "%";
-
-      if (count === MAX_SELECTED) {
-        finishBtn.classList.add("active");
-        finishText.textContent = "Готово! Перша локація пройдена.";
-        localStorage.setItem("sofiyka_location1_done", "true");
-      } else {
-        finishBtn.classList.remove("active");
-        finishText.textContent = "Обери 5 фото, щоб відкрити наступну частину подорожі.";
-      }
-    }
-
-    document.querySelectorAll(".photo").forEach((photo) => {
-      photo.addEventListener("click", () => {
-        const id = photo.dataset.id;
-        const heart = photo.querySelector(".heart");
-
-        if (selectedPhotos.has(id)) {
-          selectedPhotos.delete(id);
-          photo.classList.remove("selected");
-          heart.textContent = "♡";
-          updateProgress();
-          return;
-        }
-
-        if (selectedPhotos.size >= MAX_SELECTED) {
-          return;
-        }
-
-        selectedPhotos.add(id);
-        photo.classList.add("selected");
-        heart.textContent = "♥";
-        updateProgress();
-      });
-    });
-
-    function scrollToGallery() {
-      const gallery = document.getElementById("gallery");
-      const y = gallery.getBoundingClientRect().top + window.pageYOffset - 18;
-
-      window.scrollTo({
-        top: y,
-        behavior: "smooth"
-      });
-    }
-
-    window.addEventListener("load", () => {
-      updateProgress();
-
-      setTimeout(() => {
-        scrollToGallery();
-      }, 1400);
-    });
-
-    function finishLocation() {
-      if (selectedPhotos.size !== MAX_SELECTED) return;
-
-      localStorage.setItem("sofiyka_location1_done", "true");
-      window.location.href = "map.html";
-    }
-
-    function goMap() {
-      window.location.href = "map.html";
-    }
-
-    async function toggleMusic() {
-      try {
-        if (bgMusic.paused) {
-          await bgMusic.play();
-          musicBtn.style.transform = "scale(1.08)";
-        } else {
-          bgMusic.pause();
-          musicBtn.style.transform = "scale(1)";
-        }
-      } catch (e) {}
-    }
-
-    musicBtn.addEventListener("click", toggleMusic);
-
-    document.addEventListener("click", () => {
-      if (bgMusic.paused) {
-        bgMusic.play().catch(() => {});
-      }
-    }, { once: true });
-  </script>
-</body>
-</html>
+    .bonus-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+ 

@@ -840,4 +840,126 @@
 
         btn.classList.toggle("active", active);
         btn.textContent = active ? "❤" : "♡";
-        
+        btn.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
+      if (total === MAX_LIKES) {
+        nextBtn.disabled = false;
+        nextBtn.classList.add("enabled");
+        hintText.textContent = "Чудово! Тепер можна відкрити наступний рівень ✨";
+      } else {
+        nextBtn.disabled = true;
+        nextBtn.classList.remove("enabled");
+        hintText.textContent = "Оберіть 5 фото, щоб продовжити подорож ✨";
+      }
+    }
+
+    function saveLikes() {
+      localStorage.setItem("sofiyka_location1_likes", JSON.stringify([...selectedPhotos]));
+    }
+
+    function restoreLikes() {
+      const saved = localStorage.getItem("sofiyka_location1_likes");
+
+      if (!saved) return;
+
+      try {
+        const parsed = JSON.parse(saved);
+
+        if (Array.isArray(parsed)) {
+          selectedPhotos = new Set(parsed.slice(0, MAX_LIKES));
+        }
+      } catch (error) {
+        selectedPhotos = new Set();
+      }
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(showToast._timer);
+
+      showToast._timer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1800);
+    }
+
+    function startAutoScrollToGallery() {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduceMotion) return;
+
+      setTimeout(() => {
+        if (userTouchedPage) return;
+
+        sectionsContainer.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }, 1100);
+    }
+
+    window.addEventListener("wheel", () => {
+      userTouchedPage = true;
+    }, { passive: true });
+
+    window.addEventListener("touchmove", () => {
+      userTouchedPage = true;
+    }, { passive: true });
+
+    window.addEventListener("keydown", () => {
+      userTouchedPage = true;
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (selectedPhotos.size !== MAX_LIKES) return;
+
+      localStorage.setItem("sofiyka_location1_done", "true");
+      showToast("Перша локація пройдена! 🌟");
+
+      setTimeout(() => {
+        window.location.href = "map.html";
+      }, 900);
+    });
+
+    backBtn.addEventListener("click", () => {
+      window.location.href = "map.html";
+    });
+
+    musicBtn.addEventListener("click", async () => {
+      if (!bgMusic) return;
+
+      try {
+        if (bgMusic.paused) {
+          await bgMusic.play();
+          musicBtn.classList.add("playing");
+          localStorage.setItem("sofiyka_music", "on");
+        } else {
+          bgMusic.pause();
+          musicBtn.classList.remove("playing");
+          localStorage.setItem("sofiyka_music", "off");
+        }
+      } catch (error) {
+        showToast("Музика не запустилась. Перевір mp3 файл 🎵");
+      }
+    });
+
+    function restoreMusicState() {
+      const musicState = localStorage.getItem("sofiyka_music");
+
+      if (musicState === "on" && bgMusic) {
+        bgMusic.play().then(() => {
+          musicBtn.classList.add("playing");
+        }).catch(() => {
+          musicBtn.classList.remove("playing");
+        });
+      }
+    }
+
+    renderSections();
+    restoreMusicState();
+  </script>
+
+</body>
+</html>
